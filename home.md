@@ -50,6 +50,7 @@ The AppArmor project source is split between the kernel module, available in the
 AppArmor is in the upstream kernel as of 2.6.36. Earlier releases are available in the kernel module git tree:
 
 -   [How to get the AppArmor kernel source](gittutorial)
+
     Note: the master branch is not stable and will be rebased from time to time. Release branches will be stable and will not be rebased.
 
 The AppArmor v2.4 compatibility patches are available in the stable kernel branches. eg v3.4-aa2.8 or in the release tarballs in the kernel-patches directory.
@@ -99,6 +100,7 @@ tentative release schedule for version 3.0
 <!-- -->
 
 -   [User space tools](https://launchpad.net/apparmor)
+
     [How to get the AppArmor user space tools](launchpadtutorial)
 
 Profiles
@@ -111,14 +113,14 @@ Documentation
 
 AppArmor documentation for the project, including manuals, tutorials, technical documentation and more:
 
--   [ Documentation about the AppArmor security project](Documentation)
+-   [Documentation about the AppArmor security project](Documentation)
 
 Documentation and notes about using AppArmor in a given distribution:
 
--   [ AppArmor on CentOS](Distro_CentOS)
--   [ AppArmor on Debian](distro_debian)
--   [ AppArmor on Suse](distro_suse)
--   [ AppArmor on Ubuntu](distro_ubuntu)
+-   [AppArmor on CentOS](Distro_CentOS)
+-   [AppArmor on Debian](distro_debian)
+-   [AppArmor on Suse](distro_suse)
+-   [AppArmor on Ubuntu](distro_ubuntu)
 
 Reporting Bugs
 ==============
@@ -129,19 +131,29 @@ Joining AppArmor
 ================
 
 -   [Mailing list](https://lists.ubuntu.com/mailman/listinfo/apparmor)
-    Discuss AppArmor development and use.
+    for discussing AppArmor development and use.
 -   The IRC channel is \#apparmor on irc.oftc.net
 -   Bug Tracking - project [apparmor](https://launchpad.net/apparmor) on launchpad.net
 
-Contributions to AppArmor are welcome. Anyone can pull the code from the git repository or from launchpad, and begin hacking on the code. Patches can be contributed by posting them to the mailing list for review. Please see the [CommitPolicy](CommitPolicy) and [Versioning](Versioning) before sending patches.
+Contributions to AppArmor are welcome. Anyone can pull the code
+from the git repository or from launchpad, and begin hacking on the
+code. Patches can be contributed by posting them to the mailing
+list for review. Please see the [CommitPolicy](CommitPolicy) and
+[Versioning](Versioning) before sending patches.
 
-If you are a launchpad member, or wish to join launchpad, launchpad allows creating custom branches of AppArmor and you can submit merge requests from your own custom branch (see [Using Launchpad with AppArmor](launchpadtutorial))
+If you are a launchpad member, or wish to join launchpad, launchpad
+allows creating custom branches of AppArmor and you can submit
+merge requests from your own custom branch (see [Using Launchpad
+with AppArmor](launchpadtutorial))
 
-Commit privileges to the git tree and launchpad master repository are restricted, but can be earned by any developer who is involved in the project.
+Commit privileges to the git tree and launchpad master repository
+are restricted, but can be earned by any developer who is involved
+in the project.
 
-Meetings are held regularly on the IRC channel and are open to the everyone. Please see [MeetingAgenda](MeetingAgenda) for times.
+Meetings are held regularly on the IRC channel and are open to the
+everyone. Please see [MeetingAgenda](MeetingAgenda) for times.
 
 What happened to the profile repository?
 ========================================
 
-[ AppArmor profile repository](profile_repo)
+[AppArmor profile repository](profile_repo)
