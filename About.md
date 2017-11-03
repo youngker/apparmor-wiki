@@ -45,12 +45,12 @@ Properties of AppArmor include:
 - comments are supported in the profile.
 - absolute paths as well as file globbing can be used when specifying file access
 - various access controls for files are present.
-- access controls for networking are present
-- specificity in rule matching, ie the most specific rule matches
-- include files are supported to ease development and simplify profiles
-- variables can be defined and manipulated outside the profile
-- AppArmor profiles are easy to read and audit
-- AppArmor policy can be read and audited on a per application profile basis
+- access controls for networking are present.
+- specificity in rule matching, ie the most specific rule matches.
+- include files are supported to ease development and simplify profiles.
+- variables can be defined and manipulated outside the profile.
+- AppArmor profiles are easy to read and audit.
+- AppArmor policy can be read and audited on a per application profile basis.
 
 AppArmor is an established technology first seen in Immunix and later
 integrated into Ubuntu, Novell/SUSE, and Mandriva. Core AppArmor
