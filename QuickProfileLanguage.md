@@ -21,21 +21,23 @@ flags field, then an opening **{** followed by the rules for the
 profile and is finished by a closing **}** If the profile name does not
 begin with a **/** then the keyword profile should be prepended. Eg:
 
-` /usr/bin/firefox {`
-`    # profile contents`
-` }`
+```
+ /usr/bin/firefox {
+    # profile contents
+ }
 
-` /usr/bin/firefox flags=(complain) {`
-`    # profile contents`
-` }`
+ /usr/bin/firefox flags=(complain) {
+    # profile contents
+ }
 
-` profile /usr/bin/ {`
-`    # profile contents`
-` }`
+ profile /usr/bin/ {
+    # profile contents
+ }
 
-` profile user1 {`
-`    # profile contents`
-` }`
+ profile user1 {
+    # profile contents
+ }
+```
 
 Profile names can contain file rule globbing characters to allow
 them to apply to multiple executables, see File Globbing (below)
@@ -358,12 +360,13 @@ source. For example:
 
 The permissions to create and/or delete a file are:
 
+
 ` /foo/bar      w,`
 
 The permissions to copy a file are:
 
-` /foo/src      r,`
-` /foo/dst      w,`
+` /foo/src      r,
+ /foo/dst      w,`
 
 The permissions to move a file are:
 
