@@ -283,7 +283,9 @@ The following file permissions are supported:
 The owner keyword can be used as a qualifier making permission
 conditional on owning the file (process fsuid == file's uid).
 
-` owner /foo rw,`
+```
+ owner /foo rw,
+```
 
 The following are in development:
 
@@ -324,14 +326,18 @@ ix or ux transition. It is often a good idea to use 'PUx' instead of
 program has an AppArmor profile added later. For example, if a confined
 program should be allowed to run 'evince', then the profile might have:
 
-` /usr/bin/evince PUx,`
+```
+ /usr/bin/evince PUx,
+```
 
 The px and cx rules (and all their variants) can also be modified to
 specify a profile by name instead of using the profile that matches
 the name of the executable. This is done by providing a **-&gt;**
 transition arrow and the name of the profile.
 
-` /foo px -> profile1,`
+```
+ /foo px -> profile1,
+```
 
 For directories, the UNIX execute permission maps to search access
 and AppArmor does not further control directory search access. In
