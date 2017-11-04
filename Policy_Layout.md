@@ -26,10 +26,10 @@ files. All files within the directory are treated as profiles unless
 they match any of the following patterns in which case the files
 are ignored.
 
--  \*~
--   \.bak
--   \.rpm\*
--   \.dpkg-{bak,dist,new,old}
+-   \*~
+-   \*.bak
+-   \*.rpm\*
+-   \*.dpkg-{bak,dist,new,old}
 
 Within ${APPARMOR.D} the following directories have special meaning:
 
