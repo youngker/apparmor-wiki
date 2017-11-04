@@ -80,8 +80,10 @@ profiles. Eg:
 **\#** and include must not be separated from the **include** with
 white space otherwise it is considered a comment
 
-` # include is a comment`
-` #include `<file>
+```
+ # include is a comment
+ #include <file>
+```
 
 ### Child profiles
 
@@ -90,23 +92,25 @@ to confine an application in a special way, or when you want the
 child to be unconfined on the system, but confined when called from
 the parent. Eg:
 
-` /parent/profile {`
-`     /path/to/child1 cx -> child1,`
-`     /path/to/child2 cx,`
-`     /path/to/* cx,           # for * matching child3 will transition to child3,`
-`                              # child4, child5, ... will transition to /path/to/child*`
-`                              # if matching child profile does not exist will fail`
-`     /another/path/to/* cx -> child1,        # send all matching execs to child1`
-`     profile child1 {`
-`     }`
-`     profile /path/to/child2 {`
-`     }`
-`     profile /path/to/child3 {`
-`     }`
-`     # generic fall back profile`
-`     profile /path/to/child* {`
-`     }`
-`  }`
+```
+ /parent/profile {
+     /path/to/child1 cx -> child1,
+     /path/to/child2 cx,
+     /path/to/* cx,           # for * matching child3 will transition to child3,
+                              # child4, child5, ... will transition to /path/to/child*
+                              # if matching child profile does not exist will fail
+     /another/path/to/* cx -> child1,        # send all matching execs to child1
+     profile child1 {
+     }
+     profile /path/to/child2 {
+     }
+     profile /path/to/child3 {
+     }
+     # generic fall back profile
+     profile /path/to/child* {
+     }
+  }
+```
 
 ### Hats
 
@@ -114,10 +118,12 @@ Hats are a special child profile that can be used with the change\_hat
 API call. To denote a hat, prepend **^** before the hat name with no
 spaces. Eg:
 
-` /parent/profile {`
-`     ^hat {`
-`     }`
-` }`
+```
+ /parent/profile {
+     ^hat {
+     }
+ }
+```
 
 Capability Rules
 ----------------
@@ -127,10 +133,12 @@ capabilities (see 'man capabilities) and capabilities rules are
 used to allow access to these capabilities. For example, a setuid
 application which drops privileges might need:
 
-` /profile {`
-`    capability setuid,`
-`    capability setgid,`
-` }`
+```
+ /profile {
+    capability setuid,
+    capability setgid,
+ }
+```
 
 Network Rules
 -------------
@@ -138,17 +146,21 @@ Network Rules
 AppArmor currently supports course grained access to networking via
 network rules. For example, a network daemon might need:
 
-` /profile {`
-`   network inet dgram,`
-`   network inet stream,`
-` }`
+```
+ /profile {
+   network inet dgram,
+   network inet stream,
+ }
+```
 
 Or a packet analyzer might need:
 
-` /profile {`
-`   network raw,`
-`   network packet,`
-` }`
+```
+ /profile {
+   network raw,
+   network packet,
+ }
+```
 
 Rlimit Rules
 ------------
@@ -164,12 +176,14 @@ terminated by a comma. They can be written with either the permission
 first or the pathname first, though the convention it to list the
 path first. A valid pathname always begins with a **/**. Eg:
 
-` /profile {`
-`    /path/to/file  rw,   # file rule beginning with a pathname (convention)`
-`    rw /path/to/file2,   # file rule beginning with permissions`
-`    /path/to/file3       # file rule split over multiple lines`
-`         rw,`
-` }`
+```
+ /profile {
+    /path/to/file  rw,   # file rule beginning with a pathname (convention)
+    rw /path/to/file2,   # file rule beginning with permissions
+    /path/to/file3       # file rule split over multiple lines
+         rw,
+ }
+```
 
 File rules can contain special globbing characters that allow matching
 to multiple files (see File Globbing, below)
@@ -220,22 +234,24 @@ The following are proposed additions to the current file globbing and are not cu
 
 #### File Globbing examples
 
-`/dir/file     - match a specific file`
-`/dir/*        - match any files in a directory (including dot files)`
-`/dir/a*       - match any file in a directory starting with `<b>`a`</b>
-`/dir/*.png    - match any file in a directory ending with `<b>`.png`</b>
-`/dir/[^.]*    - match any file in a directory except dot files`
+```
+/dir/file     - match a specific file
+/dir/*        - match any files in a directory (including dot files)
+/dir/a*       - match any file in a directory starting with 'a'
+/dir/*.png    - match any file in a directory ending with '.png'
+/dir/[^.]*    - match any file in a directory except dot files
 
-`/dir/         - match a directory`
-`/dir/*/       - match any directory within /dir/`
-`/dir/a*/      - match any directory within /dir/ starting with a`
-`/dir/*a/      - match any directory within /dir/ ending with a`
+/dir/         - match a directory
+/dir/*/       - match any directory within /dir/
+/dir/a*/      - match any directory within /dir/ starting with a
+/dir/*a/      - match any directory within /dir/ ending with a
 
-`/dir/**       - match any file or directory in or below /dir/`
-`/dir/**/      - match any directory in or below /dir/`
-`/dir/**[^/]   - match any file in or below /dir/`
+/dir/**       - match any file or directory in or below /dir/
+/dir/**/      - match any directory in or below /dir/
+/dir/**[^/]   - match any file in or below /dir/
 
-`/dir{,1,2}/** - match any file or directory in or below /dir/, /dir1/, and /dir2/`
+/dir{,1,2}/** - match any file or directory in or below /dir/, /dir1/, and /dir2/
+```
 
 ### File permissions
 
@@ -369,13 +385,17 @@ The permissions to create and/or delete a file are:
 
 The permissions to copy a file are:
 
-` /foo/src      r,
- /foo/dst      w,`
+```
+ /foo/src      r,
+ /foo/dst      w,
+```
 
 The permissions to move a file are:
 
-` /foo/src     rw,`
-` /foo/dst      w,`
+```
+ /foo/src     rw,
+ /foo/dst      w,
+```
 
 Notice in the above that AppArmor does not require additional rules
 in the policy to access or write to the / or /foo/ directories (DAC
@@ -420,13 +440,15 @@ following modifiers can be prepended to a rule to change this behavior:
 
 Eg:
 
-` /profile {`
-`    /path/to/file*            r,  # allow read to /path/to/file*`
-`    /path/to/file1            w,  # allow write to /path/to/file1`
-`    deny /path/to/file2,      w,  # deny write to /path/to/file2, without logging`
-`    audit /path/to/file3      w,  # allow write to /path/to/file3, with logging`
-`    audit deny /path/to/file4 r,  # deny read to /path/to/file4, with logging`
-` }`
+```
+ /profile {
+    /path/to/file*            r,  # allow read to /path/to/file*
+    /path/to/file1            w,  # allow write to /path/to/file1
+    deny /path/to/file2,      w,  # deny write to /path/to/file2, without logging
+    audit /path/to/file3      w,  # allow write to /path/to/file3, with logging
+    audit deny /path/to/file4 r,  # deny read to /path/to/file4, with logging
+ }
+```
 
 **IMPORTANT:** deny rules are evaluated before allow rules and cannot
 be overridden by an allow rule. They are often used to override file
