@@ -72,7 +72,7 @@ is setup but are usually in one or more of the following locations:
 
 A typical denied message looks like the following:
 
-    `type=APPARMOR\_ALLOWED msg=audit(1212396827.141:861): operation=“inode\_unlink” requested\_mask=“w” denied\_mask=“w” name=“/tmp/orbit-jj/linc-e6e-0-2acdd337d87e5” pid=3694 profile=“/usr/bin/foo”`
+  type=APPARMOR\_ALLOWED msg=audit(1212396827.141:861): operation=“inode\_unlink” requested\_mask=“w” denied\_mask=“w” name=“/tmp/orbit-jj/linc-e6e-0-2acdd337d87e5” pid=3694 profile=“/usr/bin/foo”
 
 Notice the 'denied\_mask' in the above log entry. auditd will use
 'DENIED' instead. In general, you can use one of (as root):
