@@ -50,13 +50,15 @@ Comments are line oriented and begin with a **\#**. Text following
 a *'\#* to the end of the line is ignored (with the exception of the
 \#include rule). Eg:
 
+```
  #  Comment 1
  #  Comment 2
 
-` profile example {  # comment 3`
-`    # comment 4`
-`    /home/foo rw,  # comment at the end of a file rule`
-` }`
+ profile example {  # comment 3
+    # comment 4
+    /home/foo rw,  # comment at the end of a file rule
+ }
+```
 
 Include Rules
 -------------
@@ -68,9 +70,11 @@ a set include directory or **"** **"** for files relative to the
 current file. The **\#** is optional and shouldn't be used in newer
 profiles. Eg:
 
-`#include `<file>
-`#include `“`a/relative/path/file`”
-`include `<file>
+```
+ #include <file>
+ #include “a/relative/path/file”
+ include <file>
+```
 
 **\#include** conflicts with commenting rules and takes precedence. The
 **\#** and include must not be separated from the **include** with
