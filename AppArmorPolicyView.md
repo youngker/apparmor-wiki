@@ -66,10 +66,10 @@ For example, given the namespaces
 
 And the following tasks and views
 
--   Task A has a view set to the root system policy namespace, with it confinement set to unconfined
--   Task B has a view set to ns1, with its confinement set to unconfined of namespace :ns1:
--   Task C has a view set to ns1//ns2, with its confinement set to unconfined of namespace :ns1//ns2:
--   Task D has a view set to ns3, with its confinement set to unconfined of namespace :ns3:
+-   Task A has a view set to the root system policy namespace, with it confinement set to unconfined
+-   Task B has a view set to ns1, with its confinement set to unconfined of namespace :ns1:
+-   Task C has a view set to ns1//ns2, with its confinement set to unconfined of namespace :ns1//ns2:
+-   Task D has a view set to ns3, with its confinement set to unconfined of namespace :ns3:
 
 Then
 
