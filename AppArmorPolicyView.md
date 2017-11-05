@@ -31,7 +31,8 @@ as a result only see the portion of the hierarchy within their view.
 
 Example:
 
-> Given a hierarchy of :ns1//ns2:  and a view set to :ns1: then only the profiles in ns1 and ns2 will be visible.
+> Given a hierarchy of :ns1//ns2:  and a view set to :ns1: then only
+> the profiles in ns1 and ns2 will be visible.
 
 The profile introspection and management interfaces are virtualized
 to the current namespace view of the task doing profile management
@@ -44,9 +45,11 @@ that view.
 
 Example:
 
-> If profile foo is loaded into :ns1:, and Task A has its View set to :ns1: then when task one introspects
-> task B confined by :ns1:foo it will see the confinement of task B as just *foo*. Tasks outside the
-> view may be able to see the full hierarchy or nothing depending on their own views.
+> If profile foo is loaded into :ns1:, and Task A has its View set to
+> :ns1: then when task one introspects task B confined by :ns1:foo it
+> will see the confinement of task B as just *foo*. Tasks outside the
+> view may be able to see the full hierarchy or nothing depending on
+> their own views.
 
 While the AppArmor interfaces are virtualized, depending on how the
 kernel and other system namespaces (proc, user, ...) are configured it
@@ -55,60 +58,60 @@ View. In this situation the confinement of the task will be reported
 as having the name **---**. AppArmor will not expose the namespace
 name nor the profile name of the task.
 
-For example, given the namespaces
+For example, given the namespaces
 
 ```
-   root policy namespace
-   :ns1:
-   :ns1//ns2:
-   :ns3:
+   root policy namespace
+   :ns1:
+   :ns1//ns2:
+   :ns3:
 ```
 
-And the following tasks and views
+And the following tasks and views
 
-- Task A has a view set to the root system policy namespace, with it confinement set to unconfined
-- Task B has a view set to ns1, with its confinement set to unconfined of namespace :ns1:
-- Task C has a view set to ns1//ns2, with its confinement set to unconfined of namespace :ns1//ns2:
-- Task D has a view set to ns3, with its confinement set to unconfined of namespace :ns3:
+- Task A has a view set to the root system policy namespace, with it confinement set to unconfined
+- Task B has a view set to ns1, with its confinement set to unconfined of namespace :ns1:
+- Task C has a view set to ns1//ns2, with its confinement set to unconfined of namespace :ns1//ns2:
+- Task D has a view set to ns3, with its confinement set to unconfined of namespace :ns3:
 
 Then
 
-- Task A
-  - can see profiles in the system namespace
-  - can see the namespaces :ns1:, :ns1//ns2:, and :ns3: and the profiles in them
-  - sees the confinement of
-    - Task A (itself) as *unconfined*
-    - Task B as *:ns1:unconfined*
-    - Task C as *:ns1//ns2:unconfined*
-    - Task D as *:ns3:unconfined*
--   Task B
-    -   can NOT see profiles in the system namespace
-    -   can see profiles in namespaces :ns1: which appears to be the root system namespace to it
-    -   sees namespace :ns1//ns2: as :ns2: and can see the profiles in it
-    -   can NOT see namespace :ns3: nor the profiles in it
-    -   sees the confinement of
-        -   Task A as --- 
-        -   Task B (itself) as *unconfined*
-        -   Task C as *:ns2:unconfined*
-        -   Task D as ---
--   Task C
-    -   can NOT see profiles in the system namespace
-    -   can NOT see namespace :ns1: nor :ns3: nor their profiles
-    -   can see profiles in namespaces :ns1//ns2: which appears to be the root system namespace to it
-    -   sees the confinement of
-        -   Task A as ---
-        -   Task B as ---
-        -   Task C (itself) as *unconfined*
-        -   Task D as ---
--   Task D
-    -   can NOT see profiles in the system namespace
-    -   can NOT see namespace :ns1: nor :ns1//ns2: nor their profiles
-    -   can see profiles in namespaces :ns3: which appears to be the root system namespace to it
-    -   sees the confinement of
-        -   Task A as ---
-        -   Task B as ---
-        -   Task C as ---
-        -   Task D (itself) as *unconfined*
+-   Task A
+    -   can see profiles in the system namespace
+    -   can see the namespaces :ns1:, :ns1//ns2:, and :ns3: and the profiles in them
+    -   sees the confinement of
+        -   Task A (itself) as *unconfined*
+        -   Task B as *:ns1:unconfined*
+        -   Task C as *:ns1//ns2:unconfined*
+        -   Task D as *:ns3:unconfined*
+-   Task B
+    -   can NOT see profiles in the system namespace
+    -   can see profiles in namespaces :ns1: which appears to be the root system namespace to it
+    -   sees namespace :ns1//ns2: as :ns2: and can see the profiles in it
+    -   can NOT see namespace :ns3: nor the profiles in it
+    -   sees the confinement of
+        -   Task A as --- 
+        -   Task B (itself) as *unconfined*
+        -   Task C as *:ns2:unconfined*
+        -   Task D as ---
+-   Task C
+    -   can NOT see profiles in the system namespace
+    -   can NOT see namespace :ns1: nor :ns3: nor their profiles
+    -   can see profiles in namespaces :ns1//ns2: which appears to be the root system namespace to it
+    -   sees the confinement of
+        -   Task A as ---
+        -   Task B as ---
+        -   Task C (itself) as *unconfined*
+        -   Task D as ---
+-   Task D
+    -   can NOT see profiles in the system namespace
+    -   can NOT see namespace :ns1: nor :ns1//ns2: nor their profiles
+    -   can see profiles in namespaces :ns3: which appears to be the root system namespace to it
+    -   sees the confinement of
+        -   Task A as ---
+        -   Task B as ---
+        -   Task C as ---
+        -   Task D (itself) as *unconfined*
 
 How the Namespace View affects Policy
 -------------------------------------
@@ -140,31 +143,31 @@ it can be set via the apparmorfs interface (used by the api).
 The view is set relative to the namespace the policy is being defined for.
 
 ```
- namespace ns1 {
-     view ./, # view of ns1 is set to the policy root 
-      namespace ns2 {
-         view ns1, # view of ns1//ns2 is set to that of ns1 
-          profile D {
-             ...
-         }
-     }
-      namespace ns3 {
-         # view not defined so set to ns1//ns3
-         profile E {
-             ...
-         }
-     }
-      profile C {
-         ...
-     }
- }
-  profile A {
-     ...
- }
-  profile :ns1:B {
-     # profile defined external to its namespace block, view is still set in namespace block 
-     ...
- }
+ namespace ns1 {
+     view ./, # view of ns1 is set to the policy root 
+      namespace ns2 {
+         view ns1, # view of ns1//ns2 is set to that of ns1 
+          profile D {
+             ...
+         }
+     }
+      namespace ns3 {
+         # view not defined so set to ns1//ns3
+         profile E {
+             ...
+         }
+     }
+      profile C {
+         ...
+     }
+ }
+  profile A {
+     ...
+ }
+  profile :ns1:B {
+     # profile defined external to its namespace block, view is still set in namespace block 
+     ...
+ }
 ```
 
 ### Setting the View via the apparmorfs interface
@@ -190,7 +193,7 @@ the its namespace directory. Eg. to set the View of namespace ns1 to
 the current tasks view it could write
 
 ```
- echo “.” > /sys/kernel/security/apparmor/policy/namespaces/ns1/view
+ echo “.” > /sys/kernel/security/apparmor/policy/namespaces/ns1/view
 ```
 
 Current Namespace(s)
@@ -210,7 +213,7 @@ from the system's root namespace.
 That is if the task is confined by
 
 ```
- profile_A//:ns1:profile_B//:ns1//ns2:profile_C
+ profile_A//:ns1:profile_B//:ns1//ns2:profile_C
 ```
 
 the current namespace will be ns1//ns2.
@@ -244,39 +247,42 @@ when doing introspection. The current View is determined by the view
 namespace of the the task's current namespace. The current view will
 be the same as the current namespace or an ancestor of it.
 
-E.G., given a child namespace :child1: with its view set to the root namespace and with profile R in the root namespace, profile C in the the child namespace, task Tr confined by R and task Tc confined by C, then
+E.G., given a child namespace :child1: with its view set to the root
+namespace and with profile R in the root namespace, profile C in the
+the child namespace, task Tr confined by R and task Tc confined by
+C, then
 
 -   Tr
-    -   views Tc confinement as :child1:C
-    -   views its own confinement as R
--   Tc
-    -   views its own confinement as :child1:C
-    -   views Tr confinement as R
+    -   views Tc confinement as :child1:C
+    -   views its own confinement as R
+-   Tc
+    -   views its own confinement as :child1:C
+    -   views Tr confinement as R
 
 Now lets say Tc and Tr both try to transition to a profile X
 
--   Tr will transition to X in the root namespace
--   Tc will transition to a different profile X in the namespace
-    :child1: because its current namespace is :child1: and profile
-    lookups that don't specify a namespace are relative to the current namespace.
+-   Tr will transition to X in the root namespace
+-   Tc will transition to a different profile X in the namespace
+    :child1: because its current namespace is :child1: and profile
+    lookups that don't specify a namespace are relative to the current namespace.
 
 However if the transitions is to :child1:X
 
--   Tr will transition to the X profile in :child1:
--   Tc will still transition to the X profile in :child1:
+-   Tr will transition to the X profile in :child1:
+-   Tc will still transition to the X profile in :child1:
 
 This is because the namespace lookup is relative to the view not the
 current profile.
 
 Similarly if the transitions is to :child2:Y
 
--   Tr will transition to the Y profile in :child2:
--   Tc will transition to the Y profile in :child2:
+-   Tr will transition to the Y profile in :child2:
+-   Tc will transition to the Y profile in :child2:
 
 ??? Eg. A transition of
 
 ```
- px /** -> /bin/foo,
+ px /** -> /bin/foo,
 ```
 
 is relative to the current namespace.
@@ -284,7 +290,7 @@ is relative to the current namespace.
 While a transition of
 
 ```
- px /** -> :foo:/bin/foo,
+ px /** -> :foo:/bin/foo,
 ```
 
 is relative to the current view.
