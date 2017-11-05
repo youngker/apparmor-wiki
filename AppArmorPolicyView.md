@@ -66,21 +66,21 @@ For example, given the namespaces
 
 And the following tasks and views
 
--   Task A has a view set to the root system policy namespace, with it confinement set to unconfined
--   Task B has a view set to ns1, with its confinement set to unconfined of namespace :ns1:
--   Task C has a view set to ns1//ns2, with its confinement set to unconfined of namespace :ns1//ns2:
--   Task D has a view set to ns3, with its confinement set to unconfined of namespace :ns3:
+- Task A has a view set to the root system policy namespace, with it confinement set to unconfined
+- Task B has a view set to ns1, with its confinement set to unconfined of namespace :ns1:
+- Task C has a view set to ns1//ns2, with its confinement set to unconfined of namespace :ns1//ns2:
+- Task D has a view set to ns3, with its confinement set to unconfined of namespace :ns3:
 
 Then
 
--   Task A
-    -   can see profiles in the system namespace
-    -   can see the namespaces :ns1:, :ns1//ns2:, and :ns3: and the profiles in them
-    -   sees the confinement of
-        -   Task A (itself) as *unconfined*
-        -   Task B as *:ns1:unconfined*
-        -   Task C as *:ns1//ns2:unconfined*
-        -   Task D as *:ns3:unconfined*
+- Task A
+  - can see profiles in the system namespace
+  - can see the namespaces :ns1:, :ns1//ns2:, and :ns3: and the profiles in them
+  - sees the confinement of
+    - Task A (itself) as *unconfined*
+    - Task B as *:ns1:unconfined*
+    - Task C as *:ns1//ns2:unconfined*
+    - Task D as *:ns3:unconfined*
 -   Task B
     -   can NOT see profiles in the system namespace
     -   can see profiles in namespaces :ns1: which appears to be the root system namespace to it
