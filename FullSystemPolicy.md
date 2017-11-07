@@ -62,7 +62,7 @@ initramfs setup.
     (apparmor\_parser is statically linked by default in Ubuntu)
     by creating /etc/initramfs-tools/hooks/apparmor
 
-```
+    ```
 #!/bin/sh
 set -e
 PREREQ=
@@ -78,7 +78,7 @@ case $1 in
 esac
 . /usr/share/initramfs-tools/hook-functions
 copy_exec /sbin/apparmor_parser /sbin
-```
+    ```
 
 2.   Make it executable:
 
