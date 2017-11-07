@@ -1948,40 +1948,50 @@ is **not** equivalent to (see the options section for more details):
 
 #### \<source\> (device path)
 
-The \\<source\> element can be a path or any other value. It matches against the device spec of a mount command.
+The \<source\> element can be a path or any other value. It matches against the device spec of a mount command.
 
 In the command:
 
-``
-`  mount /dev/sda1 /mnt<br>`
-`  <source> matches against '''/dev/sda1'''`
-` `
+```
+  mount /dev/sda1 /mnt
+```
+
+\<source\> matches against **/dev/sda1**.
 
 In the command:
 
-``
-`  mount -t overlayfs -o rw,upperdir=/tmp/upper,lowerdir=/ none /mnt<br>`
-`  <source> matches against '''none'''`
-` `
+```
+  mount -t overlayfs -o rw,upperdir=/tmp/upper,lowerdir=/ none /mnt
+```
+
+\<source\> matches against **none**.
 
 In the command:
 
-``
-`  mount --bind /home /mnt<br>`
-`  <source> matches against '''/home'''`
-` `
+```
+  mount --bind /home /mnt
+```
 
-#### <fstype>
+\<source\> matches against **/home**
+ 
 
-The fstype is an optional element that can be used to match against a device's file type. It is a single valued option such that:
+#### \<fstype\>
 
-` fstype=ext4 == fstype=(ext4) == fstype in (ext4)`
-`and:`
-` fstype=(ext3, ext4) == fstype in (ext3, ext4)`
+The fstype is an optional element that can be used to match against
+a device's file type. It is a single valued option such that:
 
-In other words, fstype will match against any one value in the supplied list and each element in the supplied list can be a pattern match. Eg:
+  `fstype=ext4` == `fstype=(ext4)` == `fstype in (ext4)`
 
-` fstpye=(ext?, aufs, devfs)`
+and:
+
+  `fstype=(ext3, ext4)` == `fstype in (ext3, ext4)`
+
+In other words, fstype will match against any one value in the supplied
+list and each element in the supplied list can be a pattern match; e.g.:
+
+```
+ fstpye=(ext?, aufs, devfs)
+```
 
 Note: In AppArmor 2.8 the fstype may not be matched against when certain mount command flags are used. Specifically fstype matching currently only works when creating a new mount and not remount, bind, etc.
 
