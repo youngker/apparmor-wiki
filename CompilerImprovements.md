@@ -7,12 +7,8 @@ Areas for improvement
 1.  lexer - Front end duplicate include elimination
     -   per profile cache which files have already been included so they don't need to be processed multiple times
 
-<!-- -->
-
 2.  Include parse caching
     -   cache include files post parsing so that they don't need to be re-parsed
-
-<!-- -->
 
 3.  Rule duplicate removal (only done on files)
     -   almost unneeded if fix for 1 is done
