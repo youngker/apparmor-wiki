@@ -1946,280 +1946,281 @@ is **not** equivalent to (see the options section for more details):
   options=acl
 ```
 
-#### \<source\> (device path)
+#### \\<source\> (device path)
+
+The \\<source\> element can be a path or any other value. It matches against the device spec of a mount command.
+
+In the command:
+
 ``
-`The <source> element can be a path or any other value.  It matches against the device spec of a mount command.`
-``
-`In the command:`
 `  mount /dev/sda1 /mnt<br>`
 `  <source> matches against '''/dev/sda1'''`
+` `
+
+In the command:
+
 ``
-`In the command:`
 `  mount -t overlayfs -o rw,upperdir=/tmp/upper,lowerdir=/ none /mnt<br>`
 `  <source> matches against '''none'''`
+` `
+
+In the command:
+
 ``
-`In the command:`
 `  mount --bind /home /mnt<br>`
 `  <source> matches against '''/home'''`
+` `
+
+#### <fstype>
+
+The fstype is an optional element that can be used to match against a device's file type. It is a single valued option such that:
+
+` fstype=ext4 == fstype=(ext4) == fstype in (ext4)`
+`and:`
+` fstype=(ext3, ext4) == fstype in (ext3, ext4)`
+
+In other words, fstype will match against any one value in the supplied list and each element in the supplied list can be a pattern match. Eg:
+
+` fstpye=(ext?, aufs, devfs)`
+
+Note: In AppArmor 2.8 the fstype may not be matched against when certain mount command flags are used. Specifically fstype matching currently only works when creating a new mount and not remount, bind, etc.
+
+#### destination (<mntpnt>)
+
+The <mntpnt> is the location of the mounted device or filesystem will be after it is mounted. It must always be a valid path and should usually end with a **/** character in policy. The **-&gt;** must always be specified before the destination <mntpnt> is specified. If **-&gt;** is not specified any path will be interpreted as a \\<source\> path or the parser will throw an error during compilation. Eg:
+
 ``
-`==== <fstype> ====`
-``
-`The fstype is an optional element that can be used to match against a device's file type.  It is a single valued option such that:`
-`  fstype=ext4 == fstype=(ext4) == fstype in (ext4)<br>`
-` and:<br>`
-`  fstype=(ext3, ext4) == fstype in (ext3, ext4)`
-``
-`In other words, fstype will match against any one value in the supplied list and each element in the supplied list can be a pattern match. Eg:`
-`  fstpye=(ext?, aufs, devfs)`
-``
-`Note: In AppArmor 2.8 the fstype may not be matched against when certain mount command flags are used. Specifically fstype matching currently only works when creating a new mount and not remount, bind, etc.`
-``
-`==== destination (<mntpnt>) ====`
-``
-`The <mntpnt> is the location of the mounted device or filesystem will be after it is mounted. It must always be a valid path and should usually end with a '''/''' character in policy.  The '''->''' must always be specified before the destination <mntpnt> is specified.  If '''->''' is not specified any path will be interpreted as a <source> path or the parser will throw an error during compilation. Eg:`
 `  mount -> /,                  # mount on root`
 `  mount -> /**,                # mount any where below root`
 `  mount -> /{**,},             # mount on or below root`
 ``
 `  mount -> /**/,               # mount on only directories below root`
 `  mount -> /**[^/],            # mount on only files below root`
-``
-`If the destination <mntpnt> location supports both files and directories then use either a trailing ** pattern match, alternation {/,}, or separate mount rules.`
-``
-`Note: AppArmor 2.8 does not support conditionals on the destination <mntpnt>.`
-``
-`==== <options> and flags ====`
-``
-`The <options> element is a multi-valued (set) option that covers two distinct types of options: mount flags and fs specific options.  Being a multi-valued option it treats the '''=''' and '''in''' operators differently and also treats the two types differently when performing matching.`
-``
-`The mount flags are a preset list of values that are generic to all mount commands, while the fs specific options are anything else that can be specified. Because the generic mount flags and fs specific options are handled slightly differently, it is important to know the differences.`
-``
-`The '''=''' operator specifies that the rule only grants permission for mounts matching the exactly specified options. For example, an AppArmor`
-`policy with the following rule:`
+`  `
+
+If the destination <mntpnt> location supports both files and directories then use either a trailing \*\* pattern match, alternation {/,}, or separate mount rules.
+
+Note: AppArmor 2.8 does not support conditionals on the destination <mntpnt>.
+
+#### <options> and flags
+
+The <options> element is a multi-valued (set) option that covers two distinct types of options: mount flags and fs specific options. Being a multi-valued option it treats the **=** and **in** operators differently and also treats the two types differently when performing matching.
+
+The mount flags are a preset list of values that are generic to all mount commands, while the fs specific options are anything else that can be specified. Because the generic mount flags and fs specific options are handled slightly differently, it is important to know the differences.
+
+The **=** operator specifies that the rule only grants permission for mounts matching the exactly specified options. For example, an AppArmor policy with the following rule:
+
 ``
 `  mount options=ro, <br>`
 `  allows mount operations that only specify the ro flag (eg, '# mount -o ro /dev/foo /mnt')`
-``
-`while:`
-`  mount options=(ro, nodev),<br>`
+` `
+
+while:
+
+` mount options=(ro, nodev),`
 `  only matches if the mount uses both the ro and nodev flags and no others (eg '# mount -o ro,nodev /dev/foo /mnt')`
+
+The **in** conditional operator allows options to be any or all of the listed values (a subset of the values). In other words, if a conditional is specified using 'in', then the rule grants permission for mounts matching any combination of the specified options. Eg:
+
+` mount options in (ro, nodev),`
+
+is equivalent to
+
 ``
-`The '''in''' conditional operator allows options to be any or all of the listed values (a subset of the values). In other words, if a conditional is specified using 'in', then the rule grants permission for mounts matching any combination of the specified options. Eg:`
-`  mount options in (ro, nodev),`
-``
-`is equivalent to`
 `  mount options=ro,`
 `  mount options=nodev,`
 `  mount options=(ro, nodev),`
-``
-`NOTE: While the order that the flags are specified in a rule does not matter, in AppArmor 2.8 the order of fs specific options does matter.`
-``
-`NOTE: Due to limitations in the Linux kernel, there is currently no way to have 'options in (ro,nodev)' to mean only 'ro' is set, or 'nodev' is set or 'ro and nodev are set'. Instead 'options in (ro,nodev)' means 'any combination of the specified option and its inverse can be set' such that 'options in (ro,nodev)' == 'options in (rw,nodev)' == 'options in (ro,dev)' == 'options in (rw,dev)'.`
-``
-`===== specifying options multiple times =====`
-``
-`The options conditional may be specified multiple times within a section of the mount rule which can aid in logically breaking up a conditional and provides flexibility to switch between '''=''' and '''in''' conditional operators. As long as the conditional operators are the same, the specified options can be split and combined interchangeably.`
-``
-`The following are all equivalent`
-` mount options=(ro, nodev)`
-` mount options=(ro) options=(nodev)`
-``
-` mount options=(ro, nodev, upperdir=/tmp/upper, lowerdir=/)`
-` mount options=(ro) options=(nodev) options=(upperdir=/tmp/upper) options=(lowerdir=/)`
-``
-` mount options in (ro, nodev, user)`
-` mount options in (ro) options in (nodev, user)`
-` mount options in (ro nodev) options in (user)`
-` mount options in (ro) options in (nodev) options in (user)`
-``
-`When both '''=''' and '''in''' conditional operators are used the options within each condition type can be combined and split interchangeably.`
-``
-` mount options=(ro, acl) options in (nodev, user)`
-` mount options=(ro) options=(acl) options in (nodev) options in (user)`
-``
-`It is important to note that allow rule '''in''' options can also be encoded using '''=''' and both the positive and negative forms of a flag:`
-` mount options=(ro, acl) options in (nodev, user)`
-` mount options=(ro, acl, dev, nodev, user, nouser)`
-``
-`but this is discouraged because it is harder to understand, the negative form must be known to exist (not all flags have a negative form), this form does not directly apply to deny rules because of the inversion that the deny operator applies.`
-``
-`===== mount flags =====`
-``
-`Mount flags are a predetermined set of values that are common to all mount commands, and they are separated out from the fs specific options.  The apparmor option names are based on those used by the mount command. If the mount command supplies both a flag and option value then both are available to be used in apparmor mount rules.`
-``
-`Eg, the mount command allows the read only flag to specified as`
-`    mount o=ro`
-`    mount -r`
-`    mount --read-only`
-``
-`All variants are available to the apparmor mount rule (without the leading '-' or '--').`
-``
-`The generic mount flags are split into two type generic flags and the mount command flags have no negative form.`
-``
-`{| class="wikitable"`
-`|+ Generic mount flags`
-`! Positive form || Negative form || notes`
-`|-`
-`| ro, r, read-only || rw, w`
-`|-`
-`| suid || nosuid`
-`|-`
-`| dev || nodev`
-`|-`
-`| exec || noexec`
-`|-`
-`| sync || async`
-`|-`
-`| mand || nomand`
-`|-`
-`| dirsync`
-`|-`
-`| atime || noatime`
-`|-`
-`| diratime || nodiratime`
-`|-`
-`| acl ||  noacl`
-`|-`
-`| relatime || norelatime`
-`|-`
-`| iversion || noiversion`
-`|-`
-`| strictatime`
-`|-`
-`| user || nouser`
-`|}`
-``
-`{| class="wikitable"`
-`|+ Mount command type flags`
-`! command || equivalent to`
-`|-`
-`| remount`
-`|-`
-`| bind, B`
-`|-`
-`| move, M`
-`|-`
-`| rbind, R`
-`|-`
-`| make-unbindable`
-`|-`
-`| make-private`
-`|-`
-`| make-slave`
-`|-`
-`| make-shared`
-`|-`
-`| make-runbindable || options=(make-unbindable, rbind)`
-`|-`
-`| make-rprivate || options=(make-private, rbind)`
-`|-`
-`| make-rslave || options=(make-slave, rbind)`
-`|-`
-`| make-rshared || options=(make-shared, rbind)`
-`|}`
-``
-`Any other options that are specified are treated as fs specific options. Eg, the rule:`
-`  mount fstype=overlayfs options=(ro,uppderdir=/tmp/upper,lowerdir=/),`
-``
-`could be rewritten in an equivalent form with the generic options and fs specific options separated like so:`
-`  mount fstype=overlayfs options=ro options=(upperdir=/tmp/upper,lowerdir=/),`
-``
-`Note: the flags portion of a pattern match is not properly handled in AppArmor 2.8.`
-``
-`===== fs specific options =====`
-``
-`As noted above, fs specific options are any options that remain after the generic mount flags have been removed, and they are special in a few ways.`
-``
-`* AppArmor does not know the set of options supported by any given filesystem so anything that does not match a mount flag is passed through as an option.  This means typos in mount flags are treated as an fs specific option`
-`* In AppArmor 2.8 the order of the fs specific options matters.  They must be specified in the same order that the user enters them`
-`* Pattern matching can be used and is currently completely separated from the fs flags (ie this known bug means they don't match against patterns).`
-`* Options must be entered the exact same as the user enters them in the mount command.  Mediation is done before the filesystem parses the options and converts them into filesystem objects.  This means that if a file system specific option specifies a directory but the user does not specify a trailing '/', then the fs specific option should not either.`
-``
-`Eg. if the user uses the following command`
-`  mount -t overlayfs -o rw,uppderdir=/tmp/upper,lowerdir=/ none /mnt`
-``
-`then the apparmor mount command must specify the fs specific options the same way:`
-`  options=(upperdir=/tmp/upper,lowerdir=/),`
-``
-`notice that '''/tmp/upper''' does not have a trailing '''/''', this is contrary to how apparmor matches against directories for other rules.`
-``
-`In general it is recommended that when specifying fs specific options that should match a directory to use pattern matching so the rule will work regardless of whether the user includes a trailing / in their mount command:`
-`  options=("upperdir=/tmp/upper{/,}",lowerdir=/),`
-``
-`===== deny =====`
-`TODO`
-``
-`==== directories and files (trailing /) ====`
-``
-`Because AppArmor differentiates between directories and files, it is important in apparmor rules to makes sure that specified path elements have a trailing '''/''' if they are to match directory objects.  However, the mount command does not always specify elements that match up to an actual object in the filesystem. An example is when the <source> element specifies '''none''', there is no device or path associated with the mount.`
-``
-`Of particular note is fs options specified in the options field must match exactly as specified otherwise they may not resolve to a filesystem object.`
-``
-`Note: currently flags can not be extracted from or matched to regular expressions, and must be manually specified.  See Bug #965690`
-``
-`==== remount ====`
-``
-`The remount rule is just a convenience rule that maps to the mount rule`
-`  mount options=remount -> <conds>* [<mntpnt>],`
-``
-`==== umount ====`
-``
-`The umount rule gives permission to unmount a specified mount point. In AppArmor 2.8, the umount rule does not support any conditionals.`
-``
-`==== pivot_root ====`
-` pivot_root [oldroot=<value>] [<path>] [-> <profile>]`
-``
-`The pivot_root rule gives permission to pivot the root of the filesystem (see man pivot_root). It should not be granted unless it is required because it allows changing the visibility of all paths for tasks within the filesystem namespace.  This changes the meaning of all profile path rules, which can lead to aliasing and confusion.`
-``
-`The pivot_root rule provides a means to change_profile [-> <profile>] and even the namespace when a pivot_root is done, but this has several caveats:`
-`* It can only be done against the task doing the pivot_root; other tasks in the namespace will NOT be updated`
-`* The changed profile must be written with the changed filesystem view in mind which can result in disconnected paths for files that where opened under the old view.`
-`* It results in revalidation of some files under the new path names.`
-``
-`=== Chmod rules ===`
-`  <chmod> ::= <path> <perms + chmod> ','`
-`              'chmod' <perm_mask> [<path>] ','`
-`  <perm_mask> ::= (####| rwxrwxrwx)`
-``
-`The chmod permission allows controlling which DAC permissions can be changed by specifying a mask.  If a path is specified the permission mask only applies to files but it can be applied to all objects (eg. sockets) if no path is specified.`
-``
-`When chmod is specified without a mask it is assumed the mask is 7777?`
-``
-`eg.`
-`  chmod 777,  # allow chmoding all files and sockets.`
-`  chmod 777 /home/**,  # allow chmoding files in home`
-`  deny chmod 0222,`
-``
-`  /path (rw chmod),  # mask /path with `
-``
-`how to specify none file objects and not include files?  Should not specifying the path only apply to non path based objects?  Maybe`
-`  so chmod 777, would not apply to files then`
-``
-`=== Chown rules ===`
-``
-`setuid and sticky bits`
-``
-``
-`=== Setuid rules ===`
-``
-`requires capability setuid`
-``
-`  setuid -> fred,`
-`  setuid -> (fred, george)`
-``
-``
-``
-`2 options:`
-`  setuid rule embedded within the cap making it a limited cap`
-`    capability setuid (fred, george),  remains backwards compat`
-``
-``
-``
-`setuid binaries`
-`fscap binaries`
-``
-`=== Network rules ===`
-`  <nowiki>`
+` `
+
+NOTE: While the order that the flags are specified in a rule does not matter, in AppArmor 2.8 the order of fs specific options does matter.
+
+NOTE: Due to limitations in the Linux kernel, there is currently no way to have 'options in (ro,nodev)' to mean only 'ro' is set, or 'nodev' is set or 'ro and nodev are set'. Instead 'options in (ro,nodev)' means 'any combination of the specified option and its inverse can be set' such that 'options in (ro,nodev)' == 'options in (rw,nodev)' == 'options in (ro,dev)' == 'options in (rw,dev)'.
+
+##### specifying options multiple times
+
+The options conditional may be specified multiple times within a section of the mount rule which can aid in logically breaking up a conditional and provides flexibility to switch between **=** and **in** conditional operators. As long as the conditional operators are the same, the specified options can be split and combined interchangeably.
+
+The following are all equivalent
+
+`mount options=(ro, nodev)`
+`mount options=(ro) options=(nodev)`
+
+`mount options=(ro, nodev, upperdir=/tmp/upper, lowerdir=/)`
+`mount options=(ro) options=(nodev) options=(upperdir=/tmp/upper) options=(lowerdir=/)`
+
+`mount options in (ro, nodev, user)`
+`mount options in (ro) options in (nodev, user)`
+`mount options in (ro nodev) options in (user)`
+`mount options in (ro) options in (nodev) options in (user)`
+
+When both **=** and **in** conditional operators are used the options within each condition type can be combined and split interchangeably.
+
+`mount options=(ro, acl) options in (nodev, user)`
+`mount options=(ro) options=(acl) options in (nodev) options in (user)`
+
+It is important to note that allow rule **in** options can also be encoded using **=** and both the positive and negative forms of a flag:
+
+`mount options=(ro, acl) options in (nodev, user)`
+`mount options=(ro, acl, dev, nodev, user, nouser)`
+
+but this is discouraged because it is harder to understand, the negative form must be known to exist (not all flags have a negative form), this form does not directly apply to deny rules because of the inversion that the deny operator applies.
+
+##### mount flags
+
+Mount flags are a predetermined set of values that are common to all mount commands, and they are separated out from the fs specific options. The apparmor option names are based on those used by the mount command. If the mount command supplies both a flag and option value then both are available to be used in apparmor mount rules.
+
+Eg, the mount command allows the read only flag to specified as
+
+`   mount o=ro`
+`   mount -r`
+`   mount --read-only`
+
+All variants are available to the apparmor mount rule (without the leading '-' or '--').
+
+The generic mount flags are split into two type generic flags and the mount command flags have no negative form.
+
+| Positive form    | Negative form | notes |
+|------------------|---------------|-------|
+| ro, r, read-only | rw, w         |
+| suid             | nosuid        |
+| dev              | nodev         |
+| exec             | noexec        |
+| sync             | async         |
+| mand             | nomand        |
+| dirsync          |
+| atime            | noatime       |
+| diratime         | nodiratime    |
+| acl              | noacl         |
+| relatime         | norelatime    |
+| iversion         | noiversion    |
+| strictatime      |
+| user             | nouser        |
+
+| command          | equivalent to                    |
+|------------------|----------------------------------|
+| remount          |
+| bind, B          |
+| move, M          |
+| rbind, R         |
+| make-unbindable  |
+| make-private     |
+| make-slave       |
+| make-shared      |
+| make-runbindable | options=(make-unbindable, rbind) |
+| make-rprivate    | options=(make-private, rbind)    |
+| make-rslave      | options=(make-slave, rbind)      |
+| make-rshared     | options=(make-shared, rbind)     |
+
+Any other options that are specified are treated as fs specific options. Eg, the rule:
+
+` mount fstype=overlayfs options=(ro,uppderdir=/tmp/upper,lowerdir=/),`
+
+could be rewritten in an equivalent form with the generic options and fs specific options separated like so:
+
+` mount fstype=overlayfs options=ro options=(upperdir=/tmp/upper,lowerdir=/),`
+
+Note: the flags portion of a pattern match is not properly handled in AppArmor 2.8.
+
+##### fs specific options
+
+As noted above, fs specific options are any options that remain after the generic mount flags have been removed, and they are special in a few ways.
+
+-   AppArmor does not know the set of options supported by any given filesystem so anything that does not match a mount flag is passed through as an option. This means typos in mount flags are treated as an fs specific option
+-   In AppArmor 2.8 the order of the fs specific options matters. They must be specified in the same order that the user enters them
+-   Pattern matching can be used and is currently completely separated from the fs flags (ie this known bug means they don't match against patterns).
+-   Options must be entered the exact same as the user enters them in the mount command. Mediation is done before the filesystem parses the options and converts them into filesystem objects. This means that if a file system specific option specifies a directory but the user does not specify a trailing '/', then the fs specific option should not either.
+
+Eg. if the user uses the following command
+
+` mount -t overlayfs -o rw,uppderdir=/tmp/upper,lowerdir=/ none /mnt`
+
+then the apparmor mount command must specify the fs specific options the same way:
+
+` options=(upperdir=/tmp/upper,lowerdir=/),`
+
+notice that **/tmp/upper** does not have a trailing **/**, this is contrary to how apparmor matches against directories for other rules.
+
+In general it is recommended that when specifying fs specific options that should match a directory to use pattern matching so the rule will work regardless of whether the user includes a trailing / in their mount command:
+
+` options=(`“`upperdir=/tmp/upper{/,}`”`,lowerdir=/),`
+
+##### deny
+
+TODO
+
+#### directories and files (trailing /)
+
+Because AppArmor differentiates between directories and files, it is important in apparmor rules to makes sure that specified path elements have a trailing **/** if they are to match directory objects. However, the mount command does not always specify elements that match up to an actual object in the filesystem. An example is when the \\<source\> element specifies **none**, there is no device or path associated with the mount.
+
+Of particular note is fs options specified in the options field must match exactly as specified otherwise they may not resolve to a filesystem object.
+
+Note: currently flags can not be extracted from or matched to regular expressions, and must be manually specified. See Bug \#965690
+
+#### remount
+
+The remount rule is just a convenience rule that maps to the mount rule
+
+` mount options=remount -> `<conds>`* [`<mntpnt>`],`
+
+#### umount
+
+The umount rule gives permission to unmount a specified mount point. In AppArmor 2.8, the umount rule does not support any conditionals.
+
+#### pivot\_root
+
+`pivot_root [oldroot=`<value>`] [`<path>`] [-> `<profile>`]`
+
+The pivot\_root rule gives permission to pivot the root of the filesystem (see man pivot\_root). It should not be granted unless it is required because it allows changing the visibility of all paths for tasks within the filesystem namespace. This changes the meaning of all profile path rules, which can lead to aliasing and confusion.
+
+The pivot\_root rule provides a means to change\_profile \[-&gt; <profile>\] and even the namespace when a pivot\_root is done, but this has several caveats:
+
+-   It can only be done against the task doing the pivot\_root; other tasks in the namespace will NOT be updated
+-   The changed profile must be written with the changed filesystem view in mind which can result in disconnected paths for files that where opened under the old view.
+-   It results in revalidation of some files under the new path names.
+
+### Chmod rules
+
+` `<chmod>` ::= `<path>` `<perms + chmod>` ','`
+`             'chmod' `<perm_mask>` [`<path>`] ','`
+` `<perm_mask>` ::= (####| rwxrwxrwx)`
+
+The chmod permission allows controlling which DAC permissions can be changed by specifying a mask. If a path is specified the permission mask only applies to files but it can be applied to all objects (eg. sockets) if no path is specified.
+
+When chmod is specified without a mask it is assumed the mask is 7777?
+
+eg.
+
+` chmod 777,  # allow chmoding all files and sockets.`
+` chmod 777 /home/**,  # allow chmoding files in home`
+` deny chmod 0222,`
+
+` /path (rw chmod),  # mask /path with `
+
+how to specify none file objects and not include files? Should not specifying the path only apply to non path based objects? Maybe
+
+` so chmod 777, would not apply to files then`
+
+### Chown rules
+
+setuid and sticky bits
+
+### Setuid rules
+
+requires capability setuid
+
+` setuid -> fred,`
+` setuid -> (fred, george)`
+
+2 options:
+
+` setuid rule embedded within the cap making it a limited cap`
+`   capability setuid (fred, george),  remains backwards compat`
+
+setuid binaries fscap binaries
+
+### Network rules
+
+` `
 `  AppArmor 2.3 - AppArmor 2.6`
 `    <rule qualifier> ::= [('audit'|'quiet')] [('deny'')]`
 `    <rule> ::= [ <rule qualifier> ] 'network' [ <domain> ] (<type> | <protocol)`
