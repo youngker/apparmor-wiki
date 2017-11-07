@@ -1946,7 +1946,7 @@ is **not** equivalent to (see the options section for more details):
   options=acl
 ```
 
-#### \\<source\> (device path)
+#### \<source\> (device path)
 
 The \\<source\> element can be a path or any other value. It matches against the device spec of a mount command.
 
