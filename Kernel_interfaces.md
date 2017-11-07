@@ -1,9 +1,9 @@
 Low level interfaces to the AppArmor kernel module
 ==================================================
 
-### /proc/<pid>/attr/
+### /proc/\<pid\>/attr/
 
--   /proc/<pid>/attr/current
+-   /proc/\<pid\>/attr/current
     -   **read**: current confinement of a task
 
         This file contains the name of the currently confining profile,
