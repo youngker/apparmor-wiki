@@ -1990,104 +1990,168 @@ In other words, fstype will match against any one value in the supplied
 list and each element in the supplied list can be a pattern match; e.g.:
 
 ```
- fstpye=(ext?, aufs, devfs)
+ fstype=(ext?, aufs, devfs)
 ```
 
-Note: In AppArmor 2.8 the fstype may not be matched against when certain mount command flags are used. Specifically fstype matching currently only works when creating a new mount and not remount, bind, etc.
+Note: In AppArmor 2.8 the fstype may not be matched against when
+certain mount command flags are used. Specifically fstype matching
+currently only works when creating a new mount and not remount,
+bind, etc.
 
-#### destination (<mntpnt>)
+#### destination (\<mntpnt\>)
 
-The <mntpnt> is the location of the mounted device or filesystem will be after it is mounted. It must always be a valid path and should usually end with a **/** character in policy. The **-&gt;** must always be specified before the destination <mntpnt> is specified. If **-&gt;** is not specified any path will be interpreted as a \\<source\> path or the parser will throw an error during compilation. Eg:
+The \<mntpnt\> is the location of the mounted device or filesystem will
+be after it is mounted. It must always be a valid path and should
+usually end with a **/** character in policy. The **-&gt;** must always
+be specified before the destination \<mntpnt\> is specified. If **-&gt;**
+is not specified any path will be interpreted as a \<source\> path
+or the parser will throw an error during compilation. Eg:
 
-``
-`  mount -> /,                  # mount on root`
-`  mount -> /**,                # mount any where below root`
-`  mount -> /{**,},             # mount on or below root`
-``
-`  mount -> /**/,               # mount on only directories below root`
-`  mount -> /**[^/],            # mount on only files below root`
-`  `
+```
+  mount -> /,                  # mount on root
+  mount -> /**,                # mount any where below root
+  mount -> /{**,},             # mount on or below root
 
-If the destination <mntpnt> location supports both files and directories then use either a trailing \*\* pattern match, alternation {/,}, or separate mount rules.
+  mount -> /**/,               # mount on only directories below root
+  mount -> /**[^/],            # mount on only files below root
+```
 
-Note: AppArmor 2.8 does not support conditionals on the destination <mntpnt>.
+If the destination \<mntpnt\> location supports both files and
+directories then use either a trailing \*\* pattern match, alternation
+{/,}, or separate mount rules.
 
-#### <options> and flags
+Note: AppArmor 2.8 does not support conditionals on the destination \<mntpnt\>.
 
-The <options> element is a multi-valued (set) option that covers two distinct types of options: mount flags and fs specific options. Being a multi-valued option it treats the **=** and **in** operators differently and also treats the two types differently when performing matching.
+#### \<options\> and flags
 
-The mount flags are a preset list of values that are generic to all mount commands, while the fs specific options are anything else that can be specified. Because the generic mount flags and fs specific options are handled slightly differently, it is important to know the differences.
+The \<options\> element is a multi-valued (set) option that
+covers two distinct types of options: mount flags and fs specific
+options. Being a multi-valued option it treats the **=** and **in**
+operators differently and also treats the two types differently when
+performing matching.
 
-The **=** operator specifies that the rule only grants permission for mounts matching the exactly specified options. For example, an AppArmor policy with the following rule:
+The mount flags are a preset list of values that are generic to all
+mount commands, while the fs specific options are anything else that
+can be specified. Because the generic mount flags and fs specific
+options are handled slightly differently, it is important to know
+the differences.
 
-``
-`  mount options=ro, <br>`
-`  allows mount operations that only specify the ro flag (eg, '# mount -o ro /dev/foo /mnt')`
-` `
+The **=** operator specifies that the rule only grants permission
+for mounts matching the exactly specified options. For example,
+an AppArmor policy with the following rule:
 
-while:
+```
+  mount options=ro,
+```
 
-` mount options=(ro, nodev),`
-`  only matches if the mount uses both the ro and nodev flags and no others (eg '# mount -o ro,nodev /dev/foo /mnt')`
+allows mount operations that only specify the ro flag (e.g, `mount -o ro /dev/foo /mnt`).
 
-The **in** conditional operator allows options to be any or all of the listed values (a subset of the values). In other words, if a conditional is specified using 'in', then the rule grants permission for mounts matching any combination of the specified options. Eg:
+While:
 
-` mount options in (ro, nodev),`
+```
+ mount options=(ro, nodev),
+```
+
+only matches if the mount uses both the ro and nodev flags and no others (e.g. `mount -o ro,nodev /dev/foo /mnt`).
+
+The **in** conditional operator allows options to be any or all of
+the listed values (a subset of the values). In other words, if a
+conditional is specified using 'in', then the rule grants permission
+for mounts matching any combination of the specified options. For
+example:
+
+```
+ mount options in (ro, nodev),
+```
 
 is equivalent to
 
-``
-`  mount options=ro,`
-`  mount options=nodev,`
-`  mount options=(ro, nodev),`
-` `
+```
+  mount options=ro,
+  mount options=nodev,
+  mount options=(ro, nodev),
+``` 
 
-NOTE: While the order that the flags are specified in a rule does not matter, in AppArmor 2.8 the order of fs specific options does matter.
+NOTE: While the order that the flags are specified in a rule does not
+matter, in AppArmor 2.8 the order of fs specific options does matter.
 
-NOTE: Due to limitations in the Linux kernel, there is currently no way to have 'options in (ro,nodev)' to mean only 'ro' is set, or 'nodev' is set or 'ro and nodev are set'. Instead 'options in (ro,nodev)' means 'any combination of the specified option and its inverse can be set' such that 'options in (ro,nodev)' == 'options in (rw,nodev)' == 'options in (ro,dev)' == 'options in (rw,dev)'.
+NOTE: Due to limitations in the Linux kernel, there is currently no way
+to have 'options in (ro,nodev)' to mean only 'ro' is set, or 'nodev'
+is set or 'ro and nodev are set'. Instead 'options in (ro,nodev)'
+means 'any combination of the specified option and its inverse can be
+set' such that 'options in (ro,nodev)' == 'options in (rw,nodev)' ==
+'options in (ro,dev)' == 'options in (rw,dev)'.
 
 ##### specifying options multiple times
 
-The options conditional may be specified multiple times within a section of the mount rule which can aid in logically breaking up a conditional and provides flexibility to switch between **=** and **in** conditional operators. As long as the conditional operators are the same, the specified options can be split and combined interchangeably.
+The options conditional may be specified multiple times within a
+section of the mount rule which can aid in logically breaking up a
+conditional and provides flexibility to switch between **=** and **in**
+conditional operators. As long as the conditional operators are the
+same, the specified options can be split and combined interchangeably.
 
 The following are all equivalent
 
-`mount options=(ro, nodev)`
-`mount options=(ro) options=(nodev)`
+```
+mount options=(ro, nodev)
+mount options=(ro) options=(nodev)
+```
 
-`mount options=(ro, nodev, upperdir=/tmp/upper, lowerdir=/)`
-`mount options=(ro) options=(nodev) options=(upperdir=/tmp/upper) options=(lowerdir=/)`
+```
+mount options=(ro, nodev, upperdir=/tmp/upper, lowerdir=/)
+mount options=(ro) options=(nodev) options=(upperdir=/tmp/upper) options=(lowerdir=/)
+```
 
-`mount options in (ro, nodev, user)`
-`mount options in (ro) options in (nodev, user)`
-`mount options in (ro nodev) options in (user)`
-`mount options in (ro) options in (nodev) options in (user)`
+```
+mount options in (ro, nodev, user)
+mount options in (ro) options in (nodev, user)
+mount options in (ro nodev) options in (user)
+mount options in (ro) options in (nodev) options in (user)
+```
 
-When both **=** and **in** conditional operators are used the options within each condition type can be combined and split interchangeably.
+When both **=** and **in** conditional operators are used the options
+within each condition type can be combined and split interchangeably.
 
-`mount options=(ro, acl) options in (nodev, user)`
-`mount options=(ro) options=(acl) options in (nodev) options in (user)`
+```
+mount options=(ro, acl) options in (nodev, user)
+mount options=(ro) options=(acl) options in (nodev) options in (user)
+```
 
-It is important to note that allow rule **in** options can also be encoded using **=** and both the positive and negative forms of a flag:
+It is important to note that allow rule **in** options can also be
+encoded using **=** and both the positive and negative forms of a flag:
 
-`mount options=(ro, acl) options in (nodev, user)`
-`mount options=(ro, acl, dev, nodev, user, nouser)`
+```
+mount options=(ro, acl) options in (nodev, user)
+mount options=(ro, acl, dev, nodev, user, nouser)
+```
 
-but this is discouraged because it is harder to understand, the negative form must be known to exist (not all flags have a negative form), this form does not directly apply to deny rules because of the inversion that the deny operator applies.
+but this is discouraged because it is harder to understand, the
+negative form must be known to exist (not all flags have a negative
+form), this form does not directly apply to deny rules because of
+the inversion that the deny operator applies.
 
 ##### mount flags
 
-Mount flags are a predetermined set of values that are common to all mount commands, and they are separated out from the fs specific options. The apparmor option names are based on those used by the mount command. If the mount command supplies both a flag and option value then both are available to be used in apparmor mount rules.
+Mount flags are a predetermined set of values that are common to
+all mount commands, and they are separated out from the fs specific
+options. The apparmor option names are based on those used by the
+mount command. If the mount command supplies both a flag and option
+value then both are available to be used in apparmor mount rules.
 
-Eg, the mount command allows the read only flag to specified as
+As an example, the mount command allows the read only flag to
+specified as
 
-`   mount o=ro`
-`   mount -r`
-`   mount --read-only`
+```
+ mount o=ro
+ mount -r
+ mount --read-only
+```
 
-All variants are available to the apparmor mount rule (without the leading '-' or '--').
+All variants are available to the apparmor mount rule (without the
+leading '-' or '--').
 
-The generic mount flags are split into two type generic flags and the mount command flags have no negative form.
+The generic mount flags are split into two type generic flags and
+the mount command flags have no negative form.
 
 | Positive form    | Negative form | notes |
 |------------------|---------------|-------|
@@ -2121,38 +2185,58 @@ The generic mount flags are split into two type generic flags and the mount comm
 | make-rslave      | options=(make-slave, rbind)      |
 | make-rshared     | options=(make-shared, rbind)     |
 
-Any other options that are specified are treated as fs specific options. Eg, the rule:
+Any other options that are specified are treated as fs specific
+options. For example, the rule:
 
-` mount fstype=overlayfs options=(ro,uppderdir=/tmp/upper,lowerdir=/),`
+```
+ mount fstype=overlayfs options=(ro,uppderdir=/tmp/upper,lowerdir=/),
+```
 
-could be rewritten in an equivalent form with the generic options and fs specific options separated like so:
+could be rewritten in an equivalent form with the generic options
+and fs specific options separated like so:
 
-` mount fstype=overlayfs options=ro options=(upperdir=/tmp/upper,lowerdir=/),`
+```
+ mount fstype=overlayfs options=ro options=(upperdir=/tmp/upper,lowerdir=/),
+```
 
-Note: the flags portion of a pattern match is not properly handled in AppArmor 2.8.
+Note: the flags portion of a pattern match is not properly handled
+in AppArmor 2.8.
 
 ##### fs specific options
 
-As noted above, fs specific options are any options that remain after the generic mount flags have been removed, and they are special in a few ways.
+As noted above, fs specific options are any options that remain after
+the generic mount flags have been removed, and they are special in
+a few ways.
 
 -   AppArmor does not know the set of options supported by any given filesystem so anything that does not match a mount flag is passed through as an option. This means typos in mount flags are treated as an fs specific option
 -   In AppArmor 2.8 the order of the fs specific options matters. They must be specified in the same order that the user enters them
 -   Pattern matching can be used and is currently completely separated from the fs flags (ie this known bug means they don't match against patterns).
 -   Options must be entered the exact same as the user enters them in the mount command. Mediation is done before the filesystem parses the options and converts them into filesystem objects. This means that if a file system specific option specifies a directory but the user does not specify a trailing '/', then the fs specific option should not either.
 
-Eg. if the user uses the following command
+For example. if the user uses the following command
 
-` mount -t overlayfs -o rw,uppderdir=/tmp/upper,lowerdir=/ none /mnt`
+```
+ mount -t overlayfs -o rw,uppderdir=/tmp/upper,lowerdir=/ none /mnt
+```
 
-then the apparmor mount command must specify the fs specific options the same way:
+then the apparmor mount command must specify the fs specific options
+the same way:
 
-` options=(upperdir=/tmp/upper,lowerdir=/),`
+```
+ options=(upperdir=/tmp/upper,lowerdir=/),
+```
 
-notice that **/tmp/upper** does not have a trailing **/**, this is contrary to how apparmor matches against directories for other rules.
+notice that **/tmp/upper** does not have a trailing **/**, this is
+contrary to how apparmor matches against directories for other rules.
 
-In general it is recommended that when specifying fs specific options that should match a directory to use pattern matching so the rule will work regardless of whether the user includes a trailing / in their mount command:
+In general it is recommended that when specifying fs specific options
+that should match a directory to use pattern matching so the rule
+will work regardless of whether the user includes a trailing / in
+their mount command:
 
-` options=(`“`upperdir=/tmp/upper{/,}`”`,lowerdir=/),`
+```
+ options=(“upperdir=/tmp/upper{/,}”,lowerdir=/),
+```
 
 ##### deny
 
@@ -2160,29 +2244,50 @@ TODO
 
 #### directories and files (trailing /)
 
-Because AppArmor differentiates between directories and files, it is important in apparmor rules to makes sure that specified path elements have a trailing **/** if they are to match directory objects. However, the mount command does not always specify elements that match up to an actual object in the filesystem. An example is when the \\<source\> element specifies **none**, there is no device or path associated with the mount.
+Because AppArmor differentiates between directories and files, it is
+important in apparmor rules to makes sure that specified path elements
+have a trailing **/** if they are to match directory objects. However,
+the mount command does not always specify elements that match up to an
+actual object in the filesystem. An example is when the \<source\>
+element specifies **none**, there is no device or path associated
+with the mount.
 
-Of particular note is fs options specified in the options field must match exactly as specified otherwise they may not resolve to a filesystem object.
+Of particular note is fs options specified in the options field
+must match exactly as specified otherwise they may not resolve to a
+filesystem object.
 
-Note: currently flags can not be extracted from or matched to regular expressions, and must be manually specified. See Bug \#965690
+Note: currently flags can not be extracted from or matched to
+regular expressions, and must be manually specified. See [Bug
+\#965690](https://bugs.launchpad.net/bugs/965690).
 
 #### remount
 
 The remount rule is just a convenience rule that maps to the mount rule
 
-` mount options=remount -> `<conds>`* [`<mntpnt>`],`
+```
+ mount options=remount -> <conds>* [<mntpnt>],
+```
 
 #### umount
 
-The umount rule gives permission to unmount a specified mount point. In AppArmor 2.8, the umount rule does not support any conditionals.
+The umount rule gives permission to unmount a specified mount point. In
+AppArmor 2.8, the umount rule does not support any conditionals.
 
 #### pivot\_root
 
-`pivot_root [oldroot=`<value>`] [`<path>`] [-> `<profile>`]`
+```
+pivot_root [oldroot=<value>] [<path>] [-> <profile>]
+```
 
-The pivot\_root rule gives permission to pivot the root of the filesystem (see man pivot\_root). It should not be granted unless it is required because it allows changing the visibility of all paths for tasks within the filesystem namespace. This changes the meaning of all profile path rules, which can lead to aliasing and confusion.
+The pivot\_root rule gives permission to pivot the root of the
+filesystem (see man pivot\_root). It should not be granted unless it
+is required because it allows changing the visibility of all paths
+for tasks within the filesystem namespace. This changes the meaning
+of all profile path rules, which can lead to aliasing and confusion.
 
-The pivot\_root rule provides a means to change\_profile \[-&gt; <profile>\] and even the namespace when a pivot\_root is done, but this has several caveats:
+The pivot\_root rule provides a means to change\_profile \[-&gt;
+\<profile>\] and even the namespace when a pivot\_root is done,
+but this has several caveats:
 
 -   It can only be done against the task doing the pivot\_root; other tasks in the namespace will NOT be updated
 -   The changed profile must be written with the changed filesystem view in mind which can result in disconnected paths for files that where opened under the old view.
@@ -2190,25 +2295,35 @@ The pivot\_root rule provides a means to change\_profile \[-&gt; <profile>\] and
 
 ### Chmod rules
 
-` `<chmod>` ::= `<path>` `<perms + chmod>` ','`
-`             'chmod' `<perm_mask>` [`<path>`] ','`
-` `<perm_mask>` ::= (####| rwxrwxrwx)`
+```
+ <chmod> ::= <path> <perms + chmod> ','
+             'chmod' <perm_mask> [<path>] ','
+ <perm_mask> ::= (####| rwxrwxrwx)
+```
 
-The chmod permission allows controlling which DAC permissions can be changed by specifying a mask. If a path is specified the permission mask only applies to files but it can be applied to all objects (eg. sockets) if no path is specified.
+The chmod permission allows controlling which DAC permissions can be
+changed by specifying a mask. If a path is specified the permission
+mask only applies to files but it can be applied to all objects
+(eg. sockets) if no path is specified.
 
 When chmod is specified without a mask it is assumed the mask is 7777?
 
-eg.
+Example:
 
-` chmod 777,  # allow chmoding all files and sockets.`
-` chmod 777 /home/**,  # allow chmoding files in home`
-` deny chmod 0222,`
+```
+ chmod 777,  # allow chmoding all files and sockets.
+ chmod 777 /home/**,  # allow chmoding files in home
+ deny chmod 0222,
+```
 
-` /path (rw chmod),  # mask /path with `
+```
+ /path (rw chmod),  # mask /path with 
+```
 
-how to specify none file objects and not include files? Should not specifying the path only apply to non path based objects? Maybe
+how to specify none file objects and not include files? Should not
+specifying the path only apply to non path based objects? Maybe
 
-` so chmod 777, would not apply to files then`
+so chmod 777, would not apply to files then
 
 ### Chown rules
 
@@ -2218,50 +2333,80 @@ setuid and sticky bits
 
 requires capability setuid
 
-` setuid -> fred,`
-` setuid -> (fred, george)`
+```
+ setuid -> fred,
+ setuid -> (fred, george)
+```
 
 2 options:
 
-` setuid rule embedded within the cap making it a limited cap`
-`   capability setuid (fred, george),  remains backwards compat`
+-   setuid rule embedded within the cap making it a limited cap
+-   `capability setuid (fred, george),`  remains backwards compat
 
 setuid binaries fscap binaries
 
 ### Network rules
 
-` `
-`  AppArmor 2.3 - AppArmor 2.6`
-`    <rule qualifier> ::= [('audit'|'quiet')] [('deny'')]`
-`    <rule> ::= [ <rule qualifier> ] 'network' [ <domain> ] (<type> | <protocol)`
-`  AppArmor 3.0`
-`    <rule qualifier> ::= [('audit'|'quiet')] [('deny'|'kill'|'nokill')]`
-`    <rule> ::= [ <rule qualifier> ] 'network' [ <permissions> ] [ <domain> ] [ <type> ] [ <protocol> [ <address_expr> ] ] [ delegate ]','`
-`  `
+AppArmor 2.3 - AppArmor 2.6`
 
+```
+ <rule qualifier> ::= [('audit'|'quiet')] [('deny'')]
+ <rule> ::= [ <rule qualifier> ] 'network' [ <domain> ] (<type> | <protocol)
+```
+
+AppArmor 3.0
+
+```
+ <rule qualifier> ::= [('audit'|'quiet')] [('deny'|'kill'|'nokill')]
+ <rule> ::= [ <rule qualifier> ] 'network' [ <permissions> ] [ <domain> ] [ <type> ] [ <protocol> [ <address_expr> ] ] [ delegate ]','
+```
+  
 ???? Finish out permissions, network labeling, connection tracking ????
 
-AppArmor network rules provide a flexible profile centric approach to creating a firewall. The network rules are flexible in that they provide both control over creation of sockets, flow of data (packets), and can stand alone or be integrated with the system firewall.
+AppArmor network rules provide a flexible profile centric approach
+to creating a firewall. The network rules are flexible in that they
+provide both control over creation of sockets, flow of data (packets),
+and can stand alone or be integrated with the system firewall.
 
-The majority of the rule components are optional, with the fewer components specified making the rule more generic. The most generic networking rules are:
+The majority of the rule components are optional, with the fewer
+components specified making the rule more generic. The most generic
+networking rules are:
 
-` network,        #allow all networking`
-` deny network,   #disallow all networking`
+```
+ network,        # allow all networking
+ deny network,   # disallow all networking
+```
 
-The rule qualifiers modify network rules in the same manner that they are applied to file rules, ie. denied rules take precedence over allow rules and will both subtract permissions and quiet auditing.
+The rule qualifiers modify network rules in the same manner that
+they are applied to file rules, ie. denied rules take precedence over
+allow rules and will both subtract permissions and quiet auditing.
 
 #### network permissions
 
-` `<permissions>` = 'create' 'accept' 'bind' 'connect' 'listen' 'read' 'write' 'send' 'receive' 'getsockname' 'getpeername' 'getsockopt' 'setsockopt' 'fcntl' 'ioctl' 'shutdown' 'getpeersec'`
+```
+ <permissions> = 'create' 'accept' 'bind' 'connect' 'listen' 'read' 'write'
+                 'send' 'receive' 'getsockname' 'getpeername' 'getsockopt'
+                 'setsockopt' 'fcntl' 'ioctl' 'shutdown' 'getpeersec'
+```
 
-The permissions specify what operations are allowed on the network socket, and also are used to determine semantically what other parts of the network rule are allowed, and how they apply. If the permission set is not specified the full set is implicitly granted. Eg.
+The permissions specify what operations are allowed on the network
+socket, and also are used to determine semantically what other parts
+of the network rule are allowed, and how they apply. If the permission
+set is not specified the full set is implicitly granted. For example:
 
-` network inet,`
+```
+ network inet,
+```
 
-will grant all permissions for sockets in the inet domain. If the full wide permission set is not desired then the desired permissions can be specified, or a deny rule can be used to subtract a certain permissions from another rule.
+will grant all permissions for sockets in the inet domain. If the
+full wide permission set is not desired then the desired permissions
+can be specified, or a deny rule can be used to subtract a certain
+permissions from another rule.
 
-` network (read, write) inet,`
-` deny network bind inet,`
+```
+ network (read, write) inet,
+ deny network bind inet,
+```
 
 -   create - permission to create a socket of the domain, type, protocol specified.
 -   shutdown - permission to shutdown the socket.
@@ -2277,248 +2422,391 @@ will grant all permissions for sockets in the inet domain. If the full wide perm
 
 #### domain
 
-` `<domain>` ::= 'inet' | 'ax25' | 'ipx' | 'appletalk' | 'netrom' | 'bridge' | 'atmpvc" |`
-`              'x25' | 'inet6' | 'rose' | 'netbeui' | 'security' | 'key' | 'packet' | 'ash' |`
-`              'econet' | 'atmsvc' | 'sna' | 'irda' | 'pppox' | 'wanpipe' | 'bluetooth'`
+```
+ <domain> ::= 'inet' | 'ax25' | 'ipx' | 'appletalk' | 'netrom' | 'bridge' | 'atmpvc" |
+              'x25' | 'inet6' | 'rose' | 'netbeui' | 'security' | 'key' | 'packet' | 'ash' |
+              'econet' | 'atmsvc' | 'sna' | 'irda' | 'pppox' | 'wanpipe' | 'bluetooth'
+```
 
-The actually set of domain names is growing and ??? should be consulted for a complete updated list
+The actual set of domain names is growing and ??? should be consulted
+for a complete updated list
 
-In some cases the domain does not need to be specified and it is implied by the type, protocol, or addressing.
+In some cases the domain does not need to be specified and it is
+implied by the type, protocol, or addressing.
 
-`Eg.`
-`  network tcp,`
-`implies`
-`  network inet stream,`
-`  network inet6 stream,`
+Examples:
+
+```
+ network tcp,
+```
+
+implies
+
+```
+ network inet stream,
+ network inet6 stream,
+```
 
 #### type
 
-` `<type>` ::= 'stream' | 'dgram' | 'seqpacket' | 'raw' | 'rdm' | 'packet' | 'dccp'`
+```
+ <type> ::= 'stream' | 'dgram' | 'seqpacket' | 'raw' | 'rdm' | 'packet' | 'dccp'
+```
 
-The allowed types for a network are the same as used in the **socket** system call. And what is supported can vary depending by the domain (a domain does not have to implement them all, eg. inet does not implement seqpacket).
+The allowed types for a network are the same as used in the **socket**
+system call. And what is supported can vary depending by the domain
+(a domain does not have to implement them all, eg. inet does not
+implement seqpacket).
 
-Some types may require permission other than the network rule. For example the 'raw' type will also require the cap\_raw capability.
+Some types may require permission other than the network rule. For
+example the 'raw' type will also require the cap\_raw capability.
 
-In some cases the type does not need to be specified as it is implied by the protocol and or addressing. When this happens the rule matches all types implied by the protocol and or addressing.
+In some cases the type does not need to be specified as it is implied
+by the protocol and or addressing. When this happens the rule matches
+all types implied by the protocol and or addressing.
 
-`Eg.`
-`  network inet tcp,`
-`implies`
-`  network inet stream,`
+For example:
 
-The exact mappings will depend on what is supported by the apparmor tools. Please see ??? for more details.
+```
+ network inet tcp,
+```
+
+implies
+
+```
+ network inet stream,
+```
+
+The exact mappings will depend on what is supported by the apparmor
+tools. Please see ??? for more details.
 
 #### protocol
 
-<protocol>` := 'tcp' | 'udp' | 'icmp' | ..`
+```
+<protocol> := 'tcp' | 'udp' | 'icmp' | ..
+```
 
-The protocols that can appear in a rule will be dependent on the domain and types of the rules as well as the current set of protocolos understood by AppArmor. The known protocols can be used to imply domain and type.
+The protocols that can appear in a rule will be dependent on the
+domain and types of the rules as well as the current set of protocolos
+understood by AppArmor. The known protocols can be used to imply
+domain and type.
 
 #### address expr
 
-<address_expr>` ::= [('source'|'src') `<domain_addr>` ['on' `<iface>`]] [('destination'|'dst' `<domain_addr>`]`
-<domain_addr>` ::= (`<ipv4_addr>` | `<ipv6_addr>` | ..)`
+```
+<address_expr> ::= [('source'|'src') <domain_addr> ['on' <iface>]] [('destination'|'dst' <domain_addr>]
+<domain_addr> ::= (<ipv4_addr> | <ipv6_addr> | ..)
+```
 
-The address expression is dependent on the domain of the socket. Generic rules that cover more than a single domain may not even be able to contain an address expression, in these cases if an address expression is needed the rule should be broken up into multiple rules.
+The address expression is dependent on the domain of the
+socket. Generic rules that cover more than a single domain may not even
+be able to contain an address expression, in these cases if an address
+expression is needed the rule should be broken up into multiple rules.
 
-` network tcp src 192.168.1.1:80 dst 170.1.1.0:80,`
+```
+ network tcp src 192.168.1.1:80 dst 170.1.1.0:80,
+```
 
 ##### ipv4 address expressions
 
-` `<ipv4_addr>` ::= [`<ipv4_??>`['/'(`<ipv_??>`|`<num>`)]][':'`<ports>`]`
-` `<ipv4_??>` ::= <??_expr>'.'<??_expr>'.'<??_expr>'.'<??_expr>`
-` <??_expr> ::= (`<num>`|`<range>`|'*')`
-` `<ports>` ::= (`<num>`|`<range>`)(','`<num>`|`<range>`])*`
-` `<range>` ::= `<num>` '-' `<num>
+```
+ <ipv4_addr> ::= [<ipv4_??>['/'(<ipv_??>|<num>)]][':'<ports>]
+ <ipv4_??> ::= <??_expr>'.'<??_expr>'.'<??_expr>'.'<??_expr>
+ <??_expr> ::= (<num>|<range>|'*')
+ <ports> ::= (<num>|<range>)(','<num>|<range>])*
+ <range> ::= <num> '-' <num>
+```
 
 ?? Examples
 
-` 192.168.1.1`
-` 192.168.1.1-254`
-` 192.168.1.1:80`
-` 192.168.1.1:80,81`
-` 192.168.1.1:80,81,100-200`
+```
+ 192.168.1.1
+ 192.168.1.1-254
+ 192.168.1.1:80
+ 192.168.1.1:80,81
+ 192.168.1.1:80,81,100-200
+```
 
 The following ipv4 address expressions are equivalent
 
-` 192.168.1.*`
-` 192.168.1.0-255`
-` 192.168.1.0/24`
-` 192.168.1.0/255.255.255.0`
-` `
-` the masking and ranging can also be specified for internal ???`
-` 192.0-255.1.1`
-` 192.*.1.1`
-` 192.0.1.1/255.0.255.255`
+```
+ 192.168.1.*
+ 192.168.1.0-255
+ 192.168.1.0/24
+ 192.168.1.0/255.255.255.0
+```
+ 
+the masking and ranging can also be specified for internal ???
+
+```
+ 192.0-255.1.1
+ 192.*.1.1
+ 192.0.1.1/255.0.255.255
+```
 
 ##### address masks
 
-` 192.168.1.1/24`
-` 192.168.1.1/255.255.0.0`
+```
+ 192.168.1.1/24
+ 192.168.1.1/255.255.0.0
+```
 
 ranges?
 
-` 192.168.1.0-192.168.12.255`
+```
+ 192.168.1.0-192.168.12.255
+```
 
 regexes?
 
-` 192.168.*.*`
-` 192.168.**`
+```
+ 192.168.*.*
+ 192.168.**
+```
 
 port ranges
 
-` 192.168.1.1:80-85`
+```
+ 192.168.1.1:80-85
+```
 
-hrmm how to specify addresses? Masking, allow full regexs, address ranges
+hrmm how to specify addresses? Masking, allow full regexs, address
+ranges
 
 #### Integrating with system fire falls
 
-The implementation of AppArmor network rules is broken into three parts, the mediation of sockets, the labeling of packets, and the mediation of packets. When AppArmor compiles policy it splits network rules into these three separate parts.
+The implementation of AppArmor network rules is broken into three
+parts, the mediation of sockets, the labeling of packets, and the
+mediation of packets. When AppArmor compiles policy it splits network
+rules into these three separate parts.
 
-The mediation of sockets, and packets is handled entirely within the AppArmor mediation engine, the labeling of packets is however handled by linux's iptables using secmark and connsecmark.
+The mediation of sockets, and packets is handled entirely within the
+AppArmor mediation engine, the labeling of packets is however handled
+by linux's iptables using secmark and connsecmark.
 
-By default AppArmor will create an iptable with the appropriate labeling for AppArmor policy from the set of system network rules, so that policy does not need to be split between iptables and AppArmor profiles. However there is nothing stopping a user from handling labeling in iptables.
+By default AppArmor will create an iptable with the appropriate
+labeling for AppArmor policy from the set of system network rules, so
+that policy does not need to be split between iptables and AppArmor
+profiles. However there is nothing stopping a user from handling
+labeling in iptables.
 
-??? need to let apparmor know that the reserved labels exist ??? need to write rules that use the labels, most likely ipc rules
+??? need to let apparmor know that the reserved labels exist ??? need
+to write rules that use the labels, most likely ipc rules
 
 #### Note: about AppArmor 2.3 - 2.6 network rules
 
-The network rules for the earlier versions of AppArmor are semantically and syntactically compatible, they just have fewer options available.
+The network rules for the earlier versions of AppArmor are semantically
+and syntactically compatible, they just have fewer options available.
 
-The permission set is always implied to be the full permission set as is the case with AppArmor 3.0 rules when permissions are not specified. Also the protocol can only be expressed if the type isn't; eg. it is not possible to specify **network inet raw tcp,**. The protocol is only used in its convenience form to imply the type, ie. **network inet tcp,** implies **network inet stream,**.
+The permission set is always implied to be the full permission
+set as is the case with AppArmor 3.0 rules when permissions are not
+specified. Also the protocol can only be expressed if the type isn't;
+eg. it is not possible to specify **network inet raw tcp,**. The
+protocol is only used in its convenience form to imply the type,
+ie. **network inet tcp,** implies **network inet stream,**.
 
-There is one semantic change, in AppArmor 2.3 - AppArmor 2.6 sockets opened by an unconfined process could not be delegated to a confined process, they had to be revalidated. This was inconsistent with the behavior for files. In AppArmor 3.0 ?????
+There is one semantic change, in AppArmor 2.3 - AppArmor 2.6 sockets
+opened by an unconfined process could not be delegated to a confined
+process, they had to be revalidated. This was inconsistent with the
+behavior for files. In AppArmor 3.0 ?????
 
 ---
 
-??? Talk about rule combining eg. deny subtracting in more detail ??? Talk about aliases and mapping (tcp short cut)
+??? Talk about rule combining eg. deny subtracting in more detail
+??? Talk about aliases and mapping (tcp short cut)
 
-` network tcp connect from 192.168.1.1 on iface1 to 1.1.1.1,`
+```
+ network tcp connect from 192.168.1.1 on iface1 to 1.1.1.1,
+```
 
 connection tracking and label
 
 audit, quiet, deny, kill, nokill? owner and conditional
 
-rule = “network” \[ \[ <domain> \] \[ <type> \] \[ <protocol> \]
+```
+ rule = “network” [ [ <domain> ] [ <type> ] [ <protocol> ] [ <proto_expr> ] ] “,”
 
-`                         [ `<proto_expr>` ] ] `“`,`”
+ domain = “inet” | “ax25” | “ipx” | “appletalk” | “netrom” |
 
-domain = “inet” | “ax25” | “ipx” | “appletalk” | “netrom” |
+             “bridge” | “atmpvc” | “x25” | “inet6” | “rose” |
+             “netbeui” | “security” | “key” | “packet” | “ash” |
+             “econet” | “atmsvc” | “sna” | “irda” | “pppox” |
+             “wanpipe” | “bluetooth”
+```
 
-`             `“`bridge`”` | `“`atmpvc`”` | `“`x25`”` | `“`inet6`”` | `“`rose`”` |`
-`             `“`netbeui`”` | `“`security`”` | `“`key`”` | `“`packet`”` | `“`ash`”` |`
-`             `“`econet`”` | `“`atmsvc`”` | `“`sna`”` | `“`irda`”` | `“`pppox`”` |`
-`             `“`wanpipe`”` | `“`bluetooth`”
-`   *note: `“`unix`”`, `“`local`”` and `“`netlink`”` are not allowed`
+**note**: “unix”, “local” and “netlink” are not allowed
 
-type = “stream” | “dgram” | “seqpacket” | “rdm” | “raw” | “packet” |
+```
+ type = “stream” | “dgram” | “seqpacket” | “rdm” | “raw” | “packet” | “dccp”
 
-`             `“`dccp`”
+  protocol = “tcp” | “udp” | “icmp” | “ftp” | ... proto_expr = <ip_expr> | ... ip_expr = [ <ip_action> ] [ <ip_host_expr> ] [ <ip_expr_tail> ] ip_action = <tcp_action> | <udp_action> tcp_action = “connect” | “accept” | “connected” udp_action = ( “send” | “recv” ) [ “&” <udp_action> ] ip host_expr = <direction> <ip_expr> direction = “to” | “from” | “local” | “remote” | “endpoint” ip_expr = <ipv4_expr> | <ipv6_expr> ip_expr_tail= ( <ip_iface | <limit> | “conntrack”)* ipv4_expr = <ipv4_addr> [ “:” <port_expr> ] ipv4_addr = <ipv4_quad> | (<ipv4_quad> “/” <ipv4_quad>) | (ipv4_quad “/” DIGIT{1,2}
 
-protocol = “tcp” | “udp” | “icmp” | “ftp” | ... proto\_expr = <ip_expr> | ... ip\_expr = \[ <ip_action> \] \[ <ip_host_expr> \] \[ <ip_expr_tail> \] ip\_action = <tcp_action> | <udp_action> tcp\_action = “connect” | “accept” | “connected” udp\_action = ( “send” | “recv” ) \[ “&” <udp_action> \] ip host\_expr = <direction> <ip_expr> direction = “to” | “from” | “local” | “remote” | “endpoint” ip\_expr = <ipv4_expr> | <ipv6_expr> ip\_expr\_tail= ( <ip_iface | <limit> | “conntrack”)\* ipv4\_expr = <ipv4_addr> \[ “:” <port_expr> \] ipv4\_addr = <ipv4_quad> | (<ipv4_quad> “/” <ipv4_quad>) |
-
-`             (ipv4_quad `“`/`”` DIGIT{1,2}`
-
-ipv4\_quad = DIGIT{1,3} (“.” DIGIT{1,3}){3,3} ipv6\_expr = “\[” <ipv6_addr> “\]” \[ “:” <port_expr> \] ipv6\_addr = <ipv6_part> \[ “/” 1\*2DIGIT \] ipv6\_part = <hexseq> / <hexseq> “::” \[ <hexseq> \] | “::” \[ <hexseq> \] hexseq = hex4 ( “:” hex4)\* hex4 = HEXDIG{1,4} port\_expr = DIGIT{1,5} \[ “-” DIGIT{1,5} \] iface = “via” REGEXP limit = “limit” DIGIT+ \[“b” / “B” / “k” / “K” / “m” / “M”\]
+ ipv4_quad = DIGIT{1,3} (“.” DIGIT{1,3}){3,3} ipv6_expr = “[” <ipv6_addr> “]” [ “:” <port_expr> ] ipv6_addr = <ipv6_part> [ “/” 1*2DIGIT ] ipv6_part = <hexseq> / <hexseq> “::” [ <hexseq> ] | “::” [ <hexseq> ] hexseq = hex4 ( “:” hex4)* hex4 = HEXDIG{1,4} port_expr = DIGIT{1,5} [ “-” DIGIT{1,5} ] iface = “via” REGEXP limit = “limit” DIGIT+ [“b” / “B” / “k” / “K” / “m” / “M”]
+```
 
 Currently we only support
 
-rule = “network” \[ \[ <domain> \] \[ <type> \] \[ <protocol> \] “,”
+```
+ rule = “network” [ [ <domain> ] [ <type> ] [ <protocol> ] “,”
+```
 
-where protocol is limited to “tcp”, “udp”, “icmp” and can only be specified if one of <domain> or <type> is not. NOTE: when protocols are specified with out type or domain the matching
+where protocol is limited to “tcp”, “udp”, “icmp” and
+can only be specified if one of \<domain\> or \<type\> is not.
 
-`     code makes certain assumption and does mapping.  See tcp and udp`
-`     examples below.`
+**NOTE**: when protocols are specified without type or domain the
+matching code makes certain assumption and does mapping. See tcp and
+udp examples below.
 
-eg.
+Example:
 
-network inet stream, \# allow inet stream == tcp network inet raw, network inet tcp, \# allow inet stream == tcp, NOT inet raw tcp network inet udp, \# allow inet dgram == udp, NOT inet raw udp network inet, \# allow all inet type and protocols network tcp, \# allow all family's that support tcp, so
+```
+ network inet stream,  # allow inet stream == tcp
 
-`                       # currently this matches both inet, and inet6`
-`                       # ie.`
-`                       # network inet stream,`
-`                       # network inet6 stream,`
-`                       # BUT NOT`
-`                       # network inet raw tcp,`
-`                       # network inet6 raw tcp,`
+ network inet raw,
 
-network, \# allow any and all networking
+ network inet tcp, # allow inet stream == tcp, NOT inet raw tcp
+
+ network inet udp, # allow inet dgram == udp, NOT inet raw udp
+
+ network inet,  # allow all inet type and protocols
+
+ network tcp,   # allow all family's that support tcp, so
+                # currently this matches both inet, and inet6
+                # ie.
+                # network inet stream,
+                # network inet6 stream,
+                # BUT NOT
+                # network inet raw tcp,
+                # network inet6 raw tcp,
+
+ network, # allow any and all networking
+```
 
 should be connected be supported or should it be handled by fd delegation
 
 ### DBUS rules
 
-The policy rules are designed similar to the networking rules. To allow all dbus messages, acquiring of service names etc. you just need the rule
+The policy rules are designed similar to the networking rules. To
+allow all dbus messages, acquiring of service names etc. you just
+need the rule
 
-` dbus,`
+```
+ dbus,
+```
 
 While the rule
 
-` dbus bus=system dest=com.foo acquire,`
+```
+ dbus bus=system dest=com.foo acquire,
+```
 
-Is very specific in stating that the profile is allow to acquire the com.foo service name on the system bus. The policy format currently supported is as follows
+Is very specific in stating that the profile is allow to acquire the
+com.foo service name on the system bus. The policy format currently
+supported is as follows
 
-` ['audit'] ['deny'] dbus [bus='system'|'session'] ['dest='`
+```
+ ['audit'] ['deny'] dbus [bus='system'|'session'] ['dest='<address> ] ['path='<path>] ['interface='<interface>] ['method='<method>] [<perms>] ','
 
-<address>
-\] \['path='<path>\] \['interface='<interface>\] \['method='<method>\] \[<perms>\] ','
+ <perms> := <perm> | '(' (<perm> ','|[\w]) <perm> ')'
+ <perm> := r, w, rw, send, receive, acquire, bind, read, write
+```
 
-` `<perms>` := `<perm>` | '(' (`<perm>` ','|[\w]) `<perm>` ')'`
-` `<perm>` := r, w, rw, send, receive, acquire, bind, read, write`
+For the permissions r maps to read which maps to receive, w maps to
+write which maps to send, bind maps to acquire
 
-For the permissions r maps to read which maps to receive, w maps to write which maps to send, bind maps to acquire
+The ordering is currently important but in the future it could be more
+flexible as most components are named if they are specified. If any
+component is left off a rule then it will match everything of that
+type. ie.
 
-The ordering is currently important but in the future it could be more flexible as most components are named if they are specified. If any component is left off a rule then it will match everything of that type. ie.
+```
+ dbus dest=com.foo,
+```
 
-` dbus dest=com.foo,`
+will allow sending messages to com.foo, receiving messages from
+com.foo, and acquiring the service name com.foo on both the session
+and system buses.
 
-will allow sending messages to com.foo, receiving messages from com.foo, and acquiring the service name com.foo on both the session and system buses.
+```
+ dbus bus=system dest=com.foo w,
+```
 
-` dbus bus=system dest=com.foo w,`
+allows sending messages too com.foo on the system bus. Which can also
+be expressed as
 
-allows sending messages too com.foo on the system bus. Which can also be expressed as
+```
+ dbus bus=system dest=com.foo send,
+```
 
-` dbus bus=system dest=com.foo send,`
+Any single permission is allow to be specified by it self, but if more
+than one permission is specified it must appear in a list similar to
+the flags format.
 
-Any single permission is allow to be specified by it self, but if more than one permission is specified it must appear in a list similar to the flags format.
+```
+ dbus bus=system dest=com.foo (send, receive),
+```
 
-` dbus bus=system dest=com.foo (send, receive),`
-
-The commas within the parenthesis are optional, plain whitespace delimitation works just as well. The only exception the paren rule for multiple permissions is rw, which can be used outside of or inside of parens.
+The commas within the parenthesis are optional, plain whitespace
+delimitation works just as well. The only exception the paren rule
+for multiple permissions is rw, which can be used outside of or inside
+of parens.
 
 Note it is legal to specify
 
-` dbus bus=system dest=com.foo (rw, send receive),`
+```
+ dbus bus=system dest=com.foo (rw, send receive),
+```
 
-A few more examples of valid rules
+A few more examples of valid rules:
 
-` deny dbus bus=system dest=com.foo path=`“`/foo`` ``/bar`”` interface=com.bar method=fred rw,`
+```
+ deny dbus bus=system dest=com.foo path=“/foo /bar” interface=com.bar method=fred rw,
 
-` dbus interface=com.foo path=/foo/bar (send receive),`
+ dbus interface=com.foo path=/foo/bar (send receive),
 
-` dbus dest=com.foo acquire,`
+ dbus dest=com.foo acquire,
+```
 
-Now that the basis of the current policy is out of the way we can not a couple of things. 1. Current policy doesn't allow specifying a local and a remote, and I am not sure I can see a case where it makes sense to do so. The address is mapped to both local and remote. ie.
+Now that the basis of the current policy is out of the way we can
+not a couple of things. 1. Current policy doesn't allow specifying a
+local and a remote, and I am not sure I can see a case where it makes
+sense to do so. The address is mapped to both local and remote. ie.
 
-`    dbus dest=com.foo rw,`
+```
+ dbus dest=com.foo rw,
+```
 
-means allow receiving messages from com.foo, and sending messages to com.foo
+means allow receiving messages from com.foo, and sending messages
+to com.foo
 
-Generally it would be good practice to split up dbus rules when addresses and or permissions are specified. And we may consider enforcing such a rule.
+Generally it would be good practice to split up dbus rules when
+addresses and or permissions are specified. And we may consider
+enforcing such a rule.
 
-`    dbus,`
+```
+ dbus,
+```
 
-mapping to everything makes sense. But the dbus dest=com.foo case is a little confusing if you think about it and throwing bind/acquire into the mix just makes it worse.
+mapping to everything makes sense. But the dbus dest=com.foo case is
+a little confusing if you think about it and throwing bind/acquire
+into the mix just makes it worse.
 
-2. acquire/bind only apply the dest= expression, which makes including it in rules with path, interface, and method information illegal. Acquire must be used in a separate rule or the parser will throw an error.
+2. acquire/bind only apply the dest= expression, which makes
+   including it in rules with path, interface, and method information
+   illegal. Acquire must be used in a separate rule or the parser
+   will throw an error.
 
-3. addresses, paths, interfaces and methods support apparmor regexs, so don't forget to escape special characters.
+3. addresses, paths, interfaces and methods support apparmor regexs,
+   so don't forget to escape special characters.
 
 4. addresses, paths, interfaces, and methods can all be quoted.
 
-5. The profile= flag is not currently supported, which means you can't specify the target profile of the communication.
+5. The profile= flag is not currently supported, which means you
+   can't specify the target profile of the communication.
 
-` dbus profile=/foo/bar,   #only allow communicating of task confined by /foo/bar`
+```
+ dbus profile=/foo/bar,   # only allow communicating of task confined by /foo/bar
+```
 
 This is planned for just not implemented yet.
 
@@ -2526,54 +2814,85 @@ This is planned for just not implemented yet.
 
 audit, quiet, deny, kill owner and conditional
 
-AppArmor ipc rules cover a broad range of ipc behaviors, and like networking rules can be very generic or tailored to a specific form of ipc. At its base IPC rules are concerned with which profiles can shared data.
+AppArmor ipc rules cover a broad range of ipc behaviors, and like
+networking rules can be very generic or tailored to a specific form
+of ipc. At its base IPC rules are concerned with which profiles can
+shared data.
 
-` ipc with profile1,`
+```
+ ipc with profile1,
+```
 
 #### Signals
 
 #### Pipes
 
-- inherited and allowed via implicit delegation
+-   inherited and allowed via implicit delegation
 
 #### Fifos
 
-`- mediated by file control, could do with better create control`
+-   mediated by file control, could do with better create control
 
 #### System V ipc
 
-`    message queues`
+-   message queues
 
-`    Semaphores`
+-   Semaphores
 
-`    Shared memory segments`
+-   Shared memory segments
 
 #### Delegation
 
-Delegation is a special form of ipc that allows a profile to delegates it authority to access an object to another profile. This enables a parent profile to extend the permission a child profile has to include specific objects that the parent has access to.
+Delegation is a special form of ipc that allows a profile to delegates
+it authority to access an object to another profile. This enables
+a parent profile to extend the permission a child profile has to
+include specific objects that the parent has access to.
 
-Delegation allows for tighter profiles (stricter profiles), children profiles don't need to have access rights object they may receive from their parent, while at the same time allows for greater flexibility and reuse of profiles as it is possible to use one tight profile in multiple situations.
+Delegation allows for tighter profiles (stricter profiles), children
+profiles don't need to have access rights object they may receive from
+their parent, while at the same time allows for greater flexibility
+and reuse of profiles as it is possible to use one tight profile in
+multiple situations.
 
-Delegation is cumulative like other rule permissions and can be specified by either using a rule suffix, or a rule block. Eg.
+Delegation is cumulative like other rule permissions and can be
+specified by either using a rule suffix, or a rule block.
 
-` rw /example/file delegate to profile1,`
-` network tcp delegates to profile2,`
+Examples:
 
-` delegate to profile3 {`
-`   rw /example/file,`
-`   network tcp,`
-`   network udp delegate to profile4,   # delegate to profile3 and profile4`
-` }`
+```
+ rw /example/file delegate to profile1,
+ network tcp delegates to profile2,
+```
 
-It is important to note that delegation only works on objects opened and passed by the parent profile. It does not extend the target profiles ruleset.
+```
+ delegate to profile3 {
+   rw /example/file,
+   network tcp,
+   network udp delegate to profile4,   # delegate to profile3 and profile4
+ }
+```
+
+It is important to note that delegation only works on objects opened
+and passed by the parent profile. It does not extend the target
+profiles ruleset.
 
 #### Revalidation - Interaction of IPC with other rules
 
-Ipc rule interact with file and network rules so it is important to understand how they interact. When a file or network object is being created, or opened the file or network rules are applied, creating a labeling on the opened resouce (object). When data, an open file or network object is passed between tasks ipc rules are applied, to determine if the data or object can be passed. However if there is not an ipc rule governing the interaction (either positive or negative) then AppArmor will fall back to revalidation.
+Ipc rule interact with file and network rules so it is important to
+understand how they interact. When a file or network object is being
+created, or opened the file or network rules are applied, creating
+a labeling on the opened resouce (object). When data, an open file
+or network object is passed between tasks ipc rules are applied, to
+determine if the data or object can be passed. However if there is not
+an ipc rule governing the interaction (either positive or negative)
+then AppArmor will fall back to revalidation.
 
-Revalidation is the process by which AppArmor looks at the resource and recomputes its access permissions, answering whether the task receiving the object can access it, because its base permission set allows it.
+Revalidation is the process by which AppArmor looks at the resource and
+recomputes its access permissions, answering whether the task receiving
+the object can access it, because its base permission set allows it.
 
-Revalidation is used because AppArmor's set of labels is dynamic and changes as profiles are loaded or removed.
+Revalidation is used because AppArmor's set of labels is dynamic and
+changes as profiles are loaded or removed.
 
 #### Interaction of IPC with file rules
 
@@ -2587,56 +2906,97 @@ Network and IPC rule interaction is similar to that of file rules.
 
 ##### IPC and labeled network packets
 
-When network rules are marked as belonging to a secure connection, packet labeling is used and IPC rules will determine the access permissions for packet data. This is done by leveraging CIPSO, it is assumed the network is secured in someway (LAN, vLAN, ..) and that applications are correctly confined, using a common confinement for all machines in the network.
+When network rules are marked as belonging to a secure connection,
+packet labeling is used and IPC rules will determine the access
+permissions for packet data. This is done by leveraging CIPSO, it is
+assumed the network is secured in someway (LAN, vLAN, ..) and that
+applications are correctly confined, using a common confinement for
+all machines in the network.
 
-When a packet is set it is labeled with the specified label and that label is then used to determine access permission on the receiving end.
+When a packet is set it is labeled with the specified label and that
+label is then used to determine access permission on the receiving end.
 
 ### Resource controls
 
-` AppArmor provides to forms of resource control, the rlimit rules to control per process resources, and profile level resource controls to control groups of processes contained by a profile.`
+AppArmor provides to forms of resource control, the rlimit rules to
+control per process resources, and profile level resource controls
+to control groups of processes contained by a profile.
 
 #### Rlimit rules
 
-` `<rlimit rule>` ::= 'rlimit' `<rlimit>` '<=' `<value>` ','  (AppArmor 2.3 - AppArmor 2.6)`
-` `<rlimit rule>` ::= 'rlimit' [`<rlimit>` '<=' `<value>` ] ','  (AppArmor 2.7)`
-` `<rlimit rule>` ::= 'rlimit' [`<rlimit>` '<=' `<value>` ] ['profile' `<profile>`] ','  (AppArmor ???)`
+```
+ <rlimit rule> ::= 'rlimit' <rlimit> '<=' <value> ','  (AppArmor 2.3 - AppArmor 2.6)
+ <rlimit rule> ::= 'rlimit' [<rlimit> '<=' <value> ] ','  (AppArmor 2.7)
+ <rlimit rule> ::= 'rlimit' [<rlimit> '<=' <value> ] ['profile' <profile>] ','  (AppArmor ???)
+```
 
-AppArmor provides the ability for a profile to set and control an applications rlimits (man 2 setrlimit) also known as ulimits (man 3 ulimit, man 1 ulimit). By default AppArmor does not control applications rlimits, and it will only control those limits that there is a specific rule for in the confining profile.
+AppArmor provides the ability for a profile to set and control
+an applications rlimits (man 2 setrlimit) also known as ulimits
+(man 3 ulimit, man 1 ulimit). By default AppArmor does not control
+applications rlimits, and it will only control those limits that
+there is a specific rule for in the confining profile.
 
-AppArmor leverages linux's rlimits and as such does not provide an additional auditing than would normally occur. Also AppArmor's rlimits only every reduce an applications current rlimits, they can not be used to raise the value of any limit that has been set.
+AppArmor leverages linux's rlimits and as such does not provide
+an additional auditing than would normally occur. Also AppArmor's
+rlimits only every reduce an applications current rlimits, they can
+not be used to raise the value of any limit that has been set.
 
-AppArmor rlimit rules are currently limited in that the limit's value will be inherited by a processes children and will remain even if a new profile is transitioned to, or the application becomes unconfined. If an application transitions to a new profile, the new profile can control and further reduce the applications rlimits.
+AppArmor rlimit rules are currently limited in that the limit's
+value will be inherited by a processes children and will remain
+even if a new profile is transitioned to, or the application becomes
+unconfined. If an application transitions to a new profile, the new
+profile can control and further reduce the applications rlimits.
 
-AppArmor's rlimit rules also mediate setting an applications hard limits, should it try to raise them. The application will not be able to raise its hard limits any farther than specified in the profile.
+AppArmor's rlimit rules also mediate setting an applications hard
+limits, should it try to raise them. The application will not be able
+to raise its hard limits any farther than specified in the profile.
 
-The mediation of raising hard limits is not inherited as the limit value is, so that once the application transitions to a new profile it is free to raise its limits value as if allowed by the new profile.
+The mediation of raising hard limits is not inherited as the limit
+value is, so that once the application transitions to a new profile
+it is free to raise its limits value as if allowed by the new profile.
 
-AppArmor's rlimit control does not affect an applications soft limits beyond ensuring that they are less than or equal to the applications hard limits.
+AppArmor's rlimit control does not affect an applications soft limits
+beyond ensuring that they are less than or equal to the applications
+hard limits.
 
-Audit of rlimits only happend when a task tries to set its rlimits, as the enforcement of the rlimit is not done by AppArmor.
+Audit of rlimits only happend when a task tries to set its rlimits,
+as the enforcement of the rlimit is not done by AppArmor.
 
-AppArmor 2.7 adds the ability to control the setting of rlimits with out specifying a value. This prevents the task from changing the rlimits it has inherited.
+AppArmor 2.7 adds the ability to control the setting of rlimits with
+out specifying a value. This prevents the task from changing the
+rlimits it has inherited.
 
-AppArmor ??? adds the ability to control the rlimits of a task confined by another profile.
+AppArmor ??? adds the ability to control the rlimits of a task confined
+by another profile.
 
-The allowable values for <rlimit> and the its associated <value> field is described below. <rlimit>
+The allowable values for \<rlimit\> and the its associated \<value\>
+field is described below. \<rlimit\>
 
 -   fsize, data, stack, core, rss, as, memlock, msgqueue:
 
-` These rlimits take either a number in bytes, or a number with a suffix where the suffix can be`
-` K - kilobytes`
-` M - megabytes`
-` G - gigabytes`
-`  `<b>`Example`</b>
-`    rlimit data <= 100M,`
-`* nofile, locks, sigpending, nproc, rtprio, cpu (cpu is only supported in AppArmor 2.7+)`
-` These rlimits take a number greater or equal to 0 indicating their limit.`
+    These rlimits take either a number in bytes, or a number with a suffix where the suffix can be
+
+```
+ K - kilobytes
+ M - megabytes
+ G - gigabytes
+```
+
+    Example
+
+```
+  rlimit data <= 100M,
+```
+
+-   nofile, locks, sigpending, nproc, rtprio, cpu (cpu is only supported in AppArmor 2.7+)
+
+    These rlimits take a number greater or equal to 0 indicating their limit.
 
 -   nice
 
-` The nice rlimit takes a value between -20 and 19.`
+    The nice rlimit takes a value between -20 and 19.
 
-NOTES:
+**NOTES**:
 
 -   Rlimit rules first appeared in AppArmor 2.3
 -   In AppArmor 2.3 - 2.7 The set limit's value will be inherited by a processes children and will remain even if a new profile is transitioned to, or the application becomes unconfined.
@@ -2646,13 +3006,25 @@ NOTES:
 
 ##### Special nproc rlimit for AppArmor 2.3
 
-In AppArmor 2.3 the nproc rlimit is special in that it is handled different than all the other rlimits. Instead of indicating the standard process rlimit it controls the maximum number of processes that can be running under the profile at any given time. Once the limit is exceeded the creation of new processes under the profile will fail until the number of currently running processes is reduced.
+In AppArmor 2.3 the nproc rlimit is special in that it is handled
+different than all the other rlimits. Instead of indicating the
+standard process rlimit it controls the maximum number of processes
+that can be running under the profile at any given time. Once the
+limit is exceeded the creation of new processes under the profile
+will fail until the number of currently running processes is reduced.
 
-The AppArmor 2.3 interpretation is no longer used in later versions of AppArmor due to technical changes. The AppArmor per profile nproc of AppArmor 2.3 has been replaced by profile resources based on cgroups in AppArmor 2.7+.
+The AppArmor 2.3 interpretation is no longer used in later versions of
+AppArmor due to technical changes. The AppArmor per profile nproc of
+AppArmor 2.3 has been replaced by profile resources based on cgroups
+in AppArmor 2.7+.
 
 #### Profile based resource controls
 
-The AppArmor profile resource controls provide a way to control the resources of all process contained by a profile. To do this apparmor creates a linux container for each profile that specifies a resource control and then domain transitions also can transition a process into another container.
+The AppArmor profile resource controls provide a way to control the
+resources of all process contained by a profile. To do this apparmor
+creates a linux container for each profile that specifies a resource
+control and then domain transitions also can transition a process
+into another container.
 
 ...
 
@@ -2662,24 +3034,35 @@ audit, quiet, deny, kill, nokill? owner - implicit
 
 ### Append
 
-File creation semantics have been changed slightly so that the append permission provides sufficient privilege to create a new file.
+File creation semantics have been changed slightly so that the append
+permission provides sufficient privilege to create a new file.
 
 ### change\_profile
 
-The change\_profile interface has been extended so that it can be used by an unconfined process to enter confinement. An unconfined process using change\_profile can enter any loaded profile. For unconfined processes the change\_profile interface differs from the set\_profile interface in that it only applies to the current task while the set\_profile interface can be used to change confinement on any task.
+The change\_profile interface has been extended so that it can be used
+by an unconfined process to enter confinement. An unconfined process
+using change\_profile can enter any loaded profile. For unconfined
+processes the change\_profile interface differs from the set\_profile
+interface in that it only applies to the current task while the
+set\_profile interface can be used to change confinement on any task.
 
 ------------------------------------------------------------------------
 
 ### Trusted Helpers
 
-Beyond the core enforcement done by the AppArmor kernel module, some system daemons/helpers can be built with AppArmor extensions that provide additional mediation. The details of how a helper is configured and how it affects policy
+Beyond the core enforcement done by the AppArmor kernel module,
+some system daemons/helpers can be built with AppArmor extensions
+that provide additional mediation. The details of how a helper is
+configured and how it affects policy
 
 #### D-Bus
 
-\['audit'\] \['deny'\] dbus \['system'|'session'\] \[\['address='\]
+```
+ ['audit'] ['deny'] dbus ['system'|'session'] [['address='] <address>] ['path='<path>] ['interface='<interface>] ['method='<method>] [<perms>] ','
 
-<address>
-\] \['path='<path>\] \['interface='<interface>\] \['method='<method>\] \[<perms>\] ',' <perms> := <perm> | '(' (<perm> ','|\[\\w\]) <perm> ')' <perm> := r, w, rw, send, receive, acquire, bind, read, write
+ <perms> := <perm> | '(' (<perm> ','|[w]) <perm> ')'
+ <perm> := r, w, rw, send, receive, acquire, bind, read, write
+```
 
 #### X Windows
 
@@ -2699,7 +3082,8 @@ New execute permissions
 
 ### Named Profile Transitions and Log Messages
 
-Named profile transitions show up in the log as having the mode Nx and the name of the profile to be changed to is in the name2 field.
+Named profile transitions show up in the log as having the mode Nx
+and the name of the profile to be changed to is in the name2 field.
 
 ------------------------------------------------------------------------
 
@@ -2708,7 +3092,8 @@ Named profile transitions show up in the log as having the mode Nx and the name 
 File rules conditional on file ownership
 ----------------------------------------
 
-AppArmor 2.3 extends file rules so that they can be conditional upon the the user being the owner of the file.
+AppArmor 2.3 extends file rules so that they can be conditional upon
+the the user being the owner of the file.
 
 ------------------------------------------------------------------------
 
@@ -2717,7 +3102,10 @@ AppArmor 2.3 extends file rules so that they can be conditional upon the the use
 Application directed transitions - Change Hat & Change Profile
 ==============================================================
 
-AppArmor provides a for application directed profile transition via change\_hat and change\_profile. Change\_profile provides for a generic one way transition between any of the loaded profiles, while change\_hat provides for a returnable parent, child transition.
+AppArmor provides a for application directed profile transition
+via change\_hat and change\_profile. Change\_profile provides for
+a generic one way transition between any of the loaded profiles,
+while change\_hat provides for a returnable parent, child transition.
 
 change\_hat
 -----------
@@ -2742,75 +3130,121 @@ change\_profile
 
 confined vs. unconfined
 
-<tt>
+##### change\_hat
 
-` change_hat`
-` /bin/su {`
-`    ...`
+```
+ /bin/su {
+    ...
 
-`    ^tom {`
-`       ...`
+    ^tom {
+       ...
 
-`       /bin/bash px -> confined_user,`
-`    }`
+       /bin/bash px -> confined_user,
+    }
 
-`    ^jane {`
-`       ...`
+    ^jane {
+       ...
 
-`       /bin/bash px -> confined_user,`
-`    }`
-`  }`
+       /bin/bash px -> confined_user,
+    }
+  }
+```
 
-` change_profile`
-` /bin/su {`
-`     ...`
-`     change_profile stub,`
+##### change\_profile
 
-` stub {`
-`     ...`
+```
+ /bin/su {
+     ...
+     change_profile stub,
 
-`     /bin/bash px -> confined_user,`
-` }`
+ stub {
+     ...
 
-` change_profile on exec`
-` /bin/su {`
-`     ...`
+     /bin/bash px -> confined_user,
+ }
+```
 
-`    change_profile /bin/bash -> confined_user,`
-` }`
+##### change\_profile on exec
 
-</tt>
+```
+ /bin/su {
+     ...
+
+    change_profile /bin/bash -> confined_user,
+ }
+```
 
 ### Change\_hat and Change\_profile rules
 
-The change\_profile interface has been extended so that it can be used by an unconfined process to enter confinement. An unconfined process using change\_profile can enter any loaded profile. For unconfined processes the change\_profile interface differs from the set\_profile interface in that it only applies to the current task while the set\_profile interface can be used to change confinement on any task.
+The change\_profile interface has been extended so that it can be used
+by an unconfined process to enter confinement. An unconfined process
+using change\_profile can enter any loaded profile. For unconfined
+processes the change\_profile interface differs from the set\_profile
+interface in that it only applies to the current task while the
+set\_profile interface can be used to change confinement on any task.
 
-An embedded hat, implicitly adds the change\_hat rule to the profile as well as all the sibling hats.
+An embedded hat, implicitly adds the change\_hat rule to the profile
+as well as all the sibling hats.
 
-Change\_profile rules are similar except that they start with the keyword change\_profile.
+Change\_profile rules are similar except that they start with the
+keyword change\_profile.
 
--   -   Example\*\*
+Example:
 
-` change_profile a_profile,`
+```
+ change_profile a_profile,
+```
 
 ### Differences between change\_hat and change\_profile
 
-Both change\_hat and change\_profile provide for an application directed profile transition, without having to launch a separate application.
+Both change\_hat and change\_profile provide for an application
+directed profile transition, without having to launch a separate
+application.
 
-Change\_profile provides a generic one way transition between any of the loaded profiles. Change\_hat provides for a returnable parent child transition where an application can switch from the parent profile to the hat profile and if it provides the correct secret key return to the parent profile at a later time.
+Change\_profile provides a generic one way transition between any of
+the loaded profiles. Change\_hat provides for a returnable parent
+child transition where an application can switch from the parent
+profile to the hat profile and if it provides the correct secret key
+return to the parent profile at a later time.
 
 ### Safety of Domain transitions and when to use them
 
-The change\_hat and change\_profile domain transitions are less secure than a domain transition done through an exec. This is because they do not affect a processes memory mappings, nor do they close resources that have already been opened.
+The change\_hat and change\_profile domain transitions are less secure
+than a domain transition done through an exec. This is because they
+do not affect a processes memory mappings, nor do they close resources
+that have already been opened.
 
-Change\_hat is a specialized version of change\_profile that has additional security implications, so we will look at change\_profile first.
+Change\_hat is a specialized version of change\_profile that has
+additional security implications, so we will look at change\_profile
+first.
 
-Change\_profile provides a one way transition, that allows an application to go through a setup phase and then when setup is done, transition to a profile with less privledge. Any resources mapped or opened during the startup phase may still be accessible after the profile change but the new profile will restrict the opening of new resources, and will even limit some of the resources opened before the switch.
+Change\_profile provides a one way transition, that allows an
+application to go through a setup phase and then when setup is done,
+transition to a profile with less privledge. Any resources mapped
+or opened during the startup phase may still be accessible after the
+profile change but the new profile will restrict the opening of new
+resources, and will even limit some of the resources opened before
+the switch.
 
-Specifically memory resources will still be available while capability and file resources (as long as they are not memory mapped) can be limited.
+Specifically memory resources will still be available while capability
+and file resources (as long as they are not memory mapped) can
+be limited.
 
-Change\_profile is best used in situations where an application goes through a trusted setup phase and then can lower its privlege level.
+Change\_profile is best used in situations where an application goes
+through a trusted setup phase and then can lower its privlege level.
 
-Change\_hat is designed to be used in situations where privlege is temporarily dropped and then reaquired after a time. As such change\_hat is restricted to where it can be safely used. Since change\_hat stores the return secret key in the applications memory the phase of reduced privilege should not have direct access to memory. Also it is important that file access is properly separated, the hat can restrict accesses to a file handle but it does not close it. If an application does buffering and provides access to the open files with buffering, the accesses to these files may not be seen by the kernel and hence not restricted by the new profile.
+Change\_hat is designed to be used in situations where privlege
+is temporarily dropped and then reaquired after a time. As such
+change\_hat is restricted to where it can be safely used. Since
+change\_hat stores the return secret key in the applications memory
+the phase of reduced privilege should not have direct access to
+memory. Also it is important that file access is properly separated,
+the hat can restrict accesses to a file handle but it does not close
+it. If an application does buffering and provides access to the open
+files with buffering, the accesses to these files may not be seen by
+the kernel and hence not restricted by the new profile.
 
-Change\_hat is best used in situations where an applications runs a VM or interpreter that does not provide direct access to the applications resources. An example of where it could add security value is apache's mod\_perl and mod\_php.
+Change\_hat is best used in situations where an applications runs a VM
+or interpreter that does not provide direct access to the applications
+resources. An example of where it could add security value is apache's
+mod\_perl and mod\_php.
