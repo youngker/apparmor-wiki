@@ -1,6 +1,10 @@
 Userspace
 ---------
 
+**TODO** Review and update policy for Gitlab merge requests.
+
+**TODO** Propose a formatting rule of thumb for git commits.
+
 -   Patches (for both trunk and minor releases) must be sent to the
     apparmor mailing list for review.
     -   If ACKed on the mailing list by at least 1 committer, they
