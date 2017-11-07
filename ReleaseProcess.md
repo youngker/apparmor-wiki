@@ -3,6 +3,8 @@ AppArmor Release Process Notes
 
 This page is an attempt to capture the AppArmor release process.
 
+**TODO**: update this for gitlab/git conversion.
+
 Making a Userspace Release
 --------------------------
 
