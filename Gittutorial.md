@@ -1,12 +1,16 @@
 links to git documentation/tutorials...
 
-The AppArmor kernel module can be found in **Linux 2.6.36** in the security/apparmor directory. Please read the [notes](apparmor/upstream_release_notes) about using the upstream version of AppArmor as it may not be the same as development or previous versions.
+The AppArmor kernel module can be found in **Linux
+2.6.36** in the security/apparmor directory. Please read the
+[notes](apparmor/upstream_release_notes) about using the upstream
+version of AppArmor as it may not be the same as development or
+previous versions.
 
 The development code for AppArmor can be found at
 
-**<git://git.kernel.org/pub/scm/linux/kernel/git/jj/linux-apparmor>**
+https://git.kernel.org/pub/scm/linux/kernel/git/jj/linux-apparmor.git
 
-Their are multiple branches in the git tree with some of them for
+There are multiple branches in the git tree with some of them for
 development and others as stable branches. Development branches
 see frequent rebasing and amending of commits and as such should be
 generally be avoided except for by developers. The stable branches can
@@ -26,18 +30,33 @@ Stable branches (kernel version - apparmor version)
 
 to obtain the AppArmor source tree from a command line you can do
 
-` git clone `[`git://git.kernel.org/pub/scm/linux/kernel/git/jj/linux-apparmor`](git://git.kernel.org/pub/scm/linux/kernel/git/jj/linux-apparmor)
+```
+ git clone git://git.kernel.org/pub/scm/linux/kernel/git/jj/linux-apparmor.git
+```
 
-if you have another kernel source tree present it is well worth using the --reference option.
+if you have another kernel source tree present it is well worth using
+the --reference option.
 
-to obtain a branch in the AppArmor source tree from the local AppArmor git repository do
+to obtain a branch in the AppArmor source tree from the local AppArmor
+git repository do
 
-` git checkout --track -b `<branch_name>` origin/`<branch_name>
-` eg. for the AA2.5-2.6.33 branch you would do`
-`    git checkout --track origin/v3.4-aa2.8 -b v3.4-aa2.8 `
+```
+ git checkout --track -b <branch_name> origin/<branch_name>
+```
 
-Some development and patches may exist only in the Ubuntu kernels, the patches are managed via a kernel.ubuntu.com tree:
+e.g. for the AA2.5-2.6.33 branch you would do
 
-` git clone `[`git://kernel.ubuntu.com/jj/ubuntu-saucy.git`](git://kernel.ubuntu.com/jj/ubuntu-saucy.git)
+```
+ git checkout --track origin/v3.4-aa2.8 -b v3.4-aa2.8
+```
 
-brief step by step of getting AA with git
+Some development and patches may exist only in the Ubuntu kernels,
+the patches are managed via the Ubuntu kernel team's launchpad.net trees
+at https://code.launchpad.net/~ubuntu-kernel/+git; e.g. to check out the
+Ubuntu 18.04 LTS (bionic) kernel tree, do
+
+```
+ git clone https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic
+```
+
+**TODO** brief step by step of getting AA with git
