@@ -86,11 +86,9 @@ Technical documention:
         -   [Encoding of DBus Rule Paths](TechnicalDoc_DBusRuleEncoding) - DRAFT
         -   [Encoding of X Window Rule Paths](TechnicalDoc_XWindowsRuleEncoding) - DRAFT
 
-<!-- -->
-
 -   [Technical Documentation](TechnicalDoc) - DRAFT
 -   Other
-    -   [Accessing /proc/ files results in ptrace requests](TechnicalDo_Proc_and_ptrace)
+    -   [Accessing /proc/ files results in ptrace requests](TechnicalDoc_Proc_and_ptrace)
 
 Development:
 
