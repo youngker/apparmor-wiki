@@ -15,7 +15,6 @@ Related Documentation
 =====================
 
 -   [Example of how to confining users with pam\_apparmor](Pam_apparmor_example)
-
 -   [Stacking profiles in AppArmor](AppArmorStacking)
 -   [AppArmor Policy Namespaces](AppArmorNamespaces)
 -   [Confining Users with Stacking](StackingConfiningUsers)
@@ -63,13 +62,15 @@ discussed in section 3??? after the basics are established.
 This method
 
 -   exposes the user confinement to the user via any label query; e.g.:
+
     ```
-    confined_user//&firefox
+confined_user//&firefox
     ```
 -   for programs that don't have an application profile the user
     exposed to stacking with the unconfined profile in its label; e.g.:
+
     ```
-    confined\_user//&unconfined
+confined\_user//&unconfined
     ```
 -   if ignore rules are not supported requires the user confinement
     profile to allow any application directed transitions (change\_hat,
