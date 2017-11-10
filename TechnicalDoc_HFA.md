@@ -602,9 +602,9 @@ Therefore AppArmor's uncompressed encoding (2 bytes for next state,
 state. The compressed table size is represented by:
 
 ```math
- size = ((sizeof(base index) + sizeof(default) + sizeof(accept index)) + ((sizeof(next)+sizeof(check)) * (Average transitions per state) * (Packing factor))) * (# of states)
+ size = ((sizeof(base index) + sizeof(default) + sizeof(accept index)) + ((sizeof(next) + sizeof(check)) * (Average transitions per state) * (Packing factor))) * (# of states)
       = ((4 + 2 + 2) + ((2 + 2) * Ave * Pf)) * s
-      = 8s + 4(Ave*Pf)s
+      = 8s + 4(Ave * Pf)s
 ```
 
 The packing factor (Pf) expresses the efficiency of the packing done
@@ -644,9 +644,12 @@ Compression efficiency for different transition averages and packing factors:
 | 240 | 0.53  | 0.48  | 0.44  | 0.41  | 0.38  | 0.35  |
 | 250 | 0.51  | 0.46  | 0.43  | 0.39  | 0.37  | 0.34  |
 | 256 | 0.50  | 0.45  | 0.42  | 0.38  | 0.36  | 0.33  |
-||
 
-When differential state compression is used, the average number of transitions stays closer to the low end (2 and 3) and the packing factor approaches 1. This is because as the number of transitions approach the upper and lower bounds (1 and 256), the vector are denser and tend to pack better.
+When differential state compression is used, the average number of
+transitions stays closer to the low end (2 and 3) and the packing
+factor approaches 1. This is because as the number of transitions
+approach the upper and lower bounds (1 and 256), the vector are denser
+and tend to pack better.
 
 ### Effect various options have on the size of the dfa
 
@@ -654,7 +657,8 @@ add no tree-expr, no min
 
 old style accept
 
-An example of the effectiveness of the compression scheme is the evince profile, which compiles into 3 profiles with DFAs.
+An example of the effectiveness of the compression scheme is the
+evince profile, which compiles into 3 profiles with DFAs.
 
 | Profile 1 | options                 | DFA \# of states | no compression | 2 table (no comb) | 2 table + comb          | 2 table + comb + differential |     |
 |-----------|-------------------------|------------------|----------------|-------------------|-------------------------|-------------------------------|-----|
@@ -668,21 +672,41 @@ An example of the effectiveness of the compression scheme is the evince profile,
 
 ### The Basic format
 
-The HFA is split into multiple tables, for a basic DFA (subset of the EHFA) there are 5 table types used, default, base, next, check, and accept. The default, base, and accept tables store the basic information about a state and are indexed by the state number. While the next and check tables store state transitions are index by the base value (obtained from base table) + input character.
+The HFA is split into multiple tables, for a basic DFA (subset of
+the EHFA) there are 5 table types used, default, base, next, check,
+and accept. The default, base, and accept tables store the basic
+information about a state and are indexed by the state number. While
+the next and check tables store state transitions are index by the
+base value (obtained from base table) + input character.
 
-The accept table provides the information to determine the permission associated with that state, whether directly stored in the table or an index into another structure.
+The accept table provides the information to determine the permission
+associated with that state, whether directly stored in the table or
+an index into another structure.
 
-The default table stores the default transition that should be taken for the state, if the check entry does not match.
+The default table stores the default transition that should be taken
+for the state, if the check entry does not match.
 
-The base table stores the start position value into the next check tables for the state.
+The base table stores the start position value into the next check
+tables for the state.
 
-The next check, tables store the non-default transitions for the dfa. Each state begins in the table with a location determined by its base value and then it is index from that position by the character (byte) being checked. The next table stores the state to transition to for the character being checked, and the check table stores whether the entry being checked belongs to the current state.
+The next check, tables store the non-default transitions for the
+dfa. Each state begins in the table with a location determined by its
+base value and then it is index from that position by the character
+(byte) being checked. The next table stores the state to transition
+to for the character being checked, and the check table stores whether
+the entry being checked belongs to the current state.
 
-Each state with in the table is treated as a sparse matrix column only storing non default entries. The states are then interleaved so that one states entries are mapped into the holes of another state.
+Each state with in the table is treated as a sparse matrix column
+only storing non default entries. The states are then interleaved so
+that one states entries are mapped into the holes of another state.
 
-Comb compression affects the base value which determines the position of the states transitions in the next, check tables. State differential encoding affects the default state and number of transition that need to be stored for the state.
+Comb compression affects the base value which determines the position
+of the states transitions in the next, check tables. State differential
+encoding affects the default state and number of transition that need
+to be stored for the state.
 
-performance optimization, grouping tables together so they are the same cache line.
+performance optimization, grouping tables together so they are the
+same cache line.
 
 ### Basic default entry compression
 
@@ -695,21 +719,21 @@ performance optimization, grouping tables together so they are the same cache li
 | 53        |       |       |       | ..  |       |       |
 | 54        |       |       |       | ..  |       |       |
 
-|                                         |                         |
-|-----------------------------------------|-------------------------|
-| | State     | Accept | Default | Base | 
- |-----------|--------|---------|------|  
- | 0 (dead)  | 0      | 0       | 0    |  
- | 1 (start) |        |         |      |  
- | 2         |        |         |      |  
- | 3         |        |         |      |  
- | 4         |        |         |      |  | | Base | Next | Check | 
-  |------|------|-------|  
-  | 0    |      |       |  
-  | 1    |      |       |  
-  | 2    |      |       |  
-  | 3    |      |       |  
-  | 4    |      |       |  |
+| State     | Accept | Default | Base |
+|-----------|--------|---------|------|
+| 0 (dead)  | 0      | 0       | 0    |
+| 1 (start) |        |         |      |
+| 2         |        |         |      |
+| 3         |        |         |      |
+| 4         |        |         |      |
+
+| Base | Next | Check |
+|------|------|-------|
+| 0    |      |       |
+| 1    |      |       |
+| 2    |      |       |
+| 3    |      |       |
+| 4    |      |       |
 
 ### Recursive default entry compression
 
