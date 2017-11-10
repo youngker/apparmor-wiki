@@ -246,28 +246,41 @@ concatenations always have the same consistent form, which simplifies
 the the Factoring stage.
 
 left normalization rules (right normalization is opposite)
+```math
+(\epsilon | a) \to a | \epsilon
+```
+```math
+(a | b) | c  \to  a | (b | c)
+```
+```math
+[b] | a \to a | [b]
+```
 
+```math
+ \epsilon a \to a \epsilon
 ```
- (E | a) -> a | E
- (a | b) | c  ->  a | (b | c)
- [b] | a -> a | [b]
-```
-
-```
- Ea -> aE
- (ab)c -> a(bc)
+```math
+ (ab)c \to a(bc)
 ```
 
 **TODO**: add actual tree diagrams
 
 ### Factoring Patterns
 
+```math
+a\epsilon \to a
 ```
- aE -> a
-(a | a) -> a
-a | (a | b) -> (a | b)
-a | (ab) -> a (E | b) -> a (b | E)
-(ab) | (ac) -> a(b|c)
+```math
+(a | a) \to a
+```
+```math
+a | (a | b) \to (a | b)
+```
+```math
+a | (ab) \to a (\epsilon | b) \to a (b | \epsilon)
+```
+```math
+(ab) | (ac) \to a(b|c)
 ```
 
 To see the tree after the apparmor\_parser has done simplification do
@@ -589,7 +602,6 @@ an uncompressed dfa representation which is a table indexing the rows
 by state, the columns by input character, and the cells containing
 the next state and accept information. Ignoring any extended HFA
 information, this would be
-
 ```math
  size = (sizeof(next state)) * (# of input characters) * (# of states) + sizeof(accept index) * (# of states)
       = (2) * 256 * s + 2 * x
@@ -600,7 +612,6 @@ information, this would be
 Therefore AppArmor's uncompressed encoding (2 bytes for next state,
 2 bytes for accept index) takes up 514bytes of memory for each
 state. The compressed table size is represented by:
-
 ```math
  size = ((sizeof(base index) + sizeof(default) + sizeof(accept index)) + ((sizeof(next) + sizeof(check)) * (Average transitions per state) * (Packing factor))) * (# of states)
       = ((4 + 2 + 2) + ((2 + 2) * Ave * Pf)) * s
