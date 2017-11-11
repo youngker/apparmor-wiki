@@ -105,6 +105,7 @@ tar -xjvf linux-2.6.XX.XX.tar.bz2
 
 -   build the kernel
     -   in the base directory of the kernel tree do
+
         ```
  make
         ```
@@ -118,6 +119,7 @@ tar -xjvf linux-2.6.XX.XX.tar.bz2
 
 -   Build initrmafs if needed (this is very distro dependant)
     -   For ubuntu
+
         ```
  sudo update-initramfs -ck <kernelversion>
         ```
