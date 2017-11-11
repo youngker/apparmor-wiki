@@ -16,7 +16,7 @@ on a few bits of kernel functionality that were not accepted by
 upstream when the kernel portion of AppArmor was merged into the Linux
 kernel. Compatibility patches are included in this user space release.
 
-See [upstream release notes](http://wiki.apparmor.net/index.php/Apparmor/upstream_release_notes)
+See [upstream release notes](apparmor/upstream_release_notes)
 for more information.
 
 Improvements and Bugs Fixed
