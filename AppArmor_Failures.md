@@ -170,8 +170,8 @@ Examining a task's confinement
 In debugging AppArmor problems, it might be useful to look at the
 confinement of a process. This can be viewed with either:
 
--   ps -Z
--   sudo cat /proc/<pid>/attr/current
+-   `ps -Z`
+-   `sudo cat /proc/<pid>/attr/current`
 
 Eg:
 
@@ -213,7 +213,7 @@ the logs, understand why they occurred, and then adjust the profile
 as necessary. To modify policy, you can either (as root):
 
 -   use `aa-logprof`
--   edit the offending profile in /etc/apparmor.d/ directly, then reload the profile with 'apparmor\_parser -r /etc/apparmor.d/<profile>'
+-   edit the offending profile in /etc/apparmor.d/ directly, then reload the profile with `apparmor_parser -r /etc/apparmor.d/<profile>`
 
 In some cases you may need to restart the confined program after adjusting policy.
 
@@ -222,8 +222,8 @@ the policy and have it apply to an already confined process, you
 cannot remove access by replacing the profile. In this case you need to
 (as root):
 
-1.  apparmor\_parser -R /etc/apparmor.d/<profile> \# remove the profile
-1.  apparmor\_parser -a /etc/apparmor.d/<profile> \# load (add) the profile
+1.  `apparmor_parser -R /etc/apparmor.d/<profile>` to remove the profile
+1.  `apparmor_parser -a /etc/apparmor.d/<profile>` to load (add) the profile
 1.  restart the confined application
 
 Put profile in complain mode
@@ -235,11 +235,11 @@ if AppArmor was not mediating them, logging policy violations along
 the way. To temporarily put a profile in complain mode until the next
 reboot or reload of policy (as root):
 
--   manually reload the profile with 'apparmor\_parser -Cr /etc/apparmor.d/<profile>'
+-   manually reload the profile with `apparmor_parser -Cr /etc/apparmor.d/<profile>`
 
 To permanently put a profile in complain mode, choose one of (as root):
 
--   aa-complain <profile_name>
+-   `aa-complain <profile_name>`
 -   add a symlink to the profile in /etc/apparmor.d/force-complain/ and reload policy
 
 Disabling the profile
@@ -250,17 +250,17 @@ the profile from the kernel will cause any previously confined tasks
 to run unconfined. To temporarily disable a profile until the next
 reboot or reload of policy (as root):
 
--   unload the profile with 'apparmor\_parser -R /etc/apparmor.d/<profile>'
+-   unload the profile with `apparmor_parser -R /etc/apparmor.d/<profile>`
 
 To permanently disable a profile (as root):
 
--   unload the profile with 'apparmor\_parser -R <profile_name>'
+-   unload the profile with `apparmor_parser -R <profile_name>`
 -   add a symlink to the profile in /etc/apparmor.d/disable/ or remove the offending profile from /etc/apparmor.d/
 
 Profiles can also be removed by performing (as root):
 
--   apparmor\_parser -R <profile_name>
--   echo -n “<profile_name>” &gt; /sys/kernel/security/apparmor/.remove
+-   `apparmor_parser -R <profile_name>`
+-   `echo -n “<profile_name>” > /sys/kernel/security/apparmor/.remove`
 
 Unload all profiles
 -------------------
@@ -268,7 +268,7 @@ Unload all profiles
 You can also unload all AppArmor policy (not recommended or typically
 needed) by performing (as root):
 
--   /etc/init.d/apparmor teardown \# AppArmor 2.5.1+
--   /etc/init.d/apparmor stop \# AppArmor 2.5 and lower
--   rcapparmor stop \# SuSE only
+-   `/etc/init.d/apparmor teardown` \# AppArmor 2.5.1+
+-   `/etc/init.d/apparmor stop` \# AppArmor 2.5 and lower
+-   `rcapparmor stop` \# SuSE only
 
