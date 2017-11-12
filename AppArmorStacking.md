@@ -38,7 +38,7 @@ AppArmor Stacking Table of Contents
 Introduction
 ============
 
-AppArmor now supports (see [\#Required\_Versions](#Required_Versions))
+AppArmor now supports (see [Required Versions](#required-versions))
 the stacking of two or more profiles to create a confinement that
 is the intersection of all profiles in the stack. Stacking is done
 dynamically (at run time) and provides several abilities to the policy
