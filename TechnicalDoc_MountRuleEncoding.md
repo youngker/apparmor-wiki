@@ -20,7 +20,7 @@ single, and pivot\_root having two elements.
 
 Each mount, umount and pivot\_root rule in the policydb begins with
 the mount\_class which is defined as 0x07.
-```C
+```c
  #define AA_CLASS_MOUNT        7
 ```
 
@@ -71,7 +71,7 @@ accept information
 
 Mount rules uses 4 different flags, one each for mount, umount,
 and pivot\_root, with a special flag defined for data matches
-```C
+```c
  #define AA_MAY_PIVOTROOT    1
  #define AA_MAY_MOUNT        2
  #define AA_MAY_UMOUNT       4
