@@ -15,7 +15,15 @@ Required Versions
         -   The 3.5 kernel has a bug that breaks ''ix /foo -&gt; &bar, use ''px /foo -&gt; @{profile\_name}//&bar, instead
 -   AppArmor Userspace - 2.11-beta (2.10.95 shipped in Ubuntu 16.04)
 
-![AppArmorPolicyTOC](AppArmor Policy Table of Contents)
+AppArmor Policy Table of Contents
+=====================================
+
+-   [The basics of AppArmor Policy](AppArmorPolicyBasics)
+-   [AppArmor Policy Namespaces](AppArmorNamespaces)
+-   [Stacking profiles](AppArmorStacking)
+-   [Run time composition of Policy](AppArmorProfileComposition)
+-   [Delegation of Authority](AppArmorDelegation)
+-   [Object labeling](AppArmorObjectLabeling)
 
 Introduction
 ============
