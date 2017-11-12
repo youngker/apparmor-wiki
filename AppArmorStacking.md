@@ -25,6 +25,16 @@ AppArmor Policy Table of Contents
 -   [Delegation of Authority](AppArmorDelegation)
 -   [Object labeling](AppArmorObjectLabeling)
 
+AppArmor Stacking Table of Contents
+=======================================
+
+-   [Stacking profiles in AppArmor](AppArmorStacking)
+-   [Combining Stacking and Namespaces](CombiningStackingAndNamespaces)
+-   [Confining Users with Stacking](StackingConfiningUsers)
+-   [User defined policy in AppArmor](AppArmorUserDefinedPolicy)
+-   [Programatic application policy in AppArmor](AppArmorProgramaticApplicationPolicy)
+-   [Putting it all together](AppArmorStackingAndNSFullPolicy)
+
 Introduction
 ============
 
