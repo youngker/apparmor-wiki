@@ -73,7 +73,7 @@ General points to consider
 -   AppArmor's interface to the LSM is in the file **security/apparmor/lsm.c**
 
 
-```C
+```c
     static struct security_operations apparmor_ops = {
         .name =              "apparmor",
 

@@ -33,7 +33,7 @@ and eventually a match that can be used to determine permissions.
 
 Example: doing
 
-```C
+```c
  file_rules_start_state = next_state(PolicyDB, start_state, AA_FILE_TYPE)
 ```
 

@@ -19,7 +19,8 @@ match (present, not present, don't care) against a bit set.
 
 The mnt flags set follows the kernel mount flag set, that is a 32
 bit mask in the same numerical order as stored in the Linux kernel.
-```C
+
+```c
  #define MS_RDONLY     (1 << 0)
  #define MS_RW         (0 << 0)
  #define MS_NOSUID     (1 << 1)
@@ -100,7 +101,8 @@ bits. That is for a bit set (MS\_RDONLY|MS\_NODEV) only the character
 in that order.
 
 E.G. the dfa state matching for (MS\_RDONLY|MS\_NODEV) is
-```C
+
+```c
     next_state = dfa_match(state, MS_RD_ONLY shift + 1)
     next_state = dfa_match(next_state, MS_NODEV + 1)
 ```
