@@ -70,21 +70,21 @@ Current stable release: 2.11.1
 -   <https://launchpad.net/apparmor/2.11/2.11.1/+download/apparmor-2.11.1.tar.gz>
 -   sha256sum: e8e2b22c18e6b6741c1f96942398923b97316b53d86408629f922d5689ec3507
 -   signature: <https://launchpad.net/apparmor/2.11/2.11.1/+download/apparmor-2.11.1.tar.gz.asc>
--   [ 2.11.1 release notes](ReleaseNotes_2_11_1)
+-   [ 2.11.1 release notes](Release_Notes_2.11.1)
 
 Prior supported release: 2.10.3
 
 -   <https://launchpad.net/apparmor/2.10/2.10.3/+download/apparmor-2.10.3.tar.gz>
 -   sha256sum: 794a377a93b661c92877f99f386896a2c46730bdf4446ba859343a181a56ba6a
 -   signature: <https://launchpad.net/apparmor/2.10/2.10.3/+download/apparmor-2.10.3.tar.gz.asc>
--   [ 2.10.3 release notes](ReleaseNotes_2_10_3)
+-   [ 2.10.3 release notes](Release_Notes_2.10.3)
 
 Prior release: 2.9.5
 
 -   <https://launchpad.net/apparmor/2.9/2.9.5/+download/apparmor-2.9.5.tar.gz>
 -   sha256sum: 007e660323790aaa5fa098f39dbc09c43a074ff17c32cf0dbbb4e492010af485
 -   signature: <https://launchpad.net/apparmor/2.9/2.9.5/+download/apparmor-2.9.5.tar.gz.asc>
--   [ 2.9.5 release notes](ReleaseNotes_2_9_5)
+-   [ 2.9.5 release notes](Release_Notes_2.9.5)
 
 #### Development
 

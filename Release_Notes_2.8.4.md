@@ -11,11 +11,11 @@ branch](http://bazaar.launchpad.net/~apparmor-dev/apparmor/2.8/changes/2148?star
 **Important behavioral change announcement for apache mod\_apparmor users**
 ---------------------------------------------------------------------------
 
-[ AppArmor 2.8.2](ReleaseNotes_2_8_2) and before contained a bug in
+[ AppArmor 2.8.2](Release_Notes_2.8.2) and before contained a bug in
 mod\_apparmor that as a side effect, caused a AADefaultHatName defined
 hat to be attempted before the raw URI if no AAHatName had been set,
 contrary to the documented ordering of attempted hats. [ AppArmor
-2.8.3](ReleaseNotes_2_8_3) fixed this bug and thus implemented the
+2.8.3](Release_Notes_2.8.3) fixed this bug and thus implemented the
 documented ordering. However, a number of users had come to depend
 on the AADefaultHatName being attempted before the URI hat (); also,
 each failed URI hat attempt would cause a kernel log event, creating

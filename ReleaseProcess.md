@@ -14,7 +14,7 @@ During the run-up to a release, it's helpful to do some preparation
 work.
 
 1.  Review trunk check-ins and decide which should be included
-2.  Write release notes, summarizing the changes as in [ReleaseNotes\_2\_8](ReleaseNotes_2_8):
+2.  Write release notes, summarizing the changes as in [Release\_Notes\_2.8](Release_Notes_2.8):
     -   New features
     -   Language changes
     -   Improvements
@@ -79,7 +79,7 @@ as well as for bug targeting. To create a new milestone:
             -   The release note stub should have its release date updated to the current date
             -   Move the stub from the under development section (bottom of the page) to the top of the Released version section. If this is a point release it should go under any new major release but above previous point releases. ie. the ordering is chronological by major release and then minor release.
             -   If the next release version is known start new entry for it in the under development section at the bottom of the page and create a new page by specifying the link and after saving click on the link and edit the page for the actual release note entries.
-        2.  the full release notes for the release on their own page [ReleaseNotes\_X\_X\_X](ReleaseNotes_X_X_X) (e.g. [ReleaseNotes\_2\_6\_0](ReleaseNotes_2_6_0)):
+        2.  the full release notes for the release on their own page [Release\_Notes\_X.X.X](Release_Notes_X.X.X) (e.g. [Release\_Notes\_2.6.0](Release_Notes_2.6.0)):
             -   Previous release notes can be used as a template.
     -   Update current release information on the [main page](Main_Page#Userspace)
         -   if major release or point release for the most recent major release, update **Current stable release**

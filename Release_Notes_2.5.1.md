@@ -3,7 +3,7 @@ AppArmor 2.5.1 Release Notes
 
 The 2.5.1 release of the AppArmor user space tools fixes
 bugs and includes minor enhancements over the [AppArmor 2.5
-release](ReleaseNotes_2_5). Official kernel patch updates will be
+release](Release_Notes_2.5). Official kernel patch updates will be
 published at a later date.
 
 -   For information on other versions please see [AppArmor versions](AppArmor_versions)
