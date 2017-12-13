@@ -21,7 +21,7 @@ Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 12 2017
 -   anything else
     -   next meeting 18:00 UTC, Tues ?. ?, 2018
 
-[IRC Meeting, 18:00 UTC, Wednesday Oct 25 2017](irclog.11.25.2017)
+[IRC Meeting, 18:00 UTC, Wednesday Oct 25 2017](IRC_meeting_2017-25-11)
 -----------------------------------------------------------------------------
 
 -   4.0 release (target Nov 2017)
@@ -35,7 +35,7 @@ Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 12 2017
     -   do we need to resuscitate the monthly irc meeting? Or would switching to a bi-monthly, or tri-monthly be adequate
     -   next meeting 20:00 UTC, Tues Nov. 14, 2017?
 
-[IRC Meeting, 20:00 UTC, Tuesday Oct 10 2017](irclog.10.10.2017)
+[IRC Meeting, 20:00 UTC, Tuesday Oct 10 2017](IRC_meeting_2017-10-10)
 ---------------------------------------------------------------------------
 
 -   4.0 release (target Nov 2017)
@@ -51,7 +51,7 @@ Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 12 2017
     -   do we need to resuscitate the monthly irc meeting? Or would switching to a bi-monthly, or tri-monthly be adequate
     -   next meeting 20:00 UTC, Tues Nov. 14, 2017?
 
-[IRC Meeting, 20:00 UTC, Tuesday Sep 13 2016](irclog.13.09.2016)
+[IRC Meeting, 20:00 UTC, Tuesday Sep 13 2016](IRC_meeting_2016-09-13)
 ---------------------------------------------------------------------------
 
 -   2.11 release
@@ -63,7 +63,7 @@ Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 12 2017
 -   anything else
 -   next meeting 20:00 UTC, Tues Oct. 11, 2016
 
-[IRC Meeting, 20:00 UTC, Tuesday Jan 19 2016](irclog.19.01.2016)
+[IRC Meeting, 20:00 UTC, Tuesday Jan 19 2016](IRC_meeting_2016-01-19)
 ---------------------------------------------------------------------------
 
 -   2.9.3
@@ -73,7 +73,7 @@ Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 12 2017
 -   anything else
 -   next meeting Feb 9 or March 8
 
-[IRC Meeting, 20:00 UTC, Nov 17 2015](irclog.17.11.2015)
+[IRC Meeting, 20:00 UTC, Nov 17 2015](IRC_meeting_2015-11-17)
 --------------------------------------------------------------------
 
 -   2.11
@@ -100,7 +100,7 @@ IRC Meeting, 20:00 UTC, Aug 11 2015 --- CANCELLED
 -   2.9.3
 -   next meeting Sept 8
 
-[IRC Meeting, 20:00 UTC, July 14 2015](irclog.14.07.2015)
+[IRC Meeting, 20:00 UTC, July 14 2015](IRC_meeting_2015-07-14)
 --------------------------------------------------------------------
 
 -   2.10 status (it had better be released)
@@ -109,7 +109,7 @@ IRC Meeting, 20:00 UTC, Aug 11 2015 --- CANCELLED
 -   DebConf - who, what, when
 -   next meeting Aug 11
 
-[IRC Meeting, 20:00 UTC, June 09 2015](irclog.09.06.2015)
+[IRC Meeting, 20:00 UTC, June 09 2015](IRC_meeting_2015-06-09)
 --------------------------------------------------------------------
 
 -   2.10 status
@@ -133,7 +133,7 @@ IRC Meeting, 20:00 UTC, Aug 11 2015 --- CANCELLED
 -   anything else
 -   next meeting July 14
 
-[IRC Meeting, 20:00 UTC, May 12 2015](irclog.12.05.2015)
+[IRC Meeting, 20:00 UTC, May 12 2015](IRC_meeting_2015-05-12)
 -------------------------------------------------------------------
 
 -   wiki update
@@ -143,7 +143,7 @@ IRC Meeting, 20:00 UTC, Aug 11 2015 --- CANCELLED
 -   anything else
 -   next meeting June 9
 
-[IRC Meeting, 20:00 UTC, April 14 2015](irclog.14.04.2015)
+[IRC Meeting, 20:00 UTC, April 14 2015](IRC_meeting_2015-04-14)
 ---------------------------------------------------------------------
 
 -   wiki update
@@ -152,7 +152,7 @@ IRC Meeting, 20:00 UTC, Aug 11 2015 --- CANCELLED
 -   anything else
 -   next meeting May 12
 
-[IRC Meeting, 20:00 UTC, March 10 2015](irclog.10.03.2015)
+[IRC Meeting, 20:00 UTC, March 10 2015](IRC_meeting_2015-03-10)
 ---------------------------------------------------------------------
 
 -   wiki update
@@ -172,7 +172,7 @@ IRC Meeting, 20:00 UTC, Aug 11 2015 --- CANCELLED
 -   anything else
 -   next meeting April 14
 
-[IRC Meeting, 20:00 UTC, Feb 10 2015](irclog.10.02.2015)
+[IRC Meeting, 20:00 UTC, Feb 10 2015](IRC_meeting_2015-02-10)
 -------------------------------------------------------------------
 
 -   2.10/3.0 progress on targets
@@ -195,14 +195,14 @@ IRC Meeting, 20:00 UTC, Jan 20 2015
 
 -   Meeting cancelled - no log
 
-[IRC Meeting, 20:00 UTC, Dec 9 2014](irclog.9.12.2014)
+[IRC Meeting, 20:00 UTC, Dec 9 2014](IRC_meeting_2014-12-09)
 -----------------------------------------------------------------
 
 -   2.10/3.0 development direction targets
 -   anything else
 -   next meeting Jan 20
 
-[IRC Meeting, 20:00 UTC, Nov 5 2014](irclog.5.11.2014)
+[IRC Meeting, 20:00 UTC, Nov 5 2014](IRC_meeting_2014-11-05)
 -----------------------------------------------------------------
 
 -   2.9
@@ -211,7 +211,7 @@ IRC Meeting, 20:00 UTC, Jan 20 2015
 -   anything else
 -   next meeting Dec 9
 
-[IRC Meeting, 20:00 UTC, Oct 14 2014](irclog.14.10.2014)
+[IRC Meeting, 20:00 UTC, Oct 14 2014](IRC_meeting_2014-10-14)
 -------------------------------------------------------------------
 
 -   dbus upstreaming
@@ -221,7 +221,7 @@ IRC Meeting, 20:00 UTC, Jan 20 2015
 -   anything else
 -   next meeting Nov 11, should it be moved
 
-[IRC Meeting, 20:00 UTC, Sept 9 2014](irclog.09.09.2014)
+[IRC Meeting, 20:00 UTC, Sept 9 2014](IRC_meeting_2014-09-09)
 -------------------------------------------------------------------
 
 -   dbus upstreaming
@@ -230,7 +230,7 @@ IRC Meeting, 20:00 UTC, Jan 20 2015
 -   anything else
 -   next meeting
 
-[IRC Meeting, 20:00 UTC, July 8 2014](irclog.08.07.2014)
+[IRC Meeting, 20:00 UTC, July 8 2014](IRC_meeting_2014-07-08)
 -------------------------------------------------------------------
 
 -   dbus upstreaming
@@ -239,7 +239,7 @@ IRC Meeting, 20:00 UTC, Jan 20 2015
 -   anything else
 -   next meeting Aug 12, @ 20:00 UTC
 
-[IRC Meeting, 20:00 UTC, June 10 2014](irclog.10.06.2014)
+[IRC Meeting, 20:00 UTC, June 10 2014](IRC_meeting_2014-06-10)
 --------------------------------------------------------------------
 
 -   2.8.4
@@ -247,14 +247,14 @@ IRC Meeting, 20:00 UTC, Jan 20 2015
 -   anything else
 -   Next meeting
 
-[IRC Meeting, 20:00 UTC, February 24 2014](irclog.24.02.2014)
+[IRC Meeting, 20:00 UTC, February 24 2014](IRC_meeting_2014-02-24)
 ------------------------------------------------------------------------
 
 -   2.8.4
 -   2.9
 -   3.0
 
-[IRC Meeting, 20:00 UTC, November 13 2013](irclog.13.11.2013)
+[IRC Meeting, 20:00 UTC, November 13 2013](IRC_meeting_2013-11-13)
 ------------------------------------------------------------------------
 
 -   GSoC
@@ -262,7 +262,7 @@ IRC Meeting, 20:00 UTC, Jan 20 2015
 -   Reverting broken translations
 -   Next meeting
 
-[IRC Meeting, 20:00 UTC, October 8 2013](irclog.08.10.2013)
+[IRC Meeting, 20:00 UTC, October 8 2013](IRC_meeting_2013-10-08)
 ----------------------------------------------------------------------
 
 -   GSoC
@@ -275,7 +275,7 @@ IRC Meeting, 20:00 UTC, September 10 2013
 
 -   Cancelled
 
-[IRC Meeting, 20:00 UTC, August 13 2013](irclog.13.08.2013)
+[IRC Meeting, 20:00 UTC, August 13 2013](IRC_meeting_2013-08-13)
 ----------------------------------------------------------------------
 
 -   GSoC
@@ -291,7 +291,7 @@ IRC Meeting, 20:00 UTC, September 10 2013
     -   alpha4/5
 -   Next meeting
 
-[IRC Meeting, 20:00 UTC, July 09 2013](irclog.09.07.2013)
+[IRC Meeting, 20:00 UTC, July 09 2013](IRC_meeting_2013-07-09)
 --------------------------------------------------------------------
 
 -   GSoC
@@ -306,7 +306,7 @@ IRC Meeting, 20:00 UTC, September 10 2013
 -   IPC -implied or explicit permissions to talk to self
 -   Next meeting
 
-[IRC Meeting, 20:00 UTC, June 11 2013](irclog.11.06.2013)
+[IRC Meeting, 20:00 UTC, June 11 2013](IRC_meeting_2013-06-11)
 --------------------------------------------------------------------
 
 -   GSoC
@@ -319,7 +319,7 @@ IRC Meeting, 20:00 UTC, September 10 2013
         -   default profile being reworked
 -   Next meeting
 
-[IRC Meeting, 20:00 UTC, May 14 2013](irclog.14.05.2013)
+[IRC Meeting, 20:00 UTC, May 14 2013](IRC_meeting_2013-05-14)
 -------------------------------------------------------------------
 
 -   3.0 development status
@@ -339,7 +339,7 @@ IRC Meeting, 20:00 UTC, April 09 2013
 
 Canceled
 
-[IRC Meeting, 20:00 UTC, Mar 01 2013](irclog.01.03.2013)
+[IRC Meeting, 20:00 UTC, Mar 01 2013](IRC_meeting_2013-03-01)
 -------------------------------------------------------------------
 
 -   3.0 beta status
@@ -355,7 +355,7 @@ Canceled
 -   next meeting
 -   open - any none scheduled items
 
-[IRC Meeting, 20:00 UTC, Feb 05 2013](irclog.05.02.2013)
+[IRC Meeting, 20:00 UTC, Feb 05 2013](IRC_meeting_2013-02-05)
 -------------------------------------------------------------------
 
 -   Release status
@@ -374,7 +374,7 @@ Canceled
         -   beta1 - target March 4
     -   mediwiki update - still need to request
 
-[IRC Meeting, 20:00 UTC, Jan 08 2013](irclog.08.01.2013)
+[IRC Meeting, 20:00 UTC, Jan 08 2013](IRC_meeting_2013-01-08)
 -------------------------------------------------------------------
 
 -   Release
@@ -387,7 +387,7 @@ Canceled
     -   Reevaluate 2.9 - No. Just 2.8.1 and 3.0
     -   mediwiki update - still need to request
 
-[IRC Meeting, 20:00 UTC, Dec 04 2012](irclog.04.12.2012)
+[IRC Meeting, 20:00 UTC, Dec 04 2012](IRC_meeting_2012-12-04)
 -------------------------------------------------------------------
 
 -   Release
@@ -400,7 +400,7 @@ Canceled
         -   2.9 subset release of 3.0, userspace + kernel with lock rework and new interface, other features that have stablized
         -   3.0 full release with dbus (requires patched dbus), prototype display server, extended kernel features that didn't make it for 2.9 cut off
 
-[IRC Meeting, 20:00 UTC, Nov 06 2012](irclog.06.11.2012)
+[IRC Meeting, 20:00 UTC, Nov 06 2012](IRC_meeting_2012-11-06)
 -------------------------------------------------------------------
 
 -   Alpha 1: not ready yet. This can't be good we are slipping schedules already. When then?
@@ -428,7 +428,7 @@ Discussions to continue from previous meeting
         -   snippets/autogenerated/smbd.d
 -   how magical should aa-enable be? (should it look into the extras/ dir?)
 
-[IRC Meeting, 20:00 UTC, Sep 25, 2012](irclog.25.09.2012)
+[IRC Meeting, 20:00 UTC, Sep 25, 2012](IRC_meeting_2012-09-25)
 --------------------------------------------------------------------
 
 Decisions
