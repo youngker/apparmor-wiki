@@ -65,7 +65,14 @@ Development release: AppArmor 4.0
     -   query caching
     -   extensible rule support so older parsers don't break on new rule types
 
-Current stable release: 2.11.1
+Current stable release: 2.12.0
+
+-   <https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.0.tar.gz>
+-   sha256sum: 8a2b0cd083faa4d0640f579024be3a629faa7db3b99540798a1a050e2eaba056
+-   signature: <https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.0.tar.gz.asc>
+-   [ 2.12.0 release notes](Release_Notes_2.12.0)
+
+Prior supported release: 2.11.1
 
 -   <https://launchpad.net/apparmor/2.11/2.11.1/+download/apparmor-2.11.1.tar.gz>
 -   sha256sum: e8e2b22c18e6b6741c1f96942398923b97316b53d86408629f922d5689ec3507
