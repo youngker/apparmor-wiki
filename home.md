@@ -70,7 +70,7 @@ Current stable release: 2.12.0
 -   <https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.tar.gz>
 -   sha256sum: 8a2b0cd083faa4d0640f579024be3a629faa7db3b99540798a1a050e2eaba056
 -   signature: <https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.tar.gz.asc>
--   [ 2.12.0 release notes](Release_Notes_2.12.0)
+-   [ 2.12.0 release notes](Release_Notes_2.12)
 
 Prior supported release: 2.11.1
 
