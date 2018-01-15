@@ -1,3 +1,4 @@
+```
 [19:00:52] <jjohansen1> sarnold, sbeattie, tyhicks, jdstrand, cboltz, goldwyn, intrigeri meeting time
 [19:00:58] <sarnold> \o/
 [19:01:17] * cboltz hides
@@ -219,3 +220,4 @@
 [23:45:50] * cboltz wonders if it's possible to render gitlab pages from the manpages
 [23:48:05] <tyhicks> this should do it (I haven't used it): http://search.cpan.org/~rwstauner/Pod-Markdown-3.005/bin/pod2markdown
 [23:48:36] <tyhicks> (looks like it is available in Debian/Ubuntu in the libpod-markdown-perl package)
+```
