@@ -9,7 +9,7 @@ announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
 
-Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 13 2017
+Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Jan 16 2018
 ---------------------------------------------------------
 
 -  ...
