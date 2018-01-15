@@ -21,7 +21,7 @@ Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 12 2017
 -   anything else
     -   next meeting 18:00 UTC, Tues ?. ?, 2018
 
-[IRC Meeting, 18:00 UTC, Wednesday Oct 25 2017](IRC_meeting_2017-25-11)
+[IRC Meeting, 18:00 UTC, Wednesday Oct 25 2017](IRC_meeting_2017-11-25)
 -----------------------------------------------------------------------------
 
 -   4.0 release (target Nov 2017)
