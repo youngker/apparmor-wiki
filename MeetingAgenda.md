@@ -9,7 +9,13 @@ announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
 
-Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 12 2017
+Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 13 2017
+---------------------------------------------------------
+
+-  ...
+-  anything else
+
+[IRC Meeting, 18:00 UTC, Wednesday Dec 13 2017](IRC_meeting_2017-12-13)
 ---------------------------------------------------------
 
 -   git conversion, gitlab. progress checkin. IFF we need to revisit
