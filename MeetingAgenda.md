@@ -9,14 +9,23 @@ announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
 
-Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Jan 16 2018
----------------------------------------------------------
+Next Meeting: IRC Meeting, 18:00 UTC, Thursday Feb 15 2018
+-----------------------------------------------------------------------------
 
--  ...
--  anything else
+- ...
+- anything else
+
+[IRC Meeting, 18:00 UTC, Tuesday Jan 16 2018](IRC_meeting_2018-01-16)
+-----------------------------------------------------------------------------
+
+-   git conversion, gitlab. progress checkin. IFF we need to revisit
+    -   how will translations work?
+    -   bug tracking? switch away from lp?
+-   Regular release schedule/cadence for maintenance releases
+-   anything else
 
 [IRC Meeting, 18:00 UTC, Wednesday Dec 13 2017](IRC_meeting_2017-12-13)
----------------------------------------------------------
+-----------------------------------------------------------------------------
 
 -   git conversion, gitlab. progress checkin. IFF we need to revisit
     -   how will translations work?
