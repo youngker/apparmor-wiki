@@ -28,15 +28,14 @@ Distributions and Ports
 
 Distributions that include AppArmor:
 
--   [Annvix](http://annvix.org)
+-   [Annvix](https://annvix.org)
 -   [Arch Linux](https://www.archlinux.org/)
--   [Debian](http://http://www.debian.org/)
--   [Gentoo](http://www.gentoo.org/)
--   [Mandriva](http://http://www.mandriva.com/)
--   [openSUSE](http://www.opensuse.org) (integrated in default install)
--   [Pardus Linux](http://www.pardus.org.tr)
--   [PLD](http://www.pld-linux.org)
--   [Ubuntu](http://www.ubuntu.com) (integrated in default install)
+-   [Debian](https://www.debian.org/)
+-   [Gentoo](https://www.gentoo.org/)
+-   [openSUSE](https://www.opensuse.org) (integrated in default install)
+-   [Pardus Linux](https://www.pardus.org.tr)
+-   [PLD](https://www.pld-linux.org)
+-   [Ubuntu](https://www.ubuntu.com) (integrated in default install)
 
 Any derivatives of these distributions should also have AppArmor available. [Updated RPMS](http://download.opensuse.org/repositories/security:/apparmor/) can be found at the [openSUSE Build Service](http://en.opensuse.org/Build_Service). These are not limited to SUSE distributions.
 
