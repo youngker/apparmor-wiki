@@ -12,6 +12,7 @@ Meeting Logs are linked off of the month agenda title.
 Next Meeting: IRC Meeting, 18:00 UTC, Thursday Feb 15 2018
 -----------------------------------------------------------------------------
 
+- John updated the [AppArmor backports git tree](http://kernel.ubuntu.com/git/jj/linux-apparmor-backports/) with new backports
 - ...
 - anything else
 
