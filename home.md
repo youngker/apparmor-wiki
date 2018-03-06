@@ -147,8 +147,7 @@ This bug contains information that is:
 to
   ````Private Security````
 
-this will allow **only** you and the apparmor security team to see the bug, until it status is changed to
-  ```Public Security```
+this will allow **only** you and the apparmor security team to see the bug, until it status is changed to Public Security by either you or the apparmor security team.
 
 
 
