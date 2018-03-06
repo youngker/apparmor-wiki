@@ -158,24 +158,24 @@ Joining AppArmor
     for discussing AppArmor development and use.
 -   The IRC channel is \#apparmor on irc.oftc.net
 -   Bug Tracking - project [apparmor](https://launchpad.net/apparmor) on launchpad.net
-
-Contributions to AppArmor are welcome. Anyone can pull the code
-from the git repository or from launchpad, and begin hacking on the
-code. Patches can be contributed by posting them to the mailing
-list for review. Please see the [CommitPolicy](CommitPolicy) and
-[Versioning](Versioning) before sending patches.
-
-If you are a launchpad member, or wish to join launchpad, launchpad
-allows creating custom branches of AppArmor and you can submit
-merge requests from your own custom branch (see [Using Launchpad
-with AppArmor](launchpadtutorial))
-
-Commit privileges to the git tree and launchpad master repository
-are restricted, but can be earned by any developer who is involved
-in the project.
+-   Translations - project [apparmor](https://translations.launchpad.net/apparmor) on launchpad.net
+-   Code - project [apparmor](https://gitlab.com/apparmor) on gitlab
 
 Meetings are held regularly on the IRC channel and are open to the
 everyone. Please see [MeetingAgenda](MeetingAgenda) for times.
+
+How to Contribute
+=================
+Contributions to AppArmor are welcome. Anyone can pull the code
+from the git repository or from launchpad, and begin hacking on the
+code. Patches can be contributed by posting them to the mailing
+list for review or submitting a merge request on gitlab. Please see the [CommitPolicy](CommitPolicy), 
+[Versioning](Versioning), and [Coding Style](Coding Style) before sending patches.
+
+Commit privileges to the git tree and gitlab master repository
+are restricted, but can be earned by any developer who is involved
+in the project.
+
 
 What happened to the profile repository?
 ========================================
