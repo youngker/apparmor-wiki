@@ -133,6 +133,24 @@ Reporting Bugs
 
 -   Bug Tracking is hosted in Launchpad at <https://bugs.launchpad.net/apparmor>
 
+Reporting Security Vulnerabilities
+==================================
+Security issues should be reported as a bug on launchpad.
+-   Bug Tracking is hosted in Launchpad at <https://bugs.launchpad.net/apparmor>
+
+When creating the bug change the
+  ```
+This bug contains information that is:
+  Public
+```
+
+to
+  ````Private Security````
+
+  
+
+
+
 Joining AppArmor
 ================
 
