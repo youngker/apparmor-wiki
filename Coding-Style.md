@@ -1,3 +1,4 @@
+The apparmor project coding style is governed by the language used for a for a given piece of code.
 
 Kernel
 ======
