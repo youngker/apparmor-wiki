@@ -78,7 +78,7 @@ The proc interface may return a security context with a trailing
 newline, which was done up until the 4.14??? kernel. The trailing
 newline was removed from the proc interface to ensure the output
 was safe for common utilities (ps, top, pstree, ...) accessing the
-proc/<pid>/attr/ interfaces, and to unify the output with that of
+proc/\<pid\>/attr/ interfaces, and to unify the output with that of
 the socket op SO\_PEERSEC. The trailing \\n can be safely removed or
 ignored if present.
 
@@ -92,13 +92,13 @@ strings it returns to userspace. It may write a trailing \\000 to
 the buffer holding the context string in the kernel but it is not
 included in the size of data returned to userspace.
 
-writing the /proc/<pid>/attr/ files
+writing the /proc/\<pid\>/attr/ files
 -----------------------------------
 
 As of 4.14 writes to the proc file interface has been deprecated in
 favour of ????. This was done to better support interaction of the
 shared resource when multiple LSMs are active at the same time. Write
-to the /proc/<pid>/attr/ files are restricted to a task writing its
+to the /proc/\<pid\>/attr/ files are restricted to a task writing its
 own own files. If a task tries to write to another tasks files the
 write will fail.
 
@@ -991,7 +991,7 @@ security context for a socket
 ```
 
 The value returned is the same as that returned by the
-/proc/<pid>/attr/ interfaces except without the trailing *\\n\\0*. That
+/proc/\<pid\>/attr/ interfaces except without the trailing *\\n\\0*. That
 is
 
 ```
