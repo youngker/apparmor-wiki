@@ -60,7 +60,7 @@ file interface which contains 1 security context per line in the file.
 The aa\_splitcon()???ref?? api is aware of trailing '\\n' characters
 and will remove them.
 
-/proc/<pid>/attr/
+/proc/\<pid\>/attr/
 =================
 
 reading /proc/<pid>/attr/ files
