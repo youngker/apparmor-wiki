@@ -63,7 +63,7 @@ and will remove them.
 /proc/\<pid\>/attr/
 =================
 
-reading /proc/<pid>/attr/ files
+reading /proc/\<pid\>/attr/ files
 -------------------------------
 
 The following apparmor interfaces can be read to obtain security context information about a task.
