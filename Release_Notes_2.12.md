@@ -30,7 +30,7 @@ Highlighted new features
 ========================
 
 -   Reworked Yast interface (aa-logprof --json and aa-genprof --json)
--   Add support for 'owner' events to aa-logprof and aa-genprof
+-   Add support for 'owner' events to aa-logprof and aa-genprof <https://bugs.launchpad.net/apparmor/+bug/1538340>
 -   Add support for includes with absolute paths to the python tools <https://bugs.launchpad.net//apparmor/+bug/1733700>
 
 Detailed changelog
