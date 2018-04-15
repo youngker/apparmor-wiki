@@ -45,7 +45,7 @@ which is a finer grained evolution of the labeling in the 3.x series.
 Released Versions of AppArmor Userspace Utils
 =============================================
 
-[AppArmor 4.0](Release_Notes_4.0)
+[AppArmor 3.0](Release_Notes_3.0)
 -------------------------------------------
 
 -   Release Date: 2017-10-08
