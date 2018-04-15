@@ -85,8 +85,13 @@ Policy
 
 Documentation
 -------------
+-   add aa-teardown man page
+-   aa_policy_cache and aa_features man pages to add new libapparmor functions to support multiple cache dirs, and overlay cache locations
+-   update apparmor_parser man page for using overlay cache locations
+-   update apparmor.d(7) to document conditional includes
+-   update notify.conf man page, and its default configuration
+-   update apparmor(7) manpage clarify the effect of reloading a profile.
 
--   ???
 
 Translations
 ------------
