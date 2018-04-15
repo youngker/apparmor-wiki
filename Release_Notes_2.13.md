@@ -92,6 +92,16 @@ Policy
         -   allow reading memory block size
         - allow creating NVIDIA-specific user directories
 
+-   mlmmj-send: allow reading digesters.d/*
+-   mlmmj-sub: fix moderated subscription
+-   dovecot
+    -   config: allow dac_read_search and reading ssl-parameters.dat
+    -   auth: allow writing /run/dovecot/old-stats-user
+    -   add stats profile, and allow dovecot to run it
+    -   dovecot-lda: allow reading anything under /usr/share/dovecot/protocols.d/
+- dnsmasq: allow chown capability.
+- ntp: allow clockstats
+
 
 Documentation
 -------------
