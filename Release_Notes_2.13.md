@@ -55,12 +55,22 @@ Policy Compiler (a.k.a apparmor\_parser)
 Init
 ----
 
--   ???
+-   add apparmor.service
+-   add aa-teardown utility and the apparmor.systemd wrapper for it
+-   drop the old (open)SUSE initscript
 
 Library
 -------
 
--   ???
+-   add support for multiple policy cache directories
+-   add support for overlay cache locations
+-   expand ignored file list
+    -   add .pacsave
+    -   add .pacnew
+    -   add .dpkg
+    -   add .dpkg-remove
+-   expand skippable dir list
+    -   add .git
 
 Utils
 -----
