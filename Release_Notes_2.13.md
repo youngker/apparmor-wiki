@@ -86,7 +86,13 @@ Translations
 Tests
 -----
 
+-   parser
+    -   Update caching tests to use the --print-cache-dir option
+    -   fix includes to allow white space
+    -   add tests for relative path includes
+
 -   libapparmor
     -   ???
 -   regression tests
     -   ???
+
