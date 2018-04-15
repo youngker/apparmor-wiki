@@ -36,6 +36,12 @@ Highlighted new features
 Detailed changelog
 ==================
 
+Build Infrastructure
+--------------------
+-   fix $(PWD) when using "make -C profiles"
+-   add support for coverity python scan
+
+
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 
@@ -51,13 +57,13 @@ Policy Compiler (a.k.a apparmor\_parser)
 -   fix parser so that cache creation failure doesn't cause load failure
 
 
-
 Init
 ----
 
 -   add apparmor.service
 -   add aa-teardown utility and the apparmor.systemd wrapper for it
 -   drop the old (open)SUSE initscript
+
 
 Library
 -------
@@ -71,6 +77,11 @@ Library
     -   add .dpkg-remove
 -   expand skippable dir list
     -   add .git
+
+pam_apparmor
+------------
+-   install pam_apparmor.so with write permission for its owner.
+
 
 Utils
 -----
@@ -128,6 +139,7 @@ Translations
 
 -   ????
 
+
 Tests
 -----
 
@@ -135,9 +147,13 @@ Tests
     -   Update caching tests to use the --print-cache-dir option
     -   fix includes to allow white space
     -   add tests for relative path includes
-
 -   libapparmor
-    -   ???
+    -   update for multiple caches
+    -   update for overlay cache locations
+-   utils
+    -   make tests less verbose
+    -   ignore tests for 'include if exists'  ... and some exotic includes that are not supported by the tools yet    
 -   regression tests
-    -   ???
+    -   fix regression tests to pass on 4.14 upstream kernel
+
 
