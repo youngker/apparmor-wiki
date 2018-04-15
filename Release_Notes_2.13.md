@@ -137,7 +137,7 @@ Documentation
 Translations
 ------------
 
--   ????
+-   merge in .de translation updates from launchpad
 
 
 Tests
