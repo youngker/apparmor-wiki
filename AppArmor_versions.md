@@ -51,10 +51,10 @@ Released Versions of AppArmor Userspace Utils
 -   Release Date: 2017-10-08
 -   Shipped in: Debian ?, Ubuntu ?, Suse ?
 -   Kernels supported: 4.13 and upwards
--   [Release Notes](Release_Notes_4.0)
+-   [Release Notes](Release_Notes_3.0)
 -   Development target: improved userspace libraries, new policy models leveraging stacking and namespaces, new upstream kernel module
 
-[AppArmor 2.12](Release_Notes_2.13)
+[AppArmor 2.13](Release_Notes_2.13)
 ---------------------------------------------
 
 -   Release Date: 2018-04-15
