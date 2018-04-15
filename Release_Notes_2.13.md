@@ -26,6 +26,7 @@ checked for elf binary executables. Policy and tests within apparmor
 Highlighted new features
 ========================
 
+- conditional includes are now supported in policy
 - multiple cache directories: allowing for a policy cache per kernel feature set. Meaning caches can be retained when booting between different kernel versions.
 - overlay cache locations: this allows for distros to ship pre-compiled readonly caches and for a local cache that takes priority when a local change is made.
 - updates to build, and documentation to gain the core infrastructure initiative's passing badge https://bestpractices.coreinfrastructure.org/en/projects/1699
@@ -38,7 +39,17 @@ Detailed changelog
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 
--   ????
+-   add support for multiple policy cache directories
+-   add support for overlay cache locations
+-   add support for conditional includes
+-   separate features used to compile policy and kernel cache features
+-   add option to print the cache directory/directories
+-   fix error when arg parsing fails
+-   drop display_usage() calls after printing an error message
+-   fix regression in network mediation when using feature pinning
+-   disable write cache if filesystem is read-only and don't abort
+-   fix parser so that cache creation failure doesn't cause load failure
+
 
 
 Init
