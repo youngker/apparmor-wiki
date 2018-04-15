@@ -81,7 +81,17 @@ Utils
 Policy
 ------
 
--   ???
+-   abstractions
+    -   base: allow ld.so.conf and friends.
+    -   gnupg: allow pubring.kbx
+    -   ubuntu-browsers: fix for 64bit openSUSE
+    - add dri-enumerate abstraction
+    - add new dri-common abstraction to contain basic DRI-specific rules.
+    - move DRI-specific rules into it's own abstraction
+    - nvidia
+        -   allow reading memory block size
+        - allow creating NVIDIA-specific user directories
+
 
 Documentation
 -------------
