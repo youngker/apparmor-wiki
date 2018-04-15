@@ -56,16 +56,21 @@ The AppArmor v2.4 compatibility patches are available in the stable kernel branc
 
 #### Userspace
 
-Development release: AppArmor 4.0
+Development release: AppArmor 3.0
 
 -   in development
 -   targeting
-    -   support of gsettings
+    -   policy versioning
     -   query caching
     -   extensible rule support so older parsers don't break on new rule types
 
-Current stable release: 2.12.0
+Current stable release: 2.13.0
+-   <https://launchpad.net/apparmor/2.13/2.13.0/+download/apparmor-2.13.tar.gz>
+-   sha256sum: 49f0b65a60c1eb5b7b4316023811bf1785875567e0e0c4c8a26cb1f1c3ac5858
+-   signature: <https://launchpad.net/apparmor/2.13/2.13.0/+download/apparmor-2.13.tar.gz.asc>
+-   [ 2.13.0 release notes](Release_Notes_2.13)
 
+Prior supported release: 2.12.0
 -   <https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.tar.gz>
 -   sha256sum: 8a2b0cd083faa4d0640f579024be3a629faa7db3b99540798a1a050e2eaba056
 -   signature: <https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.tar.gz.asc>
@@ -78,30 +83,24 @@ Prior supported release: 2.11.1
 -   signature: <https://launchpad.net/apparmor/2.11/2.11.1/+download/apparmor-2.11.1.tar.gz.asc>
 -   [ 2.11.1 release notes](Release_Notes_2.11.1)
 
-Prior supported release: 2.10.3
+Prior release: 2.10.3
 
 -   <https://launchpad.net/apparmor/2.10/2.10.3/+download/apparmor-2.10.3.tar.gz>
 -   sha256sum: 794a377a93b661c92877f99f386896a2c46730bdf4446ba859343a181a56ba6a
 -   signature: <https://launchpad.net/apparmor/2.10/2.10.3/+download/apparmor-2.10.3.tar.gz.asc>
 -   [ 2.10.3 release notes](Release_Notes_2.10.3)
 
-Prior release: 2.9.5
-
--   <https://launchpad.net/apparmor/2.9/2.9.5/+download/apparmor-2.9.5.tar.gz>
--   sha256sum: 007e660323790aaa5fa098f39dbc09c43a074ff17c32cf0dbbb4e492010af485
--   signature: <https://launchpad.net/apparmor/2.9/2.9.5/+download/apparmor-2.9.5.tar.gz.asc>
--   [ 2.9.5 release notes](Release_Notes_2.9.5)
 
 #### Development
 
 tentative release schedule for version 3.0
 
--   Alpha 1: week of Oct 24.
--   Alpha 2: late November
--   Alpha 3/beta 1: late December
--   beta1/beta2: in mid January
--   beta2/3 start of Feb
--   release: late Feb with possible slip to late march.
+-   Alpha 1: week of May 1.
+-   Alpha 2: late May
+-   Alpha 3/beta 1: June
+-   beta1/beta2: in mid July
+-   beta2/3 start of August
+-   release: September
 
 <!-- -->
 
