@@ -75,8 +75,18 @@ Library
 Utils
 -----
 
--   ???
-    -   ???
+-   genprof/logprof
+    -   Set flags for profiles represented by a glob
+    -   comment out use_group to remove group restrictions
+    -   properly identify empty ouid/fsuid fields in logs
+    -   simplify write_include() and drop write_single()
+    -   change 'profile_changes' and 'serialize_opts' to dict()
+    -   mark profiles with multiple rules in one line as known-failing
+-   aa-status: split profile from exec name
+-   aa-nofify
+    -   add ability to customize notification message.
+    -   set DBUS_SESSION_BUS_ADDRESS, needed by notify-send
+
 
 Policy
 ------
