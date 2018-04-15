@@ -54,6 +54,15 @@ Released Versions of AppArmor Userspace Utils
 -   [Release Notes](Release_Notes_4.0)
 -   Development target: improved userspace libraries, new policy models leveraging stacking and namespaces, new upstream kernel module
 
+[AppArmor 2.12](Release_Notes_2.13)
+---------------------------------------------
+
+-   Release Date: 2018-04-15
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.13)
+-   Development target: per kernel caches, and overlay directories for caches
+
 [AppArmor 2.12](Release_Notes_2.12)
 ---------------------------------------------
 
