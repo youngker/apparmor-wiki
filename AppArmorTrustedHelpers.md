@@ -22,11 +22,18 @@ External Policy Blob
 
 Trusted helpers need to deal with dynamic policy
 
-## Dynamic includes
+Handling policy external to apparmor means having to handle dynamic policy computations
+
+## Dynamic Includes
+dynamic includes can be used to extend a profile without having to replace an entire profile.
+They allow for a Trusted helper a controlled way to provide partial policy for a profile without needing the authority to replace/update a profile.
 
 ## Stacking
 
+Used by Launchers and containers
+
 ## Delegation
+
 
 ### Object (FD) Delegation
 
@@ -47,6 +54,8 @@ Pulling policy from the kernel for independent policy
 
 policy notifications
 
+# Namespace scopes and views
+can be used to control access
 
 # Example Trusted helpers
 
