@@ -1,7 +1,42 @@
 **TODO**
 
+# Introduction
 Trusted helpers are services that have elevated permission in some
 domain, that AppArmor trusts to help enforce certain policy.
+
+
+# Basics of a Trusted Helper
+
+Factors to consider
+
+Version of AppArmor to support
+
+Whether to extend profile language or do custom policy
+- keeping policy together 
+
+Dealing with dynamic policy (stacking and delegation)
+
+PolicyDB
+
+External Policy Blob
+
+Dynamic includes
+
+
+# Accessing policy
+
+Query interface
+
+Using libapparmor on locally saved policy
+
+Pulling policy from the kernel for independent policy
+
+
+
+# Responding to policy changes
+
+policy notifications
+
 
 # Example Trusted helpers
 
