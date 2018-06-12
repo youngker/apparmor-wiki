@@ -14,9 +14,35 @@ Version of AppArmor to support
 Whether to extend profile language or do custom policy
 - keeping policy together 
 
-PolicyDB
+# Policy Backend
 
-External Policy Blob
+## Mediation Class
+AppArmor uses a reserved number, the mediation class, for each type of mediation. The mediation class is used when encoding policy and making policy queries, and is needed for registering extensions. If policy extensions are going to be integrated into AppArmor they should reserve a class number.
+
+???? link to class numbers
+
+## PolicyDB
+
+The policydb is the main ???.
+
+
+Recommended to at least provide minimal policydb entry so that
+aa_class_supported() can be used to determine if a mediation class is supported
+
+???? link to minimal policydb and how to edit
+
+## Private Trusted Helper Policy Blob
+
+A trusted helper can decide that it does not want to use the AppArmor policydb/dfa, but still have some integration with AppArmor.
+
+Trusted Helpers can use the profile "data" store to embed helper specific data into profiles. The data store provides a name value data store where the kernel does not care about the format of the data placed in the value field.
+
+Accessing the data field
+aa_query_label_data -
+
+Direct access from file????
+
+
 
 #Dealing with Dynamic Policy
 
@@ -43,6 +69,7 @@ Used by Launchers and containers
 # Accessing policy
 
 Query interface
+- caching
 
 Using libapparmor on locally saved policy
 
