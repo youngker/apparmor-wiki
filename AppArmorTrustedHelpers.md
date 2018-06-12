@@ -1,4 +1,4 @@
-**TODO**
+**This is a wip**
 
 # Introduction
 Trusted helpers are services that have elevated permission in some
