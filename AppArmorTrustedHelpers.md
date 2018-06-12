@@ -14,13 +14,23 @@ Version of AppArmor to support
 Whether to extend profile language or do custom policy
 - keeping policy together 
 
-Dealing with dynamic policy (stacking and delegation)
-
 PolicyDB
 
 External Policy Blob
 
-Dynamic includes
+#Dealing with Dynamic Policy
+
+Trusted helpers need to deal with dynamic policy
+
+## Dynamic includes
+
+## Stacking
+
+## Delegation
+
+### Object (FD) Delegation
+
+### Rule Delegation
 
 
 # Accessing policy
