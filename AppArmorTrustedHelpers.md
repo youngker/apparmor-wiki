@@ -23,7 +23,7 @@ AppArmor uses a reserved number, the mediation class, for each type of mediation
 
 ## PolicyDB
 
-The policydb is the main ???.
+The [policydb](Technicaldoc_policydb) is the main ???.
 
 
 Recommended to at least provide minimal policydb entry so that
@@ -56,10 +56,11 @@ They allow for a Trusted helper a controlled way to provide partial policy for a
 
 ## Stacking
 
-Used by Launchers and containers
+Used by Launchers and containers [stacking](Apparmorstacking)
 
 ## Delegation
 
+[delegation](Apparmordelegation)
 
 ### Object (FD) Delegation
 
@@ -87,14 +88,15 @@ can be used to control access
 # Example Trusted helpers
 
 * External Mediation
-  -   dbus
+  -   [dbus](AppArmorDBus)
   -   [xapparmor xace plug-in](AppArmorXace)
-  -   gsettings daemon
+  -   [gsettings daemon](AppArmorGSettings)
   -   databases
   -   ...
-* Launchers/Domain Transitions
+* Launchers/Domain Transitions/Containers/Sandboxing
   -   aa-exec
-* Containers
+  -   aa-sandbox
+  -   [systemd](Apparmorinsystemd)
   -   snappyd
   -   libvirt
   -   lxd
