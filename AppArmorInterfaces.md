@@ -688,9 +688,10 @@ sleep the reading task until the next revision is available.
 eg.
 
 ```
- cat /sys/kernel/security/apparmor/revision
+ $ cat /sys/kernel/security/apparmor/revision
  66
-                                                sudo apparmor_parser -r /etc/apparmor.d/bin.ping
+ $ sudo apparmor_parser -r /etc/apparmor.d/bin.ping
+ $ cat /sys/kernel/security/apparmor/revision
  67
 ```
 
