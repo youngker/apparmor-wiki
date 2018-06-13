@@ -8,7 +8,16 @@ There is no one way to implement a trusted helper, they may be tightly integrate
 
 # Basics of a Trusted Helper
 
-Factors to consider
+##Factors to consider
+
+### Split or Consolidated policy
+text policy in one place makes it easier to understand policy
+- splitting text policy may make it easier to develop tool (no integration with apparmor parser needed)
+- make it easier to write policy for admin of a traditional tool eg. iptables (note iptable rules can't take advantage of full apparmor mediation)
+
+binary policy in one place makes check/point restore operation consistent
+integrating into policydb allows for apparmor to handle dynamic policy computations
+
 
 Version of AppArmor to support
 
