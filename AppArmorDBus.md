@@ -25,10 +25,8 @@ AppArmor DBus rules are broad and general and become more restrictive as further
 
 Some AppArmor DBus permissions are not compatible with all AppArmor DBus rules.  The 'bind' permission cannot be used in message rules. The 'send' and 'receive' permissions cannot be used in service rules. The 'eavesdrop' permission cannot be used in rules containing any conditionals outside of the 'bus' conditional.
 
- 'r' and 'read' are synonyms for 'receive'.'
-
- 'w' and 'write' are synonyms for 'send'.
-
+ 'r' and 'read' are synonyms for 'receive'.'<br>
+ 'w' and 'write' are synonyms for 'send'.<br>
  'rw' is a synonym for both 'send' and 'receive'.
 
 AppArmor DBus permissions are implied when a rule does not explicitly state an access list. By default, all DBus permissions are implied. Only message permissions are implied for message rules and only service permissions are implied for service rules.
