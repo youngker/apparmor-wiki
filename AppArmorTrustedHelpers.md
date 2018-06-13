@@ -17,6 +17,8 @@ text policy in one place makes it easier to understand policy
 
 binary policy in one place makes check/point restore operation consistent
 integrating into policydb allows for apparmor to handle dynamic policy computations
+apparmor mediation modes
+auditing
 
 
 Version of AppArmor to support
