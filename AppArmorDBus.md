@@ -113,7 +113,7 @@ For a full description of its layout see [dbus rule encoding in the Technical do
 # Querying DBus Peer Security Context
 
 The apparmor security context of a peer's connection can be found
-using the org.freedesktop.DBus.GetConnectionCredentials() bus method.
+using the org.freedesktop.DBus.GetConnectionCredentials() bus method. Older version of Ubuntu use the Ubuntu specific org.freedesktop.DBus.GetConnectionAppArmorSecurityContext bus method instead.
 
 Example. in C++
 
