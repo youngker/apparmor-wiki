@@ -4,7 +4,7 @@ wip
 
 # Introduction
 
-The DBus daemon has been extended to be an AppArmor trusted helper. It is trusted with handling the mediation of dbus messages between applications. DBus policy is integrated into regular AppArmor policy, that is compiled and loaded into the kernel.
+AppArmor supports DBus mediation. The mediation is performed in conjunction with the DBus daemon. The DBus daemon verifies that communications over the bus are permitted by AppArmor policy.
 
 The DBus daemon does not load policy
 DBus activation/launcher ???
@@ -19,110 +19,89 @@ DBus activation/launcher ???
 ???
 
 # Policy
+     that is compiled and loaded into the kernel.
+ 
+AppArmor DBus policy is integrated into regular AppArmor policy. The DBus rules follow standard policy conventions that is they are accumulated so that the granted DBus permissions are the union of all the listed DBus rule permissions.
 
-DBUS RULE = ( DBUS MESSAGE RULE | DBUS SERVICE RULE | DBUS
-           EAVESDROP RULE | DBUS COMBINED RULE )
+AppArmor DBus rules are broad and general and become more restrictive as further information is specified. Policy may be specified down to the interface member level (method or signal name), however the contents of messages are not examined.
 
-           DBUS MESSAGE RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS EXPRESSION
-           ] [ DBUS BUS ] [ DBUS PATH ] [ DBUS INTERFACE ] [ DBUS MEMBER ] [
-           DBUS PEER ]
+Some AppArmor DBus permissions are not compatible with all AppArmor DBus rules.  The 'bind' permission cannot be used in message rules. The 'send' and 'receive' permissions cannot be used in service rules. The 'eavesdrop' permission cannot be used in rules containing any conditionals outside of the 'bus' conditional.
 
-           DBUS SERVICE RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS EXPRESSION
-           ] [ DBUS BUS ] [ DBUS NAME ]
+ 'r' and 'read' are synonyms for 'receive'.
+ 'w' and 'write' are synonyms for 'send'.
+ 'rw' is a synonym for both 'send' and 'receive'.
 
-           DBUS EAVESDROP RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS
-           EXPRESSION ] [ DBUS BUS ]
+AppArmor DBus permissions are implied when a rule does not explicitly state an access list. By default, all DBus permissions are implied. Only message permissions are implied for message rules and only service permissions are implied for service rules.
 
-           DBUS COMBINED RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS EXPRESSION
-           ] [ DBUS BUS ]
+Example AppArmor DBus rules:
 
-           DBUS ACCESS EXPRESSION = ( DBUS ACCESS | '(' DBUS ACCESS LIST ')' )
+ # Allow all DBus access
+ dbus,
 
-           DBUS BUS = 'bus' '=' '(' 'system' | 'session' | '"' AARE '"' | AARE
-           ')'
+ # Explicitly allow all DBus access,
+ dbus (send, receive, bind),
 
-           DBUS PATH = 'path' '=' '(' '"' AARE '"' | AARE ')'
+ # Deny send/receive/bind access to the session bus
+ deny dbus bus=session,
 
-           DBUS INTERFACE = 'interface' '=' '(' '"' AARE '"' | AARE ')'
+ # Allow bind access for a particular name on any bus
+ dbus bind name=com.example.ExampleName,
 
-           DBUS MEMBER = 'member' '=' '(' '"' AARE '"' | AARE ')'
+ # Allow receive access for a particular path and interface
+ dbus receive path=/com/example/path interface=com.example.Interface,
 
-           DBUS PEER = 'peer' '=' '(' [ DBUS NAME ] [ DBUS LABEL ] ')'
+ # Deny send/receive access to the system bus for a particular interface
+ deny dbus bus=system interface=com.example.ExampleInterface,
 
-           DBUS NAME = 'name' '=' '(' '"' AARE '"' | AARE ')'
+ # Allow send access for a particular path, interface, member, and pair of
+ # peer names:
+ dbus send
+      bus=session
+      path=/com/example/path
+      interface=com.example.Interface
+      member=ExampleMethod
+      peer=(name=(com.example.ExampleName1|com.example.ExampleName2)),
 
-           DBUS LABEL = 'label' '=' '(' '"' AARE '"' | AARE ')'
+ # Allow receive access for all unconfined peers
+ dbus receive peer=(label=unconfined)),
 
-           DBUS ACCESS LIST = Comma separated list of DBUS ACCESS
+ # Allow eavesdropping on the system bus
+ dbus eavesdrop bus=system,
 
-           DBUS ACCESS = ( 'send' | 'receive' | 'bind' | 'eavesdrop' | 'r' |
-           'read' | 'w' | 'write' | 'rw' )
-             Some accesses are incompatible with some rules; see below.
+ # Allow and audit all eavesdropping
+ audit dbus eavesdrop,
 
+## DBus rule syntax
+ DBUS RULE = ( DBUS MESSAGE RULE | DBUS SERVICE RULE | DBUS EAVESDROP RULE | DBUS COMBINED RULE )
 
-     AppArmor supports DBus mediation. The mediation is performed in
-       conjunction with the DBus daemon. The DBus daemon verifies that
-       communications over the bus are permitted by AppArmor policy.
+ DBUS MESSAGE RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS EXPRESSION ] [ DBUS BUS ] [ DBUS PATH ] [ DBUS INTERFACE ] [ DBUS MEMBER ] [DBUS PEER ]
 
-       AppArmor DBus rules are accumulated so that the granted DBus
-       permissions are the union of all the listed DBus rule permissions.
+ DBUS SERVICE RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS EXPRESSION ] [ DBUS BUS ] [ DBUS NAME ]
 
-       AppArmor DBus rules are broad and general and become more restrictive
-       as further information is specified. Policy may be specified down to
-       the interface member level (method or signal name), however the
-       contents of messages are not examined.
+ DBUS EAVESDROP RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS EXPRESSION ] [ DBUS BUS ]
 
-       Some AppArmor DBus permissions are not compatible with all AppArmor
-       DBus rules.  The 'bind' permission cannot be used in message rules. The
-       'send' and 'receive' permissions cannot be used in service rules. The
-       'eavesdrop' permission cannot be used in rules containing any
-       conditionals outside of the 'bus' conditional.
+ DBUS COMBINED RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS EXPRESSION ] [ DBUS BUS ]
 
-       'r' and 'read' are synonyms for 'receive'. 'w' and 'write' are synonyms
-       for 'send'. 'rw' is a synonym for both 'send' and 'receive'.
+ DBUS ACCESS EXPRESSION = ( DBUS ACCESS | '(' DBUS ACCESS LIST ')' )
 
-       AppArmor DBus permissions are implied when a rule does not explicitly
-       state an access list. By default, all DBus permissions are implied.
-       Only message permissions are implied for message rules and only service
-       permissions are implied for service rules.
+ DBUS BUS = 'bus' '=' '(' 'system' | 'session' | '"' AARE '"' | AARE ')'
 
-       Example AppArmor DBus rules:
+ DBUS PATH = 'path' '=' '(' '"' AARE '"' | AARE ')'
 
-           # Allow all DBus access
-           dbus,
+ DBUS INTERFACE = 'interface' '=' '(' '"' AARE '"' | AARE ')'
 
-           # Explicitly allow all DBus access,
-           dbus (send, receive, bind),
+ DBUS MEMBER = 'member' '=' '(' '"' AARE '"' | AARE ')'
 
-           # Deny send/receive/bind access to the session bus
-           deny dbus bus=session,
+ DBUS PEER = 'peer' '=' '(' [ DBUS NAME ] [ DBUS LABEL ] ')'
 
-           # Allow bind access for a particular name on any bus
-           dbus bind name=com.example.ExampleName,
+ DBUS NAME = 'name' '=' '(' '"' AARE '"' | AARE ')'
 
-           # Allow receive access for a particular path and interface
-           dbus receive path=/com/example/path interface=com.example.Interface,
+ DBUS LABEL = 'label' '=' '(' '"' AARE '"' | AARE ')'
 
-           # Deny send/receive access to the system bus for a particular interface
-           deny dbus bus=system interface=com.example.ExampleInterface,
+ DBUS ACCESS LIST = Comma separated list of DBUS ACCESS
 
-           # Allow send access for a particular path, interface, member, and pair of
-           # peer names:
-           dbus send
-                bus=session
-                path=/com/example/path
-                interface=com.example.Interface
-                member=ExampleMethod
-                peer=(name=(com.example.ExampleName1|com.example.ExampleName2)),
-
-           # Allow receive access for all unconfined peers
-           dbus receive peer=(label=unconfined)),
-
-           # Allow eavesdropping on the system bus
-           dbus eavesdrop bus=system,
-
-           # Allow and audit all eavesdropping
-           audit dbus eavesdrop,
+ DBUS ACCESS = ( 'send' | 'receive' | 'bind' | 'eavesdrop' | 'r' | 'read' | 'w' | 'write' | 'rw' )
+    * Some accesses are incompatible with some rules; see below.
 
 
 # Querying DBus Peer Security Context
