@@ -19,16 +19,16 @@ DBus activation/launcher ???
 ???
 
 # Policy
-     that is compiled and loaded into the kernel.
- 
-AppArmor DBus policy is integrated into regular AppArmor policy. The DBus rules follow standard policy conventions that is they are accumulated so that the granted DBus permissions are the union of all the listed DBus rule permissions.
+ AppArmor DBus policy is integrated into regular AppArmor policy. The DBus rules follow standard policy conventions that is they are accumulated so that the granted DBus permissions are the union of all the listed DBus rule permissions.
 
 AppArmor DBus rules are broad and general and become more restrictive as further information is specified. Policy may be specified down to the interface member level (method or signal name), however the contents of messages are not examined.
 
 Some AppArmor DBus permissions are not compatible with all AppArmor DBus rules.  The 'bind' permission cannot be used in message rules. The 'send' and 'receive' permissions cannot be used in service rules. The 'eavesdrop' permission cannot be used in rules containing any conditionals outside of the 'bus' conditional.
 
- 'r' and 'read' are synonyms for 'receive'.
+ 'r' and 'read' are synonyms for 'receive'.'
+
  'w' and 'write' are synonyms for 'send'.
+
  'rw' is a synonym for both 'send' and 'receive'.
 
 AppArmor DBus permissions are implied when a rule does not explicitly state an access list. By default, all DBus permissions are implied. Only message permissions are implied for message rules and only service permissions are implied for service rules.
@@ -101,7 +101,13 @@ Example AppArmor DBus rules:
  DBUS ACCESS LIST = Comma separated list of DBUS ACCESS
 
  DBUS ACCESS = ( 'send' | 'receive' | 'bind' | 'eavesdrop' | 'r' | 'read' | 'w' | 'write' | 'rw' )
+
     * Some accesses are incompatible with some rules; see below.
+
+## DBus binary policy encoding
+DBus policy is encoded similar to kernel based AppArmor policy where it is encoded as part of the [policydb](Technicaldoc_policydb). This means that it is loaded into the kernel and can be queried using the apparmor query and instrospection infrastructure.
+
+For a full description of its layout see [dbus rule encoding in the Technical documentation](Technicaldoc_dbusruleencoding).
 
 
 # Querying DBus Peer Security Context
