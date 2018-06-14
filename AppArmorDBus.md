@@ -19,7 +19,13 @@ suggest
 
 # Enabling
 
-apparmor=(disabled,enabled,required)
+If dbus is built with apparmor support then apparmor support can be configured in the dbus configuration file with configuration element.
+
+apparmor mode=(disabled,enabled,required)
+
+The default mode is "enabled". In "enabled" mode, AppArmor mediation will be performed if AppArmor support is available in the kernel. If it is not available, dbus-daemon will start but AppArmor mediation will not occur. In "disabled" mode, AppArmor mediation is disabled. In "required" mode, AppArmor mediation will be enabled if AppArmor support is available, otherwise dbus-daemon will refuse to start.
+
+The AppArmor mediation mode of the bus cannot be changed after the bus starts. Modifying the mode in the configuration file and sending a SIGHUP signal to the daemon has no effect on the mediation mode.
 
 no dbus policy rules needed as apparmor dbus rules are part of apparmor policy files.
 
