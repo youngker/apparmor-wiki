@@ -23,6 +23,13 @@ apparmor=(disabled,enabled,required)
 
 no dbus policy rules needed as apparmor dbus rules are part of apparmor policy files.
 
+# System Service Activation
+
+Use regular profile attachment
+
+or
+
+Define a profile for dbus daemon that over rides attachments with exec rules
 
 # Policy
  AppArmor DBus policy is integrated into regular AppArmor policy. The DBus rules follow standard policy conventions that is they are accumulated so that the granted DBus permissions are the union of all the listed DBus rule permissions.
