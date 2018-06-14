@@ -59,7 +59,7 @@ Some AppArmor DBus permissions are not compatible with all AppArmor DBus rules. 
 AppArmor DBus permissions are implied when a rule does not explicitly state an access list. By default, all DBus permissions are implied. Only message permissions are implied for message rules and only service permissions are implied for service rules.
 
 Example AppArmor DBus rules:
-
+```
  # Allow all DBus access
  dbus,
 
@@ -95,9 +95,11 @@ Example AppArmor DBus rules:
 
  # Allow and audit all eavesdropping
  audit dbus eavesdrop,
+```
 
 ## DBus rule syntax
- DBUS RULE = ( DBUS MESSAGE RULE | DBUS SERVICE RULE | DBUS EAVESDROP RULE | DBUS COMBINED RULE )
+```
+DBUS RULE = ( DBUS MESSAGE RULE | DBUS SERVICE RULE | DBUS EAVESDROP RULE | DBUS COMBINED RULE )
 
  DBUS MESSAGE RULE = [ QUALIFIERS ] 'dbus' [ DBUS ACCESS EXPRESSION ] [ DBUS BUS ] [ DBUS PATH ] [ DBUS INTERFACE ] [ DBUS MEMBER ] [DBUS PEER ]
 
@@ -128,7 +130,7 @@ Example AppArmor DBus rules:
  DBUS ACCESS = ( 'send' | 'receive' | 'bind' | 'eavesdrop' | 'r' | 'read' | 'w' | 'write' | 'rw' )
 
     * Some accesses are incompatible with some rules; see below.
-
+```
 ## DBus binary policy encoding
 DBus policy is encoded similar to kernel based AppArmor policy where it is encoded as part of the [policydb](Technicaldoc_policydb). This means that it is loaded into the kernel and can be queried using the apparmor query and instrospection infrastructure.
 
