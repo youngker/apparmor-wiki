@@ -12,10 +12,16 @@ DBus activation/launcher ???
 
 # Building
 
---enable-apparmor
+dbus can be built using autotools or cmake
 
-suggest
---enable-libaudit 
+## autotools
+When configuring and building with autotools pass --enable-apparmor as an option to ./configure
+
+Also enabling the option --enable-libaudit is also suggested. 
+
+## cmake
+
+todo
 
 # Enabling
 
