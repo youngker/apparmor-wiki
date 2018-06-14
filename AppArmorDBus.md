@@ -2,6 +2,10 @@ wip
 
 # Requirements
 
+- dbus version: ?
+- apparmor userspace version: ?
+- kernel version: ?
+
 # Introduction
 
 AppArmor supports DBus mediation. The mediation is performed in conjunction with the DBus daemon. The DBus daemon verifies that communications over the bus are permitted by AppArmor policy.
