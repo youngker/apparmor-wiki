@@ -17,7 +17,7 @@ dbus can be built using autotools or cmake
 ## autotools
 When configuring and building with autotools pass --enable-apparmor as an option to ./configure
 
-Also enabling the option --enable-libaudit is also suggested. 
+Enabling the option --enable-libaudit is also suggested. 
 
 ## cmake
 
@@ -37,13 +37,7 @@ no dbus policy rules needed as apparmor dbus rules are part of apparmor policy f
 
 # System Service Activation
 
-todo
-
-Use regular profile attachment
-
-or
-
-Define a profile for dbus daemon that over rides attachments with exec rules
+AppArmor does not provide system service activation rules at this time. Instead it relies on services when starting being give the correct system confinement through attachment. If a service launched through dbus needs a different confinement than what regular system confinement provides, the dbus daemon can be confined and exec (x) transitions can be used to define the confinement of services started by dbus.
 
 # Policy
 AppArmor DBus policy is integrated into regular AppArmor policy. The DBus rules follow standard policy conventions that is they are accumulated so that the granted DBus permissions are the union of all the listed DBus rule permissions.
@@ -52,9 +46,13 @@ AppArmor DBus rules are broad and general and become more restrictive as further
 
 Some AppArmor DBus permissions are not compatible with all AppArmor DBus rules.  The 'bind' permission cannot be used in message rules. The 'send' and 'receive' permissions cannot be used in service rules. The 'eavesdrop' permission cannot be used in rules containing any conditionals outside of the 'bus' conditional.
 
- 'r' and 'read' are synonyms for 'receive'.'<br><br>
- 'w' and 'write' are synonyms for 'send'.<br><br>
- 'rw' is a synonym for both 'send' and 'receive'.<br><br>
+```
+ 'r' and 'read' are synonyms for 'receive'.'
+
+ 'w' and 'write' are synonyms for 'send'.
+
+ 'rw' is a synonym for both 'send' and 'receive'.
+```
 
 AppArmor DBus permissions are implied when a rule does not explicitly state an access list. By default, all DBus permissions are implied. Only message permissions are implied for message rules and only service permissions are implied for service rules.
 
@@ -97,6 +95,13 @@ Example AppArmor DBus rules:
  audit dbus eavesdrop,
 ```
 
+## System, Session, Accessibility, ... buses
+
+A system may have multiple DBus services, a system bus, session bus, accessibility bus, etc. Each of these buses can have apparmor support and enforce apparmor rules for the messages passed on them.
+
+If an apparmor rule needs to be dependent on the particular bus service it can use the
+''bus='' option to specify which bus the rule applies to.
+ 
 ## DBus rule syntax
 ```
 DBUS RULE = ( DBUS MESSAGE RULE | DBUS SERVICE RULE | DBUS EAVESDROP RULE | DBUS COMBINED RULE )
@@ -199,13 +204,33 @@ Example. in C++
 
 # Implementation details
 
+## Mediation Class
+
+'''
+#define AA_CLASS_DBUS		32
+'''
+
 ## Kernel Flag
+If dbus mediation the kernel will have the file
+'''
+   /sys/kernel/security/apparmor/features/dbus/mask
+'''
 
 ## Query interface
 
+todo
+
+how to check if a profile support for dbus
+
+how to query dbus permissions
+
 ## Auditing
 
+todo
+
 ## Caching
+
+todo
 
 ## rule encoding
 [rule encoding](Technicaldoc_dbusruleencoding)
