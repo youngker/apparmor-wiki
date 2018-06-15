@@ -5,6 +5,7 @@ wip
 - dbus version: ?
 - apparmor userspace version: ?
 - kernel version: ?
+- unix domain socket support for sockopt SO_PEERSEC
 
 # Introduction
 
