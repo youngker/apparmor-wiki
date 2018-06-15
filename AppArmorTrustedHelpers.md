@@ -2,9 +2,9 @@
 
 # Introduction
 Trusted helpers are userspace services that have elevated permission in some
-domain, that AppArmor trusts to help enforce certain policy. Trusted helpers may themselves be untrusted and confined in other areas.
+domain, that AppArmor trusts to help enforce certain policy. Trusted helpers may themselves be 'untrusted' and confined by policy in other domains.
 
-There is no one way to implement a trusted helper, they may be tightly integrated with rules integrated into policy and leveraging the apparmor query infrastructure. To a loosely coupled service that shares no information with AppArmor and only queries some AppArmor properties when doing its enforcement.
+There is no one way to implement a trusted helper, they may be tightly integrated into apparmor policy, a loosely coupled service that shares no information with AppArmor and only queries some AppArmor properties when doing its enforcement, or any reasonable combination in between.
 
 # Basics of a Trusted Helper
 
