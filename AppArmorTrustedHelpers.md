@@ -29,9 +29,11 @@ Whether to extend profile language or do custom policy
 # Policy Backend
 
 ## Mediation Class
-AppArmor uses a reserved number, the mediation class, for each type of mediation. The mediation class is used when encoding policy and making policy queries, and is needed for registering extensions. If policy extensions are going to be integrated into AppArmor they should reserve a class number.
+AppArmor uses a reserved number, the mediation class, for each type of mediation. The mediation class is used when encoding policy and making policy queries, and is needed for registering extensions. If policy extensions are going to be integrated into AppArmor they should reserve a [mediation class number](AppArmorClassNumbers).
 
-???? link to class numbers
+The mediation class is used to separate different classes in the policydb and also to enable whether a profile supports mediation of a given class. If trusted helper policy is loaded into the kernel even if the policy is not enforced by the kernel, nor stored in the policydb it should have a mediation class so that apparmor can correctly answer queries as to what they policy supports.
+
+The only case where a mediation class is not needed is when policy is stored entirely external to apparmor and the helper is only leveraging apparmor for its security labels.
 
 ## PolicyDB
 
