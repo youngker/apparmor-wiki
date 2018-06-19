@@ -64,13 +64,24 @@ Trusted helpers need to deal with dynamic policy
 
 Handling policy external to apparmor means having to handle dynamic policy computations
 
+## Policy reloads
+
+If a trusted helper has sufficient permissions it can use policy replacement to dynamically update policy rules.
+
+The trusted helper will need to add/delete rules from the appropriate profile files and then compile and reload them.
+
+Changes can be isolated in include files.
+
+This provides a way to make the delegation permanent.
+
+This is the only way supported on older versions of apparmor.
+
+## Stacking
+Used by Launchers and containers [stacking](Apparmorstacking)
+
 ## Dynamic Includes
 dynamic includes can be used to extend a profile without having to replace an entire profile.
 They allow for a Trusted helper a controlled way to provide partial policy for a profile without needing the authority to replace/update a profile.
-
-## Stacking
-
-Used by Launchers and containers [stacking](Apparmorstacking)
 
 ## Delegation
 
