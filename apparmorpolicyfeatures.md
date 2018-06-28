@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 
 AppArmor is a long lived project and the set of features that are supported have evolved over time, and continues to evolve. Not only does the supported feature set change but there are independent parts: kernel, userspace tools, policy and trusted helpers each co-evolving but with independent changes.
 
