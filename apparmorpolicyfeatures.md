@@ -69,7 +69,7 @@ Where V(n-1) indicates an older feature abi, V(n) a different feature abi with m
 
 | Policy   | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel    |
 |:--------:|:---------------:|:---------------:|:----------------:|
-| V(n-1)   | enforced[^2]    | enforced[^2]    | enforced[^1][^2] |
+| V(n-1)   | enforced[^2]    | enforced[^2]    | enforced[^1],[^2] |
 | V(n)     | enforced        | enforced        | enforced[^1]     |
 | V(n+1)   | fail to compile | fail to compile | fail to compile  |
 
