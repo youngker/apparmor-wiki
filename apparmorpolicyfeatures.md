@@ -47,20 +47,35 @@ The remaining userspace tools are not required for the enforcement of policy but
 
 ??? Ignoring rules
 
+# Version support matrix
+## V(n-1) apparmor_parser
 
-V. n-1 apparmor_parser
-| Policy | V. n-1 Kernel| V.n Kernel| V. n+1 Kernel|
-|:-------:|:-----------:|:---------:|:------------:|
-| V. n-1  | enforced    | enforced+ | enforced+    |
-| V. n    |          |           |            |
-| V. n+1  | | | |
+| Policy   | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel   |
+|:--------:|:---------------:|:---------------:|:---------------:|
+| V(n-1)  v| enforced        | enforced+       | enforced+       |
+| V(n)     | fail to compile | fail to compile | fail to compile |
+| V(n+1)   | fail to compile | fail to compile | fail to compile |
 
++ - as long as kernel supports abi being generated and loaded by V n-1 parser
 
-old parser
-parser
-new parser
+## V(n) apparmor_parser
 
-old kernel
-kernel
-new kernel
+| Policy   | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel   |
+|:--------:|:---------------:|:---------------:|:---------------:|
+| V(n-1)   | enforced*       | enforced*       | enforced*+      |
+| V(n)     | enforced        | enforced        | enforced+       |
+| V(n+1)   | fail to compile | fail to compile | fail to compile |
 
+* - kernel features not supported by policy feature abi not enforced 
+
++ - as long as kernel supports abi being loaded
+
+## V.(n+1)
+
+| Policy   | V(n-1) Kernel | V(n) Kernel | V(n+1) Kernel |
+|:--------:|:-------------:|:-----------:|:-------------:|
+| V(n-1)   | enforced*     | enforced*   | enforced*     |
+| V(n)     | enforced*     | enforced*   | enforced*     |
+| V(n+1)   | enforced*     | enforced*   | enforced      |
+
+* - kernel features not supported by policy feature abi not enforced 
