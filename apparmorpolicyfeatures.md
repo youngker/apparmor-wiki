@@ -46,3 +46,20 @@ The remaining userspace tools are not required for the enforcement of policy but
 ??? rule downgrades
 
 ??? Ignoring rules
+
+
+| Policy |Old Kernel|Same Kernel|Newer Kernel|
+|:------:|:--------:|:---------:|:----------:|
+| Old - subset of supported features |          |           |            |
+| concurrent |          |           |            |
+| Newer - feature not supported by parser | | | |
+
+
+old parser
+parser
+new parser
+
+old kernel
+kernel
+new kernel
+
