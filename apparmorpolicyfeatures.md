@@ -53,15 +53,19 @@ The following set of matrixes provide a quick reference for how the policy, pars
 
 Where V(n-1) indicates an older feature abi, V(n) a different feature abi with more features than V(n-1), and V(n+1) support for a newer feature set abi with even more features than V(n).
 
+---
+
 ## V(n-1) apparmor_parser
 
 | Policy   | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel   |
 |:--------:|:---------------:|:---------------:|:---------------:|
-| V(n-1)   | enforced        | enforced+       | enforced+       |
+| V(n-1)   | enforced        | enforced[^1]    | enforced[^1]    |
 | V(n)     | fail to compile | fail to compile | fail to compile |
 | V(n+1)   | fail to compile | fail to compile | fail to compile |
 
- ```+ as long as kernel supports abi being generated and loaded by V n-1 parser```
+[^1]: as long as kernel supports abi being generated and loaded by V(n-1) parser```
+
+---
 
 ## V(n) apparmor_parser
 
@@ -72,6 +76,8 @@ Where V(n-1) indicates an older feature abi, V(n) a different feature abi with m
 | V(n+1)   | fail to compile | fail to compile | fail to compile |
 
  * kernel features not supported by policy feature abi not enforced 
+
+---
 
  + as long as kernel supports abi being loaded
 
