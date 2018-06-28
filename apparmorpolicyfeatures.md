@@ -1,4 +1,4 @@
-#Introduction
+=Introduction
 
 #AppArmor 2.x
 
