@@ -48,15 +48,20 @@ The remaining userspace tools are not required for the enforcement of policy but
 ??? Ignoring rules
 
 # Version support matrix
+
+The following set of matrixes provide a quick reference for how the policy, parser and kernel interact based on the feature abi used.
+
+Where V(n-1) indicates an older feature abi, V(n) a different feature abi with more features than V(n-1), and V(n+1) support for a newer feature set abi with even more features than V(n).
+
 ## V(n-1) apparmor_parser
 
 | Policy   | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel   |
 |:--------:|:---------------:|:---------------:|:---------------:|
-| V(n-1)  v| enforced        | enforced+       | enforced+       |
+| V(n-1)   | enforced        | enforced+       | enforced+       |
 | V(n)     | fail to compile | fail to compile | fail to compile |
 | V(n+1)   | fail to compile | fail to compile | fail to compile |
 
-+ - as long as kernel supports abi being generated and loaded by V n-1 parser
+ + as long as kernel supports abi being generated and loaded by V n-1 parser
 
 ## V(n) apparmor_parser
 
@@ -66,11 +71,11 @@ The remaining userspace tools are not required for the enforcement of policy but
 | V(n)     | enforced        | enforced        | enforced+       |
 | V(n+1)   | fail to compile | fail to compile | fail to compile |
 
-* - kernel features not supported by policy feature abi not enforced 
+ * kernel features not supported by policy feature abi not enforced 
 
-+ - as long as kernel supports abi being loaded
+ + as long as kernel supports abi being loaded
 
-## V.(n+1)
+## V.(n+1) apparmor_parser
 
 | Policy   | V(n-1) Kernel | V(n) Kernel | V(n+1) Kernel |
 |:--------:|:-------------:|:-----------:|:-------------:|
@@ -78,4 +83,4 @@ The remaining userspace tools are not required for the enforcement of policy but
 | V(n)     | enforced*     | enforced*   | enforced*     |
 | V(n+1)   | enforced*     | enforced*   | enforced      |
 
-* - kernel features not supported by policy feature abi not enforced 
+ * kernel features not supported by policy feature abi not enforced 
