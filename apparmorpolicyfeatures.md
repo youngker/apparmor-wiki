@@ -1,6 +1,6 @@
 # Introduction
 
-AppArmor is a long lived project and the set of features that are supported have evolved over time, and continues to evolve. Not only does the supported feature set change but there are independent parts: kernel, userspace tools, policy and trusted helpers each co-evolving but with independent changes. Not only do the components evolve partially independently but components from different versions may be used together so its important to understand their interactions.
+AppArmor is a long lived project and the set of features that are supported have evolved over time, and continues to evolve. Not only does the supported feature set change but there are independent parts: kernel, userspace tools, policy and trusted helpers each co-evolving but with independent changes. In addition to the components evolve partially independently but components from different versions may be used together so its important to understand their interactions and the limitations that this imparts when dealing with apparmor policy enforcement.
 
 ## Kernel
 - The kernel presents a set of features that it can enforce to userspace. This is known as the kernel feature set or abi.
@@ -12,14 +12,15 @@ AppArmor is a long lived project and the set of features that are supported have
 
 ### Policy compiler (aka apparmor_parser)
 The policy compiler is the only part of the userspace tool chain required enable apparmor it converts text policy into the binary policy format and can load the binary policy into the kernel for enforcement.
-- compiles and builds policy that is loaded into the kernel
-- glue between policy and kernel/trusted helpers
+
+It is the glue between the policy and the kernel and trusted helpers. For a policy rule to be compiled it must be understood by the parser. The parser however can down grade or ignore policy rules that a kernel does not understand allowing for newer policy to work on older kernel versions.
 
 ### Init scripts/systemd
 
 ### Libapparmor
 
-###
+### Other userspace tools
+The remaining userspace tools are not required for the enforcement of policy but can make an admin or policy authors life much easier. If one of the tools is used with a policy feature it must understand the feature enough to handle parsing the text, so generally newer tools will work with older policy but not visa versa.
 
 ## Policy
 - limits applications
@@ -37,3 +38,11 @@ The policy compiler is the only part of the userspace tool chain required enable
 - policy features
 - feature pinning
 - lesser of kernel features or base 3.0 feature set
+
+
+
+??? failing policy load
+
+??? rule downgrades
+
+??? Ignoring rules
