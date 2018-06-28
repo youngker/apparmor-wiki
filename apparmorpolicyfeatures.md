@@ -61,7 +61,7 @@ Where V(n-1) indicates an older feature abi, V(n) a different feature abi with m
 | V(n)     | fail to compile | fail to compile | fail to compile |
 | V(n+1)   | fail to compile | fail to compile | fail to compile |
 
- + as long as kernel supports abi being generated and loaded by V n-1 parser
+ ```+ as long as kernel supports abi being generated and loaded by V n-1 parser```
 
 ## V(n) apparmor_parser
 
