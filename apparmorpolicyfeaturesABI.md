@@ -30,16 +30,18 @@ The remaining userspace tools are not required for the enforcement of policy but
 ## Trusted helpers
 - similar to kernel for policy, but rely on kernel and userspace support for to help with their policy enforcement.
 
-#AppArmor 2.x
+# AppArmor 2.x
 - feature pinning
 - use kernel features
 
-#AppArmor 3.x
+# AppArmor 3.x
 - policy features
 - feature pinning
 - lesser of kernel features or base 3.0 feature set
 
-
+# Future AppArmor
+- allow defining new features in policy
+- as long as new feature only uses the exported compiler abi, new features can be supported on older compilers.
 
 ??? failing policy load
 
