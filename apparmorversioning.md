@@ -4,4 +4,4 @@ parser, kernel, policy, library, tools,
 
 applications
 
-[policy feature abi](AppArmorpolicyfeatureabi)
+[policy feature abi](AppArmorpolicyfeaturesabi)
