@@ -48,11 +48,12 @@ The remaining userspace tools are not required for the enforcement of policy but
 ??? Ignoring rules
 
 
-| Policy |Old Kernel|Same Kernel|Newer Kernel|
-|:------:|:--------:|:---------:|:----------:|
-| Old - subset of supported features |          |           |            |
-| concurrent |          |           |            |
-| Newer - feature not supported by parser | | | |
+V. n-1 apparmor_parser
+| Policy | V. n-1 Kernel| V.n Kernel| V. n+1 Kernel|
+|:-------:|:-----------:|:---------:|:------------:|
+| V. n-1  | enforced    | enforced+ | enforced+    |
+| V. n    |          |           |            |
+| V. n+1  | | | |
 
 
 old parser
