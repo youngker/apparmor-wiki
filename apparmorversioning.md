@@ -1,6 +1,6 @@
 # Introduction
 
-When working with AppArmor their are many independent or semi-independent components and it can be important to understand how they interact. Generally version numbering is used to provide a coarse indication of a components progression but does not usually provide???
+When working with AppArmor their are many independent or semi-independent components whos version numbers will not match. Generally version numbering is used to provide a coarse indication of a components progression but does not usually provide???
 
 Lots of different versioning to deal with
 
