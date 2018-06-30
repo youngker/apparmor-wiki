@@ -1,10 +1,25 @@
 # Introduction
 
-When working with AppArmor their are many independent or semi-independent components whos version numbers will not match. Generally version numbering is used to provide a coarse indication of a components progression but does not usually provide???
+When working with AppArmor their are many independent or semi-independent components whos version numbers will not match. Generally version numbering is used to provide a coarse indication of a components progression but does not usually provide an indication of compatibility.
 
-Lots of different versioning to deal with
+The main components when dealing with apparmor are the kernel module, user space tools (parser, libapparmor, apparmor utils), policy (abstractions, and applications), and applications (both the application and its dependent libraries).
 
-parser, kernel, policy, library, tools,
+# AppArmor kernel module
+
+The AppArmor kernel module does not have its own version information. It is tied to kernel releases and instead exports a feature abi, and api to userspace.
+
+This largely decouples the kernel version from userspace. A specific kernel version may be patch to include additional features (eg. Ubuntu kernels carried additional patches for several releases), and userspace can take advantage of those features if it knows how to deal with it.
+
+# AppArmor userspace
+
+## apparmor_parser (policy compiler)
+
+## library
+
+## tools and utils
+
+## policy
+
 
 dependencies
 - requires
