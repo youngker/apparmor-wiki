@@ -46,13 +46,14 @@ AppArmor 2.x series used a simple global scheme for managing the policy feature 
 
 Unfortunately not all policy was developed with a given kernel feature abi, resulting in denials and failures when booting into new kernels. Distros could manage this well enough by updating shipped policy during testing of their kernel updates, but for users running custom kernels or policy this could result in unwelcome failures.
 
-In addition the AppArmor 2.x series with the exception of AppArmor 2.13 was limited by use of policy caching which would only allow policy to be compiled for a single kernel at a time.
+In addition the AppArmor 2.x series with the exception of AppArmor 2.13 was limited by use of [policy caching](Apparmorpolicycache) which would only allow policy to be compiled for a single kernel at a time.
 
 # AppArmor 3.x
 - policy features
 - feature pinning
 - lesser of kernel features or base 3.0 feature set
 
+[binary policy](Apparmorbinarypolicy)
 
 packaging and distro recommendations
 - install time build of policy
