@@ -1,7 +1,7 @@
 # Versioning in AppArmor Table of Contents
 - [AppArmor Versioning](Apparmorversioning)
--- [Policy Feature ABI](AppArmorpolicyfeaturesabi)
--- [Policy Versioning](AppArmorpolicyversioning)
+ - [Policy Feature ABI](AppArmorpolicyfeaturesabi)
+ - [Policy Versioning](AppArmorpolicyversioning)
 
 # Introduction
 
