@@ -35,7 +35,7 @@ The discussion of policy versioning has been left to last as it depends on all o
 
 Use of packaging Versioning
 
-Dealing with the 
+Dealing with the [feature abi in policy](AppArmorpolicyfeaturesabi)
 
 [Versioning of Policy](AppArmorpolicyversioning)
 
