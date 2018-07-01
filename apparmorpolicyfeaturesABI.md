@@ -1,3 +1,8 @@
+# Versioning in AppArmor Table of Contents
+- [AppArmor Versioning](Apparmorversioning)
+- [Policy Feature ABI](AppArmorpolicyfeaturesabi)
+- [Policy Versioning](AppArmorpolicyversioning)
+
 # Introduction
 
 AppArmor is a long lived project and the set of features that are supported have evolved over time, and continues to evolve. Not only does the supported feature set change but there are independent parts: kernel, userspace tools, policy and trusted helpers each co-evolving but with independent changes. In addition to the components evolve partially independently but components from different versions may be used together so its important to understand their interactions and the limitations that this imparts when dealing with apparmor policy enforcement.
