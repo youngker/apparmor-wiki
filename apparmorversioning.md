@@ -1,3 +1,9 @@
+# TOC
+[AppArmor Versioning](Apparmorversioning)
+[Policy Feature ABI](AppArmorpolicyfeaturesabi)
+[Policy Versioning](AppArmorpolicyversioning)
+
+
 # Introduction
 
 When working with AppArmor their are many independent or semi-independent components whos version numbers will not match. Generally version numbering is used to provide a coarse indication of a components progression but does not usually provide an indication of compatibility.
@@ -30,7 +36,7 @@ The discussion of policy versioning has been left to last as it depends on all o
 
 Use of packaging Versioning
 
-Dealing with the [feature abi in policy](AppArmorpolicyfeaturesabi)
+Dealing with the 
 
 [Versioning of Policy](AppArmorpolicyversioning)
 
