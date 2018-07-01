@@ -39,13 +39,24 @@ The remaining userspace tools are not required for the enforcement of policy but
 - similar to kernel for policy, but rely on kernel and userspace support for to help with their policy enforcement.
 
 # AppArmor 2.x
-- feature pinning
-- use kernel features
+
+AppArmor 2.x series used a simple global scheme for managing the policy feature abi. All policy regardless of where/when it was authored was compiled with a globally set feature abi. The abi was either set by:
+- pinning: where the ```features-file``` option in the parser.conf file
+- running kernel feature abi: if feature pinning was not specified the kernels feature abi was used.
+
+Unfortunately not all policy was developed with a given kernel feature abi, resulting in denials and failures when booting into new kernels. Distros could manage this well enough by updating shipped policy during testing of their kernel updates, but for users running custom kernels or policy this could result in unwelcome failures.
+
+In addition the AppArmor 2.x series with the exception of AppArmor 2.13 was limited by use of policy caching which would only allow policy to be compiled for a single kernel at a time.
 
 # AppArmor 3.x
 - policy features
 - feature pinning
 - lesser of kernel features or base 3.0 feature set
+
+
+packaging and distro recommendations
+- install time build of policy
+- preshipping policy
 
 # Dealing with different feature abis in policy
 
