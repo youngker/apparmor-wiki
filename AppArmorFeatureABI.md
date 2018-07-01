@@ -2,7 +2,7 @@
 
 The AppArmor kernel module exports the set of features it exports to userspace through the features directory hierarchy in apparmorfs (part of security fs). This information can then be used to determine what features are available in the kernel, and how policy should be compiled.
 
-A flattened version of the feature abi directory is used by policy and the apparmor_parser policy compiler. This is used in text policy to specify the [feature abi](Apparmor???) the policy was developed under and to store which kernel feature abi binary policy was compiled for.
+A flattened version of the feature abi directory is used by policy and the apparmor_parser policy compiler. This is used in text policy to specify the [policy feature abi](AppArmorpolicyfeaturesabi) the policy was developed under and to store which kernel feature abi binary policy was compiled for.
 
 # Kernel
 
