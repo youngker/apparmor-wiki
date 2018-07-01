@@ -1,6 +1,6 @@
 TOC
-[policy caching](Apparmorpolicycache)
-[binary policy](Apparmorbinarypolicy)
+- [policy caching](Apparmorpolicycache)
+- [binary policy](Apparmorbinarypolicy)
 
 policy cache
 
