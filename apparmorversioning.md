@@ -28,6 +28,13 @@ AppArmor policy is not tied to an application version, however changes to an app
 
 The discussion of policy versioning has been left to last as it depends on all of the above factors.
 
+Use of packaging Versioning
+
+Dealing with the [feature abi in policy](AppArmorpolicyfeaturesabi)
+
+[Versioning of Policy](AppArmorpolicyversioning)
+
+Not all policy shipped in packaging
 
 dependencies
 - requires
@@ -43,4 +50,4 @@ system package separate from application
 profile repository
 
 
-[policy feature abi](AppArmorpolicyfeaturesabi)
+
