@@ -47,6 +47,18 @@ The remaining userspace tools are not required for the enforcement of policy but
 - feature pinning
 - lesser of kernel features or base 3.0 feature set
 
+# Dealing with different feature abis in policy
+
+conditionals and supports
+supports
+- kernel_supports
+- parser_supports
+- policy_supports
+- supports
+
+
+downgrading and ignoring unsupported rules
+
 # Future AppArmor
 - allow defining new features in policy
 - as long as new feature only uses the exported compiler abi, new features can be supported on older compilers.
