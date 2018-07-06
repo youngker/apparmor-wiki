@@ -2,6 +2,11 @@ TOC
 - [policy caching](Apparmorpolicycache)
 - [binary policy](Apparmorbinarypolicy)
 
+# Introduction
+
+In AppArmor 2.13, AppArmor moved from a [policy caching](Apparmorpolicycache) scheme to a binary policy scheme. The binary policy scheme is still a form of caching of text policy but the layout and semantics have changed allowing for improvements that where not possible under the old caching scheme.
+
+
 2.13 & AppArmor 3.x
 
 binary policy
