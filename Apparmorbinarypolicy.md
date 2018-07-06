@@ -13,6 +13,8 @@ binary policy
 
 # Layout of binary policy
 
+Binary policy is laid out as a forest of directories under a primary directory tree at ```$(location)```. 
+
 ![binarypolicy](/uploads/983cea25b0ebd22dc2eed9523096dbf4/binarypolicy.png)
 
 binary policy layout
