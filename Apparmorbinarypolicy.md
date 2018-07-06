@@ -13,9 +13,14 @@ binary policy
 
 # Layout of binary policy
 
-Binary policy is laid out as a forest of directories under a primary directory tree at ```$(location)```. 
+Binary policy is laid out as a forest of directories under a primary directory tree at ```$(location)```. Under $(location) is set of directories with their names based off of a hash of the kernel feature abi set the policy was compiled for followed by a collision number.
+
+```$(location)/hash.collison_number```
+
+For example
 
 ![binarypolicy](/uploads/983cea25b0ebd22dc2eed9523096dbf4/binarypolicy.png)
+
 
 binary policy layout
 
