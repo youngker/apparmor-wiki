@@ -2,6 +2,8 @@ TOC
 - [policy caching](Apparmorpolicycache)
 - [binary policy](Apparmorbinarypolicy)
 
+![policy caching](img/policy_cache.svg)
+
 policy cache
 
 default location
