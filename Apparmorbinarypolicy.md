@@ -8,18 +8,21 @@ In AppArmor 2.13, AppArmor moved from a [policy caching](Apparmorpolicycache) sc
 
 # Layout of binary policy
 
-Binary policy is laid out as a forest of directories under a primary directory tree at ```$(location)```. Under $(location) is set of directories with their names based off of a hash of the kernel feature abi set the policy was compiled for followed by a collision number.
+Binary policy is laid out as a forest of directories under a primary directory tree at ```$(location)```. Under $(location) directory is set of directories with their names based off of a hash of the kernel feature abi set the policy was compiled for followed by a collision number.
 
-```$(location)/hash.collison_number```
+```$(location)/kernel_feature_hash.collison_number```
 
 For example
 
 ![binarypolicy](/uploads/983cea25b0ebd22dc2eed9523096dbf4/binarypolicy.png)
 
-In the above example ```7f01cf2e``` is the hash of the kernel features abi, and ```.0``` is indicates that it is the first cache directory with the feature hash of ```7f01cf2e```. The ```7f01cf2e.1``` is a directory with the same hash as ```7f01cf2e.0``` but a different kernel feature abi set.
+In the above example ```7f01cf2e``` is the hash of a kernel features abi, and the ```.0``` collision number indicates that it is the first cache directory with the feature hash of ```7f01cf2e```. The ```7f01cf2e.1``` directory, is a directory with the same hash as ```7f01cf2e.0``` but a different kernel feature abi set, each directory contains the full feature set abi file to resolve any hash collisions.
 
-With in each binary policy directory is laid out the same as the [policy cache](Apparmorpolicycache) directory with ```.features``` file for the kernel feature set the binary policy was compile for and a file per text policy file that was compiled.
+Within each binary policy directory is laid out the same as the [policy cache](Apparmorpolicycache) directory with ```.features``` file for the kernel feature set the binary policy was compile for, and a file per for each compiled text policy file. In the above example ```7f01cf2e.0/bin.ping``` is the compiled binary policy file for the ```$(policy)/bing.ping``` text policy file compiled for a kernel who's feature abi hashes to ```7f01cf2e```. While ```a035ea11.0/bin.ping``` is a binary cache file for the same text policy file, $(policy)/bin/ping, but for a different kernel.
 
+Note that binary policy cache files within the directory correspond to a given text policy file name.
+
+Symlink files within the cache are used to map cache files that 
 
 # Binary Policy Validity check
 
@@ -48,6 +51,9 @@ A second phase of boot can be introduced to do validity checks and recompile pol
 
 
 - ro images
+
+
+# Dealing with multiple policy locations and caches
 
 
 # Managemnt
