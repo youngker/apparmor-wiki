@@ -97,7 +97,7 @@ A second phase of boot can be introduced to do validity checks and recompile pol
 - default values
 - --write-cache to update
 
-## What the init scripts handle
+## What the init system needs to do
 
 ## What packaging is supposed to handle
 
