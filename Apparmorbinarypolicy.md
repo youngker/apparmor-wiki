@@ -1,4 +1,5 @@
 TOC
+- [policy management](Apparmorpolicymanagement)
 - [policy caching](Apparmorpolicycache)
 - [binary policy](Apparmorbinarypolicy)
 
