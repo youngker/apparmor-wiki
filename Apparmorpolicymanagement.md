@@ -9,7 +9,22 @@
 
 # Init systems
 
-# Multiple policy locations
+## Policy Location
+
+The location of policy can be set by dropping a policy config file in ```$(config_location)/policy_conf.d/```. Where $(config_location) is either the default location ```/etc/apparmor/``` or set as a build option ???.
+
+## Multiple policy locations
+
+Policy can exist in multiple locations, for each location (even if the policy is not managed by AppArmor) a config file should be dropped in ```$(config_location)/policy_conf.d/```. This enables the AppArmor init system and tools find and function with the different policy locations. Even for policy not managed by AppArmor a policy config file should be added so the AppArmor tools can know not to touch the alternately managed policy.
+
+## Policy config file
+- policy location
+- cache location
+- managed
+- when should it be written
+- watched for auto update
+- additional parser flags
+
 
 # Policy namespaces
 
