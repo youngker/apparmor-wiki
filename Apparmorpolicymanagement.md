@@ -20,6 +20,7 @@ Policy can exist in multiple locations, for each location (even if the policy is
 ## Policy config file
 - policy location
 - cache location
+- namespace
 - managed
 - when should it be written
 - watched for auto update
@@ -27,6 +28,10 @@ Policy can exist in multiple locations, for each location (even if the policy is
 
 
 # Policy namespaces
+
+Mixed policy
+
+setting up a policy location
 
 # Responding to policy changes automatically
 
