@@ -24,6 +24,19 @@ With these changes policy can be shipped using traditional packaging or read-onl
 
 ### Read-only images without a kernel
 
+### Multiple policy directories
+
+Some distributions may [split policy into different directories](Apparmorpolicymanagement). In this case different binary policy directory root must be defined for each policy location if there is any chance any of the text policy files in the different locations may have the same name.
+
+If the distribution still wants to use the default recommended binary policy locations then an extra directory level can be added.
+
+Eg.
+
+  $(location)/system/...
+  $(location)/snappy/...
+
+
+
 Generally it is recommended that policy be compiled at installation time,. For traditional packaging this means building on the host, but for read-only images that include a kernel this means building policy as packages are being installed and the image is being build.
 
 
