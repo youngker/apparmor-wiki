@@ -17,7 +17,24 @@
 
 aa-policy daemon
 
+# Recommended Policy Locations
+
+- Binary policy cache (locally updatable)
+  /var/cache/apparmor/
+
+- Immutable binary policy
+
+- AppArmor 2.x default locations
+    /etc/apparmor.d/
+    /etc/apparmor.d/cache.d/
+
 # User defined policy
+
+- Requires
+-- AppArmor 3.x
+-- kernel with [scope & view support](AppArmorpolicyscope)
+- Recommended
+-- pam_apparmor2???
 
 User defined policy requires that an apparmor namespace be setup for the user by the system. This can be done through the pam_apparmor plug-in. In addition the pam_apparmor plug-in can load the initial user defined policy if it is stored in the configured location.
 
