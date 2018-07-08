@@ -99,6 +99,25 @@ A second phase of boot can be introduced to do validity checks and recompile pol
 
 ## What the init system needs to do
 
+The init system is responsible for loading and managing base system policy.
+- load policy
+- replace policy
+- remove policy
+
+Single Phase
+- the init system only ever loads or reloads binary policy
+
+Two Phase
+- early load
+- late reload/recompile
+
+The init system does an early load of binary policy using aa-load or directly calling libapparmor, and then does a later reload which checks text policy and recompiles policy if necessary via calling the apparmor_parser.
+
+Policy can 
+-- apparmor_parser (required for recompiles)
+-- aa_load
+-- directly calling libapparmor
+
 ## What packaging is supposed to handle
 
 - refcounting cache dirs, shared between kernels
