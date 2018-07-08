@@ -25,6 +25,22 @@ With these changes policy can be shipped using traditional packaging or read-onl
 
 ### Read-only images without a kernel
 
+### Kernels with the same feature abi
+
+It is possible that different kernels may export the same apparmor feature abi. This is not a problem from AppArmor's perspective as the binary policy cache will work the same for these kernels. This can however present a problem for package management systems.
+
+To deal with this package management systems are allowed to use unreserved dot files to keep track of which kernels the binary policy is being shared by. The suggested scheme is to use symlinks back to the respective kernel directories.
+
+??? or should it go to the modules dir
+
+    .kernel_4.14.0-24  -> /boot/vmlinuz-4.14.0-24
+    .kernel_4.15.0-12  -> /boot/vmlinuz-4.15.0-12
+
+In systems where cleaning up the binary policy cache is not required (eg. read-only images) this additional tracking step is not needed.
+
+
+
+
 ### Multiple policy directories
 
 Some distributions may [split policy into different directories](Apparmorpolicymanagement). In this case different binary policy directory root must be defined for each policy location if there is any chance any of the text policy files in the different locations may have the same name.
