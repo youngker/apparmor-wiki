@@ -23,14 +23,25 @@ The policy compiler is the only part of the userspace tool chain required enable
 
 It is the glue between the policy and the kernel and trusted helpers. For a policy rule to be compiled it must be understood by the parser. The parser however can down grade or ignore policy rules that a kernel does not understand allowing for newer policy to work on older kernel versions.
 
+- supports older feature abis and kernels
+- will fail on policy it doesn't understand.
+-- policy using new features needs newer versions of the apparmor_parser
+
 ### Init scripts/systemd
 
+TODO
+
 ### Libapparmor
+
+TODO
 
 ### Other userspace tools
 The remaining userspace tools are not required for the enforcement of policy but can make an admin or policy authors life much easier. If one of the tools is used with a policy feature it must understand the feature enough to handle parsing the text, so generally newer tools will work with older policy but not visa versa.
 
 ## Policy
+
+TODO see policy links
+
 - limits applications
 - often dependent on application versions, OS release versions
 - dependent on supported features of userspace and kernel
@@ -38,89 +49,9 @@ The remaining userspace tools are not required for the enforcement of policy but
 ## Trusted helpers
 - similar to kernel for policy, but rely on kernel and userspace support for to help with their policy enforcement.
 
-# AppArmor 2.x
+# Packaging
 
-AppArmor 2.x series used a simple global scheme for managing the policy feature abi. All policy regardless of where/when it was authored was compiled with a globally set feature abi. The abi was either set by:
-- pinning: where the ```features-file``` option in the parser.conf file
-- running kernel feature abi: if feature pinning was not specified the kernels feature abi was used.
+TODO
 
-Unfortunately not all policy was developed with a given kernel feature abi, resulting in denials and failures when booting into new kernels. Distros could manage this well enough by updating shipped policy during testing of their kernel updates, but for users running custom kernels or policy this could result in unwelcome failures.
-
-In addition the AppArmor 2.x series with the exception of AppArmor 2.13 was limited by use of [policy caching](Apparmorpolicycache) which would only allow policy to be compiled for a single kernel at a time.
-
-# AppArmor 3.x
-- policy features
-- feature pinning
-- lesser of kernel features or base 3.0 feature set
-
-[binary policy](Apparmorbinarypolicy)
-
-packaging and distro recommendations
-- install time build of policy
-- preshipping policy
-
-# Dealing with different feature abis in policy
-
-conditionals and supports
-supports
-- kernel_supports
-- parser_supports
-- policy_supports
-- supports
-
-
-downgrading and ignoring unsupported rules
-
-# Future AppArmor
-- allow defining new features in policy
-- as long as new feature only uses the exported compiler abi, new features can be supported on older compilers.
-
-??? failing policy load
-
-??? rule downgrades
-
-??? Ignoring rules
-
-# Version support matrix
-
-The following set of matrixes provide a quick reference for how the policy, parser and kernel interact based on the feature abi used.
-
-Where V(n-1) indicates an older feature abi, V(n) a different feature abi with more features than V(n-1), and V(n+1) support for a newer feature set abi with even more features than V(n).
-
----
-
-## V(n-1) apparmor_parser
-
-| Policy   | V(n-1) Kernel   | V(n) Kernel       | V(n+1) Kernel     |
-|:--------:|:---------------:|:-----------------:|:-----------------:|
-| V(n-1)   | enforced        | enforced[^1] [^3] | enforced[^1] [^3] |
-| V(n)     | fail to compile | fail to compile   | fail to compile   |
-| V(n+1)   | fail to compile | fail to compile   | fail to compile   |
-
----
-
-## V(n) apparmor_parser
-
-| Policy   | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel     |
-|:--------:|:---------------:|:---------------:|:-----------------:|
-| V(n-1)   | enforced        | enforced[^3]    | enforced[^1] [^3] |
-| V(n)     | enforced[^2]    | enforced        | enforced[^1] [^3] |
-| V(n+1)   | fail to compile | fail to compile | fail to compile   |
-
----
-
-## V.(n+1) apparmor_parser
-
-| Policy   | V(n-1) Kernel | V(n) Kernel | V(n+1) Kernel |
-|:--------:|:------------:|:------------:|:-------------:|
-| V(n-1)   | enforced     | enforced[^3] | enforced[^3]  |
-| V(n)     | enforced[^2] | enforced     | enforced[^3]  |
-| V(n+1)   | enforced[^2] | enforced[^2] | enforced      |
-
-[^1]: as long as kernel supports abi being generated and loaded by the parser
-
-[^2]: policy features not supported by kernel down graded or not enforced 
-
-[^3]: kernel features not supported by policy feature abi not enforced
 
 
