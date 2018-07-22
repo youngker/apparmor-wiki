@@ -23,8 +23,8 @@ Where V(n-1) indicates an older feature abi, V(n) a different feature abi with m
 
 ## V(n-1) apparmor_parser
 
-|          | V(n-1) Kernel   | V(n) Kernel       | V(n+1) Kernel     |
-|:--------:|:---------------:|:-----------------:|:-----------------:|
+|               | V(n-1) Kernel   | V(n) Kernel       | V(n+1) Kernel     |
+|:-------------:|:---------------:|:-----------------:|:-----------------:|
 | V(n-1) Policy | enforced        | enforced[^1] [^3] | enforced[^1] [^3] |
 | V(n) Policy   | fail to compile | fail to compile   | fail to compile   |
 | V(n+1) Policy | fail to compile | fail to compile   | fail to compile   |
@@ -33,21 +33,21 @@ Where V(n-1) indicates an older feature abi, V(n) a different feature abi with m
 
 ## V(n) apparmor_parser
 
-| Policy   | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel     |
-|:--------:|:---------------:|:---------------:|:-----------------:|
-| V(n-1)   | enforced        | enforced[^3]    | enforced[^1] [^3] |
-| V(n)     | enforced[^2]    | enforced        | enforced[^1] [^3] |
-| V(n+1)   | fail to compile | fail to compile | fail to compile   |
+|               | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel     |
+|:-------------:|:---------------:|:---------------:|:-----------------:|
+| V(n-1) Policy | enforced        | enforced[^3]    | enforced[^1] [^3] |
+| V(n) Policy   | enforced[^2]    | enforced        | enforced[^1] [^3] |
+| V(n+1) Policy | fail to compile | fail to compile | fail to compile   |
 
 ---
 
 ## V.(n+1) apparmor_parser
 
-| Policy   | V(n-1) Kernel | V(n) Kernel | V(n+1) Kernel |
-|:--------:|:------------:|:------------:|:-------------:|
-| V(n-1)   | enforced     | enforced[^3] | enforced[^3]  |
-| V(n)     | enforced[^2] | enforced     | enforced[^3]  |
-| V(n+1)   | enforced[^2] | enforced[^2] | enforced      |
+|               | V(n-1) Kernel | V(n) Kernel | V(n+1) Kernel |
+|:-------------:|:------------:|:------------:|:-------------:|
+| V(n-1) Policy | enforced     | enforced[^3] | enforced[^3]  |
+| V(n) Policy   | enforced[^2] | enforced     | enforced[^3]  |
+| V(n+1) Policy | enforced[^2] | enforced[^2] | enforced      |
 
 [^1]: as long as kernel supports abi being generated and loaded by the parser
 
