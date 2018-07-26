@@ -13,7 +13,7 @@ In AppArmor 2.13, AppArmor moved from a [policy caching](Apparmorpolicycache) sc
 - binary policy exists for each kernel that is booted so there is no clearing of the "cache" when switching kernels
 - binary policy can be pre-shipped as immutable policy. With or without the corresponding text policy
 - binary policy can be a cache of locally modifiable text policy
-- binary policy allows for local updates again read-only images via an overlay system
+- binary policy allows for local updates against read-only images via an overlay system
 
 With these changes policy can be shipped using traditional packaging or read-only images, and the init system can load policy from early boot with out having to do text policy compiles or consistency checks. 
 
