@@ -63,7 +63,7 @@ Generally it is recommended that policy be compiled at installation time,. For t
 
 Binary policy is laid out as a forest of directories under a primary directory tree at ```$(location)```. Under $(location) directory is set of directories with their names based off of a hash of the kernel feature abi set the policy was compiled for followed by a collision number.
 
-```$(location)/kernel_feature_hash.collison_number```
+   $(location)/kernel_feature_hash.collison_number
 
 For example
 
