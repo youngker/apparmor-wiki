@@ -4,6 +4,7 @@
 - [policy management](Apparmorpolicymanagement)
 - [policy caching](Apparmorpolicycache)
 - [binary policy](Apparmorbinarypolicy)
+- [policy in the initrd/initramfs](Apparmorinitrd)
 
 # Introduction
 
