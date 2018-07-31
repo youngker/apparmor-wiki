@@ -12,9 +12,9 @@ to system services and daemon's (dbus, gsettings, X, ...) allowing
 its policy enforcement integration beyond what isolation allows.
 
 Specifically AppArmor is a variant of [Domain Type Enforcement
-(DTE)](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.1501)
-which is itself a variant of [Type Enforcement
-(TE)](https://en.wikipedia.org/wiki/Type_enforcement). While AppArmor
+(DTE)](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.1501),
+ which a variant of [Type Enforcement
+(TE)](https://en.wikipedia.org/wiki/Type_enforcement), crossed with a [capability system](???). While AppArmor
 is capable of providing a total system policy its policy is designed
 and focused around an application (domain) centric model allowing for
 easy targeting of specific applications or users. Because AppArmor
