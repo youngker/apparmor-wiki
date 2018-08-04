@@ -1,7 +1,7 @@
 Chronology of important events affecting AppArmor development:
 
 -   AppArmor's predecessor SubDomain began life as a Grad project
--   1998/1999? WireX founded by Crispin Cowan and ???? to commercialize SubDomain, and develop other security extensions to Linux.
+-   1998/1999? WireX founded by Crispin Cowan and ???? to commercialize [SubDomain](https://www.usenix.org/legacy/publications/library/proceedings/lisa2000/full_papers/cowan/cowan_html/index.html), and develop other security extensions to Linux.
     -   WireX produced Immunix a secure Linux distribution based on Red Hat Linux using StackGuard, FormatGuard, and SubDomain
     -   WireX involved in creation of LSM
 -   In early 2004 WireX rebranded to Immunix and then dropped its Linux distribution, refocusing instead on providing SubDomain for SuSE linux.
