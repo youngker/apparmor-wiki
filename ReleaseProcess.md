@@ -9,9 +9,45 @@ Making a Kernel Pull request
 ----------------------------
 
 1. Preparatory Steps
-1.1 Ensure patches have been staged in linux-next for at least 2 weeks before the request pull is sent
-1.1 Built and test the set of patches, preferably with different configs and architectures
-1.2 Dump the candidate patches and run checkpatch on them, make adjustments as needed
+   1. Ensure patches have been staged in linux-next for at least 2 weeks before the request pull is sent
+   1. Built and test the set of patches, preferably with different configs and architectures
+   2. Dump the candidate patches and run checkpatch on them, make adjustments as needed
+   3. Ensure patches have been staged in linux-next for at least 2 weeks before the request pull is sent
+2. Sending a pull request
+   $ git checkout work
+   $ git tag -s apparmor-pr-year-month-day work
+
+       eg. $ git tag -s apparmor-pr-2018-08-23
+
+     Summaries changes in the pull request, and exit editor
+       + Features
+         - add support for mapping secids and using secctxes
+         - add the ability to get a task's secid
+         - add support for audit rule filtering
+
+       + Cleanups
+         - multiple typo fixes
+         - Convert to use match_string() helper
+         - update git and wiki locations in AppArmor docs
+         - improve get_buffers macro by using get_cpu_ptr
+         - Use an IDR to allocate apparmor secids
+
+       + Bug fixes
+         - fix '*seclen' is never less than zero
+         - fix mediation of prlimit
+         - fix memory leak when deduping profile load
+         - fix ptrace read check
+         - fix memory leak of rule on error exit path
+
+   Push the tag to the upstream repository. There is no need to push the branch
+
+   $ git push  aa-upstream +apparmor-pr-2018-08-23
+
+   Prepare the request-pull
+
+   $ git request-pull pull aa-upstream-pull apparmor-pr-2018-08-23 >msg.txt
+
+
 
 Making a Userspace Release
 --------------------------
