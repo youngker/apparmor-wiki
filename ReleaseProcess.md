@@ -5,6 +5,14 @@ This page is an attempt to capture the AppArmor release process.
 
 **TODO**: update this for gitlab/git conversion.
 
+Making a Kernel Pull request
+----------------------------
+
+1. Preparatory Steps
+1.1 Ensure patches have been staged in linux-next for at least 2 weeks before the request pull is sent
+1.1 Built and test the set of patches, preferably with different configs and architectures
+1.2 Dump the candidate patches and run checkpatch on them, make adjustments as needed
+
 Making a Userspace Release
 --------------------------
 
