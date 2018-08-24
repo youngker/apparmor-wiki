@@ -47,6 +47,10 @@ Making a Kernel Pull request
 
    $ git request-pull pull aa-upstream-pull apparmor-pr-2018-08-23 >msg.txt
 
+   prepare email to Linus, lkml and lsm including the request the request pull
+
+   send preferable early in the 2 week merge window
+
 
 
 Making a Userspace Release
