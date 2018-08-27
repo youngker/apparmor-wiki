@@ -64,7 +64,7 @@ the unit will fail. The stanza can be proceeded by a **-** to ignore
 failures in setting the profile confinement.
 
 ```
- -AppArmorProfile=bad_profile
+ AppArmorProfile=-bad_profile
 ```
 
 If apparmor is not enabled the AppArmorProfile stanza will be ignored
