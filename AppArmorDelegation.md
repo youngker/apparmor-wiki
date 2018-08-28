@@ -1,8 +1,8 @@
 Required Versions
 =================
 
--   AppArmor kernel module 5 or later
--   AppArmor userspace 5 later
+-   AppArmor kernel module 4 or later
+-   AppArmor userspace 4 later
 
 Related Documentation
 =====================
