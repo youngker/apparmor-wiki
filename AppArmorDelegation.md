@@ -108,12 +108,14 @@ The following table identifies which version of AppArmor different types of dele
 ??? add inheritance to the table ???
 
 Temporary
+
 |              | Policy Directed | Application Directed |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
 | rule based   |        ?        |          ?           |
 
 Permanent
+
 |              | Policy Directed | Application Directed |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
