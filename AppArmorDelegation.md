@@ -109,14 +109,12 @@ The following table identifies which version of AppArmor different types of dele
 
 Temporary
 
-|              | Policy Directed | Application Directed |
+| **Temporary Delegation** | Policy Directed | Application Directed |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
 | rule based   |        ?        |          ?           |
 
-Permanent
-
-|              | Policy Directed | Application Directed |
+| **Permanent Delegation**      | Policy Directed | Application Directed |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
 | rule based   |        ?        |          ?           |
