@@ -7,14 +7,17 @@ Required Versions
 Related Documentation
 =====================
 
+todo
+
+
 Introduction
 ============
 
-AppArmor allows a task to Delegate some of its authority to other
+AppArmor allows a profile or task to delegate some of its authority to other
 applications, allowing them to perform operations or access data that
-they could not normally under their confinement.
+they could not normally do or access under their confinement.
 
-??? [labels](AppArmorLabelsandTypes)
+Delegation of Authority helps with authoring policy that follows with the principle of Least authority.
 
 Authority
 ---------
@@ -32,14 +35,46 @@ to file objects or rules that they would not normally have.
 Identity
 --------
 
-In AppArmor authority and Identity are different. Authority is the
-right/permission to do something while Identity is the who. I real
+In AppArmor authority and identity are different. Authority is the
+right/permission to do something while identity is the who. In real
 world terms this is like saying Bob the police man. Where Bob is who
-and police man is the name of the authority, which is it self a form
+and police man is a name of associated with some authority, which is it self a form
 of identity.
 
-In AppArmor terms Identity is the profile name or label, and delegated
-authority can be associated with the Identity.
+In AppArmor terms identity is the profile name or label, and delegated
+authority can be associated with the identity. The delegated authority
+may or may not have an name (identity) associated with it.
+
+Principle of Least Authority (PoLA)
+-----------------------------------
+
+The principle of least authority (also known as the principle of least privilege) is that a task
+should not have any more privilege/permissions than it needs to do
+its job.
+
+Unfortunately for many applications the data an application may need to access is determined dynamically, resulting in a need for very broad access rights if 
+
+. Which profiles have to be written
+in a very broad fashion giving them more permissions than is required
+most of the time because the application might need access to certain
+resources some times. An example of this is the Firefox web browser
+which may want to save files to a user's home directory. To allow for
+this the profile must grant Firefox permissions to access all of the
+users directory even though it doesn't need access to all the files,
+nor does it even need access to any files in the directory most of
+the time.
+
+Having such broad profiles means policy is broader than it needs
+to be and can allow an attacker access to information that could be
+blocked most of the time.
+
+Ideally an application profile would be written with the minimal set
+of permissions required, eg. no generic access to the users data,
+and selectively extended when needed. Delegation of Authority is one
+of the tools available in AppArmor to craft policy in such a manner,
+where an application is given a base profile and it is given additional
+access when required, either via policy or trusted helpers.
+
 
 How Delegation is Expressed
 ===========================
@@ -273,32 +308,10 @@ in the kernel.
 
 - in view sub policy namespaces - references and restricted policy update
 
-Principle of Least Authority (PoLA)
-===================================
 
-The principle of least authority (or privilege) is that a task
-should not have any more privilege/permissions than it needs to do
-its job. Unfortunately many applications may need very broad access
-to perform their jobs sometimes. Which profiles have to be written
-in a very broad fashion giving them more permissions than is required
-most of the time because the application might need access to certain
-resources some times. An example of this is the Firefox web browser
-which may want to save files to a user's home directory. To allow for
-this the profile must grant Firefox permissions to access all of the
-users directory even though it doesn't need access to all the files,
-nor does it even need access to any files in the directory most of
-the time.
+# Privilege Separation
 
-Having such broad profiles means policy is broader than it needs
-to be and can allow an attacker access to information that could be
-blocked most of the time.
-
-Ideally an application profile would be written with the minimal set
-of permissions required, eg. no generic access to the users data,
-and selectively extended when needed. Delegation of Authority is one
-of the tools available in AppArmor to craft policy in such a manner,
-where an application is given a base profile and it is given additional
-access when required, either via policy or trusted helpers.
+Portals
 
 Trusted helpers and Delegation
 ==============================
