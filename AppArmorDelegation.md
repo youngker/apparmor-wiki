@@ -76,6 +76,34 @@ where an application is given a base profile and it is given additional
 access when required, either via policy or trusted helpers.
 
 
+# Delegation in AppArmor
+
+task and policy based
+
+rule to delegate and control delegation
+
+It is important to understand that delegation is in AppArmor is composed
+of several components. That can be decomposed in different ways.
+
+object based - when an object (file handle, socket, ...) is delegated between tasks.
+rule based - when rules are passed between 
+
+Policy directed (implicit) - the delegation is specified by rules in policy
+Application directed (explicit) - the application takes action to delegate some authority
+
+
+## Availability of Delegation
+
+The following table identifies which version of AppArmor different types of delegation are available in.
+
+??? add inheritance to the table ???
+
+|              | Policy Directed | Application Directed |
+|--------------|-----------------|----------------------|
+| object based |        ?        |          ?           |
+| rule based   |        ?        |          ?           |
+
+
 How Delegation is Expressed
 ===========================
 
