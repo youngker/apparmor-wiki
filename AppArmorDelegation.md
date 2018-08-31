@@ -1,3 +1,5 @@
+# Warning this document and feature are a WIP
+
 Required Versions
 =================
 
@@ -82,8 +84,7 @@ task and policy based
 
 rule to delegate and control delegation
 
-It is important to understand that delegation is in AppArmor is composed
-of several components. That can be decomposed in different ways.
+It is important to understand that delegation is in AppArmor can be viewed in different ways.
 
 object vs. rule
 * object based - when an object (file handle, socket, ...) is delegated between tasks.
@@ -94,8 +95,9 @@ Policy directed vs. Application directed
 * Application directed (explicit) - the application takes action to delegate some authority
 
 Temporary vs. Permanent
-* Temporary - temporary delegation only last the life time the task the delegation was made to. Object based delegation is always temporary, where rule based delegation may be temporary or permanent.
+* Temporary/Dynamic - temporary delegation only last the life time the task the delegation was made to. Object based delegation is always temporary, where rule based delegation may be temporary or permanent.
 * Permanent - permanent delegation is always rule based and is a way of extending a profile permanently. Permanent delegation is the only form of delegation that is not strictly task based.
+
 
 ??? dynamic includes
 
@@ -105,6 +107,13 @@ The following table identifies which version of AppArmor different types of dele
 
 ??? add inheritance to the table ???
 
+Temporary
+|              | Policy Directed | Application Directed |
+|--------------|-----------------|----------------------|
+| object based |        ?        |          ?           |
+| rule based   |        ?        |          ?           |
+
+Permanent
 |              | Policy Directed | Application Directed |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
