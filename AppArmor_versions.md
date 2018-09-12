@@ -54,6 +54,15 @@ Released Versions of AppArmor Userspace Utils
 -   [Release Notes](Release_Notes_3.0)
 -   Development target: improved userspace libraries, new policy models leveraging stacking and namespaces, new upstream kernel module
 
+[AppArmor 2.13.1](Release_Notes_2.13.1)
+---------------------------------------------
+
+-   Release Date: 2018-09-12
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.13.1)
+-   Development target: Bug fixes and policy improvements for AppArmor 2.13
+
 [AppArmor 2.13](Release_Notes_2.13)
 ---------------------------------------------
 
@@ -63,14 +72,32 @@ Released Versions of AppArmor Userspace Utils
 -   [Release Notes](Release_Notes_2.13)
 -   Development target: per kernel caches, and overlay directories for caches
 
+[AppArmor 2.12](Release_Notes_2.12.1)
+---------------------------------------------
+
+-   Release Date: 2018-09-12
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.12.1)
+-   Development target: Bug fixes and policy improvements for AppArmor 2.12
+
 [AppArmor 2.12](Release_Notes_2.12)
 ---------------------------------------------
 
--   Release Date: 2017-??-??
+-   Release Date: 2017-12-25
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.12)
 -   Development target: Bug fixes, policy improvements, new feature support
+
+[AppArmor 2.11.2](Release_Notes_2.11.2)
+-------------------------------------------------
+
+-   Release Date: 2018-09-12
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.11.2)
+-   Development target: Bug fixes and policy improvements for AppArmor 2.11.1
 
 [AppArmor 2.11.1](Release_Notes_2.11.1)
 -------------------------------------------------
@@ -89,6 +116,15 @@ Released Versions of AppArmor Userspace Utils
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.11)
 -   Development target: support basic policy stacking, and lxc when combined with development kernel
+
+[AppArmor 2.10.4](Release_Notes_2.10.4)
+-------------------------------------------------
+
+-   Release Date: 2018-09-12
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.10.4)
+-   Development target: bug fix release for 2.10.3
 
 [AppArmor 2.10.3](Release_Notes_2.10.3)
 -------------------------------------------------
