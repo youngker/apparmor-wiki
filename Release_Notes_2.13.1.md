@@ -26,9 +26,6 @@ checked for elf binary executables. Policy and tests within apparmor
     
 
 
-Detailed changelog
-==================
-
 Build Infrastructure
 --------------------
 -   fix FTBFS w/older glibc
