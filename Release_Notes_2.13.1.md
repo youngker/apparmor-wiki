@@ -31,108 +31,78 @@ Detailed changelog
 
 Build Infrastructure
 --------------------
--   Fix FTBFS w/older glibc
+-   fix FTBFS w/older glibc
+-   fix install loction of aa-teardown
+-   coverity: capture separate log files for each coverity invocation
 
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 -   allow specifying the parser config file
 -   fix cache write message when stdin is used
-
+-   provide typedefs for comparison_fn_t and __free_fn_t to fix build issues on musl based systems
 
 
 Init
 ----
 
-???
+-   fix permissions of apparmor.systemd helper script
+
 
 Library
 -------
-
--   add support for multiple policy cache directories
--   add support for overlay cache locations
--   expand ignored file list
-    -   add .pacsave
-    -   add .pacnew
-    -   add .dpkg
-    -   add .dpkg-remove
--   expand skippable dir list
-    -   add .git
-
-pam_apparmor
-------------
--   install pam_apparmor.so with write permission for its owner.
+-   do not honor $LIBAPPARMOR_DEBUG when `secure_getenv` is undefined
+-   make `aa_policy_cache_add_ro_dir` function visible to fix dynamic linking of parser
+-   not purge PMurHash.h on maintainerclean
+-   add cache.d to skipable dir list
+-   fix failure to create missing cache dir
+-   fix build failure when enable-debug-output=yes
+-   replace `scandirat` with open-coded variant so that apparmor can be built on musl libc
 
 
 Utils
 -----
+-  genprof/logprof
+   - error out on nested child profiles which are not currently supported
+   - fix writing alias rules
+   - fix writing "link subset" rules
+   - fix overwriting of child profile flags if they differ from the main profile
+   - allow for named profiles without and attachment specification
 
--   genprof/logprof
-    -   Set flags for profiles represented by a glob
-    -   properly identify empty ouid/fsuid fields in logs
-    -   simplify write_include() and drop write_single()
-    -   change 'profile_changes' and 'serialize_opts' to dict()
-    -   mark profiles with multiple rules in one line as known-failing
--   aa-status: split profile from exec name
--   aa-nofify
-    -   add ability to customize notification message.
-    -   set DBUS_SESSION_BUS_ADDRESS, needed by notify-send
-    -   comment out use_group to remove group restrictions
+-   aa-notify
+    - make message about notify-send package cross-distro compatible
+
+-   sandbox.py
+    - remove unused exception binding
 
 
 Policy
 ------
 
 -   abstractions
-    -   base: allow ld.so.conf and friends.
-    -   gnupg: allow pubring.kbx
-    -   ubuntu-browsers: fix for 64bit openSUSE
-    - add dri-enumerate abstraction
-    - add new dri-common abstraction to contain basic DRI-specific rules.
-    - move DRI-specific rules into it's own abstraction
-    - nvidia
-        -   allow reading memory block size
-        - allow creating NVIDIA-specific user directories
 
--   mlmmj-send: allow reading digesters.d/*
--   mlmmj-sub: fix moderated subscription
--   dovecot
-    -   config: allow dac_read_search and reading ssl-parameters.dat
-    -   auth: allow writing /run/dovecot/old-stats-user
-    -   add stats profile, and allow dovecot to run it
-    -   dovecot-lda: allow reading anything under /usr/share/dovecot/protocols.d/
-- dnsmasq: allow chown capability.
-- ntp: allow clockstats
+- Profiles
+  - update samba
+  - update usr.sbin.useradd to support usr-merge
 
+- Tunables
+  - Make variables value more readable by avoiding the use of too many alternations.
 
-Documentation
--------------
--   add aa-teardown man page
--   aa_policy_cache and aa_features man pages to add new libapparmor functions to support multiple cache dirs, and overlay cache locations
--   update apparmor_parser man page for using overlay cache locations
--   update apparmor.d(7) to document conditional includes
--   update notify.conf man page, and its default configuration
--   update apparmor(7) manpage clarify the effect of reloading a profile.
-
-
-Translations
-------------
-
--   merge in .de translation updates from launchpad
+- Abstractions
+  - add recent documents write abstraction and update abstractions to use it
+  - add OpenCL abstraction
+  - kde: drop redundant rules for icons access
+  - php: allow ICU (unicode support) data tables
+  - Python:
+    - add support for python 3.7
+    - allow /usr/local/lib/python3/dist-packages
+  - freedesktop.org:
+    - factor out duplicated path components with variables
+    - treat Flatpak exports the same way as bits shipped by the distro.
+    - simplify by not attempting to guess the exhaustive list of files that can exist in {~/.local/share,/usr/share}/applications/.
+    - refactor for consistency.
 
 
 Tests
 -----
-
--   parser
-    -   Update caching tests to use the --print-cache-dir option
-    -   fix includes to allow white space
-    -   add tests for relative path includes
--   libapparmor
-    -   update for multiple caches
-    -   update for overlay cache locations
--   utils
-    -   make tests less verbose
-    -   ignore tests for 'include if exists'  ... and some exotic includes that are not supported by the tools yet    
--   regression tests
-    -   fix regression tests to pass on 4.14 upstream kernel
+- mount regression test: convert mount test to use MS_NODE
