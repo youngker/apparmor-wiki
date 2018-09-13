@@ -134,6 +134,10 @@ Reporting Bugs
 
 Reporting Security Vulnerabilities
 ==================================
+
+There are 2 ways that security bugs can be reported
+
+### In the bug tracker (preferred)
 Security issues should be reported as a bug on launchpad.
 -   Bug Tracking is hosted in Launchpad at <https://bugs.launchpad.net/apparmor>
 
@@ -148,6 +152,14 @@ to
 
 this will allow **only** you and the apparmor security team to see the bug, until it status is changed to Public Security by either you or the apparmor security team.
 
+### email (no account needed)
+
+If the security issue contains information that is public or can be public. Send an email to
+  ```apparmor@lists.ubuntu.com```
+Emails to the list from addresses without an account will go into moderation, so there will be a delay before they hit the list but any email that isn't spam will be moderated through. There is no need to signup to be on the mailing list.
+
+If the issue should may need an embargo you can send an email to
+   ```security@apparmor.net```
 
 
 Joining AppArmor
