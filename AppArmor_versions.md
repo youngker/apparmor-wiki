@@ -72,7 +72,7 @@ Released Versions of AppArmor Userspace Utils
 -   [Release Notes](Release_Notes_2.13)
 -   Development target: per kernel caches, and overlay directories for caches
 
-[AppArmor 2.12](Release_Notes_2.12.1)
+[AppArmor 2.12.1](Release_Notes_2.12.1)
 ---------------------------------------------
 
 -   Release Date: 2018-09-12
