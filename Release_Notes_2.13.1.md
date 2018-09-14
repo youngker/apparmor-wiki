@@ -103,3 +103,8 @@ Policy
 Tests
 -----
 - mount regression test: convert mount test to use MS_NODE
+
+Documentation
+-------------
+- update documentation to references gitlab and updated bug reporting procedures.
+
