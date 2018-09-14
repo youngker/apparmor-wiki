@@ -65,6 +65,7 @@ Utils
    - fix writing "link subset" rules
    - fix overwriting of child profile flags if they differ from the main profile
    - allow for named profiles without and attachment specification
+   - add python3.7 to logprof.conf
 
 -   aa-notify
     - make message about notify-send package cross-distro compatible
