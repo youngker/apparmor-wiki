@@ -79,7 +79,7 @@ Policy
      - add dovecot/stats profile, and allow dovecot to run it
      - allow write to /run/dovecot/old-stats-user
      - allow dac_read_search and reading ssl-parameters.dat
-  -samba
+  - samba
     - allow smbd to load new shared libraries
     - allow winbindd to read and write new kerberos cache location
 
