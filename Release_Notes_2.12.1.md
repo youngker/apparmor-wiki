@@ -28,8 +28,9 @@ checked for elf binary executables. Policy and tests within apparmor
 
 Build Infrastructure
 --------------------
- - Fix $(PWD) when using "make -C profiles"
- - coverity
+- Update release infrastructure to use gitlab
+- Fix $(PWD) when using "make -C profiles"
+- coverity
    - capture separate log files for each coverity invocatio
    - support python scan
 
@@ -106,4 +107,6 @@ Documentation
 -------------
 - apparmor(7): clarify the effect of reloading a profile.
 - fix typo in apparmor_parser.pod
+- update documentation to references gitlab and updated bug reporting procedures.
+
 
