@@ -53,6 +53,7 @@ Utils
    - fix unsetting filename in get_profile()
    - don't crash if setting printk_ratelimit fails
    - fix overwriting of child profile flags if they differ from the main profile
+   - add python3.7 to logprof.conf
 
 -   aa-notify
     - make message about notify-send package cross-distro compatible
