@@ -77,8 +77,6 @@ Utils
 Policy
 ------
 
--   abstractions
-
 - Profiles
   - update samba
   - update usr.sbin.useradd to support usr-merge
