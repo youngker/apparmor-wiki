@@ -69,8 +69,6 @@ Utils
 Policy
 ------
 
--   abstractions
-
 - Profiles
   - ntpd allow access to ntp clockstat
   - mlmmj-sub fix moderated subscription
