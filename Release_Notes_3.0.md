@@ -40,6 +40,13 @@ Highlighted new features
 
 - IMA integration??
 
+- nnp
+
+- APIs
+  - fd based interfaces for querying task confinement and label ...
+  - policy revision notification
+  -
+
 
 
 
