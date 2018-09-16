@@ -1,17 +1,16 @@
 Introduction
 ============
 
-AppArmor 2.11.2 is an incremental release of the user space components
+AppArmor 2.10.4 is an incremental release of the user space components
 of the AppArmor security project. The kernel portion of the project
 is maintained and pushed separately.
 
 This version of the userspace should work with all kernel versions from
 2.6.15 and later (some earlier version of the kernel if they have the
-apparmor patches applied). And supports features released in the 4.18
-kernel.
+apparmor patches applied). 
 
-Note: These release notes cover all changes between 2.11.1 (???5)
-and 2.11.2 (???).
+Note: These release notes cover all changes between 2.10.4 (???5)
+and 2.10.4 (???).
     
 
 
