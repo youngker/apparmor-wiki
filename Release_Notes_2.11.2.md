@@ -69,7 +69,6 @@ Utils
 
 Policy
 ------
-
 - Profiles
   - netstat: allow capability sys_ptrace
   - syslog-ng: fix startup for some configurations
@@ -100,7 +99,6 @@ Policy
   - ssl: add dehydrated certificate location
   - php: allow ICU (unicode support) data tables
   - nameservice: allow reading /etc/netconfig
-
   - audio:
     - Fix local pulseaudio config file access
     - Allow to read pulseaudio config subdirectories
