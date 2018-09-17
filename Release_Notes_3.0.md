@@ -55,6 +55,10 @@ Highlighted new features
   - prompt
   - complain
 
+- new keyword ```all``` has place holder for mediation class
+  - allow all,
+  - deny all,
+
 - Support for new kernel features (requires appropriate features abi tagging in policy)
   - upstream network rules support
   - IMA integration??
