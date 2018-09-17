@@ -1,3 +1,5 @@
+# Warning WIP release notes for apparmor 3.0 userspace that has not been finalized nor released yet.
+
 Introduction
 ============
 
