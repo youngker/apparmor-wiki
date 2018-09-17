@@ -36,7 +36,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 -   allow specifying the parser config file
 -   fix cache write message when stdin is used
 -   provide typedefs for comparison_fn_t and __free_fn_t to fix build issues on musl based systems
-
+-   fix bugs in --config-file handling
 
 Init
 ----
@@ -99,6 +99,7 @@ Policy
 Tests
 -----
 - mount regression test: convert mount test to use MS_NODE
+- use --config-file in tests so they are unaffected by the system parser.conf file
 
 Documentation
 -------------
