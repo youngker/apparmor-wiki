@@ -41,6 +41,18 @@ Highlighted new features
 - New Init system for loading policy
   - aa-load - a stand alone policy cache loader that can be used by any init system. Also serves as an example for using the library function to allow init systems to directly load apparmor policy.
   - two stage load - early load stage for loading policy cache, second stage for ensuring policy cache is up to date and reloading if necessary.
+- support profile modes
+  - enforce (default)
+  - kill
+  - unconfined
+  - prompt?
+  - audit flags - normal, all, quiet, noquiet, quiet_denied, quiet_allow
+
+- support new rule mode ```access```
+
+- support new rule qualifiers
+  - prompt
+  - complain
 
 - Support for new kernel features (requires appropriate features abi tagging in policy)
   - upstream network rules support
