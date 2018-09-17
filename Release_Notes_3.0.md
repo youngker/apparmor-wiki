@@ -26,12 +26,15 @@ checked for elf binary executables. Policy and tests within apparmor
 
 Highlighted new features
 ========================
+??? Add links to extended descriptions of new features
 
 - Policy now must declare the feature abi it was developed for if it is to use any new features. 
 
-- Policy in multiple locations is now supported with a way to easily add new locations.
+- Multiple policy and cache locations are now supported with support for new locations.
 
-- Overlay locations are supported for policy and cache.
+- Read-only policy and cache images are now supported with local modification allowed via overlay locations.
+
+- Policy cache validation now uses fast hashing in addition to time stamps.
 
 - New Init system for loading policy
   aa-load
@@ -47,7 +50,8 @@ Highlighted new features
   - policy revision notification
   -
 
-
+pam-apparmor
+- support for setting up user policy namespace?
 
 
 
