@@ -10,8 +10,8 @@ This version of the userspace should work with all kernel versions from
 apparmor patches applied). And supports features released in the 4.20
 kernel.
 
-Note: These release notes cover all changes between 2.13 (????)
-and 3.0 (???).
+Note: These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46)
+and 3.0 (wip covers up to f2de2952da73bc3fb0190c2cba70365c43a14865).
 
 
 Note
