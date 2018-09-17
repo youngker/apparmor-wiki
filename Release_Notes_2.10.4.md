@@ -9,8 +9,8 @@ This version of the userspace should work with all kernel versions from
 2.6.15 and later (some earlier version of the kernel if they have the
 apparmor patches applied). 
 
-Note: These release notes cover all changes between 2.10.3 (???5)
-and 2.10.4 (???).
+Note: These release notes cover all changes between 2.10.3 (3004390a6c3e2efe1c2bcfa51e3b0ceef5b39041)
+and 2.10.4 (???) on the [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
     
 
 
