@@ -64,7 +64,8 @@ Build Infrastructure
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
-
+- fix bugs in --config-file handling
+- make --config-file so it is no longer required to be the first option passed to the parser
 
 Init
 ----
@@ -97,6 +98,8 @@ Translations
 
 Tests
 -----
+- use --config-file in tests so they are unaffected by the system parser.conf file
+
 -   parser
 -   libapparmor
 -   utils
