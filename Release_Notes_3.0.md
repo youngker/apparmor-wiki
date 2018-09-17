@@ -50,8 +50,7 @@ Highlighted new features
 
 
 
-Detailed changelog
-==================
+
 
 Build Infrastructure
 --------------------
