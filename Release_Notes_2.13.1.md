@@ -37,6 +37,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 -   fix cache write message when stdin is used
 -   provide typedefs for comparison_fn_t and __free_fn_t to fix build issues on musl based systems
 -   fix bugs in --config-file handling
+-   make --config-file so it is no longer required to be the first option passed to the parser
 
 Init
 ----
