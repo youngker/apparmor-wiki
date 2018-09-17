@@ -11,7 +11,7 @@ apparmor patches applied). And supports features released in the 4.18
 kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
 Note: These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46)
-and 2.13.1 (???).
+and 2.13.1 (???) [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
 
 
 Note
