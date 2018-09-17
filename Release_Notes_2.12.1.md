@@ -10,7 +10,7 @@ This version of the userspace should work with all kernel versions from
 apparmor patches applied). And supports features released in the 4.18
 kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
-Note: These release notes cover all changes between 2.12 (???5)
+Note: These release notes cover all changes between 2.12 (7f72fd0fcacf8a856b0357261f2f521d90d1bb25)
 and 2.12.1 (???).
 
 
