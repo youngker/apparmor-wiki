@@ -23,8 +23,6 @@ enforcement. Specifically it affects when the m permission bit is
 checked for elf binary executables. Policy and tests within apparmor
 2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
 
-    
-
 
 Build Infrastructure
 --------------------
@@ -42,7 +40,6 @@ Policy Compiler (a.k.a apparmor\_parser)
 
 Init
 ----
-
 -   fix permissions of apparmor.systemd helper script
 
 
@@ -76,7 +73,6 @@ Utils
 
 Policy
 ------
-
 - Profiles
   - update samba
   - update usr.sbin.useradd to support usr-merge
@@ -88,6 +84,7 @@ Policy
   - add recent documents write abstraction and update abstractions to use it
   - add OpenCL abstraction
   - kde: drop redundant rules for icons access
+  - ssl: add dehydrated certificate support
   - php: allow ICU (unicode support) data tables
   - Python:
     - add support for python 3.7
