@@ -48,9 +48,10 @@ Highlighted new features
   - prompt?
   - audit flags - normal, all, quiet, noquiet, quiet_denied, quiet_allow
 
-- support new rule mode ```access```
+- support new rule mode ```access```  quiet access, audit access
 
 - support new rule qualifiers
+  - quiet
   - prompt
   - complain
 
