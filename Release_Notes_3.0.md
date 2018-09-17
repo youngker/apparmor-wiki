@@ -37,13 +37,13 @@ Highlighted new features
 - Policy cache validation now uses fast hashing in addition to time stamps.
 
 - New Init system for loading policy
-  aa-load
+  - aa-load - a stand alone policy cache loader that can be used by any init system. Also serves as an example for using the library function to allow init systems to directly load apparmor policy.
+  - two stage load - early load stage for loading policy cache, second stage for ensuring policy cache is up to date and reloading if necessary.
 
-- upstream network rules support
-
-- IMA integration??
-
-- nnp
+- Support for new kernel features (requires appropriate features abi tagging in policy)
+  - upstream network rules support
+  - IMA integration??
+  - nnp
 
 - APIs
   - fd based interfaces for querying task confinement and label ...
