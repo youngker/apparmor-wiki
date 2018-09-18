@@ -47,9 +47,8 @@ task and policy based
 
 rule to delegate and control delegation
 
-It is important to understand that delegation in AppArmor can be viewed in different ways.
+It is important to understand that delegation in AppArmor has multiple aspects to it.
 
-## ???
 
 
 | ** ?????? ** | Temporary/Dynamic | Permanent |
@@ -57,16 +56,27 @@ It is important to understand that delegation in AppArmor can be viewed in diffe
 | object based |     always      |          -           |
 | rule based   |   supported     | with trusted helper  |
 
-### object vs. rule
+## Object or Rule
+One aspect is whether the delegation is happening at the object or rule level.
+
 * object based - when an object (file handle, socket, ...) is delegated between tasks.
 * rule based - when rules are used to extend what a task can do
 
-### Temporary vs. Permanent
+Object delegation allows for live objects to be passed without giving the receiving task privileges beyond access to the already opened object. Rule based delegation extends a tasks confine so that it has increased authority.
+
+Object delegation happens through three mechanisms
+- fd inheritance
+- fd passing
+- application directing delegation of the fd
+
+Object delegation and rule delegation are often combined to provide for inheritance of delegated objects.
+
+### Temporary or Permanent
 * Temporary/Dynamic - temporary delegation only last the life time the task the delegation was made to. Object based delegation is always temporary, where rule based delegation may be temporary or permanent.
 * Permanent - permanent delegation is always rule based and is a way of extending a profile permanently. It requires a trusted user space helper to update the policy rules. Permanent delegation is the only form of delegation that is not strictly task based.
 
 
-##Policy directed vs. Application directed
+## Policy directed or Application directed
 * Policy directed - the delegation is specified by rules in policy
 * Application directed - the application takes action to delegate some authority. The ability to do this is it self mediated by policy.
 
@@ -154,24 +164,27 @@ be named.
  }
 ```
 
-The authority block is just a specialized profile can specify the block
-as a profile authority block can't be directly transitioned to
+The authority block is just a specialized profile that can't be directly transitioned to by an exec transition or the change_profile/change_hat apis. In fact profiles can be used as an authority block and be delegated to another profile.
 
-Delegating authority in policy
-------------------------------
 
-To delegate authority in policy the rules that are being delegated
-are specified as part of a domain transition.
+## Delegating rules at profile transition in policy
+
+Rules can be delegated as part of a domain transition.
 
 ```
+ # transition to profile bar with the added rules in foo
  px /foo -> bar + foo;
 ```
 
+
 ```
+ # transition to the profile that attaches to /foo with the added rules in foo
  px /foo -> + foo;
 ```
 
 ### localized authority
+
+Authority blocks can be localized to a profile just like child profiles.
 
 ```
  profile A {
@@ -179,7 +192,7 @@ are specified as part of a domain transition.
      ...
    }
 
-   px /foo -> + ^foo,
+   px /foo -> + foo,
  }
 ```
 
@@ -208,7 +221,7 @@ Just as authority in a label is not distinguished from a profile, the
 localized authority set is treated as a special hat or child profile,
 and will appear as such in labels.
 
-E.G. the profile for /foo given the following rules
+E.g. the confinement of /foo when started from the confinement of profile A with the following rules
 
 ```
  profile A {
@@ -216,7 +229,7 @@ E.G. the profile for /foo given the following rules
      ...
    }
 
-   px /foo -> B+^foo,
+   px /foo -> B + foo,
  }
 ```
 
@@ -224,6 +237,8 @@ would be
 
 ```
  B//+A//foo
+
+B is the profile transitioned to and A//foo is the name of the local authority block.
 ```
 
 controlling application directed delegation
