@@ -36,7 +36,7 @@ AppArmor allows a profile or task to delegate some of its authority to other
 applications, allowing them to perform operations or access data that
 they could not normally do or access under their confinement.
 
-Delegation of Authority helps with authoring policy that adheres to the principle of Least authority.
+Delegation of Authority helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola).
 
 Authority
 ---------
