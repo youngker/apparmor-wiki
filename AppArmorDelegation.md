@@ -275,6 +275,16 @@ restricted to an object that matches a delegation rule by specifying
 Allowing a profile to receive delegation
 ----------------------------------------
 
+# Delegation and Domain transitions
+
+When an exec transition or change_profile happens causing a profile transition. The tasks confinement and delegation is re-evaluated.
+
+First each component of the task confinement is evaluated for transitions, this is done for the profile as well as the delegated rules.  ??? do the delegated rule objects replace themselves if they have exec rules or the profile ???
+
+After the transition evaluation the delegated rules are checked for inheritance.
+
+
+
 Application Directed Delegation
 ===============================
 
