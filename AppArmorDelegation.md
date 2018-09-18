@@ -284,6 +284,14 @@ First each component of the task confinement is evaluated for transitions, this 
 After the transition evaluation the delegated rules are checked for inheritance.
 
 
+# delegtion and stacking
+
+confinement is always expressed in conjunctive normal form
+
+delegating to a stack
+(A//&B)//+C is transformed into (A//+C)//&(B//+C)
+
+
 
 Application Directed Delegation
 ===============================
