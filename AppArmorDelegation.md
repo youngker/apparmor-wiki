@@ -49,17 +49,7 @@ rule to delegate and control delegation
 
 It is important to understand that delegation in AppArmor can be viewed in different ways.
 
-##object vs. rule
-* object based - when an object (file handle, socket, ...) is delegated between tasks.
-* rule based - when rules are used to extend what a task can do
-
-##Policy directed vs. Application directed
-* Policy directed - the delegation is specified by rules in policy
-* Application directed - the application takes action to delegate some authority. The ability to do this is it self mediated by policy.
-
-##Temporary vs. Permanent
-* Temporary/Dynamic - temporary delegation only last the life time the task the delegation was made to. Object based delegation is always temporary, where rule based delegation may be temporary or permanent.
-* Permanent - permanent delegation is always rule based and is a way of extending a profile permanently. It requires a trusted user space helper to update the policy rules. Permanent delegation is the only form of delegation that is not strictly task based.
+## ???
 
 
 | ** ?????? ** | Temporary/Dynamic | Permanent |
@@ -67,13 +57,32 @@ It is important to understand that delegation in AppArmor can be viewed in diffe
 | object based |     always      |          -           |
 | rule based   |   supported     | with trusted helper  |
 
+### object vs. rule
+* object based - when an object (file handle, socket, ...) is delegated between tasks.
+* rule based - when rules are used to extend what a task can do
+
+### Temporary vs. Permanent
+* Temporary/Dynamic - temporary delegation only last the life time the task the delegation was made to. Object based delegation is always temporary, where rule based delegation may be temporary or permanent.
+* Permanent - permanent delegation is always rule based and is a way of extending a profile permanently. It requires a trusted user space helper to update the policy rules. Permanent delegation is the only form of delegation that is not strictly task based.
+
+
+##Policy directed vs. Application directed
+* Policy directed - the delegation is specified by rules in policy
+* Application directed - the application takes action to delegate some authority. The ability to do this is it self mediated by policy.
+
 
 ??? dynamic includes
 
 
 ## Inheritance
 
+Inheritance only applies to task and is always temporary
 
+Delegation is across profile boundaries
+
+Inheritance of delegation is not based only based on a tasks parent child hierachy. Instead, all inheritance, whether object or rule based, is controlled by a set of rules that is it self part of the delegation.
+
+Without inheritance rules the delegated objects and rules can not cross a profile boundary.
 
 
 How Delegation is Expressed
