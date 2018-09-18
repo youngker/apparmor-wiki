@@ -21,6 +21,7 @@ The following table identifies which version of AppArmor different types of dele
 | object based |        ?        |          ?           |
 | rule based   |        ?        |          ?           |
 
+
 | **Permanent Delegation**      | Policy Directed | Application Directed |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
