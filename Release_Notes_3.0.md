@@ -107,6 +107,16 @@ Utils
 Policy
 ------
 
+- profiles:
+  - support distributions which merge sbin into bin
+
+  - ping: support void linux binary location
+  - traceroute: support void linux binary location
+  - ntpd
+    - allow access to ntp clockstat
+    - add openntpd drift and socket files
+    - support void linux binary location
+  - dnsmasq: add paths for NetworkManager connection sharing
 
 Documentation
 -------------
