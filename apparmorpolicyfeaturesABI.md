@@ -17,37 +17,37 @@ policy api exported by compiler to policy
 
 The following set of matrixes provide a quick reference for how the policy, parser and kernel interact based on the feature abi used.
 
-Where V(n-1) indicates an older feature abi, V(n) a different feature abi with more features than V(n-1), and V(n+1) support for a newer feature set abi with even more features than V(n).
+Where abi:old indicates an older feature abi, abi:current a different feature abi with more features than abi:old, and abi:future support for a newer feature set abi with even more features than V(n).
 
 ---
 
-## V(n-1) apparmor_parser
+## abi:old apparmor_parser
 
-|               | V(n-1) Kernel   | V(n) Kernel       | V(n+1) Kernel     |
+|               | abi:old Kernel  |abi:current Kernel | abi:future Kernel |
 |:-------------:|:---------------:|:-----------------:|:-----------------:|
-| V(n-1) Policy | enforced        | enforced[^1] [^3] | enforced[^1] [^3] |
-| V(n) Policy   | fail to compile | fail to compile   | fail to compile   |
-| V(n+1) Policy | fail to compile | fail to compile   | fail to compile   |
+| abi:old Policy| enforced        | enforced[^1] [^3] | enforced[^1] [^3] |
+|abi:current Policy | fail to compile | fail to compile   | fail to compile   |
+|abi:future Policy | fail to compile | fail to compile   | fail to compile   |
 
 ---
 
-## V(n) apparmor_parser
+## abi:current apparmor_parser
 
-|               | V(n-1) Kernel   | V(n) Kernel     | V(n+1) Kernel     |
+|               | abi:old Kernel   | abi:current Kernel     | abi:future Kernel     |
 |:-------------:|:---------------:|:---------------:|:-----------------:|
-| V(n-1) Policy | enforced        | enforced[^3]    | enforced[^1] [^3] |
-| V(n) Policy   | enforced[^2]    | enforced        | enforced[^1] [^3] |
-| V(n+1) Policy | fail to compile | fail to compile | fail to compile   |
+| abi:old Policy | enforced        | enforced[^3]    | enforced[^1] [^3] |
+| abi:current Policy | enforced[^2]    | enforced        | enforced[^1] [^3] |
+| abi:future Policy | fail to compile | fail to compile | fail to compile   |
 
 ---
 
-## V.(n+1) apparmor_parser
+## abi:future apparmor_parser
 
-|               | V(n-1) Kernel | V(n) Kernel | V(n+1) Kernel |
+|               | abi:old Kernel | abi:current Kernel | abi:future Kernel |
 |:-------------:|:------------:|:------------:|:-------------:|
-| V(n-1) Policy | enforced     | enforced[^3] | enforced[^3]  |
-| V(n) Policy   | enforced[^2] | enforced     | enforced[^3]  |
-| V(n+1) Policy | enforced[^2] | enforced[^2] | enforced      |
+| abi:old Policy | enforced     | enforced[^3] | enforced[^3]  |
+| abi:current Policy   | enforced[^2] | enforced     | enforced[^3]  |
+| abi:future Policy | enforced[^2] | enforced[^2] | enforced      |
 
 [^1]: as long as kernel supports abi being generated and loaded by the parser
 
