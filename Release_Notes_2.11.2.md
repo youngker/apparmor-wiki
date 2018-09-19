@@ -70,9 +70,16 @@ Utils
 Policy
 ------
 - Profiles
+  - support distributions which merge sbin into bin
+  - ping: support void linux binary location
+  - traceroute: support void linux binary location
+  - ntpd
+    - allow access to ntp clockstat
+    - add openntpd drift and socket files
+    - support void linux binary location
   - netstat: allow capability sys_ptrace
   - syslog-ng: fix startup for some configurations
-  - ntpd allow access to ntp clockstat
+  - dnsmasq: add paths for NetworkManager connection sharing
   - mlmmj-sub fix moderated subscription
   - wireshark update for modern releases
   - dovecot
