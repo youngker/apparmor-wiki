@@ -17,7 +17,7 @@ policy api exported by compiler to policy
 
 The following set of matrixes provide a quick reference for how the policy, parser and kernel interact based on the feature abi used.
 
-Where abi-old indicates an older feature abi, abi-current a different feature abi with more features than abi-old, and abi-future support for a newer feature set abi with even more features than V(n).
+Where abi-old indicates an older feature abi, abi-current a different feature abi with more features than abi-old, and abi-future support for a newer feature set abi with even more features than abi-current.
 
 ---
 
