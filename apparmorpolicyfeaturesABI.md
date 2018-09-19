@@ -17,41 +17,41 @@ policy api exported by compiler to policy
 
 The following set of matrixes provide a quick reference for how the policy, parser and kernel interact based on the feature abi used.
 
-Where abi:old indicates an older feature abi, abi:current a different feature abi with more features than abi:old, and abi:future support for a newer feature set abi with even more features than V(n).
+Where abi-old indicates an older feature abi, abi-current a different feature abi with more features than abi-old, and abi-future support for a newer feature set abi with even more features than V(n).
 
 ---
 
-## abi:old apparmor_parser
+## abi-old apparmor_parser
 
-|               | abi:old Kernel  |abi:current Kernel | abi:future Kernel |
+|               | abi-old Kernel  |abi-current Kernel | abi-future Kernel |
 |:-------------:|:---------------:|:-----------------:|:-----------------:|
-| abi:old Policy| enforced        | enforced[^1] [^3] | enforced[^1] [^3] |
-|abi:current Policy | fail to compile | fail to compile   | fail to compile   |
-|abi:future Policy | fail to compile | fail to compile   | fail to compile   |
+| abi-old Policy| enforced        | enforced[^1] [^3] | enforced[^1] [^3] |
+|abi-current Policy | fail to compile | fail to compile   | fail to compile   |
+|abi-future Policy | fail to compile | fail to compile   | fail to compile   |
 
 ---
 
-## abi:current apparmor_parser
+## abi-current apparmor_parser
 
-|               | abi:old Kernel   | abi:current Kernel     | abi:future Kernel     |
+|               | abi-old Kernel   | abi-current Kernel     | abi-future Kernel     |
 |:-------------:|:---------------:|:---------------:|:-----------------:|
-| abi:old Policy | enforced        | enforced[^3]    | enforced[^1] [^3] |
-| abi:current Policy | enforced[^2]    | enforced        | enforced[^1] [^3] |
-| abi:future Policy | fail to compile | fail to compile | fail to compile   |
+| abi-old Policy | enforced        | enforced[^3]    | enforced[^1] [^3] |
+| abi-current Policy | enforced[^2]    | enforced        | enforced[^1] [^3] |
+| abi-future Policy | fail to compile | fail to compile | fail to compile   |
 
 ---
 
-## abi:future apparmor_parser
+## abi-future apparmor_parser
 
-|               | abi:old Kernel | abi:current Kernel | abi:future Kernel |
+|               | abi-old Kernel | abi-current Kernel | abi-future Kernel |
 |:-------------:|:------------:|:------------:|:-------------:|
-| abi:old Policy | enforced     | enforced[^3] | enforced[^3]  |
-| abi:current Policy   | enforced[^2] | enforced     | enforced[^3]  |
-| abi:future Policy | enforced[^2] | enforced[^2] | enforced      |
+| abi-old Policy | enforced     | enforced[^3] | enforced[^3]  |
+| abi-current Policy   | enforced[^2] | enforced     | enforced[^3]  |
+| abi-future Policy | enforced[^2] | enforced[^2] | enforced      |
 
 [^1]: as long as kernel supports abi being generated and loaded by the parser
 
-[^2]: policy features not supported by kernel down graded or not enforced 
+[^2]: policy features not supported by kernel are down graded or not enforced 
 
 [^3]: kernel features not supported by policy feature abi not enforced
 
