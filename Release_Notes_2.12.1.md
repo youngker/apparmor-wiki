@@ -68,11 +68,18 @@ Utils
 
 Policy
 ------
-
 - Profiles
-  - ntpd allow access to ntp clockstat
+  - support distributions which merge sbin into bin
+  - ping: support void linux binary location
+  - traceroute: support void linux binary location
+  - ntpd
+    - allow access to ntp clockstat
+    - add openntpd drift and socket files
+    - support void linux binary location
   - mlmmj-sub fix moderated subscription
-  - dnsmasq allow chown capability.
+  - dnsmasq
+    - allow chown capability.
+    - add paths for NetworkManager connection sharing
   - Fix ubuntu-browsers for 64bit openSUSE
   - dovecot
      - add dovecot/stats profile, and allow dovecot to run it
