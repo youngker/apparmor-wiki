@@ -479,7 +479,7 @@ may or may not have an name (identity) associated with it.
 
 ## Principle of Least Authority (PoLA)
 
-The [https://en.wikipedia.org/wiki/Principle_of_least_privilege](principle of least authority) (also known as the principle of least privilege) is that a task
+The [principle of least authority](https://en.wikipedia.org/wiki/Principle_of_least_privilege) (also known as the principle of least privilege) is that a task
 should not have any more privilege/permissions than it needs to do
 its job.
 
@@ -508,5 +508,5 @@ of the tools available in AppArmor to craft policy in such a manner,
 where an application is given a base profile and it is given additional
 access when required, either via policy or trusted helpers.
 
-# [https://en.wikipedia.org/wiki/Confused_deputy_problem](Confused Deputy Problem)
- The [https://en.wikipedia.org/wiki/Confused_deputy_problem](confused deputy problem)
+# [Confused Deputy Problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)
+ The [confused deputy problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)
