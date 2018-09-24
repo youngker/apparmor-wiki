@@ -460,10 +460,10 @@ would be a police officer has the authority to make an arrest but
 he does not have the authority to determine the sentence of the
 arrested person. Authority in the real world is often associated
 with an identity or position and some time authority can delegated
-to another, Eg. a sheriff deputizing someone to assist him.
+to another, Eg. a sheriff deputizing a person to assist him.
 
 In AppArmor authority can be delegated to extend profiles with access
-to file objects or rules that they would not normally have.
+to objects or rules that they would not normally have.
 
 ## Identity
 
@@ -479,7 +479,7 @@ may or may not have an name (identity) associated with it.
 
 ## Principle of Least Authority (PoLA)
 
-The principle of least authority (also known as the principle of least privilege) is that a task
+The [https://en.wikipedia.org/wiki/Principle_of_least_privilege](principle of least authority) (also known as the principle of least privilege) is that a task
 should not have any more privilege/permissions than it needs to do
 its job.
 
@@ -507,3 +507,6 @@ and selectively extended when needed. Delegation of Authority is one
 of the tools available in AppArmor to craft policy in such a manner,
 where an application is given a base profile and it is given additional
 access when required, either via policy or trusted helpers.
+
+# [https://en.wikipedia.org/wiki/Confused_deputy_problem](Confused Deputy Problem)
+ The [https://en.wikipedia.org/wiki/Confused_deputy_problem](confused deputy problem)
