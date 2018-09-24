@@ -42,6 +42,8 @@ Delegation of Authority helps with authoring policy that adheres to the [princip
 
 # Delegation in AppArmor
 
+In AppArmor delegation is always temporary as it based on passing authority to a task and only last the life time the task. 
+
 task and policy based
 
 rule to delegate and control delegation
@@ -53,7 +55,7 @@ It is important to understand that delegation in AppArmor has multiple aspects t
 | ** ?????? ** | Temporary/Dynamic | Permanent |
 |--------------|-----------------|----------------------|
 | object based |     always      |          -           |
-| rule based   |   supported     | with trusted helper  |
+| rule based   |   supported     | [with trusted helper]()  |
 
 ## Object or Rule
 One aspect is whether the delegation is happening at the object or rule level.
@@ -61,7 +63,7 @@ One aspect is whether the delegation is happening at the object or rule level.
 * object based - when an object (file handle, socket, ...) is delegated between tasks.
 * rule based - when rules are used to extend what a task can do
 
-Object delegation allows for live objects to be passed without giving the receiving task privileges beyond access to the already opened object. Rule based delegation extends a tasks confine so that it has increased authority.
+Object delegation allows for live objects to be passed without giving the receiving task privileges beyond access to the already opened object. Rule based delegation extends a tasks confinement so that it has increased authority and can create new objects its old confinement wouldn't allow.
 
 Object delegation happens through three mechanisms
 - fd inheritance
@@ -70,17 +72,10 @@ Object delegation happens through three mechanisms
 
 Object delegation and rule delegation are often combined to provide for inheritance of delegated objects.
 
-### Temporary or Permanent
-* Temporary/Dynamic - temporary delegation only last the life time the task the delegation was made to. Object based delegation is always temporary, where rule based delegation may be temporary or permanent.
-* Permanent - permanent delegation is always rule based and is a way of extending a profile permanently. It requires a trusted user space helper to update the policy rules. Permanent delegation is the only form of delegation that is not strictly task based.
-
 
 ## Policy directed or Application directed
 * Policy directed - the delegation is specified by rules in policy
 * Application directed - the application takes action to delegate some authority. The ability to do this is it self mediated by policy.
-
-
-??? dynamic includes
 
 
 ## Inheritance
@@ -308,8 +303,18 @@ rule delegation vis api
 Making Delegation Permanent
 ===========================
 
-As mentioned above it is possible to make some delegation a permanent
-part of policy. However this requires being able to update the policy
+While delegation in AppArmor is temporary there are several techniques
+available to achieve similar affects permanently.
+
+### Authority based attachment
+
+Instead of defining a profile for an application attachment it is possible to declare the applications confinement is based on a combination of other profiles.
+
+authority A//+B//+C /usr/bin/foo,
+
+### ????
+
+???. However this requires being able to update the policy
 for the given delegation. This is fine for some types of delegation,
 but for application directed delegation granting rights to arbitrarily
 edit and load policy is not desirable, in these cases AppArmor provides
@@ -337,6 +342,8 @@ access. See [object labeling in AppArmor](AppArmorObjectLabeling)
 for more details.
 
 ### Selective limited policy updates
+
+??? dynamic includes
 
 AppArmor provides the ability to control who can edit and load
 certain pieces of policy via fine grained controls. A [policy
