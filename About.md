@@ -14,7 +14,7 @@ its policy enforcement integration beyond what isolation allows.
 Specifically AppArmor is a variant of [Domain Type Enforcement
 (DTE)](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.1501),
  which a variant of [Type Enforcement
-(TE)](https://en.wikipedia.org/wiki/Type_enforcement), crossed with a [capability system](???). While AppArmor
+(TE)](https://en.wikipedia.org/wiki/Type_enforcement). AppArmor 4 extends AppArmor to be a hybrid of DTE and a [capability system](https://en.wikipedia.org/wiki/Capability-based_security). While AppArmor
 is capable of providing a total system policy its policy is designed
 and focused around an application (domain) centric model allowing for
 easy targeting of specific applications or users. Because AppArmor
