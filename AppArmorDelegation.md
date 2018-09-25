@@ -32,10 +32,10 @@ The following table identifies which version of AppArmor different types of dele
 Introduction
 ============
 
-AppArmor 4 allows a profile or task to delegate some of its [authority](AppArmorDelegation#authority) to other
+AppArmor 4 extends AppArmor to be a hybrid of [Domain Type Enforcement](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.1501) and a [capability system](https://en.wikipedia.org/wiki/Capability-based_security). This is achieved by allowing a profile or task to delegate some of its [authority](AppArmorDelegation#authority) to other
 applications, allowing them to perform operations or access data that they could not normally do or access under their confinement.
 
-Delegation of Authority helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola).
+Delegation of Authority helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola). Which mean policy can be tighter and then expanded to allow access to data as needed. And helps avoiding problems like the [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem)
 
 
 
