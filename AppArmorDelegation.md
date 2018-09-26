@@ -32,25 +32,23 @@ Delegation of Authority helps with authoring policy that adheres to the [princip
 In AppArmor delegation is always temporary as it based on passing [authority](AppArmorDelegation#authority) to a task and unless [inheritance](AppArmorDelegation#inheritance) is defined will only lasts the life time the task. 
 
 
-## Identity
+## Authority
+Authority is the right/permission to do something, This expressed by the set of rules often in a profile but could be a special block of rules.
 
+
+## Identity
 In AppArmor identity is the name associated with a set of rules. This is often a profile name but could be a random name associated with a set of rule. When a task has multiple identities assigned to it, all identities are equal.
 
-In real world term this is like saying a person Bob is also a policy man. The individual is both of those things and has the rights and responsibilies of
+In real world term this is like saying a person Bob is also a police man. The individual is both of those things and has the rights and responsibilies of both Bob and a police man.
 
-## Authority
+In AppArmor terms this is done by listing in the label the profile names that contribute to the task's authority.
 
-Authority is the right/permission to do something, This often expressed by the set of rules in a profile but could be a set of rules in a special block of rules.
+  firefox//+user_data
 
-is the
-right/permission to do something while identity is the who. In real
-world terms this is like saying Bob the police man. Where Bob is who
-and police man is a name of associated with some authority, which is it self a form
-of identity.
+Identity is also used in policy to control which authority is or can be delegated.
 
-## Authority
 
-task and policy bas
+
 
 rule to delegate and control delegation
 
@@ -58,10 +56,7 @@ It is important to understand that delegation in AppArmor has multiple aspects t
 
 
 
-| ** ?????? ** | Temporary/Dynamic | Permanent |
-|--------------|-----------------|----------------------|
-| object based |     always      |          -           |
-| rule based   |   supported     | [with trusted helper]()  |
+
 
 ## Object or Rule
 One aspect is whether the delegation is happening at the object or rule level.
