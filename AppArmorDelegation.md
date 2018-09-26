@@ -12,39 +12,45 @@ Related Documentation
 todo
 
 # Availability of Delegation
-
 The following table identifies which version of AppArmor different types of delegation are available in.
 
 
-| **Temporary Delegation** | Policy Directed | Application Directed |
+| ** Delegation** | Policy Directed | Application Directed |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
 | rule based   |        ?        |          ?           |
 
 
-| **Permanent Delegation**      | Policy Directed | Application Directed |
-|--------------|-----------------|----------------------|
-| object based |        ?        |          ?           |
-| rule based   |        ?        |          ?           |
+# Introduction
+AppArmor 4 extends AppArmor to be a hybrid of [Domain Type Enforcement (DTE)](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.1501) and a [capability system](https://en.wikipedia.org/wiki/Capability-based_security). This is achieved by allowing a profile or task to delegate some of its [authority](AppArmorDelegation#authority) to other applications, allowing them to perform operations or access data that they could not normally do or access under their confinement.
 
-
-
-Introduction
-============
-
-AppArmor 4 extends AppArmor to be a hybrid of [Domain Type Enforcement (DTE)](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.1501) and a [capability system](https://en.wikipedia.org/wiki/Capability-based_security). This is achieved by allowing a profile or task to delegate some of its [authority](AppArmorDelegation#authority) to other
-applications, allowing them to perform operations or access data that they could not normally do or access under their confinement.
-
-Delegation of Authority helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola). Which mean policy can be tighter and then expanded to allow access to data as needed. And helps avoiding problems like the [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem)
-
-
+Delegation of Authority helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola). Which means policy can be tighter and then expanded to allow access to data as needed. Delegation can also help avoiding problems like the [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem)
 
 
 # Delegation in AppArmor
 
-In AppArmor delegation is always temporary as it based on passing authority to a task and only last the life time the task. 
+In AppArmor delegation is always temporary as it based on passing [authority](AppArmorDelegation#authority) to a task and unless [inheritance](AppArmorDelegation#inheritance) is defined will only lasts the life time the task. 
 
-task and policy based
+
+## Identity
+
+In AppArmor identity is the name associated with a set of rules. This is often a profile name but could be a random name associated with a set of rule. When a task has multiple identities assigned to it, all identities are equal.
+
+In real world term this is like saying a person Bob is also a policy man. The individual is both of those things and has the rights and responsibilies of
+
+## Authority
+
+Authority is the right/permission to do something, This often expressed by the set of rules in a profile but could be a set of rules in a special block of rules.
+
+is the
+right/permission to do something while identity is the who. In real
+world terms this is like saying Bob the police man. Where Bob is who
+and police man is a name of associated with some authority, which is it self a form
+of identity.
+
+## Authority
+
+task and policy bas
 
 rule to delegate and control delegation
 
