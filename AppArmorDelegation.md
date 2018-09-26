@@ -49,12 +49,9 @@ Identity is also used in policy to control which authority is or can be delegate
 
 
 
-
-rule to delegate and control delegation
+## Aspects of delegation
 
 It is important to understand that delegation in AppArmor has multiple aspects to it.
-
-
 
 
 
@@ -71,7 +68,7 @@ Object delegation happens through three mechanisms
 - fd passing
 - application directing delegation of the fd
 
-Object delegation and rule delegation are often combined to provide for inheritance of delegated objects.
+Object delegation and rule delegation are often combined to provide for [inheritance](AppArmorDelegation#inheritance) of delegated objects.
 
 
 ## Policy directed or Application directed
