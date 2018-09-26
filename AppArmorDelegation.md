@@ -33,17 +33,17 @@ In AppArmor delegation is always temporary as it based on passing [authority](Ap
 
 
 ## Authority
-Authority is the right/permission to do something, This expressed by the set of rules often in a profile but could be a special block of rules.
+Authority is the right/permission to do something, This is expressed by the set of rules often in a profile but could be a special block of rules.
 
 
 ## Identity
 In AppArmor identity is the name associated with a set of rules. This is often a profile name but could be a random name associated with a set of rule. When a task has multiple identities assigned to it, all identities are equal.
 
-In real world term this is like saying a person Bob is also a police man. The individual is both of those things and has the rights and responsibilies of both Bob and a police man.
+In real world term this is like saying a person Bob is also a police man. The individual is both of those things and has the rights and responsibilities of both Bob and a police man.
 
-In AppArmor terms this is done by listing in the label the profile names that contribute to the task's authority.
+In AppArmor terms this is exposed in the label by listing the profile names that contribute to the task's authority.
 
-  firefox//+user_data
+  Bob//+police_man
 
 Identity is also used in policy to control which authority is or can be delegated.
 
