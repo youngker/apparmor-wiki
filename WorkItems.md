@@ -20,6 +20,17 @@ For a list of improvements and extensions to AppArmor see the [development roadm
       - make vmalloc work with larger allocations
         - investigate
 
+- proper handling of overlapping x permissions
+  - dominance
+
+- rule priority
+
+- annotate rule sets at compile time so that we can have proper error messages about where things fail
+
+- include dedup
+
+- include caching so we don't have to reload cache files that have already been processed
+
 - type cache
 
 - lockless label tree lookup
