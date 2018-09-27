@@ -1,10 +1,105 @@
 Work Items
 ==========
 
-This is a list of outstanding work items that can be done again the
+This is a list of outstanding work items that can be done against the
 current code base.
 
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
+
+
+- policy blob compression
+  - kernel: make transparent to userspace
+    - after unpack succeeds, compress blob using gzip, or lz
+    - decompress compressed blob when read
+- policy blob: reading
+  - kernel: make transparent to userspace
+    - convert single large buffer allocation into chunks of N size and do copy to user in chunk sizes
+    - update unpack to work with chunks instead of single buffer
+
+- namespace mappings
+  - ???
+
+- policy ABI
+  - compiler
+  - utils
+
+- audit cleanup
+
+- audit cache/message dedup
+
+- complain mode daemon
+
+- prompting
+
+
+
+- Dynamic Includes
+  - kernel:
+  - compiler:
+
+- Delegation
+  - kernel:
+  - compiler:
+  - utils:
+    - genprof/logprof
+    - aa_status
+      - update to handle new //+
+  - libraries
+    - logparsing
+    - delegation apis
+  - regression tests
+  - documentation
+
+
+
+- nested container support
+  - kernel:
+    - ????
+
+- suid
+
+- nonewprivileges override
+  - kernel:
+    - abi: export nnp override/conditional is supported
+    - add nnp permission
+    - check domain transitions using nnp conditional and nnp perm.
+    - build new transition based on override
+    - update tracked nnp for override so nnp subset test still works
+  - parser:
+    - update front end to parse
+    - build layout for backend compile
+    - tests:
+      - add language parsing tests
+  - utils:
+    - update to handle policy updates
+    - update to ask override question
+  - policy:
+    - update language design/documentation
+  - library
+    - update log parsing
+  - regression tests:
+    - tests around nnp override and subset behaviors
+
+- mount
+- keyring
+- ioctl
+- pipe
+- sysV ipc
+- mknod
+- seccomp
+- binder
+- dmesg controls
+- audit controls
+- task priority, ...
+
+
+- overlayfs
+  - ???
+
+extended permissions
+extended conditionals
+
+
 
 Parser
 ------
@@ -12,7 +107,6 @@ Parser
 ##### General
 
 -   Convert parser to straight C++ compile and then strip
--   Remove pcre
 -   Convert parser into front end and library(ies)
     -   Front end, switch and input control
     -   Parsing Layer and semantic check - convert text to parse tree
