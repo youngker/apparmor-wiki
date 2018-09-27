@@ -20,6 +20,16 @@ For a list of improvements and extensions to AppArmor see the [development roadm
       - make vmalloc work with larger allocations
         - investigate
 
+- type cache
+
+- lockless label tree lookup
+
+- dfa sharing
+
+- precomputed labels A//&B, A//+B
+
+- label aliases
+
 - namespace mappings
   - ???
 
