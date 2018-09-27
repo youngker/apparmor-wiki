@@ -26,6 +26,10 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 - inode labeling
 
+- mount labeling
+
+- mount point tagging and improved name lookup
+
 - dfa sharing
 
 - precomputed labels A//&B, A//+B
