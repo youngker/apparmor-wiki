@@ -24,6 +24,8 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 - lockless label tree lookup
 
+- inode labeling
+
 - dfa sharing
 
 - precomputed labels A//&B, A//+B
