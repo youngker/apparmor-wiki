@@ -11,10 +11,14 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - kernel: make transparent to userspace
     - after unpack succeeds, compress blob using gzip, or lz
     - decompress compressed blob when read
-- policy blob: reading
+- policy blob: reading deal with vmalloc limit
   - kernel: make transparent to userspace
-    - convert single large buffer allocation into chunks of N size and do copy to user in chunk sizes
-    - update unpack to work with chunks instead of single buffer
+    - vmalloc picked up a limit, either switch to reading in chunks or method to make larger vmalloc work
+      - chunks
+        - convert single large buffer allocation into chunks of N size and do copy to user in chunk sizes
+        - update unpack to work with chunks instead of single buffer
+      - make vmalloc work with larger allocations
+        - investigate
 
 - namespace mappings
   - ???
@@ -23,11 +27,33 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - compiler
   - utils
 
-- audit cleanup
+- audit cleanup 1
+  - move audit struct defines early
+  - what of struct sharing and multiple structs for different audits
+  - audits need grouping
+
+- audit cleanup 2
+  - copy lsm audit specific fields into apparmor audit blob
+  - move audit blobs to kmem_cache
+  - per cpu buffer of allocated blobs
+  - move blob allocation to early in hook
+    - pull out of per cpu cache or fallback to kmem_cache if necessary
+  - attach apparmor blob to lsm_audit at aa_audit time
+  - move free to just before hook exit (outside of any aa locks)
 
 - audit cache/message dedup
+  - setup cache hash tree
+  - copy buffer data to new string that can exist outside of locks
+  - push message into tree, update time if already exists, and move to back
+  - pop old message if full, or timed out
+    - free contents if needed
+    - push onto per cpu buffer or kmem_cache
 
 - complain mode daemon
+  - allow daemon to open fd to register interest in receiving messages
+  - control to set mask for which messages to receive
+  - allocate unique id for each message diverted to userspace
+  - add messages to cache so we can dedup
 
 - prompting
 
