@@ -61,10 +61,24 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 - Dynamic Includes
   - kernel:
+    - chase down include similar to delegation for permissions
   - compiler:
 
 - Delegation
   - kernel:
+    - rework domain label vector of profiles, to be vector of union { profile, vector profile, vector of label} + tag
+    - rework label walk macros to check state, push/pop onto iterator
+    - update permission routines to compute/carry accumulated perms
+    - update parse to handle //+
+    - update label print for //+
+    - update label match
+    - update label compute fns to build conjunctive normal form
+    - update attachment to deal with delegation
+    - update exec path
+    - update fd handling to deal with delegation
+    - update inheritance to deal with delegation
+    - update fd passing to deal with delegation
+    - add delegation api
   - compiler:
   - utils:
     - genprof/logprof
