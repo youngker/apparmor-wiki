@@ -8,7 +8,7 @@
 # General code notes
 - aa_ : prefix is used to namespace apparmor fns that are visible.
 - __XXX: leading underscores indicates fn needs to be used within locking or other special conditions
-- AA_BUG(): is used in new code to check (when debug is one) and document preconditions. Not all code has been converted to using this convention.
+- AA_BUG(): is used in new code to check (when debug is on) and document preconditions. Not all code has been converted to using this convention.
 
 
 # Layout
