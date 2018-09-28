@@ -1,4 +1,20 @@
-layout
+# Layout
+AppArmor is largely self contained in
+- security/apparmor
+
+aa_ : prefix is used to namespace apparmor fns that are visible.
+__XXX: underscores indicates fn needs to be used within locking or other special conditions
+AA_BUG(): is used in new code to check (when debug is one) and document preconditions.
+
+- lsm.c: LSM hook registration, base hook fns used in the registration and general module init. Base hook fns should be generally be static and in lsm.c
+
+- match.c & include/match.h: state machine
+
+- policy_namespace.c: apparmor policy namespaces, not other system namespaces
+
+- foo
+
+
 
 lsm.c
 
