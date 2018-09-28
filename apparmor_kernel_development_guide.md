@@ -46,7 +46,7 @@ Mediation
 - capability.c, include/capability.h: mediation of capability set 
 - domain.c, include/domain.h: mediation of exec transitions, and change_profile, ...
 - file.c, include/file.h: mediation of file objects
-- ipc.c, include/ipc.h: ptrace and signals
+- ipc.c, include/ipc.h, include/sig_names.h: ptrace and signals
 - mount.c, include/mount.h: mediation of mount, pivot root
 - net.c, include/net.h: base socket mediation and support routines for fine grained mediation
 - task.c, include/task.h: task related mediation and storing off of state for nonewprivs, change_hat, change_onexec
