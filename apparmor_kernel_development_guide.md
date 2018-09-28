@@ -16,7 +16,7 @@ Other locations
 - Documentation/admin-guide/kernel-parameters.rst
 - Documentation/process/3.Early-stage.rst
 
-```security/apparmor/```
+### security/apparmor/ overview
 - apparmor.h: class mediation type allocation, lsm.c global vars
 - lsm.c: LSM hook registration, base hook fns used in the registration and general module init. Base hook fns should be generally be static and in lsm.c
 
