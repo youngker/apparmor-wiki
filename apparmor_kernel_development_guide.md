@@ -60,6 +60,11 @@ Mediation
 - task.c, include/task.h: task related mediation and storing off of state for nonewprivs, change_hat, change_onexec
 - resource.c, include/resource.h: mediation of rlimits, and also setting rlimits to profile defined values
 
+# LSM
+Infrastructure that provides a set of hooks and blobs off of kernel object. Hooks are spread through out the kernel, called using
+- security_XXX.
+????
+
 # task labeling
 The task's label is stored off of the task's cred security blob, not the task security blob. In older versions of apparmor the data stored in the task security blob was also stored in the cred security blob in addition to the label, and there was no task security blob.
 
