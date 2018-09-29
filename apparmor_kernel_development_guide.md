@@ -61,9 +61,22 @@ Mediation
 - resource.c, include/resource.h: mediation of rlimits, and also setting rlimits to profile defined values
 
 # LSM
-Infrastructure that provides a set of hooks and blobs off of kernel object. Hooks are spread through out the kernel, called using
+The is infrastructure that operates on kernel objects, at a deeper level in the kernel. It does not provide syscall filtering (provided by seccomp). It is possible to combine the two but apparmor does not at this time.
+
+The LSM provides a set of hooks
+- see include/linux/security.h and include/linux/lsm_hooks.h
+- see security/apparmor/lsm.c apparmor_hooks[]
+and blobs  via a security (void *) field off of several kernel object (inode, file, sock, superblock,...).
+
+Calls to the hooks are spread through out the kernel, called using
 - security_XXX.
-????
+
+int return errcode
+
+stacking
+
+updating state vs permission check
+
 
 # task labeling
 The task's label is stored off of the task's cred security blob, not the task security blob. In older versions of apparmor the data stored in the task security blob was also stored in the cred security blob in addition to the label, and there was no task security blob.
