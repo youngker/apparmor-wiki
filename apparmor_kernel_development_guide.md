@@ -60,6 +60,43 @@ Mediation
 - task.c, include/task.h: task related mediation and storing off of state for nonewprivs, change_hat, change_onexec
 - resource.c, include/resource.h: mediation of rlimits, and also setting rlimits to profile defined values
 
+# task labeling
+The task's label is stored off of the task's cred security blob, not the task security blob. In older versions of apparmor the data stored in the task security blob was also stored in the cred security blob in addition to the label, and there was no task security blob.
+
+Except in a few special cases NEVER directly use the cred's label. Doing so could result in using a STALE label, that can lead to strange problems and bug reports.
+
+Instead use
+  - task context: begin_label_crit_section/end_label_crit_section
+  - atomic context: __begin_label_crit_section/__end_label_crit_section
+
+A task is the only one that can update its label. So label update is done in hook functions
+- the label is checked for staleness (profile has been replaced)
+  - the label is updated if in context that can sleep
+  - if not a refcounted version of the label is returned for use
+
+# profile replacement and label update
+A tasks label can only be updated by it self. This means profile replacement proceeds in two phases, updating the profiles and labels, and updating the task's label. Because locking over the entire update process would be very detrimental to the kernel profile replacement is not expected to be atomic but that it will complete within a reasonable time window.
+
+- when a profile is replaced
+  - it is unpacked and verified outside of locks, only once the profile is ready are locks taken
+  - a round of lookups and fs creation is done, prepping for actual replacement
+  - only once all the setup that could fail is done does actual replacement take place
+  - its aa_proxy is updated to point to the new profile.
+  - its STALE flag in its label is set.
+    - The STALE flag is updated without lock. This is okay because its a one way transition and the only flag in the set that can change at run time, so even if there is racing updates, the correct value will always be written.
+  - the task doing the profile replacement then mutex locks the ns label tree and begins walking the labels updating compound labels that contain the replaced label, updating their proxies and marking them stale
+- when a task enters a hook
+  - it checks if its label is STALE at the beginning of the critical section
+    - if the label is stale it will
+      - update the task if it can (begin_label_crit_section())
+      - or get a refcount to the updated label (__begin_label_crit_section())
+- when a task leaves the critical section it will put the label refcount if one was taken.
+
+It is possible that a tasks label will not be updated for some time if the task does not enter LSM hooks where the label can be updated.
+
+This technique is used because profile replacement is expected to be infrequent compared to LSM hook entry and it is relatively expensive to do atomic operations. As long as there are thousands of hook entries between profile replacement, it is worth skipping the atomic operation.
+
+
 
 # apparmorfs: userspace interface, introspection and api
 - virtualized policy/ directory
