@@ -86,6 +86,10 @@ Except in a few special cases NEVER directly use the cred's label. Doing so coul
 Instead use
   - task context: begin_label_crit_section/end_label_crit_section
   - atomic context: __begin_label_crit_section/__end_label_crit_section
+unless you are going to update the task's label. NEVER update the task's label inside of a label_crit_section. Instead
+  - get a reference count on the task's label
+  - update the tasks label via updating the cred
+  - put the reference count when done with the label
 
 A task is the only one that can update its label. So label update is done in hook functions
 - the label is checked for staleness (profile has been replaced)
