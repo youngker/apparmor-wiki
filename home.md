@@ -30,6 +30,7 @@ Distributions that include AppArmor:
 
 -   [Annvix](https://annvix.org)
 -   [Arch Linux](https://www.archlinux.org/), documentation and Arch specific [notes](https://wiki.archlinux.org/index.php/AppArmor)
+-   [CentOs](https://www.centos.org/), documentation and CentOS specific [notes](Distro_CentOS)
 -   [Debian](https://www.debian.org/), documentation and Debian specific [notes](distro_debian)
 -   [Gentoo](https://www.gentoo.org/)
 -   [openSUSE](https://www.opensuse.org) (integrated in default install), documentation and Suse specific [notes](distro_suse)
