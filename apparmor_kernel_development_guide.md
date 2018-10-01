@@ -150,8 +150,6 @@ task
 
 hooks
 
-critical_sections - accessing the task cred and labels
--
 
 preallocated buffers
 - apparmor preallocates some large percpu work buffers for path lookups
