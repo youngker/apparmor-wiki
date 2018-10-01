@@ -83,22 +83,22 @@ The task's label is stored off of the task's cred security blob, not the task se
 
 Except in a few special cases NEVER directly use the cred's label. Doing so could result in using a STALE label, that can lead to strange problems and bug reports.
 
+## critical sections
 Instead use
   - task context: begin_label_crit_section/end_label_crit_section
   - atomic context: __begin_label_crit_section/__end_label_crit_section
 
-unless you are going to update the task's label. NEVER update the task's label inside of a label_crit_section. Instead
-  - get a reference count on the task's label
-  - update the tasks label via updating the cred
+```NEVER``` update the task's label inside of a label_crit_section.
+
+## changing the task label
+  - ensure you are NOT in a label critical section
+  - get a reference count on the task's label (aa_get_current_label())
+  - update the tasks label via updating the cred (aa_replace_current_label())
   - put the reference count when done with the label
 
-A task is the only one that can update its label. So label update is done in hook functions
-- the label is checked for staleness (profile has been replaced)
-  - the label is updated if in context that can sleep
-  - if not a refcounted version of the label is returned for use
 
 # profile replacement and label update
-A tasks label can only be updated by it self. This means profile replacement proceeds in two phases, updating the profiles and labels, and updating the task's label. Because locking over the entire update process would be very detrimental to the kernel profile replacement is not expected to be atomic but that it will complete within a reasonable time window.
+A task's label can only be updated by it self. This means profile replacement proceeds in two phases, updating the profiles and labels, and updating the task's label. Because locking over the entire update process would be very detrimental to the kernel profile replacement is not expected to be atomic but that it will complete within a reasonable time window.
 
 - when a profile is replaced
   - it is unpacked and verified outside of locks, only once the profile is ready are locks taken
@@ -108,6 +108,7 @@ A tasks label can only be updated by it self. This means profile replacement pro
   - its STALE flag in its label is set.
     - The STALE flag is updated without lock. This is okay because its a one way transition and the only flag in the set that can change at run time, so even if there is racing updates, the correct value will always be written.
   - the task doing the profile replacement then mutex locks the ns label tree and begins walking the labels updating compound labels that contain the replaced label, updating their proxies and marking them stale
+
 - when a task enters a hook
   - it checks if its label is STALE at the beginning of the critical section
     - if the label is stale it will
