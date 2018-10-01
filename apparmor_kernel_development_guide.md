@@ -172,7 +172,12 @@ policydb
 
 .null
 
-# permission checks, caching and revalidation
+# permission checks
+- caching
+- revalidation
+- revocation
+- type calculation
+
 
 # stacking
 
