@@ -120,9 +120,17 @@ It is possible that a tasks label will not be updated for some time if the task 
 
 This technique is used because profile replacement is expected to be infrequent compared to LSM hook entry and it is relatively expensive to do atomic operations. As long as there are thousands of hook entries between profile replacement, it is worth skipping the atomic operation.
 
+# task's policy namespace
+The policy namespace to user for a task is determined by its label. Use
+- aa_get_current_ns()
 
+# userspace interface, introspection and api
+The userspace interface is split between procfs and securityfs.
 
-# apparmorfs: userspace interface, introspection and api
+## /proc/<pid>/attr/*
+
+## securityfs (/sys/kernel/security/apparmor/)
+
 - virtualized policy/ directory
   - jump link trick
 - aa_fs - common fn() between apparmor security fs and special virtualized apparmorfs
