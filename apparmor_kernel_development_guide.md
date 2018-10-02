@@ -61,21 +61,30 @@ Mediation
 - resource.c, include/resource.h: mediation of rlimits, and also setting rlimits to profile defined values
 
 # ```LSM```
-The is infrastructure that operates on kernel objects, at a deeper level in the kernel. It does not provide syscall filtering (provided by seccomp). It is possible to combine the two but apparmor does not at this time.
+The LSM is infrastructure that operates on kernel objects, at a deeper level in the kernel. It does not provide syscall filtering (provided by seccomp). It is possible to combine the two but apparmor does not at this time.
 
 The LSM provides a set of hooks
 - see include/linux/security.h and include/linux/lsm_hooks.h
 - see security/apparmor/lsm.c apparmor_hooks[]
-and blobs  via a security (void *) field off of several kernel object (inode, file, sock, superblock,...).
+
+and blobs via a security (void *) field off of several kernel object (inode, file, sock, superblock,...). The blobs should always be accessed by accessors macros (in older kernels the blobs can't be shared but LSM stacking is making is sharing them and requires access macros).
 
 Calls to the hooks are spread through out the kernel, called using
 - security_XXX.
 
-int return errcode
+Security hooks tend to either return no value 
 
-stacking
+  void security_XXX()
 
-updating state vs permission check
+for hooks that can not fail or int
+
+  int security_XXX()
+
+for hooks that can fail where the return int is 0 for success and ```-ERRNO``` on failure.
+
+## lsm hooks and state update
+
+Because the LSM allows at least minor stacking, it is important to not just update apparmor's internal state on any hook because another LSM or DAC may cause a denial after the apparmor permission hook is called. Consult the LSM documentation for the hooks where state updates can be performed.
 
 
 # ```task labeling```
@@ -120,9 +129,56 @@ It is possible that a tasks label will not be updated for some time if the task 
 
 This technique is used because profile replacement is expected to be infrequent compared to LSM hook entry and it is relatively expensive to do atomic operations. As long as there are thousands of hook entries between profile replacement, it is worth skipping the atomic operation.
 
-# ```task's policy namespace```
-The policy namespace to user for a task is determined by its label. Use
-- aa_get_current_ns()
+# ```Profiles, Labels, proxyies, and namespaces oh my```
+
+## Profile
+Profile is a name (identity), a set of rules (authority) and an optional attachment (rules about where the profile can be applied).
+
+The profile is currently the base unity of mediation. Every profile is a label, and has a label embedded within it that points to it self.
+
+The profile currently exists on two structures. Its parent (either a namespace, or a profile) list and the namespace label set tree. The profile list provides lockless lookup, label tree is not yet lockless read.
+
+The plan is to remove the label list eventually.
+
+Profiles are NOT removed from the label tree automatically because their ref count does not normally go to 0. They are manualy removed on profile replacement/removal when their replacement is inserted.
+
+Profiles are freed in RCU callback.
+
+## Label (Domain Type)
+
+The label is a vector of profiles. Once created it is read only except for its stale flag, which can be flipped one way, and its refcount.
+
+Labels exist in the tree when valid.
+
+Labels are sorted and stored in a Canonical form.
+
+Labels are expensive to build, vector allocations are kept down by using a small stack based vec for smaller labels, and short circuiting in code when possible.
+
+Labels can expire without being invalid, as tasks or objects referencing them cause their refcount to go to 0. Labels will be automatically removed from the tree in RCU call back if they were not removed before.
+
+If a label refcount is already held it is safe to use
+- aa_get_label()
+
+it a refcount is not held
+- aa_get_label_rcu()
+
+should be used. There are only a couple places where this should be needed (like accessing the proxy).
+
+## aa_proxy
+
+The proxy is an object to help with profile/label replacement, it keeps a reference to the most recent version a profile/label. It does cause a circular reference on profiles/labels that have not been replaced. This has to be manually broken by profile replacement at this time (there are plans to change this).
+
+The proxy has a special refcount, that can point to a label/profile thats label refcount has gone to 0. Use aa_get_label_rcu() to access.
+
+
+## namespaces
+
+
+## ```task's policy namespace```
+The policy namespace to user for a task is determined by its label. Use either
+- labels_ns if you have a reference on the label
+- aa_get_current_ns() to get the current task's ns.
+
 
 # ```userspace interface, introspection and api```
 The userspace interface is split between procfs and securityfs.
