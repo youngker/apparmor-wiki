@@ -78,7 +78,7 @@ stacking
 updating state vs permission check
 
 
-# ```task labeling````
+# ```task labeling```
 The task's label (domain type) is stored off of the task's cred security blob, not the task security blob. In older versions of apparmor the data stored in the task security blob was also stored in the cred security blob in addition to the label, and there was no task security blob.
 
 Except in a few special cases NEVER directly use the cred's label. Doing so could result in using a STALE label, that can lead to strange problems and bug reports.
