@@ -5,6 +5,11 @@
 - [Kernel Development Guide](apparmor_kernel_development_guide)
 - [Policy Development Guide](aparmor_policy_development_guide)
 
+# Disclaimer
+- This assumes you know about the basics of apparmor policy and enforcement ???link
+- This document probably lags the code
+- This document is a general overview, and some hints and tips. It can't cover everything the code does.
+
 # ```General code notes```
 - aa_ : prefix is used to namespace apparmor fns that are visible.
 - __XXX: leading underscores indicates fn needs to be used within locking or other special conditions
