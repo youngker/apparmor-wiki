@@ -24,7 +24,7 @@ Other locations
 - Documentation/admin-guide/kernel-parameters.rst
 - Documentation/process/3.Early-stage.rst
 
-### security/apparmor/ overview
+### security/apparmor/ directory overview
 - apparmor.h: class mediation type allocation, lsm.c global vars
 - lsm.c: LSM hook registration, base hook fns used in the registration and general module init. Base hook fns should be generally be static and in lsm.c
 
@@ -60,7 +60,7 @@ Mediation
 - task.c, include/task.h: task related mediation and storing off of state for nonewprivs, change_hat, change_onexec
 - resource.c, include/resource.h: mediation of rlimits, and also setting rlimits to profile defined values
 
-# LSM
+# ```LSM```
 The is infrastructure that operates on kernel objects, at a deeper level in the kernel. It does not provide syscall filtering (provided by seccomp). It is possible to combine the two but apparmor does not at this time.
 
 The LSM provides a set of hooks
@@ -78,8 +78,8 @@ stacking
 updating state vs permission check
 
 
-# task labeling
-The task's label is stored off of the task's cred security blob, not the task security blob. In older versions of apparmor the data stored in the task security blob was also stored in the cred security blob in addition to the label, and there was no task security blob.
+# ```task labeling````
+The task's label (domain type) is stored off of the task's cred security blob, not the task security blob. In older versions of apparmor the data stored in the task security blob was also stored in the cred security blob in addition to the label, and there was no task security blob.
 
 Except in a few special cases NEVER directly use the cred's label. Doing so could result in using a STALE label, that can lead to strange problems and bug reports.
 
@@ -97,7 +97,7 @@ Instead use
   - put the reference count when done with the label
 
 
-# profile replacement and label update
+# ```profile replacement and label update```
 A task's label can only be updated by it self. This means profile replacement proceeds in two phases, updating the profiles and labels, and updating the task's label. Because locking over the entire update process would be very detrimental to the kernel profile replacement is not expected to be atomic but that it will complete within a reasonable time window.
 
 - when a profile is replaced
@@ -120,11 +120,11 @@ It is possible that a tasks label will not be updated for some time if the task 
 
 This technique is used because profile replacement is expected to be infrequent compared to LSM hook entry and it is relatively expensive to do atomic operations. As long as there are thousands of hook entries between profile replacement, it is worth skipping the atomic operation.
 
-# task's policy namespace
+# ```task's policy namespace```
 The policy namespace to user for a task is determined by its label. Use
 - aa_get_current_ns()
 
-# userspace interface, introspection and api
+# ```userspace interface, introspection and api```
 The userspace interface is split between procfs and securityfs.
 
 ## /proc/<pid>/attr/*
