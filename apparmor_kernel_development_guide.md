@@ -146,7 +146,7 @@ Profiles are freed in RCU callback.
 
 ## Label (Domain Type)
 
-The label is a vector of profiles. Once created it is read only except for its stale flag, which can be flipped one way, and its refcount.
+The label is a vector of profiles. It is the means by which apparmor does dynamic policy composition (stacking and delegation). Once created it is read only except for its stale flag, which can be flipped one way, and its refcount.
 
 Labels exist in the tree when valid.
 
@@ -173,12 +173,63 @@ The proxy has a special refcount, that can point to a label/profile thats label 
 
 ## namespaces
 
+namespaces
 
-## ```task's policy namespace```
+scope
+view
+
+
+### ```task's policy namespace```
 The policy namespace to user for a task is determined by its label. Use either
 - labels_ns if you have a reference on the label
 - aa_get_current_ns() to get the current task's ns.
 
+
+# Permission Computation
+When computing permissions it is almost always done and on a per profile level, and audited at on a per profile level.
+
+Profile based callback fns are used to provide a per profile access with special macros used to handle permission composition.
+
+While not all code has been converted to the following pattern where possible the new pattern should be used as it will make it easier to land delegation when it is ready.
+
+## Label access patterns
+???
+There are several macros to help with writing 
+
+
+## permission pattern
+
+The permission pattern is
+- lookup permission in dfa
+- apply run time modes to dfa perms
+- run the permission check, and audit (if the audit structure is defined)
+
+An example code snippet
+
+        // permission lookup
+	state = aa_dfa_next(profile->policy.dfa,
+			    profile->policy.start[AA_CLASS_SIGNAL],
+			    aad(sa)->signal);
+	aa_label_match(profile, peer, state, false, request, &perms);
+	
+	// apply modes to the permissions
+	aa_apply_modes_to_perms(profile, &perms);
+	
+	// perform the permission check and audit if needed
+	return aa_check_perms(profile, &perms, request, sa, audit_signal_cb);
+
+## dfa access patterns
+
+The dfa access pattern is how permissions are encoded in the dfa
+
+start with a class
+
+order - and
+
+alternation - or
+
+permission on each state
+????
 
 # ```userspace interface, introspection and api```
 The userspace interface is split between procfs and securityfs.
