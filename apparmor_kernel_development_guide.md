@@ -177,18 +177,47 @@ The proxy is an object to help with profile/label replacement, it keeps a refere
 The proxy has a special refcount, that can point to a label/profile thats label refcount has gone to 0. Use aa_get_label_rcu() to access.
 
 
-## namespaces
+## policy namespaces
 
-namespaces
-
-scope
-view
-
-
-### ```task's policy namespace```
 The policy namespace to user for a task is determined by its label. Use either
 - labels_ns if you have a reference on the label
 - aa_get_current_ns() to get the current task's ns.
+
+scope
+
+view
+
+# ```Domain Transitions```
+
+## pre 4.11
+
+## post 4.11
+AppArmor replaced the profile* stored in the task_ctx with a label*. Domain transition now consist of building a new label. To do this we walk each profile in the cred label and they can each have a transition
+
+  A -> D
+  B -> B
+  C -> A&C
+
+the transition is usually to a single profile (actually label of the profile) but it can be to a label
+stack, C -> A&C above. This allows setting up stacks etc.
+
+The label computation takes and place each transition into a vector (label*[]). The build macro takes the transition vector and finds a matching label in the label tree or builds a new label out of it.
+
+So for the above example the built label would be
+
+  A&B&C&D
+
+## post 4.??
+
+the task->security->nnp field is also a label but it might not be the
+same as the task's cred because we are already allowing some limited
+transitions.  The current restriction is that nnp must be a subset of
+the current label so if the current label is A&B&C, nnp might be A&C,
+but won't be A&D.
+
+After 4.?? apparmor switched to putting the domain label directly from the cred->security field. The task_ctx and rest of the fields moved to to hang of the task->security field.
+
+Domain transitions now check the task_ctx for change_hat, change_onexec and nnp, and update the cred->security field with a label directly.
 
 
 # Permission Computation
