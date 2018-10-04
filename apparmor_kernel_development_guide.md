@@ -77,11 +77,12 @@ and blobs via a security (void *) field off of several kernel object (inode, fil
 Calls to the hooks are spread through out the kernel, called using
 - security_XXX.
 
-Security hooks tend to either return no value 
+## return no value.
+Security hooks return either
 
   void security_XXX()
 
-for hooks that can not fail or int
+for hooks that can not fail, or int
 
   int security_XXX()
 
