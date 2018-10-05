@@ -41,6 +41,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 - fix parser so that cache creation failure doesn't cause load failure
 - fix includes to allow white space
 - add support for conditional includes
+- fix Makefile hardcoded paths to flex and bison
 
 
 Utils
