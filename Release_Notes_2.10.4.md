@@ -38,6 +38,7 @@ Utils
   - fix writing "link subset" rules
   - fix writing alias rules
   - don't crash if setting printk_ratelimit fails
+  - add python3.6 line to utils/logprof.conf
   - add python3.7 to logprof.conf
   - add support for zsh in logprof.conf
   - error out on nested child profiles which are not currently supported
@@ -61,28 +62,33 @@ Utils
 
 Policy
 ------
-- netstat: allow capability sys_ptrace
-- ntpd allow access to ntp clockstat
-- syslog-ng: fix startup for some configurations
-- mlmmj-sub: fix moderated subscription
-- allow running Thunderbird wrapper script
-- dovecot
-  - add dovecot/stats profile, and allow dovecot to run it
-  - allow dac_read_search and reading ssl-parameters.dat
-  - config: allow dac_read_search and reading ssl-parameters.dat
-  - add abstractions/openssl needed by dict
-  - add write tempfiles needed by imap
-  - add access to the login-master-notify socket needed by managesieve-login
-  - fix signal sending for usr.sbin.dovecot
-  - auth
-    - allow dac_read_search and dac_override
-    - allow writing /run/dovecot/old-stats-user
-- samba
-  - allow smbd to load new shared libraries
-  - allow winbindd to read and write new kerberos cache location
-  - nmbd add missing files
-  - smbd add missing pid lock file
-- abstractions
+- Profiles
+  - netstat: allow capability sys_ptrace
+  - ntpd allow access to ntp clockstat
+  - syslog-ng: fix startup for some configurations
+  - mlmmj-sub: fix moderated subscription
+  - allow running Thunderbird wrapper script
+  - dovecot
+    - add dovecot/stats profile, and allow dovecot to run it
+    - allow dac_read_search and reading ssl-parameters.dat
+    - config: allow dac_read_search and reading ssl-parameters.dat
+    - add abstractions/openssl needed by dict
+    - add write tempfiles needed by imap
+    - add access to the login-master-notify socket needed by managesieve-login
+    - fix signal sending for usr.sbin.dovecot
+    - auth
+      - allow dac_read_search and dac_override
+      - allow writing /run/dovecot/old-stats-user
+  - samba
+    - allow smbd to load new shared libraries
+    - allow winbindd to read and write new kerberos cache location
+    - nmbd add missing files
+    - smbd add missing pid lock file
+
+- Tunables
+  - Add uid and uids kernel var placeholders
+
+- Abstractions
   - add qt5 abstraction
   - add qt5-compose-cache-write abstraction
   - ubuntu-email: add new Thunderbird executable path
@@ -108,8 +114,6 @@ Policy
     - add support for python 3.6
     - add support for python 3.7
     - allow /usr/local/lib/python3/dist-packages
-- tunables
-  - Add uid and uids kernel var placeholders
 
 Tests
 -----
