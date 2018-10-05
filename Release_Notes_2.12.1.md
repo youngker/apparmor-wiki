@@ -55,11 +55,14 @@ Utils
    - don't crash if setting printk_ratelimit fails
    - fix overwriting of child profile flags if they differ from the main profile
    - add python3.7 to logprof.conf
+   - add support for zsh in logprof.conf
+   - add basic support for abi rules to the tools
 
 -   aa-notify
     - make message about notify-send package cross-distro compatible
     - set DBUS_SESSION_BUS_ADDRESS, needed by notify-send
     - remove group restrictions
+    - Read user's configuration file from XDG_CONFIG_HOME
 
 -   sandbox.py
     - remove unused exception binding
@@ -73,6 +76,7 @@ Policy
   - support distributions which merge sbin into bin
   - ping: support void linux binary location
   - traceroute: support void linux binary location
+  - allow running Thunderbird wrapper script
   - ntpd
     - allow access to ntp clockstat
     - add openntpd drift and socket files
@@ -89,8 +93,23 @@ Policy
   - samba
     - allow smbd to load new shared libraries
     - allow winbindd to read and write new kerberos cache location
+    - nmbd add missing files
+    - smbd add missing pid lock file
+
+- Tunables
+  - Add uid and uids kernel var placeholders
 
 - Abstractions
+  - add qt5 abstraction
+  - add qt5-compose-cache-write abstraction
+  - ubuntu-email: add new Thunderbird executable path
+  - ubuntu-browsers.d/user-files: disallow access to the dirs of private files
+  - private-files: disallow writes to thumbnailer dir (LP: #1788929)
+  - private-files-strict: disallow access to the dirs of private files
+  - user-files: disallow access to the dirs of private files
+  - remove antiquated abstractions/launchpad-integration
+  - kde: use qt5 abstration
+  - samba: add missing log files
   - gnupg: allow pubring.kbx
   - ld.so.conf: Update base abstraction
   - nvidia: allow to create .nv directory
