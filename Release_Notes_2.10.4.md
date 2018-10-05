@@ -44,6 +44,7 @@ Utils
   - add support for zsh in logprof.conf
   - error out on nested child profiles which are not currently supported
   - fix conflicting profile error
+  - add basic support for abi rules to the tools
   
 - aa-notify
   - make message about notify-send package cross-distro compatible
