@@ -11,7 +11,7 @@ apparmor patches applied). And supports features released in the 4.18
 kernel.
 
 Note: These release notes cover all changes between 2.11.1 (8b81fe065f2d8ad93767ebf32afbd3740c6f3818)
-and 2.11.2 (???) on the [apparmor-2.11 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.11).
+and 2.11.2 (3e527d903f312704146a40e0a64bae37aef9c1de) on the [apparmor-2.11 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.11).
     
 
 
@@ -38,22 +38,26 @@ Utils
 -----
 -  genprof/logprof
    - ignore .git in is_skippable_dir()
+   - ignore cache.d in is_skippable_dir()
    - fix writing "link subset" rules
    - fix writing alias rules
    - error out on nested child profiles which are not currently supported
    - don't crash if setting printk_ratelimit fails
    - add python3.6 line to utils/logprof.conf
    - add python3.7 to logprof.conf
+   - add support for zsh in logprof.conf
    - handle_children(): automatically add m permissions on ix rules
    - FileRule: detect that 'a' is covered by 'w'
    - gracefully handles a missing parser when running the utils tests
    - fix conflicting profile error
    - fix selection order of profiles when saving
+   - add basic support for abi rules to the tools
 
 -   aa-notify
     - make message about notify-send package cross-distro compatible
     - set DBUS_SESSION_BUS_ADDRESS, needed by notify-send
     - remove group restrictions
+    - Read user's configuration file from XDG_CONFIG_HOME
 
 -   sandbox.py
     - remove unused exception binding
@@ -82,6 +86,7 @@ Policy
   - dnsmasq: add paths for NetworkManager connection sharing
   - mlmmj-sub fix moderated subscription
   - wireshark update for modern releases
+  - allow running Thunderbird wrapper script
   - dovecot
     - add dovecot/stats profile, and allow dovecot to run it
     - allow write to /run/dovecot/old-stats-user
@@ -94,11 +99,24 @@ Policy
   - samba
     - allow smbd to load new shared libraries
     - allow winbindd to read and write new kerberos cache location
+    - nmbd add missing files
+    - smbd add missing pid lock file
 
 - Tunables
   - global: accept seven digit pids
+  - add uid and uids kernel var placeholders
 
 - Abstractions
+  - add qt5 abstraction
+  - add qt5-compose-cache-write abstraction
+  - ubuntu-email: add new Thunderbird executable path
+  - ubuntu-browsers.d/user-files: disallow access to the dirs of private files
+  - private-files: disallow writes to thumbnailer dir (LP: #1788929)
+  - private-files-strict: disallow access to the dirs of private files
+  - user-files: disallow access to the dirs of private files
+  - remove antiquated abstractions/launchpad-integration
+  - kde: use qt5 abstration
+  - samba: add missing log files
   - gnupg: allow pubring.kbx
   - add mesa abstraction
   - ld.so.conf: Update base abstraction
