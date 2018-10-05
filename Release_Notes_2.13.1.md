@@ -39,6 +39,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 -   fix bugs in --config-file handling
 -   make --config-file so it is no longer required to be the first option passed to the parser
 -   move default cache location to /var/cache
+-  fix Makefile hardcoded paths to flex and bison
 
 Init
 ----
