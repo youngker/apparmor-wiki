@@ -10,7 +10,7 @@ This version of the userspace should work with all kernel versions from
 apparmor patches applied). 
 
 Note: These release notes cover all changes between 2.10.3 (3004390a6c3e2efe1c2bcfa51e3b0ceef5b39041)
-and 2.10.4 (???) on the [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
+and 2.10.4 (f74f044f9fc0160973772262c88e443881014233) on the [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
     
 
 
@@ -34,10 +34,12 @@ Utils
 -----
 - genprof/logprof
   - ignore .git in is_skippable_dir()
+  - ignore cache.d in is_skippable_dir()
   - fix writing "link subset" rules
   - fix writing alias rules
   - don't crash if setting printk_ratelimit fails
   - add python3.7 to logprof.conf
+  - add support for zsh in logprof.conf
   - error out on nested child profiles which are not currently supported
   - fix conflicting profile error
   
@@ -45,6 +47,7 @@ Utils
   - make message about notify-send package cross-distro compatible
   - set DBUS_SESSION_BUS_ADDRESS, needed by notify-send
   - remove group restrictions
+  - Read user's configuration file from XDG_CONFIG_HOME
 
 - sandox.py
   - remove unused exception binding
@@ -62,6 +65,7 @@ Policy
 - ntpd allow access to ntp clockstat
 - syslog-ng: fix startup for some configurations
 - mlmmj-sub: fix moderated subscription
+- allow running Thunderbird wrapper script
 - dovecot
   - add dovecot/stats profile, and allow dovecot to run it
   - allow dac_read_search and reading ssl-parameters.dat
@@ -76,8 +80,19 @@ Policy
 - samba
   - allow smbd to load new shared libraries
   - allow winbindd to read and write new kerberos cache location
-
+  - nmbd add missing files
+  - smbd add missing pid lock file
 - abstractions
+  - add qt5 abstraction
+  - add qt5-compose-cache-write abstraction
+  - ubuntu-email: add new Thunderbird executable path
+  - ubuntu-browsers.d/user-files: disallow access to the dirs of private files
+  - private-files: disallow writes to thumbnailer dir (LP: #1788929)
+  - private-files-strict: disallow access to the dirs of private files
+  - user-files: disallow access to the dirs of private files
+  - remove antiquated abstractions/launchpad-integration
+  - kde: use qt5 abstration
+  - samba: add missing log files
   - gnupg: allow pubring.kbx
   - ld.so.conf: Update base abstraction
   - nvidia: allow to create .nv directory
@@ -85,15 +100,16 @@ Policy
   - php: allow ICU (unicode support) data tables
   - X: add another location for .Xauthority
   - nameservice: allow reading /etc/netconfig
-- audio
-  - Fix local pulseaudio config file access
-  - Allow to read pulseaudio config subdirectories
-  - add OpenAL HRTF support
-- Python:
-  - add support for python 3.6
-  - add support for python 3.7
-  - allow /usr/local/lib/python3/dist-packages
-
+  - audio
+    - Fix local pulseaudio config file access
+    - Allow to read pulseaudio config subdirectories
+    - add OpenAL HRTF support
+  - Python:
+    - add support for python 3.6
+    - add support for python 3.7
+    - allow /usr/local/lib/python3/dist-packages
+- tunables
+  - Add uid and uids kernel var placeholders
 
 Tests
 -----
