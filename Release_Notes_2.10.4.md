@@ -28,6 +28,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 - fix includes to allow white space
 - add support for conditional includes
 - fix includes to allow white space
+- fix Makefile hardcoded paths to flex and bison
 
 
 Utils
