@@ -55,6 +55,7 @@ Library
 -   fix failure to create missing cache dir
 -   fix build failure when enable-debug-output=yes
 -   replace `scandirat` with open-coded variant so that apparmor can be built on musl libc
+-   fix dirat_for_each2() fd handling
 
 
 Utils
@@ -66,9 +67,12 @@ Utils
    - fix overwriting of child profile flags if they differ from the main profile
    - allow for named profiles without and attachment specification
    - add python3.7 to logprof.conf
+   - add support for zsh in logprof.conf
+   -   add basic support for abi rules to the tools
 
 -   aa-notify
     - make message about notify-send package cross-distro compatible
+    - Read user's configuration file from XDG_CONFIG_HOME
 
 -   sandbox.py
     - remove unused exception binding
@@ -81,6 +85,7 @@ Policy
   - ping: support void linux binary location
   - traceroute: support void linux binary location
   - dnsmasq: add paths for NetworkManager connection sharing
+  - allow running Thunderbird wrapper script
   - ntpd
     - allow access to ntp clockstat
     - add openntpd drift and socket files
@@ -90,8 +95,19 @@ Policy
 
 - Tunables
   - Make variables value more readable by avoiding the use of too many alternations.
+  - Add uid and uids kernel var placeholders
 
 - Abstractions
+  - add qt5 abstraction
+  - add qt5-compose-cache-write abstraction
+  - ubuntu-email: add new Thunderbird executable path
+  - ubuntu-browsers.d/user-files: disallow access to the dirs of private files
+  - private-files: disallow writes to thumbnailer dir (LP: #1788929)
+  - private-files-strict: disallow access to the dirs of private files
+  - user-files: disallow access to the dirs of private files
+  - remove antiquated abstractions/launchpad-integration
+  - kde: use qt5 abstration
+  - samba: add missing log files
   - add recent documents write abstraction and update abstractions to use it
   - add OpenCL abstraction
   - kde: drop redundant rules for icons access
@@ -105,6 +121,8 @@ Policy
     - treat Flatpak exports the same way as bits shipped by the distro.
     - simplify by not attempting to guess the exhaustive list of files that can exist in {~/.local/share,/usr/share}/applications/.
     - refactor for consistency.
+  - nvidia
+    - opencl: don't allow PUx on nvidia-modprobe
 
 
 Tests
