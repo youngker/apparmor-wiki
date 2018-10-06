@@ -39,7 +39,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 -   fix bugs in --config-file handling
 -   make --config-file so it is no longer required to be the first option passed to the parser
 -   move default cache location to /var/cache
--  fix Makefile hardcoded paths to flex and bison
+-   fix Makefile hardcoded paths to flex and bison
 
 Init
 ----
@@ -90,7 +90,11 @@ Policy
     - allow access to ntp clockstat
     - add openntpd drift and socket files
     - support void linux binary location
-  - update samba
+  - samba
+    - allow smbd to load new shared libraries
+    - allow winbindd to read and write new kerberos cache location
+    - nmbd add missing files
+    - smbd add missing pid lock file
   - update usr.sbin.useradd to support usr-merge
 
 - Tunables
@@ -123,6 +127,7 @@ Policy
     - refactor for consistency.
   - nvidia
     - opencl: don't allow PUx on nvidia-modprobe
+    - use nvidia_modprobe profile inside opencl-nvidia
 
 
 Tests
