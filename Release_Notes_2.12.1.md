@@ -77,6 +77,7 @@ Policy
   - ping: support void linux binary location
   - traceroute: support void linux binary location
   - allow running Thunderbird wrapper script
+  - add nvidia_modprobe profile
   - ntpd
     - allow access to ntp clockstat
     - add openntpd drift and socket files
