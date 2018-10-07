@@ -11,3 +11,5 @@
 - This document is a general overview, and some hints and tips. It can't cover everything the code does.
 
 # TODO
+
+The parser is an old code base that is slowly being modernized, as such it has all the warts of both old and new at the same time. The goal currently is to make adding new code easier and slowly finish moving the old code over to new patterns.
