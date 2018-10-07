@@ -270,7 +270,7 @@ The permission pattern is
 
 An example code snippet
 
-        // permission lookup
+	// permission lookup
 	state = aa_dfa_next(profile->policy.dfa,
 			    profile->policy.start[AA_CLASS_SIGNAL],
 			    aad(sa)->signal);
