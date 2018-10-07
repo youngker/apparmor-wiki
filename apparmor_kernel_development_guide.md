@@ -135,7 +135,7 @@ It is possible that a tasks label will not be updated for some time if the task 
 
 This technique is used because profile replacement is expected to be infrequent compared to LSM hook entry and it is relatively expensive to do atomic operations. As long as there are thousands of hook entries between profile replacement, it is worth skipping the atomic operation.
 
-# ```Profiles, Labels, proxyies, and namespaces oh my```
+# ```Profiles, Labels, proxies, and namespaces```
 
 ## Profile
 Profile is a name (identity), a set of rules (authority) and an optional attachment (rules about where the profile can be applied).
@@ -152,6 +152,9 @@ Profiles are freed in RCU callback.
 
 ## Label (Domain Type)
 
+The label is the domain type. It provides dynamic composition, of profiles. It was brought into the upstream kernel in 4.13 but existed in ubuntu kernels for longer.
+
+### kernel 4.13+
 The label is a vector of profiles. It is the means by which apparmor does dynamic policy composition (stacking and delegation). Once created it is read only except for its stale flag, which can be flipped one way, and its refcount.
 
 Labels exist in the tree when valid.
@@ -169,6 +172,13 @@ it a refcount is not held
 - aa_get_label_rcu()
 
 should be used. There are only a couple places where this should be needed (like accessing the proxy).
+
+### ??? Future kernels
+
+The label will be moving away from a simple vector of profiles to more organized, tagged arrays. All profiles within a policy namespace will be grouped into a sublabel, and delegation will see the same treatment.
+
+This is a wip. And has not landed yet. This note is here to encourage use of the provided fns, and macros to make switching over easier.
+
 
 ## aa_proxy
 
