@@ -199,10 +199,10 @@ view
 
 # ```Domain Transitions```
 
-## pre 4.11
+## pre 4.13
 
-## post 4.11
-AppArmor replaced the profile* stored in the task_ctx with a label*. Domain transition now consist of building a new label. To do this we walk each profile in the cred label and they can each have a transition
+## post 4.13
+AppArmor replaced the profile* stored in the task_ctx stored off the cred with a label*. Domain transition now consist of building a new label. To do this we walk each profile in the cred label and they can each have a transition
 
   A -> D
   B -> B
@@ -217,7 +217,7 @@ So for the above example the built label would be
 
   A&B&C&D
 
-## post 4.??
+## post 4.17
 
 the task->security->nnp field is also a label but it might not be the
 same as the task's cred because we are already allowing some limited
