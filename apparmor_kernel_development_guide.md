@@ -204,9 +204,11 @@ view
 ## post 4.13
 AppArmor replaced the profile* stored in the task_ctx stored off the cred with a label*. Domain transition now consist of building a new label. To do this we walk each profile in the cred label and they can each have a transition
 
-| A -> D |
-| B -> B |
-| C -> A&C |
+| Profile |  |Transition |
+|---------|--|-----------|
+| A | -> | D |
+| B | -> | B |
+| C | -> | A&C |
 
 the transition is usually to a single profile (actually label of the profile) but it can be to a label
 stack, C -> A&C above. This allows setting up stacks etc.
