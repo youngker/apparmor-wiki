@@ -203,7 +203,7 @@ view
 
 Domain transitions pre 4.13 are fairly straight forward. The task's confinement is a single profile, refcounted from the apparmor task_ctx struct off of the the task's cred.
 
-task -> cred -> security (task_ctx) -> profile
+task -> cred -> security (task_ctx *) -> profile
 
 The confining profile can transition to single profile, either the same or something different dependent on the profile rules.
 
@@ -212,7 +212,11 @@ The confining profile can transition to single profile, either the same or somet
 | A | -> | D |
 
 ## post 4.13
-AppArmor replaced the profile* stored in the task_ctx stored off the cred with a label*. Domain transition now consist of building a new label. To do this we walk each profile in the cred label and they can each have a transition
+AppArmor replaced the profile* stored in the task_ctx stored off the cred with a label*.
+
+task -> cred -> security (task_ctx *) -> label
+
+Domain transition now consist of building a new label. To do this we walk each profile in the cred label and they can each have a transition
 
 | Profile |  |Transition |
 |---------|--|-----------|
@@ -232,9 +236,9 @@ So for the above example the built label would be
 ## post 4.17
 In 4.17 the confinement label was split from the task specific tracking information (change_hat, onexec, ...). The label becomes directly referenced by that cred->security field while that task_ctx is now referenced by the task's security field.
 
-task->cred->security (label)
+task->cred->security (label *)
 
-task->security->task_ctx
+task->security (task_ctx *)
 
 In addition the task_ctx picked up a new nnp field
 
