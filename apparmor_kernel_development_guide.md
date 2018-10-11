@@ -215,7 +215,7 @@ The confining profile can transition to single profile, either the same or somet
 
 When seccomp nnp is set, it affects what domain transitions can occur. Specifically exec time inheritance of the current profile is allowed but regular profile transitions are blocked. The only transition that is allowed is from ```unconfined``` to any profile as this always results in less privileges.
 
-## post 4.13
+## 4.13..4.16
 AppArmor replaced the profile* stored in the task_ctx stored off the cred with a label*.
 
    ```task -> cred -> security (task_ctx *) -> label```
