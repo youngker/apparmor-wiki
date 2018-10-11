@@ -94,9 +94,20 @@ Because the LSM allows at least minor stacking, it is important to not just upda
 
 
 # ```task labeling```
-The task's label (domain type) is stored off of the task's cred security blob, not the task security blob. In older versions of apparmor the data stored in the task security blob was also stored in the cred security blob in addition to the label, and there was no task security blob.
-
+The task's label (domain type) is stored off of the task's cred security blob, not the task security blob.
 Except in a few special cases NEVER directly use the cred's label. Doing so could result in using a STALE label, that can lead to strange problems and bug reports.
+
+## pre 4.13
+  ```task -> cred -> security (task_ctx *) -> profile```
+
+## 4.13-4.16
+   ```task -> cred -> security (task_ctx *) -> label```
+
+## 4.17
+  ```task->cred->security (label *)```
+
+4.17 removed the domain label from the task_ctx and moved the remain parts of the task_ctx to the task->security blob,
+
 
 ## critical sections
 Instead use
