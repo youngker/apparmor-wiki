@@ -203,7 +203,7 @@ view
 
 Domain transitions pre 4.13 are fairly straight forward. The task's confinement is a single profile, refcounted from the apparmor task_ctx struct off of the the task's cred.
 
-task -> cred -> security (task_ctx *) -> profile
+  ```task -> cred -> security (task_ctx *) -> profile```
 
 The confining profile can transition to single profile, either the same or something different dependent on the profile rules.
 
@@ -214,7 +214,7 @@ The confining profile can transition to single profile, either the same or somet
 ## post 4.13
 AppArmor replaced the profile* stored in the task_ctx stored off the cred with a label*.
 
-task -> cred -> security (task_ctx *) -> label
+   ```task -> cred -> security (task_ctx *) -> label```
 
 Domain transition now consist of building a new label. To do this we walk each profile in the cred label and they can each have a transition
 
@@ -236,9 +236,8 @@ So for the above example the built label would be
 ## post 4.17
 In 4.17 the confinement label was split from the task specific tracking information (change_hat, onexec, ...). The label becomes directly referenced by that cred->security field while that task_ctx is now referenced by the task's security field.
 
-task->cred->security (label *)
-
-task->security (task_ctx *)
+  ```task->cred->security (label *)```
+  ```task->security (task_ctx *)```
 
 In addition the task_ctx picked up a new nnp field
 
@@ -248,7 +247,7 @@ transitions.  The current restriction is that nnp must be a subset of
 the current label so if the current label is A&B&C, nnp might be A&C,
 but won't be A&D.
 
-After 4.?? apparmor switched to putting the domain label directly from the cred->security field. The task_ctx and rest of the fields moved to to hang of the task->security field.
+After 4.17 apparmor switched to putting the domain label directly from the cred->security field. The task_ctx and rest of the fields moved to to hang of the task->security field.
 
 Domain transitions now check the task_ctx for change_hat, change_onexec and nnp, and update the cred->security field with a label directly.
 
