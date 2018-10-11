@@ -100,7 +100,7 @@ Except in a few special cases NEVER directly use the cred's label. Doing so coul
 ## pre 4.13
   ```task -> cred -> security (task_ctx *) -> profile```
 
-## 4.13-4.16
+## 4.13 - 4.16
    ```task -> cred -> security (task_ctx *) -> label```
 
 ## 4.17
@@ -226,7 +226,7 @@ The confining profile can transition to single profile, either the same or somet
 
 When seccomp nnp is set, it affects what domain transitions can occur. Specifically exec time inheritance of the current profile is allowed but regular profile transitions are blocked. The only transition that is allowed is from ```unconfined``` to any profile as this always results in less privileges.
 
-## 4.13..4.16
+## 4.13 - 4.16
 AppArmor replaced the profile* stored in the task_ctx stored off the cred with a label*.
 
    ```task -> cred -> security (task_ctx *) -> label```
@@ -259,6 +259,10 @@ In 4.17 the confinement label was split from the task specific tracking informat
 
   ```task->security (task_ctx *)```
 
+Domain transitions are basically the same as in 4.13 except now they check the task_ctx for change_hat, change_onexec and nnp, and update the cred->security field with a label directly.
+
+### no new privs (nnp)
+
 In addition the task_ctx picked up a new nnp field
 
 the task->security->nnp field is also a label but it might not be the
@@ -266,13 +270,6 @@ same as the task's cred because we are already allowing some limited
 transitions.  The current restriction is that nnp must be a subset of
 the current label so if the current label is A&B&C, nnp might be A&C,
 but won't be A&D.
-
-After 4.17 apparmor switched to putting the domain label directly from the cred->security field. The task_ctx and rest of the fields moved to to hang of the task->security field.
-
-Domain transitions now check the task_ctx for change_hat, change_onexec and nnp, and update the cred->security field with a label directly.
-
-### no new privs (nnp)
-
 nnp field
 
 
