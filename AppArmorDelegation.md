@@ -298,6 +298,41 @@ object delegation via fd passing
 rule delegation vis api
 -----------------------
 
+Applications can delegate rules instead of just objects. Rule delegation requires access to the rule delegation api (which requires access to certain files and the ability to load policy in certain places), and there is some overhead associated with it.
+
+Rules being delegated go through a compile to transform the rules into a form that can be used by the kernel. It is best to group multiple rules into a single group. Each group of rules delegated results in a new profile block and that will be used as part of the delegated label.
+
+  A//+xxxx
+
+If the profile block is not part of existing policy it will be dynamically constrained by the label is delegated from. That is if a task with confinement A delegates a block of rules A.13 to a task confined by B. Task B's resulting confinement is
+  B//+A.13 but A.13 rules will not blindly extend B, they will first be dynamically intersected with A to ensure that A.13 is a true subset of A.
+
+
+Since delegation requires a confined user to be able to be able to do a restricted policy load, the loaded rule set must be verified to be a subset of the confinement of the task doing the delegation. To guarantee that the rule set is a subset, apparmor will do a dynamic intersection check of the delegated rules and the confinement of the task that did the delegation.
+
+  effectively B//+(A.13&A)
+
+the intersection check can be avoided if the delegated object is predefined in policy (normal delegating tasks cannot change the predefined policy objects so it is possible to know in advance whether the intersection is needed).
+
+
+delegation api basically needs to cache and create per task the delegated object. Attempt to load the object
+and then use the object. Can fail at any point.
+ 
+each delegated rule set also carries a mark where the authority came from, and that is used to limit
+
+delegation through inheritance
+onexec
+- load object
+- set onexec to target + object
+
+delegation through rule passing
+- load object
+- write object delegation to api, identifying task
+- mark task->security object
+- task notices, task invalidation, does label update
+
+
+
 Making Delegation Permanent
 ===========================
 
