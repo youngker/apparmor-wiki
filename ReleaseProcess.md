@@ -114,15 +114,15 @@ as well as for bug targeting. To create a new milestone:
 5.  Perform any last minute builds and tests on the tarball to ensure there are no brown paper bag issues.
 6.  Tag the release with `make tag` in the toplevel of an up to date checked out tree, to ensure consistently named tags. This does the equivalent of `bzr tag apparmor_VERSION` (e.g. `bzr tag apparmor_2.6.0`).
     -   Note that tags can be deleted and re-added if testing the generated release shows a critical bug that needs to be fixed before release.
-6.1  GIT: push tag to the repository  `git push <upstream repo> +<tag>`
-7.  \[Optional\] upload packages based on the release to the appropriate apparmor-dev ppa: https://launchpad.net/~apparmor-dev/+archive/apparmor-X.Y (where X.Y is the series version)
-8.  Create a new release from the milestone: https://launchpad.net/apparmor/+milestone/X.Y.Z/+addrelease
+7.  GIT: push tag to the repository  `git push <upstream repo> +<tag>`
+8.  \[Optional\] upload packages based on the release to the appropriate apparmor-dev ppa: https://launchpad.net/~apparmor-dev/+archive/apparmor-X.Y (where X.Y is the series version)
+9.  Create a new release from the milestone: https://launchpad.net/apparmor/+milestone/X.Y.Z/+addrelease
     -   Once a release has been created in launchpad, files can be uploaded to it
-9.  Upload the tarball and detached gpg signature to the launchpad page: https://launchpad.net/apparmor/X.Y/X.Y.Z/+adddownloadfile (where X.Y is the series and X.Y.Z is the specific version)
+10.  Upload the tarball and detached gpg signature to the launchpad page: https://launchpad.net/apparmor/X.Y/X.Y.Z/+adddownloadfile (where X.Y is the series and X.Y.Z is the specific version)
     -   The **Description** field should just be **AppArmor X.Y.Z**
-10. [Branch the release](ReleaseProcess#Branching_Userspace_Trees) (For major releases only)
+11. [Branch the release](ReleaseProcess#Branching_Userspace_Trees) (For major releases only)
     -   For point releases (2.6.x) a new branch is unnecessary, as only stable patches are being applied. The tag is sufficient to identify the release points.
-11. Update wiki
+12. Update wiki
     -   Update the release notes. There are two separate entries for release notes:
         1.  A stub entry on the [release notes](AppArmor_versions) page.
             -   The release note stub should have its release date updated to the current date
@@ -133,7 +133,7 @@ as well as for bug targeting. To create a new milestone:
     -   Update current release information on the [main page](Main_Page#Userspace)
         -   if major release or point release for the most recent major release, update **Current stable release**
         -   if point release for an older release series, update **Prior supported release**
-12. Mirror to kernel.org (require kernel.org account)
+13. Mirror to kernel.org (require kernel.org account)
     -   Mirror release tarball
         -   If major release create a release directory in **/pub/linux/security/apparmor/**.
             -   minor releases use the major release directory, but have the point release as part of their name
@@ -144,9 +144,9 @@ as well as for bug targeting. To create a new milestone:
         -   **/pub/scm/linux/security/apparmor/**
     -   Make sure any additional kernel patches are synced to the apparmor kernel tree
         -   **/pub/scm/linux/kernel/git/jj/apparmor-dev.git/**
-13. Send announcement of the release to the apparmor mailing list **apparmor@lists.ubuntu.com**
-14. Make a copy of the announcement on the launchpad page at https://launchpad.net/apparmor/+announce
-15. Go through bugs targeted to the milestone https://bugs.launchpad.net/apparmor/+milestone/X.Y.Z and either close them or move them to a different milestone if they were not fixed by this release
+14. Send announcement of the release to the apparmor mailing list **apparmor@lists.ubuntu.com**
+15. Make a copy of the announcement on the launchpad page at https://launchpad.net/apparmor/+announce
+16. Go through bugs targeted to the milestone https://bugs.launchpad.net/apparmor/+milestone/X.Y.Z and either close them or move them to a different milestone if they were not fixed by this release
 
 > ??? Register a new series in lp - when should this be done?  Before
 > files can be uploaded to it, but can be after branch is created
