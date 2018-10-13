@@ -114,6 +114,7 @@ as well as for bug targeting. To create a new milestone:
 5.  Perform any last minute builds and tests on the tarball to ensure there are no brown paper bag issues.
 6.  Tag the release with `make tag` in the toplevel of an up to date checked out tree, to ensure consistently named tags. This does the equivalent of `bzr tag apparmor_VERSION` (e.g. `bzr tag apparmor_2.6.0`).
     -   Note that tags can be deleted and re-added if testing the generated release shows a critical bug that needs to be fixed before release.
+6.1  GIT: push tag to the repository  `git push <upstream repo> +<tag>`
 7.  \[Optional\] upload packages based on the release to the appropriate apparmor-dev ppa: https://launchpad.net/~apparmor-dev/+archive/apparmor-X.Y (where X.Y is the series version)
 8.  Create a new release from the milestone: https://launchpad.net/apparmor/+milestone/X.Y.Z/+addrelease
     -   Once a release has been created in launchpad, files can be uploaded to it
