@@ -65,6 +65,37 @@ Mediation
 - task.c, include/task.h: task related mediation and storing off of state for nonewprivs, change_hat, change_onexec
 - resource.c, include/resource.h: mediation of rlimits, and also setting rlimits to profile defined values
 
+# Configuration
+If building go with default value for configuration items. 
+
+AppArmor needs to be enabled from the security menu (security/Kconfig). And configured via the apparmor menu (security/apparmor/Kconfig).
+
+## Configuration conditional code
+
+AppArmor code does NOT ifdef access to certain fields that are ```ifdef```ed within general kernel code. This is because these fields are required by apparmor and those conditionals are guarenteed to be selected. Specifically apparmor depends on
+
+```
+	SECURITY
+	NET
+```
+
+and will select
+```
+	AUDIT
+	SECURITY_PATH
+	SECURITYFS
+	SECURITY_NETWORK
+```
+
+The Crypto code is ifdefed by SECURITY_APPARMOR_HASH_DEFAULT which if enabled will select 
+```
+	CRYPTO
+        CRYPTO_SHA1
+```
+
+New code that have conditional dependencies should use ifdef instead of select for no core mediation. Eg. secmark, netfilter, keys code should all be wrapped in ifdefs.
+
+
 # ```LSM```
 The LSM is infrastructure that operates on kernel objects, at a deeper level in the kernel. It does not provide syscall filtering (provided by seccomp). It is possible to combine the two but apparmor does not at this time.
 
