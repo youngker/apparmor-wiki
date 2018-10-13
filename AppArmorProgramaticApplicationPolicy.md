@@ -62,8 +62,12 @@ api
 
 under hood task_ctx references the profile
 - need profiles that auto cleanup
-- need better policy load controls
-- need control saying application policy is allowed
+- need better policy load controls, ns rule
+- need control saying application policy is allowed, ns rule may limit uid?
+- need application policy to be able to block policy loads, so the policy can be locked into place
+  - blocks policy at ns, but if subns entered before lock down that ns could allow loading policy
+
+
 
 
 
