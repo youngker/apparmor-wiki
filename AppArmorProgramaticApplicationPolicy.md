@@ -26,30 +26,47 @@ Introduction
 
 When unprivileged policy is allowed via [stacking](AppArmorStacking)
 and [policy namespaces](AppArmorNamespaces) applications can you
-leverage AppArmor policy to create and manage sandboxes, voluntarily
-reducing their available resources and permissions to reduce attack
+leverage AppArmor policy to create and manage application sandboxes, allowing tasks to voluntarily
+reduce their available resources and permissions to reduce attack
 surface.
 
-1. Checking for AppArmor support
-================================
+# 1. Checking for AppArmor support
 
-2. Creating Policy
-==================
+api call
+- checks kernel support and permission to load application policy
 
-auto creating unique name based on @{exec\_name}, @{profile}, @{pid}
+# 2. Creating Policy
 
-```
-profile ? create=:app://@{exec\_name}.@{pid} {
+Policy is in NS of current task confinement.
 
-hat foo { }
+api
+- settup rules
+  - opaque *aa_new_app_policy(const char *name)
+        optional name will be combined with unique value
+- add rules
+     error *aa_policy_add_rules(opaque *, const char *blob, size_t len)
 
-}
-```
+- finalize/compile rules
+     aa_policy_create(opaque *, out *blob);
 
-this way the application doesn't need to create its own unique name
+     applications can own caching to save off blob, or extend caching to support app caching
+
+- load compiled policy
+
+
 
 3. Loading Policy
 =================
+- load of application policy creates/replaces profiles & enters task into profile stack (thread check)
+
+
+under hood task_ctx references the profile
+- need profiles that auto cleanup
+- need better policy load controls
+- need control saying application policy is allowed
+
+
+
 
 4. Switch to the application policy
 ===================================
