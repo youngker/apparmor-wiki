@@ -40,6 +40,8 @@ Policy Compiler (a.k.a apparmor\_parser)
 - add support for conditional includes
 - fix Makefile hardcoded paths to flex and bison
 
+# Library
+- fix: remove empty LD_RUN_PATH from libapparmor-perl
 
 Utils
 -----
