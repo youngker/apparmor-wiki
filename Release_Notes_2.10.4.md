@@ -9,10 +9,14 @@ This version of the userspace should work with all kernel versions from
 2.6.15 and later (some earlier version of the kernel if they have the
 apparmor patches applied). 
 
-Note: These release notes cover all changes between 2.10.3 (3004390a6c3e2efe1c2bcfa51e3b0ceef5b39041)
-and 2.10.4 (f74f044f9fc0160973772262c88e443881014233) on the [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
-    
+# Obtaining this Release
+This release notes cover all changes between 2.10.3 (3004390a6c3e2efe1c2bcfa51e3b0ceef5b39041)
+and 2.10.4 (???) on the [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
 
+Tarball
+-   <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4,tar.gz.asc>
 
 Build Infrastructure
 --------------------
