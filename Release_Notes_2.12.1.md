@@ -40,6 +40,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 - fix includes to allow white space
 - add support for conditional includes
 - fix Makefile hardcoded paths to flex and bison
+- ignore abi rules
 
 # Library
 - fix: remove empty LD_RUN_PATH from libapparmor-perl
