@@ -35,6 +35,7 @@ Build Infrastructure
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 - disable write cache if filesystem is read-only
+- fix cache write message when stdin is used
 - fix parser so that cache creation failure doesn't cause load failure
 - fix includes to allow white space
 - add support for conditional includes
