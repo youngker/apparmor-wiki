@@ -10,18 +10,15 @@ This version of the userspace should work with all kernel versions from
 apparmor patches applied). And supports features released in the 4.18
 kernel.
 
-Note: These release notes cover all changes between 2.11.1 (8b81fe065f2d8ad93767ebf32afbd3740c6f3818)
-and 2.11.2 (???) on the [apparmor-2.11 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.11).
-    
 
-# Release Location
+# Obtaining this Release
+These release notes cover all changes between 2.11.1 (8b81fe065f2d8ad93767ebf32afbd3740c6f3818)
+and 2.11.2 (???) on the [apparmor-2.11 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.11).
 
 Tarball
 -   <https://launchpad.net/apparmor/2.11/2.11.2/+download/apparmor-2.11.2.tar.gz>
 -   sha256sum: 
 -   signature: <https://launchpad.net/apparmor/2.11/2.11.1/+download/apparmor-2.11.1,tar.gz.asc>
-
-Branch https://gitlab.com/apparmor/apparmor/tree/apparmor-2.11 Commit https://gitlab.com/apparmor/apparmor/commit/????
 
 
 Build Infrastructure
