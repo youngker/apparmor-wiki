@@ -98,7 +98,9 @@ Policy
   - samba
     - allow smbd to load new shared libraries
     - allow winbindd to read and write new kerberos cache location
-    - nmbd add missing files
+    - nmbd
+      - add missing files
+      - support writing to /run/systemd/notify
     - smbd add missing pid lock file
   - update usr.sbin.useradd to support usr-merge
 
