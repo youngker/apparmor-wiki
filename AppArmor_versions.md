@@ -162,7 +162,7 @@ AppArmor 2.10
 -   [Release Notes](Release_Notes_2.10)
 -   Development target: libapparmor apis for managing and working with cache loading of apparmor policy into the kernel
 
-[AppArmor 2.9.5](Release_Notes_2.9.5)
+[AppArmor 2.9.5](Release_Notes_2.9.5) (Unsupported)
 -----------------------------------------------
 
 -   Release Date: 2017-10-18
@@ -171,7 +171,7 @@ AppArmor 2.10
 -   [Release Notes](Release_Notes_2.9.5)
 -   Development target: bug fix only release over 2.9.4
 
-[AppArmor 2.9.4](Release_Notes_2.9.4)
+[AppArmor 2.9.4](Release_Notes_2.9.4) (Unsupported)
 -----------------------------------------------
 
 -   Release Date: 2017-01-08
@@ -180,7 +180,7 @@ AppArmor 2.10
 -   [Release Notes](Release_Notes_2.9.4)
 -   Development target: bug fix only release over 2.9.3
 
-AppArmor 2.9.3
+AppArmor 2.9.3 (Unsupported)
 --------------
 
 -   Release Date: 2016-04-15
@@ -189,7 +189,7 @@ AppArmor 2.9.3
 -   [Release Notes](Release_Notes_2.9.3)
 -   Development target: bug fix only release over 2.9.2
 
-AppArmor 2.9.2
+AppArmor 2.9.2 (Unsupported)
 --------------
 
 -   Release Date: 2015-04-23
@@ -198,7 +198,7 @@ AppArmor 2.9.2
 -   [Release Notes](Release_Notes_2.9.2)
 -   Development target: bug fix only release over 2.9.1
 
-AppArmor 2.9.1
+AppArmor 2.9.1 (Unsupported)
 --------------
 
 -   Release Date: 2014-12-15
@@ -207,7 +207,7 @@ AppArmor 2.9.1
 -   [Release Notes](Release_Notes_2.9.1)
 -   Development target: bug fix only release over 2.9.0
 
-AppArmor 2.9.0
+AppArmor 2.9.0 (Unsupported)
 --------------
 
 -   Release Date: 2014-10-17
@@ -216,7 +216,7 @@ AppArmor 2.9.0
 -   [Release Notes](Release_Notes_2.9.0)
 -   Development target: support dbus, unix abstract sockets, ptrace mediation, new python tools
 
-AppArmor 2.8.5
+AppArmor 2.8.5 (Unsupported)
 --------------
 
 -   Release Date: 2017-10-18
@@ -225,7 +225,7 @@ AppArmor 2.8.5
 -   [Release Notes](Release_Notes_2.8.5)
 -   Development target: bug fix only release over 2.8.4, add policy updates
 
-AppArmor 2.8.4
+AppArmor 2.8.4 (Unsupported)
 --------------
 
 -   Release Date: 2014-10-13
@@ -234,7 +234,7 @@ AppArmor 2.8.4
 -   [Release Notes](Release_Notes_2.8.4)
 -   Development target: bug fix only release over 2.8.3, add mod\_apparmor regression
 
-AppArmor 2.8.3
+AppArmor 2.8.3 (Unsupported)
 --------------
 
 -   Release Date: 2014-02-16
@@ -243,7 +243,7 @@ AppArmor 2.8.3
 -   [Features and Release Notes](Release_Notes_2.8.3)
 -   Development target: bug fix only release over 2.8.2, new apparmor\_parser --create-cache-dir command line option
 
-AppArmor 2.8.2
+AppArmor 2.8.2 (Unsupported)
 --------------
 
 -   Release Date: 2013-08-16
@@ -252,7 +252,7 @@ AppArmor 2.8.2
 -   [Features and Release Notes](Release_Notes_2.8.2)
 -   Development target: bug fix only release over 2.8.1
 
-AppArmor 2.8.1
+AppArmor 2.8.1 (Unsupported)
 --------------
 
 -   Release Date: 2013-01-09
@@ -261,7 +261,7 @@ AppArmor 2.8.1
 -   [Features and Release Notes](Release_Notes_2.8.1)
 -   Development target: bug fix only release over 2.8.0
 
-AppArmor 2.8.0
+AppArmor 2.8.0 (Unsupported)
 --------------
 
 -   Release Date: 2012-05-31
@@ -270,7 +270,7 @@ AppArmor 2.8.0
 -   [Features and Release Notes](Release_Notes_2.8)
 -   Development target: incremental improvement over AppArmor 2.7.x, with more code cleanups and bug fixes to the userspace tools. Mount rules, and the start of a new introspection interface in the kernel.
 
-AppArmor 2.7.2
+AppArmor 2.7.2 (Unsupported)
 --------------
 
 -   Release Date: 2012-01-31
@@ -279,12 +279,12 @@ AppArmor 2.7.2
 -   [Features and Release Notes](Release_Notes_2.7.1)
 -   Development target - Bug Fix release to 2.7.0
 
-AppArmor 2.7.1
+AppArmor 2.7.1 (Unsupported)
 --------------
 
 -   Not released due to a problem with the generated tarball, superceded by 2.7.2
 
-AppArmor 2.7.0
+AppArmor 2.7.0 (Unsupported)
 --------------
 
 -   Release Date: 2011-12-15
@@ -293,7 +293,7 @@ AppArmor 2.7.0
 -   [Features and Release Notes](Release_Notes_2.7)
 -   Development target - this is an incremental improvement over AppArmor 2.6.x, with more code cleanups and bug fixes to the userspace tools.
 
-AppArmor 2.6.1
+AppArmor 2.6.1 (Unsupported)
 --------------
 
 -   Release Date: Mar 24, 2011
@@ -302,7 +302,7 @@ AppArmor 2.6.1
 -   [Release Notes](Release_Notes_2.6.1)
 -   Development target: this is a bug fix release of AppArmor 2.6 with bug fixes and minor improvements to userspace.
 
-AppArmor 2.6.0
+AppArmor 2.6.0 (Unsupported)
 --------------
 
 -   Release Date: Feb 24. 2011
@@ -311,7 +311,7 @@ AppArmor 2.6.0
 -   [Features and Release Notes](Release_Notes_2.6.0)
 -   Development target: this is an incremental improvement over AppArmor 2.5.x, with some more invasive cleanups to the userspace tools.
 
-AppArmor 2.5.2
+AppArmor 2.5.2 (Unsupported)
 --------------
 
 -   Release Date: Mar 7, 2011
@@ -320,7 +320,7 @@ AppArmor 2.5.2
 -   [Release Notes](Release_Notes_2.5.2)
 -   Development target: this is a bug fix release of AppArmor 2.5 with Kernel module upstreaming changes, bug fixes and minor improvements to userspace.
 
-AppArmor 2.5.1
+AppArmor 2.5.1 (Unsupported)
 --------------
 
 -   Release Date: Sep 21, 2010
@@ -329,7 +329,7 @@ AppArmor 2.5.1
 -   [Release Notes](Release_Notes_2.5.1)
 -   Development target - this is a bug fix release of AppArmor 2.5 with Kernel module upstreaming changes, bug fixes and minor improvements to userspace
 
-AppArmor 2.5
+AppArmor 2.5 (Unsupported)
 ------------
 
 -   Release Date: May 1, 2010
@@ -338,7 +338,7 @@ AppArmor 2.5
 -   [Features and Release Notes](Release_Notes_2.5)
 -   Development target - this will be a slightly updated version of AppArmor 2.4 with Kernel module upstreaming changes, bug fixes and improvements in the parser dfa generation
 
-AppArmor 2.4
+AppArmor 2.4 (Unsupported)
 ------------
 
 -   Release Date: Feb 1, 2010 (generic tarballs made available)
@@ -357,7 +357,7 @@ In this version of AppArmor development of new features was largely halted and t
     -   chmod, chown mediation
     -   xattr mediation
 
-AppArmor 2.3.1
+AppArmor 2.3.1 (Unsupported)
 --------------
 
 -   Release Date:
@@ -365,7 +365,7 @@ AppArmor 2.3.1
 -   kernels supported: 2.6.27 2.6.28
 -   [Features and Release Notes](Release_Notes_2.3.1)
 
-AppArmor 2.3
+AppArmor 2.3 (Unsupported)
 ------------
 
 -   Release Date: June 2008
@@ -375,7 +375,7 @@ AppArmor 2.3
 
 AppArmor 2.3 builds incrementally one the AppArmor 2.1 release. The main thrust of its development was extending the profile and file rule features.
 
-AppArmor 2.2
+AppArmor 2.2 (Deprecated)
 ------------
 
 AppArmor 2.2 was purposely skipped due to versioning conflicts in
@@ -431,46 +431,3 @@ AppArmor 2.0 (Deprecated)
 AppArmor versions prior to 2.0 exist only in the linux distro Immunix
 and are not covered here.
 
-Versions of AppArmor under Development
-======================================
-
-AppArmor 2.11.0 (In development)
---------------------------------
-
--   Release Date: target 2016.05.01
--   Release Manager: sbeattie
--   Shipped in:
--   Kernels supported:
--   Development target: profile stacking
--   Status: preparing for release, 2.10.95 (Beta 1) released
-
-AppArmor 2.10.1 (In development)
---------------------------------
-
--   Release Date: target 2016.05.01
--   Release Manager: sbeattie
--   Shipped in:
--   Kernels supported:
--   Development target: bug fix release for 2.10
-
-AppArmor 3.0
-------------
-
--   Futuristic roadmap version of apparmor (ie. where we would like to be now but it won't happen for a few years).
--   updated applet
--   kde based applet
--   updated audit dbus dispatcher
--   updated tools
--   profile layout and installation improvements
--   improvements to the profile repository
-
-<!-- -->
-
--   extended owner permissions
--   mount rules
--   ptrace rules
--   signal mediation
--   bind based network rules
--   ...
-
-The final feature list will be determined closer to the release date.
