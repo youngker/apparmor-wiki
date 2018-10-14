@@ -114,7 +114,9 @@ Policy
   - gnupg: allow pubring.kbx
   - ld.so.conf: Update base abstraction
   - nvidia: allow to create .nv directory
-  - ssl: add dehydrated certificate support
+  - ssl:
+    - add dehydrated certificate support
+    - support new location for ssl-params file
   - php: allow ICU (unicode support) data tables
   - Python:
     - add support for python 3.7
