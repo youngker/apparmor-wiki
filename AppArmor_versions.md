@@ -57,7 +57,7 @@ Released Versions of AppArmor Userspace Utils
 [AppArmor 2.13.1](Release_Notes_2.13.1)
 ---------------------------------------------
 
--   Release Date: 2018-09-12
+-   Release Date: 2018-10-13
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.13.1)
@@ -75,7 +75,7 @@ Released Versions of AppArmor Userspace Utils
 [AppArmor 2.12.1](Release_Notes_2.12.1)
 ---------------------------------------------
 
--   Release Date: 2018-09-12
+-   Release Date: 2018-10-13
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.12.1)
@@ -93,7 +93,7 @@ Released Versions of AppArmor Userspace Utils
 [AppArmor 2.11.2](Release_Notes_2.11.2)
 -------------------------------------------------
 
--   Release Date: 2018-09-12
+-   Release Date: 2018-10-13
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.11.2)
@@ -120,7 +120,7 @@ Released Versions of AppArmor Userspace Utils
 [AppArmor 2.10.4](Release_Notes_2.10.4)
 -------------------------------------------------
 
--   Release Date: 2018-09-12
+-   Release Date: 2018-10-13
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.10.4)
