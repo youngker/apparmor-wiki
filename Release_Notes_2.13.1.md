@@ -22,15 +22,6 @@ Tarball
 
 Branch https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13 Commit https://gitlab.com/apparmor/apparmor/commit/2e922a9a9b31088c9d0f9760f7e1c71f8ad5d4b9
 
-Note
-====
-
-There is a semantic change in the 4.8 kernel (commit
-9f834ec18defc369d73ccf9e87a2790bfa05bf46) that affects apparmor policy
-enforcement. Specifically it affects when the m permission bit is
-checked for elf binary executables. Policy and tests within apparmor
-2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
-
 
 Build Infrastructure
 --------------------
@@ -153,4 +144,14 @@ Tests
 Documentation
 -------------
 - update documentation to references gitlab and updated bug reporting procedures.
+
+
+Note
+====
+
+There is a semantic change in the 4.8 kernel (commit
+9f834ec18defc369d73ccf9e87a2790bfa05bf46) that affects apparmor policy
+enforcement. Specifically it affects when the m permission bit is
+checked for elf binary executables. Policy and tests within apparmor
+2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
 
