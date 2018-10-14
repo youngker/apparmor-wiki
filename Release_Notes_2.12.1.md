@@ -17,7 +17,7 @@ and 2.12.1 (e1a8793ea19f189a761333a43191fc5a6e19cf1c) [apparmor-2.12 branch](htt
 
 Tarball
 -   <https://launchpad.net/apparmor/2.12/2.12.1/+download/apparmor-2.12.1.tar.gz>
--   sha256sum: 
+-   sha256sum: ec7fcb334f68e29f481251f865c29953163853506a8dc96ce8591d9add659db2
 -   signature: <https://launchpad.net/apparmor/2.12/2.12.1/+download/apparmor-2.12.1,tar.gz.asc>
 
 Branch https://gitlab.com/apparmor/apparmor/tree/apparmor-2.12 Commit https://gitlab.com/apparmor/apparmor/commit/???
