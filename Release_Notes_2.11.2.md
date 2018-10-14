@@ -43,6 +43,8 @@ Policy Compiler (a.k.a apparmor\_parser)
 - add support for conditional includes
 - fix Makefile hardcoded paths to flex and bison
 
+# Library
+- fix: remove empty LD_RUN_PATH from libapparmor-perl
 
 Utils
 -----
@@ -93,7 +95,9 @@ Policy
     - support void linux binary location
   - netstat: allow capability sys_ptrace
   - syslog-ng: fix startup for some configurations
-  - dnsmasq: add paths for NetworkManager connection sharing
+  - dnsmasq
+    - add paths for NetworkManager connection sharing
+    - add permission to open log files
   - mlmmj-sub fix moderated subscription
   - wireshark update for modern releases
   - allow running Thunderbird wrapper script
