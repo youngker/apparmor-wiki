@@ -38,10 +38,12 @@ Build Infrastructure
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 - disable write cache if filesystem is read-only
+- fix cache write message when stdin is used
 - fix parser so that cache creation failure doesn't cause load failure
 - fix includes to allow white space
 - add support for conditional includes
 - fix Makefile hardcoded paths to flex and bison
+- ignore abi rules
 
 # Library
 - fix: remove empty LD_RUN_PATH from libapparmor-perl
@@ -135,7 +137,9 @@ Policy
   - add mesa abstraction
   - ld.so.conf: Update base abstraction
   - nvidia: allow to create .nv directory
-  - ssl: add dehydrated certificate location
+  - ssl
+    - add dehydrated certificate location
+    - support new location for ssl-params file
   - php: allow ICU (unicode support) data tables
   - nameservice: allow reading /etc/netconfig
   - audio:
