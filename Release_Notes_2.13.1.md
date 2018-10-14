@@ -70,7 +70,8 @@ Utils
    - allow for named profiles without and attachment specification
    - add python3.7 to logprof.conf
    - add support for zsh in logprof.conf
-   -   add basic support for abi rules to the tools
+   - add basic support for abi rules to the tools
+   - skip processing 'apparmor/cache.d' 
 
 -   aa-notify
     - make message about notify-send package cross-distro compatible
