@@ -28,12 +28,13 @@ Build Infrastructure
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 - disable write cache if filesystem is read-only
+- fix cache write message when stdin is used
 - fix parser so that cache creation failure doesn't cause load failure
 - fix includes to allow white space
 - add support for conditional includes
 - fix includes to allow white space
 - fix Makefile hardcoded paths to flex and bison
-
+- ignore abi rules
 
 
 # Library
@@ -53,6 +54,7 @@ Utils
   - error out on nested child profiles which are not currently supported
   - fix conflicting profile error
   - add basic support for abi rules to the tools
+  - fix crash when hats are uninitialized
   
 - aa-notify
   - make message about notify-send package cross-distro compatible
@@ -92,7 +94,9 @@ Policy
   - samba
     - allow smbd to load new shared libraries
     - allow winbindd to read and write new kerberos cache location
-    - nmbd add missing files
+    - nmbd
+      - add missing files
+      - support writing to /run/systemd/notify
     - smbd add missing pid lock file
 
 - Tunables
@@ -112,10 +116,12 @@ Policy
   - gnupg: allow pubring.kbx
   - ld.so.conf: Update base abstraction
   - nvidia: allow to create .nv directory
-  - ssl: add dehydrated certificate location
   - php: allow ICU (unicode support) data tables
   - X: add another location for .Xauthority
   - nameservice: allow reading /etc/netconfig
+  - ssl
+    - add dehydrated certificate location
+    - support new location for ssl-params file
   - audio
     - Fix local pulseaudio config file access
     - Allow to read pulseaudio config subdirectories
