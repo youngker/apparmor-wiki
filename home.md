@@ -72,25 +72,25 @@ Current stable release: 2.13.1
 -   signature: <https://launchpad.net/apparmor/2.13/2.13.1/+download/apparmor-2.13.1,tar.gz.asc>
 -   [ 2.13.1 release notes](Release_Notes_2.13.1)
 
-Prior supported release: 2.12.0
--   <https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.tar.gz>
--   sha256sum: 8a2b0cd083faa4d0640f579024be3a629faa7db3b99540798a1a050e2eaba056
--   signature: <https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.tar.gz.asc>
--   [ 2.12.0 release notes](Release_Notes_2.12)
+Prior supported release: 2.12.1
+-   <https://launchpad.net/apparmor/2.12/2.12.1/+download/apparmor-2.12.1.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.12/2.12.1/+download/apparmor-2.12.1.tar.gz.asc>
+-   [ 2.12.1 release notes](Release_Notes_2.12.1)
 
-Prior supported release: 2.11.1
+Prior supported release: 2.11.2
 
--   <https://launchpad.net/apparmor/2.11/2.11.1/+download/apparmor-2.11.1.tar.gz>
--   sha256sum: e8e2b22c18e6b6741c1f96942398923b97316b53d86408629f922d5689ec3507
--   signature: <https://launchpad.net/apparmor/2.11/2.11.1/+download/apparmor-2.11.1.tar.gz.asc>
--   [ 2.11.1 release notes](Release_Notes_2.11.1)
+-   <https://launchpad.net/apparmor/2.11/2.11.2/+download/apparmor-2.11.2.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.11/2.11.2/+download/apparmor-2.11.2.tar.gz.asc>
+-   [ 2.11.2 release notes](Release_Notes_2.11.2)
 
-Prior release: 2.10.3
+Prior release: 2.10.4
 
--   <https://launchpad.net/apparmor/2.10/2.10.3/+download/apparmor-2.10.3.tar.gz>
--   sha256sum: 794a377a93b661c92877f99f386896a2c46730bdf4446ba859343a181a56ba6a
--   signature: <https://launchpad.net/apparmor/2.10/2.10.3/+download/apparmor-2.10.3.tar.gz.asc>
--   [ 2.10.3 release notes](Release_Notes_2.10.3)
+-   <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz.asc>
+-   [ 2.10.4 release notes](Release_Notes_2.10.4)
 
 
 #### Development
@@ -102,7 +102,7 @@ tentative release schedule for version 3.0
 -   Alpha 3/beta 1: June
 -   beta1/beta2: in mid July
 -   beta2/3 start of August
--   release: September
+-   release: Oct-Nov
 
 <!-- -->
 
