@@ -63,6 +63,7 @@ Utils
    - fix conflicting profile error
    - fix selection order of profiles when saving
    - add basic support for abi rules to the tools
+   - fix aa-mergeprof crash caused by accidentially initialzed hat
 
 -   aa-notify
     - make message about notify-send package cross-distro compatible
