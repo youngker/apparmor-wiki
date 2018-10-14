@@ -69,7 +69,8 @@ Utils
    - add python3.7 to logprof.conf
    - add support for zsh in logprof.conf
    - add basic support for abi rules to the tools
-   - skip processing 'apparmor/cache.d' 
+   - skip processing 'apparmor/cache.d'
+   - fix aa-mergeprof crash caused by accidentially initialzed hat
 
 -   aa-notify
     - make message about notify-send package cross-distro compatible
