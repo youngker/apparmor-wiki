@@ -40,10 +40,13 @@ Policy Compiler (a.k.a apparmor\_parser)
 -   make --config-file so it is no longer required to be the first option passed to the parser
 -   move default cache location to /var/cache
 -   fix Makefile hardcoded paths to flex and bison
+-   do not output cache warning for stdin if not using cache
+-   ignore abi rules
 
 Init
 ----
 -   fix permissions of apparmor.systemd helper script
+-   skip XBPS conffile artifacts
 
 
 Library
@@ -56,7 +59,7 @@ Library
 -   fix build failure when enable-debug-output=yes
 -   replace `scandirat` with open-coded variant so that apparmor can be built on musl libc
 -   fix dirat_for_each2() fd handling
-
+-   fix: remove empty LD_RUN_PATH from libapparmor-perl
 
 Utils
 -----
@@ -84,7 +87,9 @@ Policy
   - support distributions which merge sbin into bin
   - ping: support void linux binary location
   - traceroute: support void linux binary location
-  - dnsmasq: add paths for NetworkManager connection sharing
+  - dnsmasq
+    - add paths for NetworkManager connection sharing
+    - add permission to open log files
   - allow running Thunderbird wrapper script
   - ntpd
     - allow access to ntp clockstat
@@ -115,7 +120,9 @@ Policy
   - add recent documents write abstraction and update abstractions to use it
   - add OpenCL abstraction
   - kde: drop redundant rules for icons access
-  - ssl: add dehydrated certificate support
+  - ssl
+    - add dehydrated certificate support
+    - support new location for ssl-params file
   - php: allow ICU (unicode support) data tables
   - Python:
     - add support for python 3.7
