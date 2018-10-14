@@ -14,6 +14,7 @@ kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 # Obtaining the Release
 These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46)
 and 2.13.1 (2e922a9a9b31088c9d0f9760f7e1c71f8ad5d4b9) [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
+AppArmor 2.13.1 was released 2018-10-14.
 
 Tarball
 -   <https://launchpad.net/apparmor/2.13/2.13.1/+download/apparmor-2.13.1.tar.gz>
