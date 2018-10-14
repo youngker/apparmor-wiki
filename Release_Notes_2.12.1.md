@@ -83,6 +83,7 @@ Policy
   - dnsmasq
     - allow chown capability.
     - add paths for NetworkManager connection sharing
+    - add permission to open log files
   - Fix ubuntu-browsers for 64bit openSUSE
   - dovecot
      - add dovecot/stats profile, and allow dovecot to run it
