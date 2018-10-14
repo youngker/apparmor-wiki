@@ -13,17 +13,14 @@ kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 Note: These release notes cover all changes between 2.12 (7f72fd0fcacf8a856b0357261f2f521d90d1bb25)
 and 2.12.1 (e1a8793ea19f189a761333a43191fc5a6e19cf1c) [apparmor-2.12 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.12).
 
+# Release Location
 
-Note
-====
+Tarball
+-   <https://launchpad.net/apparmor/2.12/2.12.1/+download/apparmor-2.12.1.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.12/2.12.1/+download/apparmor-2.12.1,tar.gz.asc>
 
-There is a semantic change in the 4.8 kernel (commit
-9f834ec18defc369d73ccf9e87a2790bfa05bf46) that affects apparmor policy
-enforcement. Specifically it affects when the m permission bit is
-checked for elf binary executables. Policy and tests within apparmor
-2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
-
-    
+Branch https://gitlab.com/apparmor/apparmor/tree/apparmor-2.12 Commit https://gitlab.com/apparmor/apparmor/commit/???
 
 
 Build Infrastructure
@@ -137,3 +134,11 @@ Documentation
 - update documentation to references gitlab and updated bug reporting procedures.
 
 
+Note
+====
+
+There is a semantic change in the 4.8 kernel (commit
+9f834ec18defc369d73ccf9e87a2790bfa05bf46) that affects apparmor policy
+enforcement. Specifically it affects when the m permission bit is
+checked for elf binary executables. Policy and tests within apparmor
+2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
