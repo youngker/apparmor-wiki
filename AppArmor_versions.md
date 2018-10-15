@@ -42,6 +42,9 @@ with a subject or object.
 The 4.x series finished the transition to a DTE type splitting model,
 which is a finer grained evolution of the labeling in the 3.x series.
 
+# What release version does Distro X have
+With the caveat that several distros (especially Ubuntu), have distro patches, backports etc on top of their version of apparmor, a mapping of the apparmor packaging to distros can be found [here](https://repology.org/metapackage/apparmor/versions)
+
 Released Versions of AppArmor Userspace Utils
 =============================================
 
