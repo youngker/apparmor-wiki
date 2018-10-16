@@ -101,5 +101,18 @@ under hood task_ctx references the profile
 Setting up policy to allow application policy
 =============================================
 
+5. Interaction with other policy in the namespace
+
+- several rule types specify the identity that a profile can interact with
+  - this can prevent policy from interacting with application policy
+  - need set name for application profile OR kernel var
+  - applications may want to name their profiles for interaction
+- want to be able to interact with policy
+  - other wise could not block communication with some services.
+  - wants visibility to interact
+    - problem system policy is not necessarily designed to interact with user/application policy
+      - could handle with globbing rules
+
+
 ??? using policy ns vs. not
 ---------------------------
