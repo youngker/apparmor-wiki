@@ -8,6 +8,12 @@ Requirements
 ============
 
 -   AppArmor Kernel module - 4.x??
+    - scope & view work
+    - namespace based policy accounting
+    - application policy api
+    - auto cleanup policy
+    - policy management rules
+      - namespace and profile
 -   AppArmor Userspace - 4.x???
 
 Related Documentation
@@ -30,12 +36,23 @@ leverage AppArmor policy to create and manage application sandboxes, allowing ta
 reduce their available resources and permissions to reduce attack
 surface.
 
+# 0. Mediation of application policy
+- needs to be allowed by the namespace
+  - is accounted to the namespace
+- needs to be allowed by any policy for the namespace scope
+  - profiles can have rules to allow or disallow policy management
+
 # 1. Checking for AppArmor support
 
 api call
+- high level
+- low level
 - checks kernel support and permission to load application policy
 
 # 2. Creating Policy
+
+- lives in ns of current_ns
+  - can load multiple profiles if using child profiles
 
 Policy is in NS of current task confinement.
 
