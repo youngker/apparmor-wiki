@@ -11,6 +11,14 @@ Related Documentation
 
 todo
 
+power box
+- trusted helper + delegation OR editing policy (limited or full power box)
+
+sand box
+- isolation
+- isolation + controlled sharing
+
+
 # Availability of Delegation
 The following table identifies which version of AppArmor different types of delegation are available in.
 
