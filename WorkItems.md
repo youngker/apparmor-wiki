@@ -8,10 +8,15 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 
 - policy blob compression
+  - dependencies: none
+  - description: improve kernel memory usage by compressing the policy blobs which are used for dedup and check point and restore.
   - kernel: make transparent to userspace
     - after unpack succeeds, compress blob using gzip, or lz
     - decompress compressed blob when read
-- policy blob: reading deal with vmalloc limit
+
+- policy blob: unpack deal with vmalloc limit
+  - dependencies: none
+  - description: currently policy is loaded as a single large blob which is then copied to kernel mem and unpacked. VMalloc picked up an 8 MB limit, so it is best for larger policy if we handle it in chunks instead of a single large blob.
   - kernel: make transparent to userspace
     - vmalloc picked up a limit, either switch to reading in chunks or method to make larger vmalloc work
       - chunks
@@ -21,9 +26,39 @@ For a list of improvements and extensions to AppArmor see the [development roadm
         - investigate
 
 - proper handling of overlapping x permissions
-  - dominance
+  - dependencies: dominance calculation in parser backend
+  - description: make most specific x modifier win in an overlap as long as the overlap has full dominance. If there is a partial overlap it is not clear which modifier should be used so an error should be thrown.
+  - parser: add x overlap computation
+
+- Late permission mapping
+  - dependencies: none
+  - description: move permission mapping to backend of compiler right before output format encoding
+  - parser:
+    - move use of native tree permission mapping into front end of the compiler
+    - move mapping logic of tree permissions to backend of the compiler
 
 - rule priority
+  - dependencies: none
+  - description: extend policy to support notion of priority so some rules can override others
+  - parser, tools, policy, documentation, tests
+
+- extended permission base
+
+- extended support for file permissins
+
+- Move deny into permission set
+
+- extended x index
+
+- extend file permissions
+
+- extend perm x mode for intersection rule delegation
+
+- extended conditionals
+
+
+- new audit modes
+
 
 - annotate rule sets at compile time so that we can have proper error messages about where things fail
 
