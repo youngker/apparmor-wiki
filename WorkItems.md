@@ -195,6 +195,19 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 - task priority, ...
 
 
+- text policy in kernel
+  - dependencies: none required, possibly make it dependent on text policy file cache so it is easier to get the unmodified text policy.
+  - description: carry a compressed version of text policy along with raw data that can be introspected from the kernel. It should be optional so that it is not loaded/can be thrown away to reduce memory usage if the desired by the user.
+  - kernel
+    - export feature interface to indicate text policy is available.
+    - potentially use key value store, and just grab a reference to a specific reserved key's data in the store.
+    - provide interface to introspect the text policy
+  - parser
+    - check for support for text policy, or possibly just key/value store
+    - keep policy text and push into key value policy storage.
+
+
+  
 - overlayfs
   - ???
 
