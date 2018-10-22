@@ -7,81 +7,71 @@ along with time estimates, and groups to aid in focusing development.
 Work item list
 --------------
 
-```
-[jjohansen] be disappointed we don't get to rehash previous sessions in a new session at UDS R: DONE
-```
 
 ```
-[jdstrand] templating, commit aa-easyprof tree soon (trunk only): DONE
-[jjohansen] templating, expand available templates (low) (?): TODO
-[jjohansen] templating, gui tool (low) (?): TODO
-[jjohansen] templating, gui tool unit tests (low) (?): TODO
-[jjohansen] templating, gui tool documentation/man pages (low) (?): TODO
+templating, expand available templates (low) (?): TODO
+templating, gui tool (low) (?): TODO
+templating, gui tool unit tests (low) (?): TODO
+templating, gui tool documentation/man pages (low) (?): TODO
 ```
  
 ```
-[jdstrand] sandboxing, base aa-sandbox tool (low) (?): TODO
-[jjohansen] sandboxing - fs overlay (low) (?): TODO
-[jjohansen] sandboxing - alt X backend support. xephyr, xace (low) (?): TODO
-[jjohansen] sandboxing - documentation/man pages (low) (?): TODO
+[] sandboxing, base aa-sandbox tool (low) (?): TODO
+[] sandboxing - fs overlay (low) (?): TODO
+[] sandboxing - alt X backend support. xephyr, xace (low) (?): TODO
+[] sandboxing - documentation/man pages (low) (?): TODO
 ```
  
 ```
-[jjohansen] refresh/kick out cgroup prototype (low) (1): TODO
-[jjohansen] refresh/kick out env matching prototype (low) (1): TODO
+[] refresh/kick out cgroup prototype (low) (1): TODO
+[] refresh/kick out env matching prototype (low) (1): TODO
 ```
  
 ```
-[jjohansen] fix deny mount perm bug - parser (high) (2): TODO
-[jjohansen] fix deny mount perm bug - regression tests (high) (1): TODO
-[jjohansen] fix change_onexec with threads test - kernel (medium) (0.5): TODO
-[jjohansen] fix change_onexec with threads test - regression tests (medium) (0.5): TODO
-[jjohansen] fix bug #888077 - alias only being partially applied - depends on dfa perms stored as set (high) (6): TODO
-[jjohansen] fix missed transitions in handleChildren() - utils (low) (1): TODO
+[] fix deny mount perm bug - parser (high) (2): TODO
+[] fix deny mount perm bug - regression tests (high) (1): TODO
+[] fix change_onexec with threads test - kernel (medium) (0.5): TODO
+[] fix change_onexec with threads test - regression tests (medium) (0.5): TODO
+[] fix bug #888077 - alias only being partially applied - depends on dfa perms stored as set (high) (6): TODO
 [jjohansen] fix null-XXX profiles to auto clean - kernel (low) (3): TODO
 ``` 
  
 ```
-[jjohansen] misc, kernel - kernel export state controls in someplace other than /sys/modules (we don't control required cap check done there) needed by lxc to query state without needing cap in profile (essential) (1): TODO
-[jjohansen] misc, kernel - profile rcu patch (low) (1): TODO
-[jjohansen] misc, kernel - cleanup unpack (tristate return value) (???) (2): TODO
-[jjohansen] misc, kernel - rework per class auditing to not call audit auto (???) (1): TODO
-[jjohansen] misc, kernel auditing - split global audit flag into per type/perms flags (???) (2): TODO
-[jjohansen] misc, kernel auditing - tests for split global audit flag into per type/perms flags (???) (2): TODO
-[jjohansen] misc, kernel - automatically fallback to deleted file names in problematic lsm hooks (???) (1): TODO
-[jjohansen] misc, kernel - evaluate need for special support of console fds (may create new work items) (???) (1): TODO
+[] misc, kernel - kernel export state controls in someplace other than /sys/modules (we don't control required cap check done there) needed by lxc to query state without needing cap in profile (essential) (1): TODO
+[] misc, kernel - profile rcu patch (low) (1): TODO
+[] misc, kernel - cleanup unpack (tristate return value) (???) (2): TODO
+[] misc, kernel - rework per class auditing to not call audit auto (???) (1): TODO
+[] misc, kernel auditing - split global audit flag into per type/perms flags (???) (2): TODO
+[] misc, kernel auditing - tests for split global audit flag into per type/perms flags (???) (2): TODO
+[n] misc, kernel - automatically fallback to deleted file names in problematic lsm hooks (???) (1): TODO
+[] misc, kernel - evaluate need for special support of console fds (may create new work items) (???) (1): TODO
 ```
 
 ```
-[jjohansen] misc parser, remove cruft
-[jjohansen] misc parser, base conversion to C++ so that it can compile in a C++ compiler
-[jjohansen] misc parser, convert structs, fns to classes
-[jjohansen] misc parser, convert/cleanup allocations
-[jjohansen] misc parser, split out writing binary format to object
-[jjohansen] misc parser, split out parsing library
-[jjohansen] misc parser, fix disabled profile using name not symlink
-[jjohansen] misc parser, support overlapping x transitions - deps dfa dominance (low) (1): TODO
+[] misc parser, remove cruft
+[] misc parser, convert structs, fns to classes
+[] misc parser, convert/cleanup allocations
+[] misc parser, split out parsing library
+[] misc parser, support overlapping x transitions - deps dfa dominance (low) (1): TODO
 ```
 
 ```
-[jjohansen] misc, utils - switch tools to using null profile path instead of parent pid for fork tracking - utils (low) (2): TODO
-[jjohansen] misc, utils - update pam_apparmor to use change_profile (???) (3): TODO
-[jjohansen] misc, utils - variable support in tools (???) (?): TODO
-[jjohansen] misc, utils - conditional support in tools (???) (?): TODO
-[jjohansen] misc, utils - rewrite genprof/logprof in python (???) (?): TODO
+[] misc, utils - update pam_apparmor to use change_profile (???) (3): TODO
+[] misc, utils - variable support in tools (???) (?): TODO
+[] misc, utils - conditional support in tools (???) (?): TODO
 ```
 
 ```
-[jjohansen] aa-namespaces, evaluate attaching aa-namespace to other system namespace, to aid with auditing stacking ... (???) (?): TODO
+[] aa-namespaces, evaluate attaching aa-namespace to other system namespace, to aid with auditing stacking ... (???) (?): TODO
 ```
 
 ```
-[jjohansen] aa-namespaces, add user namespace support - upstream - deps: aa-ns controls, stacking (low) (?): TODO
-[jjohansen] aa-namespaces, add user namespace support - kernel - deps: aa-ns controls, stacking (low) (?): TODO
-[jjohansen] aa-namespaces, add user namespace support - parser - deps: aa-ns controls, stacking (low) (?): TODO
-[jjohansen] aa-namespaces, add user namespace support - regression tests - deps: aa-ns controls, stacking (low) (?): TODO
-[jjohansen] aa-namespaces, add user namespace support - update userspace tools if needed - deps: aa-ns controls, stacking (low) (?): TODO
-[jjohansen] aa-namespaces, add user namespace support - documentation/man pages - deps: aa-ns controls, stacking (low) (?): TODO
+[] aa-namespaces, add user namespace support - upstream - deps: aa-ns controls, stacking (low) (?): TODO
+[] aa-namespaces, add user namespace support - kernel - deps: aa-ns controls, stacking (low) (?): TODO
+[n] aa-namespaces, add user namespace support - parser - deps: aa-ns controls, stacking (low) (?): TODO
+[] aa-namespaces, add user namespace support - regression tests - deps: aa-ns controls, stacking (low) (?): TODO
+[] aa-namespaces, add user namespace support - update userspace tools if needed - deps: aa-ns controls, stacking (low) (?): TODO
+[] aa-namespaces, add user namespace support - documentation/man pages - deps: aa-ns controls, stacking (low) (?): TODO
 ```
 
 ```
