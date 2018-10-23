@@ -52,7 +52,19 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - description: extend policy to support notion of priority so some rules can override others
   - parser, tools, policy, documentation, tests
 
-- extended permission base
+- kernel: dfa rework
+  - dependencies: none
+  - description: rework dfa to an easier to work with format that does more checking
+  - kernel:
+    - rework dfa unpack
+
+- kernel: map permissions on unpack (extended permission base)
+  - dependencies: dfa rework
+  - description: move permission remapping from run time to unpack
+  - kernel:
+    - create perm array 2 * number of accept entries
+    - map accept entries to accept array, owner perm mapping to even entries?
+    - create index array to use in place of accept entry arrays
 
 - extended support for file permissins
 
