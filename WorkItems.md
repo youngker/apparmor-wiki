@@ -7,14 +7,14 @@ current code base.
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
 
 
-- policy blob compression
+- kernel: policy blob compression
   - dependencies: none
   - description: improve kernel memory usage by compressing the policy blobs which are used for dedup and check point and restore.
   - kernel: make transparent to userspace
     - after unpack succeeds, compress blob using gzip, or lz
     - decompress compressed blob when read
 
-- policy blob: unpack deal with vmalloc limit
+- kernel: policy blob: unpack deal with vmalloc limit
   - dependencies: none
   - description: currently policy is loaded as a single large blob which is then copied to kernel mem and unpacked. VMalloc picked up an 8 MB limit, so it is best for larger policy if we handle it in chunks instead of a single large blob.
   - kernel: make transparent to userspace
@@ -25,10 +25,20 @@ For a list of improvements and extensions to AppArmor see the [development roadm
       - make vmalloc work with larger allocations
         - investigate
 
-- proper handling of overlapping x permissions
+- libaa_re: dominance calculation of accept nodes
+  - dependencies: permission rework
+  - description: enable calculating dominance of a given node over another given node on all accept states
+  - libaa_re: add method for calculating dominance
+
+- parser: proper handling of overlapping x permissions
   - dependencies: dominance calculation in parser backend
   - description: make most specific x modifier win in an overlap as long as the overlap has full dominance. If there is a partial overlap it is not clear which modifier should be used so an error should be thrown.
   - parser: add x overlap computation
+
+- parser, libaa_re: fixup exception code for C++11
+  - dependencies: none
+  - description: the parser throws exceptions for failure during class construction. Resulting in "warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]"
+
 
 - Late permission mapping
   - dependencies: none
@@ -47,8 +57,22 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 - extended support for file permissins
 
 - Move deny into permission set
+  - dependencies: extended permission
+  - description: current the explicit deny is not carried into the kernel. We need to carry explicit deny as a unique state permission for delegation.
+  - kernel:
+    - ?
+  - parser:
+    - ?
 
 - extended x index
+  - dependencies: none or extended permissions if doing more than 5 bits
+  - description: The xindex is currently limited to 12 entries (4 bits minus 4). It is possible to extend this to 5 bits before extended permission set lands.
+  - kernel:
+    - update unpack to work with extra bit
+  - parser:
+    - detect kernel supports extra entries
+    - extend tests and coding for extra entries
+    - update verify backend/mapping of extra bits
 
 - extend file permissions
 
