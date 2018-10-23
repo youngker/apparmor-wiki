@@ -93,14 +93,33 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 - extended conditionals
 
 
-- new audit modes
-
+- multiple: new audit modes
+  - dependencies: none
+  - description: update stack to support new audit modes
+    - quiet_complain
+    - ???
 
 - annotate rule sets at compile time so that we can have proper error messages about where things fail
 
-- include dedup
+- parser: split out timestamp logic
+  - dependencies: none
+  - description: currently the timestamp logic for determinig if the cache or policy is good is internal to the parser. split it out to a library api
 
-- include caching so we don't have to reload cache files that have already been processed
+- parser: policy hashing
+  - dependencies: none
+  - description: use a fast hash (murmur hash 3) to help detect policy changes, in addition to the timestamp method currently used.
+
+- parser: include caching
+  - dependencies: none
+  - description: cache include files so we don't have to reload cache files that have already been processed.
+  - parser: create cache for include files etc. That can be used instead of accessing the file multiple times.
+
+- parser:include dedup
+  - dependencies: parser block context passed in as parameter, include caching
+  - description: currently includes are expanded blindly causing the same include to be expanded multiple times. We can detect and cache which includes have been used within a given context
+  - parser keep a cache of used includes on block context
+
+
 
 - type cache
 
