@@ -28,60 +28,60 @@ list of immediate WIs
   - audit rework
   - audit caching
 
-• LPC talk
-• a//b exec target bug
-• apparmor 3
-∘ overlay
-‣ policy
-‣ configs
-∘ cache
-‣ fallback if exact match not found
-‣ support warn if exact match not found
-∘ allow all,
-∘ compiler
-‣ intersection of kernel abi and specified abi
-‣ document abi priotity
-• when does policy abi override, compiler specified abi, vs defaulting to kernel abi
-‣ cleanup warnings
-∘ build flags default locations
-‣ policy
-‣ cache
-‣ config
-∘ policy_hash
-∘ abi
-∘ fd interface
-∘ multi-query
-∘ query caching
-∘ network
-∘ nnp
-∘ evm xattr match support
-∘ profile flags
-‣ prompt
-‣ kill
-‣ debug
-∘ audit flags
-‣ audit
-‣ quite_allow
-∘ prefix
-‣ quiet
-‣ kill
-‣ complain
-∘ proc interface replacement in lib
-∘ aa-policy
-‣ default location, overlay support
-‣ config dir
-‣ lib interface
-‣ --load, --replace, --remove
-‣ option to build policy caches
-∘ aa-hash
-‣ hash policy, match to kernel hashes
-∘ semantic verification of
-‣ profile names
-‣ stacks
-‣ transitions
-‣ requires: aa_dfa in userspace
-∘ parser x dominance
-‣ 
+- LPC talk
+- a//b exec target bug
+- overlayfs support
+- apparmor 3
+  - overlay
+    - policy
+    - configs
+  - cache
+    - fallback if exact match not found
+    - support warn if exact match not found
+  - allow all,
+  - compiler
+    - intersection of kernel abi and specified abi
+    - document abi priotity
+  - when does policy abi override, compiler specified abi, vs defaulting to kernel abi
+    - cleanup warnings
+  - build flags default locations
+    - policy
+    - cache
+    - config
+  - policy_hash
+  - abi
+  - fd interface
+  - multi-query
+  - query caching
+  - network
+  - nnp
+  - evm xattr match support
+  - profile flags
+    - prompt
+    - kill
+    - debug
+  - audit flags
+    - audit
+    - quite_allow
+  - prefix
+    - quiet
+    - kill
+    - complain
+  - proc interface replacement in lib
+  - aa-policy
+    - default location, overlay support
+    - config dir
+    - lib interface
+    - --load, --replace, --remove
+    - option to build policy caches
+  - aa-hash
+    - hash policy, match to kernel hashes
+  - semantic verification of
+    - profile names
+    - stacks
+    - transitions
+    - requires: aa_dfa in userspace
+  - parser x dominance
 • proc interface replacement
 • unix upstream
 ∘ sock peercred conversion
