@@ -5,6 +5,158 @@ This is a list of outstanding work items that can be done against the
 current code base.
 
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
+# wi list
+
+list of immediate WIs
+
+- policy raw_data compression
+  - how to handle dedup of individual profiles within blob?
+- parser exception warning
+- fuzzing interfaces
+- kernel pull request
+- David Howell's LSM in continers, CC on RFC
+- update apparmor logo on cii best practices
+- nnp
+  - kernel patch review & revision
+  - userspace support
+- support labels, early
+- fs subtype for mount
+- lsm stacking
+  - cosmic
+  - review for kees
+- prompt
+  - audit rework
+  - audit caching
+
+• LPC talk
+• a//b exec target bug
+• apparmor 3
+∘ overlay
+‣ policy
+‣ configs
+∘ cache
+‣ fallback if exact match not found
+‣ support warn if exact match not found
+∘ allow all,
+∘ compiler
+‣ intersection of kernel abi and specified abi
+‣ document abi priotity
+• when does policy abi override, compiler specified abi, vs defaulting to kernel abi
+‣ cleanup warnings
+∘ build flags default locations
+‣ policy
+‣ cache
+‣ config
+∘ policy_hash
+∘ abi
+∘ fd interface
+∘ multi-query
+∘ query caching
+∘ network
+∘ nnp
+∘ evm xattr match support
+∘ profile flags
+‣ prompt
+‣ kill
+‣ debug
+∘ audit flags
+‣ audit
+‣ quite_allow
+∘ prefix
+‣ quiet
+‣ kill
+‣ complain
+∘ proc interface replacement in lib
+∘ aa-policy
+‣ default location, overlay support
+‣ config dir
+‣ lib interface
+‣ --load, --replace, --remove
+‣ option to build policy caches
+∘ aa-hash
+‣ hash policy, match to kernel hashes
+∘ semantic verification of
+‣ profile names
+‣ stacks
+‣ transitions
+‣ requires: aa_dfa in userspace
+∘ parser x dominance
+‣ 
+• proc interface replacement
+• unix upstream
+∘ sock peercred conversion
+∘ deal stored path
+• suse socket mediation performance (tony)
+• bigger xindex
+• resurrect NS patches
+• point releases 2.13.2, 2.12.2, ...
+• dfa perm remap
+• dfa update
+• suid issues
+• uid conditionals
+∘ attachment conditional
+∘ new hook to control and transition based on uid
+• jann email about fixing something around ptrace???
+• mount work
+∘ fix compiler for current mount
+∘ fix for new mount api
+∘ fix to enable tracking and dealing with mounts and an ns level
+• extended conditionals work
+• net patches
+∘ kernel_t
+∘ act_as
+∘ integrate with prompting
+∘ ...
+• sysbot interfaces/profiles
+• Tetsuo
+• ioctl
+• user conditional
+• user lsm hooks
+• scope & view
+∘ proper code division and annotations
+∘ add view and scope to ns
+∘ finish virtualizing kernel parameters
+∘ children profiles become specialized namespace
+∘ allow for multiple mounts of securityfs?
+‣ maybe move entirely to apparmorfs?
+• rbac/user policy
+∘ pam_apparmor
+• user defined policy
+∘ pam_apparmor
+∘ sysctl to disable
+• application policy
+∘ sysctl to disable
+• documentation
+∘ wi
+∘ dev guides
+‣ don't allow user writes to locations policy defined for
+• could allow user to define scripts that change confinement behavior
+• fuzz interfaces (Chris?)
+• env filtering
+• userspace exec helper (redirect)
+∘ env rewriting
+‣ add envs, change envs
+‣ set LD library overrides so we can have our libraries hook calls
+∘ arg processing
+• unshare ns on clone
+∘ anonymous random named ns
+∘ needs: transition at clone
+‣ needs lsm hook or abuse of clone hook
+• policy author guide
+∘ profile attachments, transitions and writable locations note
+∘ mount, clone ns manipulation guidelines
+∘ handling stacking crossing ns boundaries with different system namespaces
+∘ handling user transitions
+• unsafe/nnp flags should be separate for p and i in pix
+
+
+
+
+# expanded wi
+
+
+
+
 
 
 - kernel: policy blob compression
