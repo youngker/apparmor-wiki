@@ -41,7 +41,16 @@ If profile attachments are defined for scripts, one way to ensure the correct co
 Script attachments are subject to the same rules and general binary attachments. See ???
 
 ### Scripts and locations without attachment
-???
+
+If a script or executable is created in a location without attachment, its possible the script or executable could be used to by-pass policy restrictions if care is not taken.
+
+Profiles should not use executable name based transitions (px, or cx) for paths that overlap writeable locations.
+
+
+Unconfined processes can by-pass confinement ???
+
+
+
 
 
 
