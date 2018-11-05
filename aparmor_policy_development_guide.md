@@ -44,10 +44,16 @@ Script attachments are subject to the same rules and general binary attachments.
 
 If a script or executable is created in a location without attachment, its possible the script or executable could be used to by-pass policy restrictions if care is not taken.
 
-Profiles should not use executable name based transitions (px, or cx) for paths that overlap writeable locations.
+Profiles should not use executable name based transitions (px, or cx) for paths that overlap writeable locations in profiles that should not be able override the specified confinemet.
+
+### Unconfined processes can by-pass confinement
+Unconfined processes have several avenues available to them to by-pass confinement.
+
+- aa-exec/change-onexec: unconfined processes have full access to the change_profile api which lets them override the confinement specified by an attachment at exec time.
+
+- wrapper script: unconfined processes can create a wrapper script that declares an existing binary with a defined attachment as its interpreter. The created scripts confinement will override that of the interpreters allowing the unconfined user to launch the "interpreter" without confinement.
 
 
-Unconfined processes can by-pass confinement ???
 
 
 
