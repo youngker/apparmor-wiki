@@ -361,7 +361,7 @@ permission on each state
 # ```userspace interface, introspection and api```
 The userspace interface is split between procfs and securityfs.
 
-## /proc/<pid>/attr/*
+## > /proc/<pid>/attr/*
 
 ## securityfs (/sys/kernel/security/apparmor/)
 
