@@ -413,5 +413,62 @@ policydb
 
 # stacking
 
+# Notifications
+
+Notifications are based on apparmor audit messages. However instead of being converted to a text format they are passed in machine native binary structure.
+
+profile flags
+rule flags
+
+multiple notification
+- profile loads
+- per profile in stack
+
+apparmor audit msg -> audit msg cache -> dedup -> copy msg -> insert in msg cache -> send to audit subsystem
+                   |                          |            |
+                   |                           -> drop msg |
+                   |                                        -> send to audit subsystem
+                   -> notify queue -> insert queue on waiting
+
+multicast
+- policy changes
+- complain messages
+prompting
+- synchronous
+- asynch + ptrace and restart
+
+prompt failing
+- interrupts
+- time outs
+
+how to keep alive
+restarting request
+
+down grading prompt
+
+## ???
+audit structs
+
+
+## user space api
+
+### include file
+
+### setting up notifications
+
+open file
+use ioctl to set notification
+wait for notifications
+read file
+- reply
+
+link to userspace api provided by library.
+
+## ???
+
+
+
+
+
 # Delegation
 - TODO: this is not implemented yet.
