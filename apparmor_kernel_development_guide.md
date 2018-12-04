@@ -3,6 +3,7 @@
 - [Library Development Guide](apparmor_library_development_guide)
 - [Profile Tool Guide](apparmor_profile_tools_guide)
 - [Kernel Development Guide](apparmor_kernel_development_guide)
+  - [Notifications](apparmor_kernel_development_guide_notifications)
 - [Policy Development Guide](aparmor_policy_development_guide)
 
 # Disclaimer
