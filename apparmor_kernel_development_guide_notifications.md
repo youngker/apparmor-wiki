@@ -43,7 +43,10 @@ If a notification is determined to be needed the audit message is queued up on t
 
 ## Audit messages and allocations
 
-The queue of audit messages requires that they be allocated via heap memory, but we also don't want the regular audit path to fail. ???
+The queue of audit messages requires that they be allocated via heap memory, but we also don't want the regular audit path to fail.
+
+Atm the initial audit struct is allocated on the stack, if an audit message is to go to notifications, a new audit structure is allocated from a kmem_cache of audit message objects. This reduces the chance of failure, and allows per cpu caching of the audit struct.
+
 
 It does however require that audit messages are NOT allocated from the stac
 
