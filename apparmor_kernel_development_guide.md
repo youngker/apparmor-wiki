@@ -422,6 +422,27 @@ policydb
 
 Notifications are based on apparmor audit messages. However instead of being converted to a text format they are passed in machine native binary structure.
 
+AppArmor can not sleep in the majority of the LSM hooks due to locking. Even if the LSM hook allows the task to sleep, apparmor's internal locking (even just rcu_read_lock) prevents sleeping within code. To avoid having to deal with the locking issues, notifications are delayed until hook exit.
+
+Each hook that allows notifications gets a aa_notify struct
+
+  DEFINE_NOTIFY(name, ...)
+
+And at hook exit
+
+  DO_NOTIFY(name, ...)
+
+If a notification is determined to be needed the audit message is queued up on the aa_notify struct. And it is handled in DO_NOTIFY at the end of the hook. This allows us to avoid apparmor internal locking and also to group multiple notifications into a single message.
+
+## Audit messages and allocations
+
+The queue of audit messages requires that they be allocated via heap memory, but we also don't want the regular audit path to fail. ???
+
+It does however require that audit messages are NOT allocated from the stac
+
+
+
+
 profile flags
 rule flags
 
