@@ -1,3 +1,29 @@
+# Related Documents
+- [Compiler Development Guide](apparmor_compiler_development_guide)
+- [Library Development Guide](apparmor_library_development_guide)
+- [Profile Tool Guide](apparmor_profile_tools_guide)
+- [Kernel Development Guide](apparmor_kernel_development_guide)
+  - [Notifications](apparmor_kernel_development_guide_notifications)
+- [Policy Development Guide](aparmor_policy_development_guide)
+
+# Introduction
+
+Notifications are how the apparmor kernel message can send event based messages to userspace daemons.
+
+# Types of Notifications
+
+There are different types of notifications
+
+- multicast policy changes
+- multicast complain
+- unicast prompt/reply
+
+# Scope of Notification
+Namespace
+
+Hierarchical
+
+Limiting scope
 
 # Notifications
 
