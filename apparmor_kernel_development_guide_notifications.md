@@ -10,6 +10,14 @@
 
 Notifications are how the apparmor kernel message can send event based messages to userspace daemons.
 
+# Files involved
+- apparmorfs.c: file based interface
+- audit.c
+- lib.c
+- lsm.c: hooks
+- include/audit.h
+
+
 # Types of Notifications
 
 There are different types of notifications
@@ -45,10 +53,12 @@ If a notification is determined to be needed the audit message is queued up on t
 
 The queue of audit messages requires that they be allocated via heap memory, but we also don't want the regular audit path to fail.
 
-Atm the initial audit struct is allocated on the stack, if an audit message is to go to notifications, a new audit structure is allocated from a kmem_cache of audit message objects. This reduces the chance of failure, and allows per cpu caching of the audit struct.
+Atm the initial audit struct is allocated on the stack, if an audit message is to go to notifications, a new audit structure is allocated from a kmem_cache of audit message objects. The kmem_cache provides some per cpu caching but also allows better use of memory for multiple audit messages in flight at one time. Allocating an audit buffer only if audit/notifications happen also ensures that allocations are kept out of the fast path. Note: the kmem_cache is also used for audit caching and dedup.
 
+Going with dynamic audit buffers also requires that all audit data be stored in the audit message, both the common_audit_data and the apparmor_audit_data.
 
-It does however require that audit messages are NOT allocated from the stac
+The shared preallocated buffers (used for file name, ..) can not be used in audit messages that will be queue for notifications as they must be able to live beyond the rcu locking range used to protect the buffer. When the audit message is allocated, and the data from the stack based audit message is copied in, references to the preallocated buffers are replaced by allocating and duping the the string, these buffers must be properly freed once the notification has been issued.
+
 
 
 
