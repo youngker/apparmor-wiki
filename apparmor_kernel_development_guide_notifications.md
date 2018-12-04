@@ -34,9 +34,15 @@ Hierarchical
 
 Limiting scope
 
-# Notifications
+# Notification
+
+
+
+# Notification Message Life cycle
 
 Notifications are based on apparmor audit messages. However instead of being converted to a text format they are passed in machine native binary structure.
+
+## LSM hooks
 
 AppArmor can not sleep in the majority of the LSM hooks due to locking. Even if the LSM hook allows the task to sleep, apparmor's internal locking (even just rcu_read_lock) prevents sleeping within code. To avoid having to deal with the locking issues, notifications are delayed until hook exit.
 
@@ -48,9 +54,14 @@ And at hook exit
 
   do_notify(name, ...)
 
-If a notification is determined to be needed the audit message is queued up on the aa_notify struct. And it is handled in DO_NOTIFY at the end of the hook. This allows us to avoid apparmor internal locking and also to group multiple notifications into a single message.
+If a notification is determined to be needed the audit message is queued up on the aa_notify struct. And it is handled in do_notify at the end of the hook. This allows us to avoid apparmor internal locking and also to group multiple notifications into a single message.
 
-## Audit messages and allocations
+## ??
+
+
+
+
+# Audit messages and allocations
 
 The queue of audit messages requires that they be allocated via heap memory, but we also don't want the regular audit path to fail.
 
@@ -122,6 +133,61 @@ The audit cache is used to dedup messages to the audit subsystem. This can great
 needs to take cred ref, profile/label refs
 
 
+
+# Notification Message Listeners (Daemons)
+
+Userspace notification daemons follow a basic notification loop
+
+- open ```notify``` file
+- register event mask
+- poll events (optional)
+- read events
+- reply to event if required
+
+Listeners must be registered before a notification can be delivered to them. Notifications that have been sent before a listener has registered will never be received by the listener.
+
+Notification listeners are per namespace.
+
+There can be multiple listeners per namespace, and listeners may be subscribed to the same set of notifications.
+
+Notification listeners should specify a buffer larger than the largest notification. The kernel is capable of delivering multiple notification per kernel round trip.
+
+## information notifications
+
+Many notifications are informational.
+
+Informational notifications are broadcast style messages and will be sent to every listener that matches the notification.
+
+
+## interactive notifications
+
+Interactive notifications will only be sent to the first listener who's subscription matches.
+
+Prompt notifications are interactive. There are two mechanism for dealing with them depending on where the notification occurs.
+
+
+### No Listeners
+
+If there are no matching listeners to an interactive notification, the notification is cancelled and the error code in the audit structure is returned.
+
+??? debug/info message for missing listener
+
+Notifications that are cancelled are not cached to either the type nor audit caches.
+
+
+### Dealing with time outs and interrupts
+
+
+### replying to a notification
+
+### waiting on event
+
+### ptrace
+
+#### registering a ptrace handler
+
+
+### replying to a notification
 
 
 
