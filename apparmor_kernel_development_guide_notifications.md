@@ -46,13 +46,20 @@ The profile flags apply to all actions that do NOT have a specific match in poli
 
 ## State based notifications
 
+These are notifications based on changes to internal state. Policy loads etc.
+
 
 # Scope of Notification
-Namespace
 
-Hierarchical
+Notifications listeners are opened against a specific namespace and can be used to listen to events within the namespace's [scope](AppArmorPolicyScope).
 
-Limiting scope
+The set of notifications being listened on can be further refined by limiting the type of events being listened for and providing a dfa based filter at registration time that can limit notifications to specific profiles.
+
+## Format of the dfa
+
+regular dfa. permission are mapped to the type of notification
+
+
 
 # Notification
 
