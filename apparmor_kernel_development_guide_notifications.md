@@ -99,6 +99,8 @@ audit structs
 
 To avoid repeating prompt messages to userspace. Answers are pushed into the type cache. However because we don't have a true type for the prompt we use a hash of the prompt parameters. That is unique and guaranteed not to overlap actual types in the cache.
 
+The hash of the parameters is taken early to do a lookup in the cache, and then held (as metadata) unitl after the prompt is inserted in the cache.
+
 Because the cache ages and sees replacement as new permissions are cached it is possible userspace will see the same prompt again if the profile doing the query is not replaced. Just how long this will take on average will depend on the size of the type cache.
 
 
