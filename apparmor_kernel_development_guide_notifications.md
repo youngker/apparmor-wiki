@@ -46,7 +46,7 @@ Each hook that allows notifications gets a aa_notify struct
 
 And at hook exit
 
-  DO_NOTIFY(name, ...)
+  do_notify(name, ...)
 
 If a notification is determined to be needed the audit message is queued up on the aa_notify struct. And it is handled in DO_NOTIFY at the end of the hook. This allows us to avoid apparmor internal locking and also to group multiple notifications into a single message.
 
@@ -98,6 +98,8 @@ audit structs
 
 # caching
 
+Two different caches come into play with notifications.
+
 ## type cache
 
 The type cache is used to cache permission lookups, when an object type is available. And is a generic cache to help accelerate permission lookup.
@@ -116,6 +118,8 @@ The audit cache is used to dedup messages to the audit subsystem. This can great
 - complain/learning and policy change messages: are always checked against the audit cache.
 - prompt messages: are only checked against the audit cache if the prompting results in an audited message.
  
+
+needs to take cred ref, profile/label refs
 
 
 
