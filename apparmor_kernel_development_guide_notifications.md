@@ -23,8 +23,8 @@ Notifications are how the apparmor kernel message can send event based messages 
 
 There are different types of notifications
 
-- multicast policy changes
-- multicast complain
+- broadcast policy changes
+- broadcast complain
 - unicast prompt/reply
 
 # Specifying When notifications should occur
@@ -115,7 +115,7 @@ apparmor audit msg -> audit msg cache -> dedup -> copy msg -> insert in msg cach
                    |                                        -> send to audit subsystem
                    -> notify queue -> insert queue on waiting
 
-multicast
+broadcast
 - policy changes
 - complain messages
 prompting
@@ -190,7 +190,44 @@ Informational notifications are broadcast style messages and will be sent to eve
 
 Interactive notifications will only be sent to the first listener who's subscription matches.
 
-Prompt notifications are interactive. There are two mechanism for dealing with them depending on where the notification occurs.
+Prompt notifications are interactive. There are two mechanism for dealing with them depending on where the notification occurs. The task can be slept at the hook point, or the task can be signaled and suspended. From an interactive notification policy POV these methods are the same and there is no way to specify one or the other.
+
+From a listener POV it can choose to support one and not the other.
+
+### Sleep task on notification
+
+There are a few LSM hooks that allow sleep. In these cases sleep task on notification can be used. The task is suspended at the point of notification and a notification is sent to userspace. When the reply is received the task is woken up and continues.
+
+The reply from userspace, can update the permission set and potentially change the results returned to for the syscall.
+
+#### Timeouts
+
+The notification has a timeout, and a response must be received before the timeout expires. It is possible to reply to a notification with a keep-alive reply to keep the notification active, while waiting for some other event in userspace.
+
+There are a limited number of keep alive replies that can be applied before the notification will be canceled.
+
+
+#### signals
+
+Sleeping notifications are interruptable and which can cause
+ERESTART??? to be returned.
+
+
+#### Down grading
+
+Sleep task notifications can be handled as a signal task notification if a listener capable of handling a sleep task notification is not available but a handler capable of dealing with signal task notifications is.
+
+### Signal task on notification
+
+This technique requires either task cooperation or ptracing of the task that is causing the notifications. This means it can not be used with debuggers, some seccomp filters, upstart job control and yama restrictions may also be a problem.
+
+A SIG_STOP? is sent to the task, causing it to suspend. A error value of ????, is returned from the syscall. In addition a notification is sent to a listener.
+
+The userspace listener must receive the notification, trace the task, reply to the notification, restart the task at the original syscall.
+
+
+The task maybe already ptraced by the listener
+??? should we require the listener register a ptrace handler, so the notification can verify the correct ptracer before sending the notification????
 
 
 ### No Listeners
@@ -207,9 +244,7 @@ Notifications that are cancelled are not cached to either the type nor audit cac
 
 ### replying to a notification
 
-### waiting on event
 
-### ptrace
 
 #### registering a ptrace handler
 
@@ -237,6 +272,12 @@ link to userspace api provided by library.
 ## ???
 
 
+
+# Keeping notifications from becoming an attack vector via consuming kernel resources
+
+type cache, audit cache, and notification queues are all bounded
+
+interactive notifications always have a time out
 
 
 
