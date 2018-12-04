@@ -14,6 +14,7 @@ Notifications are how the apparmor kernel message can send event based messages 
 - apparmorfs.c: file based interface
 - audit.c
 - lib.c
+- tc.c
 - lsm.c: hooks
 - include/audit.h
 
