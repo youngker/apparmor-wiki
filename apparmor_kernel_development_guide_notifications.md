@@ -27,6 +27,26 @@ There are different types of notifications
 - multicast complain
 - unicast prompt/reply
 
+# Specifying When notifications should occur
+
+## Policy based notifications
+
+Notifications are not directly specified in policy instead they are based on profile flags, and rule prefixes along with the presences of a listener that matches the event.
+
+- complain: broadcast any allowed message to all listeners, instead of auditing
+- prompt: send any allowed message to the first matching listener
+
+ or a rule prefix.
+
+- complain: as for the complain profile flag except only applies only to events that match the rule
+- prompt: as for the prompt profile flag except only applies only to events that match the rule.
+
+The profile flags apply to all actions that do NOT have a specific match in policy (explicit denies count as a match). The rule prefix applies similarly being lower priority than allow or deny rules, so in a situation with rule overlap it only applies to the part of the rule not covered by a regular allow or deny rule.
+
+
+## State based notifications
+
+
 # Scope of Notification
 Namespace
 
