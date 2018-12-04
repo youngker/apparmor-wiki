@@ -96,13 +96,30 @@ down grading prompt
 ## ???
 audit structs
 
-# type cache
+# caching
 
-To avoid repeating prompt messages to userspace. Answers are pushed into the type cache. However because we don't have a true type for the prompt we use a hash of the prompt parameters. That is unique and guaranteed not to overlap actual types in the cache.
+## type cache
+
+The type cache is used to cache permission lookups, when an object type is available. And is a generic cache to help accelerate permission lookup.
+
+For notifications the type cache is used to reduce repeat prompt messages to userspace. It caches previous answers from userspace for a given prompt. However because we don't have a true type for the prompt we use a hash of the prompt parameters. That is unique and guaranteed not to overlap actual types in the cache.
 
 The hash of the parameters is taken early to do a lookup in the cache, and then held (as metadata) unitl after the prompt is inserted in the cache.
 
 Because the cache ages and sees replacement as new permissions are cached it is possible userspace will see the same prompt again if the profile doing the query is not replaced. Just how long this will take on average will depend on the size of the type cache.
+
+
+## audit cache
+
+The audit cache is used to dedup messages to the audit subsystem. This can greatly reduce the flood of messages that complain mode/learning mode generates. It is very similar to the type cache except it caches audit data objects, instead of permissions.
+
+- complain/learning and policy change messages: are always checked against the audit cache.
+- prompt messages: are only checked against the audit cache if the prompting results in an audited message.
+ 
+
+
+
+
 
 
 
