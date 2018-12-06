@@ -83,7 +83,20 @@ And at hook exit
 
 If a notification is determined to be needed the audit message is queued up on the aa_notify struct. And it is handled in do_notify at the end of the hook. This allows us to avoid apparmor internal locking and also to group multiple notifications into a single message.
 
-## ??
+## Waiting
+
+- we use a wait_queue instead of a completion queue
+  - as there maybe multiple tasks listening, that may wake up on the same event.
+
+- because events are at the policy ns level, we have a single wait_queue per ns.
+  - waiter
+
+- each listener whos filter matches a notification will be woken/receive wakeup?
+
+
+
+??? Instead of having a message on multiple queues there is a single queue of notifications per ns
+- notifications removed when every listener has processed it OR timeout OR rate limiting drops it
 
 
 
