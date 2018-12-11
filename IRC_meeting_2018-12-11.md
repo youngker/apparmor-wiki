@@ -65,6 +65,48 @@
 (10:31:58 AM) sbeattie: let's move on
 (10:33:18 AM) jjohansen1: okay, so we still have a lot of outstanding WI
 (10:33:23 AM) jjohansen1: http://paste.opensuse.org/view//83156820
+
+    apparmor 3
+    ∘ file based profile names deprecated
+    ∘ overlay
+      ‣ policy
+      ‣ configs
+    ∘ allow all,
+    ∘ compiler
+      ‣ intersection of kernel abi and specified abi
+      ‣ document abi priotity
+        • when does policy abi override, compiler specified abi, vs defaulting to kernel abi
+    ∘ build flags default locations
+      ‣ policy
+      ‣ cache
+      ‣ config
+    ∘ policy_hash
+    ∘ abi
+    ∘ fd based api interface
+    ∘ multi-query
+    ∘ upstream network support
+    ∘ nnp
+    ∘ evm xattr match support
+    ∘ profile flags
+      ‣ prompt
+      ‣ kill
+      ‣ debug
+    ∘ audit flags
+      ‣ audit
+      ‣ quiet_allow
+    ∘ prefix
+      ‣ quiet
+      ‣ kill
+      ‣ complain
+      ‣ access (alternative to allow/deny)
+    ∘ proc interface replacement in lib
+    ∘ semantic verification of
+      ‣ profile names
+      ‣ stacks
+      ‣ transitions
+      ‣ requires: aa_dfa in userspace
+    ∘ bigger xindex
+
 (10:33:56 AM) jjohansen1: I split out what I thought I could get away with into an apparmor 3.1 release schedule
 (10:34:11 AM) sarnold: where would pam_apparmor using change_profile rather than change_hat fit?
 (10:34:40 AM) jjohansen1: oh, is that still in there? that can go to 3.1 :)
@@ -72,6 +114,30 @@
 (10:35:14 AM) sarnold: but if you won't mind 3.1 that's fine then, heh
 (10:36:12 AM) cboltz: with "allow all", you mean "file, capability, network, dbus, ..." as one rule?
 (10:36:56 AM) jjohansen1: ftr the apparmor 3.1 WI list http://paste.opensuse.org/view//10385421
+
+    apparmor 3.1
+    ∘ cache
+      ‣ fallback if exact match not found
+      ‣ support warn if exact match not found
+    ∘ compiler
+      ‣ clean up warnings
+      ‣ mount fixes
+    ∘ new mount api support?
+    ∘ aa-hash
+      ‣ hash policy, match to kernel hashes
+    ∘ parser x dominance
+    ∘ aa-policy
+      ‣ default location, overlay support
+      ‣ config dir
+      ‣ lib interface
+      ‣ --load, --replace, --remove
+      ‣ option to build policy caches
+    ∘ query caching
+    ∘ policy versioning
+    ∘ pam_apparmor
+      ‣ use change_profile
+      ‣ support creating user namespaces
+
 Sargun sarnold 
 (10:37:42 AM) sarnold: thanks
 (10:38:16 AM) jjohansen1: sarnold: so yes pam_apparmor really needs an update, especially around user namespaces (the scopes and view work), but since that hasn't landed upstream yet, there is no point holding off 3.0 longer, it can wait for the next release
