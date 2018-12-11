@@ -88,8 +88,15 @@ If a notification is determined to be needed the audit message is queued up on t
 - we use a wait_queue instead of a completion queue
   - as there maybe multiple tasks listening, that may wake up on the same event.
 
-- because events are at the policy ns level, we have a single wait_queue per ns.
-  - waiter
+- events are at the policy ns level, but events are filtered per listener fd. Further more a listener may want to listen to events from multiple namespaces.
+  - a single wait_queue per ns would force listeners to use multiple fds, and non-blocking I/O or polling
+  - instead we use a single wait_queue per listener (fd)
+    - listeners are added to a per ns list
+    - events are checked against the listeners filter before waking the listener
+    - listeners are then responsible for processing available events
+      - events are queued at the ns with a unique id, not the listener
+
+
 
 - each listener whos filter matches a notification will be woken/receive wakeup?
 
