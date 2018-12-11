@@ -9,12 +9,19 @@ announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
 
-Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Dec 11 2018
+Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Jan ?? 2019
 -----------------------------------------------------------------------------
 
 - apparmor 3.0
-- stable releases
 - anything else
+
+[IRC Meeting, 18:00 UTC, Tuesday Dec 11 2018](IRC_meeting_2018-12-11)
+-----------------------------------------------------------------------------
+
+- stable releases
+- apparmor 3.0
+- apparmor 3.1
+- ericchiang membership
 
 [IRC Meeting, 18:00 UTC, Thursday Feb 15 2018](IRC_meeting_2018-02-15)
 -----------------------------------------------------------------------------
