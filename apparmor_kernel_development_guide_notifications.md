@@ -61,7 +61,16 @@ regular dfa. permission are mapped to the type of notification
 
 
 
-# Notification
+# Notification Listeners
+
+- Userspace can open an fd to listen to notifications
+- Userspace can specify the set of events it wants to listen to on the fd
+  - the set of events received can be selected via a mask of notifiction types
+  - a filter to limit notifications to specific profiles or namespaces
+- The fd is used to receive notifications and reply to them when necessary
+- notifications can be waited on via blocking I/O or select/poll
+- multiple listeners can receive the same notification if it is broadcast
+- interactive notifications go to a single listener
 
 
 
