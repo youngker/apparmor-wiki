@@ -20,7 +20,7 @@ and 2.13.1 (2e922a9a9b31088c9d0f9760f7e1c71f8ad5d4b9) [apparmor-2.13 branch](htt
 Tarball
 -   <https://launchpad.net/apparmor/2.13/2.13.1/+download/apparmor-2.13.1.tar.gz>
 -   sha256sum: 7a060d94c275e59f96bacd1da150e6fee2c9152a85bf57800109d07d51ef8afb
--   signature: <https://launchpad.net/apparmor/2.13/2.13.1/+download/apparmor-2.13.1,tar.gz.asc>
+-   signature: <https://launchpad.net/apparmor/2.13/2.13.1/+download/apparmor-2.13.1.tar.gz.asc>
 
 
 Build Infrastructure
