@@ -16,7 +16,7 @@ and 2.10.4 (???) on the [apparmor-2.10 branch](https://gitlab.com/apparmor/appar
 Tarball
 -   <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz>
 -   sha256sum: 
--   signature: <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4,tar.gz.asc>
+-   signature: <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz.asc>
 
 Build Infrastructure
 --------------------
