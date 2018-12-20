@@ -23,6 +23,7 @@ Build Infrastructure
 - Update release infrastructure to use gitlab
 - Fix $(PWD) when using "make -C profiles"
 - exit rather than returning from shell snippets in Makefiles
+- update .gitignore
 
 
 Policy Compiler (a.k.a apparmor\_parser)
@@ -39,6 +40,9 @@ Policy Compiler (a.k.a apparmor\_parser)
 
 # Library
 - fix: remove empty LD_RUN_PATH from libapparmor-perl
+
+# Init
+- Ignore *.orig and *.rej files when loading profiles
 
 Utils
 -----
@@ -80,6 +84,7 @@ Policy
   - syslog-ng: fix startup for some configurations
   - mlmmj-sub: fix moderated subscription
   - allow running Thunderbird wrapper script
+  - postalias: allow locking /etc/aliases.db
   - dovecot
     - add dovecot/stats profile, and allow dovecot to run it
     - allow dac_read_search and reading ssl-parameters.dat
@@ -91,6 +96,7 @@ Policy
     - auth
       - allow dac_read_search and dac_override
       - allow writing /run/dovecot/old-stats-user
+    - allow reading /proc/sys/fs/suid_dumpable
   - samba
     - allow smbd to load new shared libraries
     - allow winbindd to read and write new kerberos cache location
@@ -103,6 +109,8 @@ Policy
   - Add uid and uids kernel var placeholders
 
 - Abstractions
+   - ssl_key: add letsencrypt abstraction
+  - add vulkan abstraction
   - add qt5 abstraction
   - add qt5-compose-cache-write abstraction
   - ubuntu-email: add new Thunderbird executable path
@@ -139,6 +147,10 @@ Tests
 - mark profiles with multiple rules in one line as known-failing
 - add tests for relative path includes
 - utils ignore tests for 'include if exists'
+- error out on superfluous TODOs
+- disable abi/ok_10 and abi/ok_12 tests
+- Remove TODO notes from no-longer-failing tests
+- test abstractions against apparmor_parser
 
 
 Documentation
@@ -146,3 +158,5 @@ Documentation
 - apparmor(7): clarify the effect of reloading a profile.
 - Move README to README.md and sync with master branch to support gitlab
 - update documentation to references gitlab and updated bug reporting procedures
+- aa-notify(8): update user's configuration file path
+
