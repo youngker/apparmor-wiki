@@ -26,6 +26,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 - Fix failures due to -M only setting compile-features
 - Don't hard code the location of netinet/in.h.
+- ignore feature abi rules from 3.0 policy
 
 
 Init
@@ -71,6 +72,7 @@ Tests
 - disable abi/ok_10 and abi/ok_12 tests
 - Remove TODO notes from no-longer-failing tests
 - add utils/test/common_test.pyc to gitignore
+- test abstractions against apparmor_parser
 
 
 Documentation
