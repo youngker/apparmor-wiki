@@ -63,7 +63,7 @@ Policy
 - Abstractions
   - private-files: deny ~/.mutt**
   - private-files-strict: audit deny ~/.aws
-  - ssl_key: Add /etc/letsencrypt/archive
+  - ssl_key: Add letsencrypt abstraction
   - Add vulkan abstraction
 
 Tests
