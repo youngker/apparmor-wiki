@@ -30,6 +30,7 @@ Build Infrastructure
 - coverity
    - capture separate log files for each coverity invocatio
    - support python scan
+- update .gitignore
 
 
 Policy Compiler (a.k.a apparmor\_parser)
@@ -44,6 +45,9 @@ Policy Compiler (a.k.a apparmor\_parser)
 
 # Library
 - fix: remove empty LD_RUN_PATH from libapparmor-perl
+
+# Init
+- Fix syntax error in rc.apparmor.functions which could cause policy load failures
 
 Utils
 -----
@@ -86,8 +90,6 @@ Utils
 Policy
 ------
 - Profiles
-  - support distributions which merge sbin into bin
-  - ping: support void linux binary location
   - traceroute: support void linux binary location
   - ntpd
     - allow access to ntp clockstat
@@ -98,9 +100,12 @@ Policy
   - dnsmasq
     - add paths for NetworkManager connection sharing
     - add permission to open log files
+    - add pid file used by NetworkManager
+    - adjust pattern for log files to comply with SELinux
   - mlmmj-sub fix moderated subscription
   - wireshark update for modern releases
   - allow running Thunderbird wrapper script
+  - postalias: allow locking /etc/aliases.db
   - dovecot
     - add dovecot/stats profile, and allow dovecot to run it
     - allow write to /run/dovecot/old-stats-user
@@ -110,6 +115,7 @@ Policy
     - add stats profile, and allow dovecot to run it
     - lda: allow reading anything under /usr/share/dovecot/protocols.d/
     - fix signal sending for usr.sbin.dovecot
+    - allow reading /proc/sys/fs/suid_dumpable
   - samba
     - allow smbd to load new shared libraries
     - allow winbindd to read and write new kerberos cache location
@@ -121,12 +127,18 @@ Policy
   - add uid and uids kernel var placeholders
 
 - Abstractions
+  - ssl_key: Add letsencrypt abstraction
+  - Add vulkan abstraction
   - add qt5 abstraction
   - add qt5-compose-cache-write abstraction
   - ubuntu-email: add new Thunderbird executable path
   - ubuntu-browsers.d/user-files: disallow access to the dirs of private files
-  - private-files: disallow writes to thumbnailer dir (LP: #1788929)
-  - private-files-strict: disallow access to the dirs of private files
+  - private-files:
+    - disallow writes to thumbnailer dir (LP: #1788929)
+    - deny ~/.mutt**
+  - private-files-strict:
+    - disallow access to the dirs of private files
+    - audit deny ~/.aws
   - user-files: disallow access to the dirs of private files
   - remove antiquated abstractions/launchpad-integration
   - kde: use qt5 abstration
@@ -159,9 +171,14 @@ Tests
 - mark profiles with multiple rules in one line as known-failing
 - add tests for relative path includes
 - ignore tests for 'include if exists'
+- error out on superfluous TODOs
+- disable abi/ok_10 and abi/ok_12 tests
+- Remove TODO notes from no-longer-failing tests
+- test abstractions against apparmor_parser
 
 Documentation
 -------------
 - apparmor(7): clarify the effect of reloading a profile.
 - README: Document that the parser should be built before the utils
 - update documentation to references gitlab and updated bug reporting procedures
+- aa-notify(8): update user's configuration file path
