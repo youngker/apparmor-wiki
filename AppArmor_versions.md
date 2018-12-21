@@ -57,6 +57,15 @@ Released Versions of AppArmor Userspace Utils
 -   [Release Notes](Release_Notes_3.0)
 -   Development target: improved userspace libraries, new policy models leveraging stacking and namespaces, new upstream kernel module
 
+[AppArmor 2.13.2](Release_Notes_2.13.2)
+---------------------------------------------
+
+-   Release Date: 2018-12-21
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.13.2)
+-   Development target: Bug fixes and policy improvements for AppArmor 2.13
+
 [AppArmor 2.13.1](Release_Notes_2.13.1)
 ---------------------------------------------
 
@@ -74,6 +83,15 @@ Released Versions of AppArmor Userspace Utils
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.13)
 -   Development target: per kernel caches, and overlay directories for caches
+
+[AppArmor 2.12.2](Release_Notes_2.12.2)
+---------------------------------------------
+
+-   Release Date: 2018-12-21
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.12.2)
+-   Development target: Bug fixes and policy improvements for AppArmor 2.12
 
 [AppArmor 2.12.1](Release_Notes_2.12.1)
 ---------------------------------------------
@@ -96,7 +114,7 @@ Released Versions of AppArmor Userspace Utils
 [AppArmor 2.11.2](Release_Notes_2.11.2)
 -------------------------------------------------
 
--   Release Date: 2018-10-13
+-   Release Date: 2018-12-21
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.11.2)
@@ -123,7 +141,7 @@ Released Versions of AppArmor Userspace Utils
 [AppArmor 2.10.4](Release_Notes_2.10.4)
 -------------------------------------------------
 
--   Release Date: 2018-10-13
+-   Release Date: 2018-12-21
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.10.4)
