@@ -66,17 +66,17 @@ Development release: AppArmor 3.0
     -   query caching
     -   extensible rule support so older parsers don't break on new rule types
 
-Current stable release: 2.13.1
--   <https://launchpad.net/apparmor/2.13/2.13.1/+download/apparmor-2.13.1.tar.gz>
--   sha256sum: 7a060d94c275e59f96bacd1da150e6fee2c9152a85bf57800109d07d51ef8afb
--   signature: <https://launchpad.net/apparmor/2.13/2.13.1/+download/apparmor-2.13.1,tar.gz.asc>
--   [ 2.13.1 release notes](Release_Notes_2.13.1)
+Current stable release: 2.13.2
+-   <https://launchpad.net/apparmor/2.13/2.13.2/+download/apparmor-2.13.2.tar.gz>
+-   sha256sum: 844def9926dfda5c7858428d06e44afc80573f9706458b6e7282edbb40b11a30
+-   signature: <https://launchpad.net/apparmor/2.13/2.13.2/+download/apparmor-2.13.2,tar.gz.asc>
+-   [ 2.13.2 release notes](Release_Notes_2.13.2)
 
-Prior supported release: 2.12.1
--   <https://launchpad.net/apparmor/2.12/2.12.1/+download/apparmor-2.12.1.tar.gz>
--   sha256sum: ec7fcb334f68e29f481251f865c29953163853506a8dc96ce8591d9add659db2
--   signature: <https://launchpad.net/apparmor/2.12/2.12.1/+download/apparmor-2.12.1.tar.gz.asc>
--   [ 2.12.1 release notes](Release_Notes_2.12.1)
+Prior supported release: 2.12.2
+-   <https://launchpad.net/apparmor/2.12/2.12.2/+download/apparmor-2.12.2.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.12/2.12.2/+download/apparmor-2.12.2.tar.gz.asc>
+-   [ 2.12.2 release notes](Release_Notes_2.12.2)
 
 Prior supported release: 2.11.2
 
