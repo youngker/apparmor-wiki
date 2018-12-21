@@ -10,15 +10,15 @@ This version of the userspace should work with all kernel versions from
 apparmor patches applied). And supports features released in the 4.18
 kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
-AppArmor 2.12.2 was released 2018-12-????.
+AppArmor 2.12.2 was released 2018-12-21.
 
 
 # Obtaining the Release
-These release notes cover all changes between 2.12.1 (4633658232827cfeb8d301257d9112cd101c2f7c) and 2.12.2 (?????? ) [apparmor-2.12 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.12).
+These release notes cover all changes between 2.12.1 (4633658232827cfeb8d301257d9112cd101c2f7c) and 2.12.2 (50aa7293ddbba5bde10065761e9b83764f3d2449) [apparmor-2.12 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.12).
 
 Tarball
 -   <https://launchpad.net/apparmor/2.12/2.12.2/+download/apparmor-2.12.2.tar.gz>
--   sha256sum: ???
+-   sha256sum: a316355e9f14c55831856350ef5f4bb99e0a34ecde6f7d7b07719079fdda5866
 -   signature: <https://launchpad.net/apparmor/2.12/2.12.2/+download/apparmor-2.12.2,tar.gz.asc>
 
 
