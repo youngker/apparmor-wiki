@@ -93,16 +93,6 @@ Prior release: 2.10.4
 -   [ 2.10.4 release notes](Release_Notes_2.10.4)
 
 
-#### Development
-
-tentative release schedule for version 3.0
-
--   Alpha 1: week of May 1.
--   Alpha 2: late May
--   Alpha 3/beta 1: June
--   beta1/beta2: in mid July
--   beta2/3 start of August
--   release: Oct-Nov
 
 <!-- -->
 
