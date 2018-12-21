@@ -11,11 +11,11 @@ apparmor patches applied).
 
 # Obtaining the Release
 These release notes cover all changes between 2.10.3 (3004390a6c3e2efe1c2bcfa51e3b0ceef5b39041)
-and 2.10.4 (???) on the [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
+and 2.10.4 (758ec0cdbd1978ff7b82fb0b18abc92687f81f59) on the [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
 
 Tarball
 -   <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz>
--   sha256sum: 
+-   sha256sum: 990aafd91905bcced2a8386bc5e45507e847b825c7c693a3c2cbeb5c0b9e7da3
 -   signature: <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz.asc>
 
 Build Infrastructure
