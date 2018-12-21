@@ -14,7 +14,7 @@ AppArmor 2.13.2 was released 2018-12-21.
 
 
 # Obtaining the Release
-These release notes cover all changes between 2.13.1 (2e922a9a9b31088c9d0f9760f7e1c71f8ad5d4b9) and 2.13.2 (???) [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
+These release notes cover all changes between 2.13.1 (2e922a9a9b31088c9d0f9760f7e1c71f8ad5d4b9) and 2.13.2 (af4808b5f6b58946f5c5a4de4b77df5e0eae6ca0) [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
 
 Tarball
 -   <https://launchpad.net/apparmor/2.13/2.13.2/+download/apparmor-2.13.2.tar.gz>
