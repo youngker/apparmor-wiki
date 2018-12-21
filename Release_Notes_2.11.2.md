@@ -13,11 +13,11 @@ kernel.
 
 # Obtaining the Release
 These release notes cover all changes between 2.11.1 (8b81fe065f2d8ad93767ebf32afbd3740c6f3818)
-and 2.11.2 (???) on the [apparmor-2.11 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.11).
+and 2.11.2 (5afe0f8889d5007b7ddb3b2aef287a19e01e656c) on the [apparmor-2.11 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.11).
 
 Tarball
 -   <https://launchpad.net/apparmor/2.11/2.11.2/+download/apparmor-2.11.2.tar.gz>
--   sha256sum: 
+-   sha256sum: e22a6369e6d377dbb606fb8e732fe5eef7d7055c9bf4f69e671aa60cda289c74
 -   signature: <https://launchpad.net/apparmor/2.11/2.11.2/+download/apparmor-2.11.2.tar.gz.asc>
 
 
