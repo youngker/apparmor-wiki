@@ -20,6 +20,7 @@ Making a Kernel Pull request
        eg. $ git tag -s apparmor-pr-2018-08-23
 
      Summaries changes in the pull request, and exit editor
+
        + Features
          - add support for mapping secids and using secctxes
          - add the ability to get a task's secid
