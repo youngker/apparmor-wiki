@@ -594,8 +594,10 @@ write that does the policy load must be done as a single atomic write.
 
 If ```/sys/kernel/apparmor/interface/set_remove``` exists and reports ```Y``` then a null separated list of profiles and or namespaces can be specified.
 
-otherwise the interface accept a single profile name or namespace name (beginning with a :) at a time.
+otherwise the interface accept a single profile name or namespace name (beginning with a ```:```) at a time.
 
+  eg.
+  echo -n "/demo/profile" > /sys/kernel/security/apparmor/.remove
 
 /sys/kernel/security/apparmor/.ns\_name
 ---------------------------------------
