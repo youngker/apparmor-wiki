@@ -60,10 +60,15 @@ file interface which contains 1 security context per line in the file.
 The aa\_splitcon()???ref?? api is aware of trailing '\\n' characters
 and will remove them.
 
-/proc/\<pid\>/attr/
+/proc/\<pid\>/attr/  &&  /proc/\<pid\>/attr/apparmor/  && /sys/kernel/security/apparmor/attr
 =================
 
-reading /proc/\<pid\>/attr/ files
+The files in /proc/\<pid\>/attr/ are virtualized in LSM stacking kernels, and will display the values for the current display LSM. There are two alternatives for these kernels. The apparmor subdirectory in /proc/\<pid\>/attr/ contains the same files as the /proc/\<pid\>/attr/ directory, but is not virtualized and will only display apparmor attributes.
+
+The /sys/kernel/security/apparmor/attr/ directory contains the same files as /proc/current/attr/apparmor/ meaning only the current tasks attributes can be accessed via this method.
+
+
+reading /proc/\<pid\>/attr/\* files
 -------------------------------
 
 The following apparmor interfaces can be read to obtain security context information about a task.
