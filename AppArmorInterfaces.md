@@ -592,7 +592,10 @@ The data format of the policy is specified in ????.
 This is a write only interface that allows removal of policy. The
 write that does the policy load must be done as a single atomic write.
 
-ns profile list of profiles
+If ```/sys/kernel/apparmor/interface/set_remove``` exists and reports ```Y``` then a null separated list of profiles and or namespaces can be specified.
+
+otherwise the interface accept a single profile name or namespace name (beginning with a :) at a time.
+
 
 /sys/kernel/security/apparmor/.ns\_name
 ---------------------------------------
