@@ -48,7 +48,7 @@ Making a Kernel Pull request
 
    Prepare the request-pull
 
-   $ git request-pull pull <base commit> aa-upstream-pull apparmor-pr-2018-08-23 >msg.txt
+   $ git request-pull pull \<base commit\> aa-upstream-pull apparmor-pr-2018-08-23 >msg.txt
 
    prepare email to Linus, lkml and lsm including the request the request pull
 
