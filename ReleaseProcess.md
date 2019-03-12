@@ -14,7 +14,9 @@ Making a Kernel Pull request
    2. Dump the candidate patches and run checkpatch on them, make adjustments as needed
    3. Ensure patches have been staged in linux-next for at least 2 weeks before the request pull is sent
 2. Sending a pull request
+
    $ git checkout work
+
    $ git tag -s apparmor-pr-year-month-day work
 
        eg. $ git tag -s apparmor-pr-2018-08-23
@@ -46,7 +48,7 @@ Making a Kernel Pull request
 
    Prepare the request-pull
 
-   $ git request-pull pull aa-upstream-pull apparmor-pr-2018-08-23 >msg.txt
+   $ git request-pull pull apparmor-pr-2018-08-23 aa-upstream-pull >msg.txt
 
    prepare email to Linus, lkml and lsm including the request the request pull
 
