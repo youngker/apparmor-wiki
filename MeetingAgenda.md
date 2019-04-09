@@ -14,6 +14,7 @@ Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Apr 9, 2019
 - moving kernel dev to gitlab
 - stable releases
 - apparmor 3.0
+- gitlab releases
 - anything else
 
 [IRC Meeting, 18:00 UTC, Tuesday Dec 11 2018](IRC_meeting_2018-12-11)
