@@ -9,7 +9,11 @@ announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
 
-Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Apr 9, 2019
+Next Meeting: IRC Meeting, 18:00 UTC, Tuesday May 14, 2019
+- anything else
+
+-----------------------------------------------------------------------------
+[IRC Meeting, 18:00 UTC, Tuesday Apr 9 2019](IRC_meeting_2019-04-09)
 -----------------------------------------------------------------------------
 - moving kernel dev to gitlab
 - stable releases
