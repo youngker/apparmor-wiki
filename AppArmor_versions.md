@@ -49,7 +49,9 @@ With the caveat that several distros (especially Ubuntu), have distro patches, b
 The actual set of mediation available depends on both the userspace version and the kernel version available.
 
 [Kernel Feature support](Kerenl_Feature_Matrix)
+
 [Userspace Feature support](Userspace_Feature_Matrix)
+
 [Combined Feature support](Combined_Feature_matrix)
 
 Released Versions of AppArmor Userspace Utils
