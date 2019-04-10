@@ -28,9 +28,8 @@ There kernel module breaks down into several development epochs.
 -   apparmor 2.5: creds & LSM path hooks rewrite
 -   apparmor 3: labeling - a development series that was a precursor to type splitting. Carried by Ubuntu but never upstreamed
 -   apparmor 3.5 - 3.6: stacking which exposes compound task labeling to user interfaces. Carried by Ubuntu but never upstreamed
--   apparmor 4: labeling upstreamed
--   apparmor 4.5: typesplitting
--   apparmor 5: Delegation
+-   apparmor 4: typesplitting?
+-   apparmor 5: Delegation?
 
 The 2.x series reworked the backend several times but kept the same
 basic profile model.
@@ -44,6 +43,14 @@ which is a finer grained evolution of the labeling in the 3.x series.
 
 # What release version does Distro X have
 With the caveat that several distros (especially Ubuntu), have distro patches, backports etc on top of their version of apparmor, a mapping of the apparmor packaging to distros can be found [here](https://repology.org/metapackage/apparmor/versions)
+
+# Available Features
+
+The actual set of mediation available depends on both the userspace version and the kernel version available.
+
+[Kernel Feature support](Kerenl_Feature_Matrix)
+[Userspace Feature support](Userspace_Feature_Matrix)
+[Combined Feature support](Combined_Feature_matrix)
 
 Released Versions of AppArmor Userspace Utils
 =============================================
