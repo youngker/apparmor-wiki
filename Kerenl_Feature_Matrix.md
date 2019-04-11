@@ -3,24 +3,7 @@
 
 | Kernel Version | Feature |
 |----------------|---------|
-| 2.6.36         | Base functionality lands upstream mediation of: <ul>
-<li>File
-    <ul>
-        <li>owner conditional</li>
-        <li>read, write, link, lock, mmap exec</li>
-    </ul></li>
-<li>Execute
-   <ul>
-     <li>px, cx, ix, ux, pix, named transitions</li>
-     <li>attachment conditional separate from profile name</li>
-   </ul></li>
-<li>Change hat
-   <ul>
-       <li>single hat</li>
-   </ul></li>
-<li>Change Profile</li>
-<li>Capability</li>
-</ul> |
+| 2.6.36         | Base functionality lands upstream mediation of: <ul><li>File<ul><li>owner conditional</li><li>read, write, link, lock, mmap exec</li></ul></li><li>Execute<ul><li>px, cx, ix, ux, pix, named transitions</li><li>attachment conditional separate from profile name</li></ul></li><li>Change hat<ul><li>single hat</li></ul></li><li>Change Profile</li><li>Capability</li></ul> |
 | 2.6.37         |         |
 | 2.6.38         |         |
 | 2.6.39         |         |
