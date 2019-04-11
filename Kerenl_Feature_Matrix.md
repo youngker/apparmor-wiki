@@ -1,5 +1,5 @@
 
-#Upstream kernel
+# Upstream kernel
 
 | Kernel Version | Feature |
 |----------------|---------|
@@ -52,6 +52,6 @@
 | 5.1            | LSM stacking with generic blobs (sara/landlock) |
 |----------------|-------------------------------------------------|
 
-#Suse kernel
+# Suse kernel
 
-#Ubuntu Kernel
+# Ubuntu Kernel
