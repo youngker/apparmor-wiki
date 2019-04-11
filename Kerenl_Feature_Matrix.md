@@ -3,7 +3,7 @@
 
 | Kernel Version | Feature |
 |----------------|---------|
-| 2.6.36         | Base functionality lands upstream |
+| 2.6.36         | Base functionality lands upstream<br>File<br>Execute<br>Change hat<br>Change Profile<br>Capability<br> |
 | 2.6.37         |         |
 | 2.6.38         |         |
 | 2.6.39         |         |
