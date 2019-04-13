@@ -48,7 +48,7 @@
 | 4.19           | Bug fixes |
 | 4.20           | Secmark mediation for custom policy |
 | 5.0            | Bug fixes |
-| 5.1            | LSM stacking with generic blobs (sara/landlock) |
+| 5.1            | LSM stacking with generic blobs (sara/landlock). Does not include secids so insufficient to stack with selinux and smack. |
 |----------------|-------------------------------------------------|
 
 # Suse kernel
