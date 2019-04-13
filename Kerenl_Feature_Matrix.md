@@ -18,16 +18,9 @@
 | 3.8            |         |
 | 3.9            |         |
 | 3.10           |         |
-| 3.11           |         |
-| 3.12           |         |
-| 3.13           |         |
-| 3.14           |         |
-| 3.15           |         |
-| 3.16           |         |
-| 3.17           |         |
-| 3.18           |         |
-| 3.19           |         |
-| 4.0 - 4.7       | Bug fixes        |
+| 3.11           |    ???     |
+| 3.12           |     ???    |
+| 3.13 - 4.7       | Bug fixes        |
 | 4.8            | <ul><li>allow CAP_SYS_RESOURCE to prlimit another task</li><li>add kernel parameter and kconfig to allow controlling if profile hashing is used</li></ul>        |
 | 4.9 - 4.10     | Bug fixes        |
 | 4.11           | <ul><ul><li>add <i>/sys/kernel/security/lsm</i> to enable detecting currently in use lsm</li><li>kernel parameters<ul><li>remove paranoid load parameter - all policy loads now do full checking</li></ul></li><li>speedup mediation by use of percpu buffers</li><li>add sysctl <i>/proc/sys/kernel/unprivileged_userns_apparmor_policy</i> to allow disabling user namespaces from loading policy</li><li>add query interface for extended profile <i>key/value</i> data store</ul><li>allow profile hashing to be disabled with a kconfing</li><li>policy namespaces<ul><li>add namespace view support and restrictions on visibility</li><li>add per namespace policy interface file to directly load policy into a namespace<ul><li><i>policy/namespaces/NAMESPACE/.load</i></li><li><i>policy/namespaces/NAMESPACE/.replace</i></li><li><i>policy/namespaces/NAMESPACE/.remove</i></li></ul></li></ul></li><li>allow introspecting and checkpoint and restore of loaded profile data via<ul><li><i>policy/profiles/PROFILE/raw_abi</i></li><li><i>policy/profiles/PROFILE/raw_data</i></li><li><i>policy/profiles/PROFILE/raw_sha1</i></li></ul></li><li> on exec dup2 opened files that the task won't have permission to access to a special <i>.null</i> device file</li><li>Complain mode<ul><li>support force complain flag</li><li>try to create null profiles using the exec name <i>null-EXECNAME</i></ul></li><li>feature set<ul><li> add <i>features/domain/fix_binfmt_elf_mmap</i> to enable userspace to detect the semantic change caused by <i>9f834ec18def</i></li></ul></li><li>report namespace name in audit messages</li></ul>        |
