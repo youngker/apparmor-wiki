@@ -4,14 +4,8 @@
 | Kernel Version | Feature |
 |----------------|---------|
 | 2.6.36         | Base functionality lands upstream mediation of: <ul><li>File<ul><li>owner conditional</li><li>read, write, link, lock, mmap exec</li></ul></li><li>Execute<ul><li>px, cx, ix, ux, pix, named transitions</li><li>attachment conditional separate from profile name</li></ul></li><li>Change hat<ul><li>single hat</li></ul></li><li>Change Profile</li><li>Capability</li><li>policy namespaces created through policy load</li></ul> |
-| 2.6.37         |         |
-| 2.6.38         |         |
-| 2.6.39         |         |
-| 3.0            |         |
-| 3.1            |         |
-| 3.2            |         |
-| 3.3            |         |
-| 3.4            |         |
+| 2.6.37 - 3.3| Bug fixes        |
+| 3.4            | <ul><li>Add support for extensible policydb</li><li>feature set<ul><li>add <i>features/</i> directory as a userspace api to discover kernel supported feature set</li><li>add file mediation details</li><li>add capability mediation details</li><li>export known rlimit mappings</li></ul></li></ul>       |
 | 3.5            |         |
 | 3.6            |         |
 | 3.7            |         |
