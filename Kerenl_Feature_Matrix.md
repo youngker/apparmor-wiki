@@ -7,11 +7,7 @@
 | 2.6.37 - 3.3| Bug fixes        |
 | 3.4            | <ul><li>Add support for extensible policydb</li><li>feature set<ul><li>add <i>features/</i> directory as a userspace api to discover kernel supported feature set</li><li>add file mediation details</li><li>add capability mediation details</li><li>export known rlimit mappings</li></ul></li></ul>       |
 | 3.5            | Fail exec transitions due to no_new_privs<ul><li>unconfined is allowed to transition to anything</li><li>inherit is allowed when task has nnp set</li><li>all other domain transitions are blocked when a task has nnp set</li></ul>        |
-| 3.6            |         |
-| 3.7            |         |
-| 3.8            |         |
-| 3.9            |         |
-| 3.10           |         |
+| 3.6 - 3.10     | Bug fixes        |
 | 3.11           |    ???     |
 | 3.12           |     ???    |
 | 3.13 - 4.7       | Bug fixes        |
