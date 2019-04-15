@@ -48,7 +48,7 @@ With the caveat that several distros (especially Ubuntu), have distro patches, b
 
 The actual set of mediation available depends on both the userspace version and the kernel version available.
 
-[Kernel Feature support](Kerenl_Feature_Matrix)
+[Kernel Feature support](Kernel_Feature_Matrix)
 
 [Userspace Feature support](Userspace_Feature_Matrix)
 
