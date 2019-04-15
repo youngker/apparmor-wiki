@@ -9,7 +9,7 @@
 | 3.5            | Fail exec transitions due to no_new_privs<ul><li>unconfined is allowed to transition to anything</li><li>inherit is allowed when task has nnp set</li><li>all other domain transitions are blocked when a task has nnp set</li></ul>        |
 | 3.6 - 3.10     | Bug fixes        |
 | 3.11           |    ???     |
-| 3.12           |     ???    |
+| 3.12           | <ul><li>report sha1 of loaded policy</li></ul>   |
 | 3.13 - 4.7       | Bug fixes        |
 | 4.8            | <ul><li>allow CAP_SYS_RESOURCE to prlimit another task</li><li>add kernel parameter and kconfig to allow controlling if profile hashing is used</li></ul>        |
 | 4.9 - 4.10     | Bug fixes        |
