@@ -1,6 +1,6 @@
 # Upstream AppArmor Releases
 
-| AppArmor user space Version | Feature | Minimum Kernel Version | Required Kernel Version for supported featutres | Notes |
+| AppArmor user space Version | Feature | Minimum Supported Kernel | Required Kernel Version for supported featutres | Notes |
 |-----------------------------|---------|------------------------|------------------------------------------------|-------|
 | 2.3  |   | | 2.6.24, 2.6.25   | ```1``` <ul><li>2.3 features not supported due to upstreaming changes<ul><li>basic socket mediation - requires out of tree patch</li><li>xattr mediation</li><li>?????</li><li>semantics of file mediation changed some</li></ul></li></ul> |
 | 2.3.1  |  | | 2.6.27, 2.6.28   | |
