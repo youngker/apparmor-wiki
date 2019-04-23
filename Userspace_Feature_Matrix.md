@@ -2,7 +2,7 @@
 
 | AppArmor user space Version | Feature | Minimum Kernel Version | Required Kernel Version for supported featutres | Notes |
 |-----------------------------|---------|------------------------|------------------------------------------------|-------|
-| 2.3  |   | | 2.6.24, 2.6.25   | |
+| 2.3  |   | | 2.6.24, 2.6.25   | ```1``` <ul><td>2.3 features not supported due to upstreaming changes<ul><td>basic socket mediation - requires out of tree patch</td><td>xattr mediation</td><td>?????</td><td>semantics of file mediation changed some</td></ul></td></ul>|
 | 2.3.1  |  | | 2.6.27, 2.6.28   | |
 | 2.4  |   | | 2.6.31, 2.6.32  | |
 | 2.5  |   | | 2.6.31   | |
