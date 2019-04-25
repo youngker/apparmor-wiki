@@ -10,7 +10,7 @@
 | 2.5.2  |  | |2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.38   | |
 | 2.6  |  | |2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.38   | |
 | 2.6.1  | |  |2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.38 |
-| 2.7  |  | |2.6.35 - 2.6.39, 3.0, 3.1, 3.2   | |
+| 2.7  |  | |2.6.35 - 2.6.39, 3.0, 3.1, 3.2   | last point release to support old immunix/suse kernels using out of tree patches and pcre matching engine (v3 abi) |
 | 2.7.2  | |  |2.6.35 - 2.6.39, 3.0, 3.1, 3.2   | |
 | 2.8  |  | | 3.3, 3.4   | |
 | 2.8.1  |  | |3.3 - 3.6   | |
