@@ -2,7 +2,7 @@
 
 | AppArmor user space Version | Feature | Minimum Supported Kernel | Required Kernel Version for supported featutres | Notes |
 |-----------------------------|---------|------------------------|------------------------------------------------|-------|
-| 2.3  |   | pre 2.6.24 + out of tree patches| 2.6.24, 2.6.25   | ```1``` <ul><li>2.3 features not supported due to upstreaming changes<ul><li>basic socket mediation - requires out of tree patch</li><li>xattr mediation</li><li>?????</li><li>semantics of file mediation changed some</li></ul></li></ul> |
+| 2.3  |   | pre 2.6.24 + out of tree patches| 2.6.24, 2.6.25   | ```1``` <ul><li>2.3 features not supported due to upstreaming changes<ul><li>basic socket mediation - requires out of tree patch</li><li>xattr mediation</li><li>the ability to set confinement on a pre-existing task</li><li>semantics of file mediation changed some</li></ul></li></ul> |
 | 2.3.1  |  | | 2.6.27, 2.6.28   | |
 | 2.4  |   | | 2.6.31, 2.6.32  | |
 | 2.5  |   | | 2.6.31   | |
