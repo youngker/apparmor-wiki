@@ -1,3 +1,88 @@
+# Intro
+
+bla bla bla
+
+# Stacking Kernel Requirements
+
+## Upstream
+
+There is not yet an upstream kernel capable of stacking apparmor and another major LSM (smack, selinux).
+
+However the necessary LSM stacking configuration options are present in the 5.1 kernel.
+
+  lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+
+or config
+
+  CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
+
+
+??? In 5.1 first major LSM wins
+
+## Stacking Development kernels
+
+??? multiple major LSMs
+
+uses the same kernel params and config as 5.1
+
+lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+
+or config
+
+CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
+
+
+## Ubuntu Kernels
+
+Some Ubuntu kernels carry a version of the LSM stacking patch set and apparmor necessary to use apparmor stacked with another LSM.
+
+### Ubuntu 19.04 (Disco Dingo)
+
+The LSM stacking patches in 19.04's 5.0 based kernel is a combination of a backport of the 5.1 LSM stacking patch set, some LSM Dev branch patches, and reverts of secid support in apparmor so the full LSM dev branch did not need to be incorporated.
+
+same as LSM Stacking development kernels
+
+  lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+
+or config
+
+  CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
+
+
+### Ubuntu 18.04 (Bionic Badger)
+
+  security=smack,apparmor
+
+  CONFIG_????
+
+
+# AppArmor Policy namespaces
+
+## ensuring apparmor is enabled
+
+## ensuring the securityfs filesystem is enabled
+
+## creating via the fs interface
+
+## policy
+
+
+# AppArmor Policy on the Host
+
+# Alternate LSM Policy on the Host
+
+# Simultaneous AppArmor & Alternate LSM Policy on the Host
+
+
+# single level of apparmor policy enforcement
+
+
+# bounding apparmor policy via apparmor policy stacking
+
+
+
+
+
 hrmmm, add more specific details about doing this with docker and snappy
 
 Assumes this is being done on host that isn't using apparmor. But could document that situation as well
