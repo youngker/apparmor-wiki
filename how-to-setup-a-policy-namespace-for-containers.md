@@ -4,7 +4,15 @@ bla bla bla
 
 # snappy
 
+Is not required for snappy. Snappy applications don't load their own policy, snapd does it for them.
+
+Can be used on distros that don't use apparmor as the default major lsm
+
+need the display lsm set
+
 # containers (docker ...)
+
+????
 
 # lxd
 
