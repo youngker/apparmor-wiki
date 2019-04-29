@@ -2,7 +2,24 @@
 
 bla bla bla
 
+# snappy
+
+# containers (docker ...)
+
+# lxd
+
+Lxd already supports creating apparmor child namespaces.
+Nesting requirement with user namespaces
+
 # Stacking Kernel Requirements
+
+## Nesting Requirement
+
+if apparmor policy namespaces are used in conjunction with user namespaces. There is a nesting limit.
+
+* 4.??? - single level of apparmor policy namespace (1 child policy namespace below the root) used with the user namespace.
+
+* 4.???? - nesting level of policy namespace must match nesting level of the user namepace.
 
 ## Upstream
 
