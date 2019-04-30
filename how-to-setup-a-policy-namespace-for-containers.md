@@ -21,6 +21,8 @@ Nesting requirement with user namespaces
 
 # Stacking Kernel Requirements
 
+Caveat: Audit subsystem is not namespaced
+
 ## Nesting Requirement
 
 if apparmor policy namespaces are used in conjunction with user namespaces. There is a nesting limit.
