@@ -29,6 +29,8 @@ if apparmor policy namespaces are used in conjunction with user namespaces. Ther
 
 * 4.???? - nesting level of policy namespace must match nesting level of the user namepace.
 
+* 5.3 + apparmor 3.0 no need to set display LSM
+
 ## Upstream
 
 There is not yet an upstream kernel capable of stacking apparmor and another major LSM (smack, selinux).
