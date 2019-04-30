@@ -1,6 +1,6 @@
 # Intro
 
-bla bla bla
+bla bla bla, dependent on apparmor version and kernel version
 
 # snappy
 
