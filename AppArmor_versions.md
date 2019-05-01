@@ -401,7 +401,7 @@ AppArmor 2.3 (Unsupported)
 -   Release Date: June 2008
 -   Shipped in: openSUSE 11.0, opensuse 11.1, Ubuntu 8.04 (Hardy Haron), Ubuntu 8.10 (Intrepid Ibex)
 -   kernels supported: 2.6.24, 2.6.25
--   [Features and Release Notes](http://developer.novell.com/wiki/index.php/Apparmor_2_3)
+-   [Features and Release Notes](https://web.archive.org/web/20091214065721/http://developer.novell.com/wiki/index.php/Apparmor_2_3)
 
 AppArmor 2.3 builds incrementally one the AppArmor 2.1 release. The main thrust of its development was extending the profile and file rule features.
 
