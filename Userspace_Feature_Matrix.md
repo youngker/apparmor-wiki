@@ -5,7 +5,7 @@
 | 2.3 |   | pre 2.6.24 + out of tree patches (v4 abi) | 2.6.24+ (v5 bi)<sup>1</sup>   | ```1``` <ul><li>2.3 features not supported due to upstreaming changes<ul><li>basic socket mediation - requires out of tree patch</li><li>xattr mediation</li><li>the ability to set confinement on a pre-existing task</li><li>semantics of file mediation changed some</li></ul></li></ul> |
 | 2.3.1  |  | | 2.6.27, 2.6.28   | |
 | [2.4](Release_Notes_2.4)  |<ul><li>pux transitions</li><li>Improved profile namespace support</li><li>Caching of compiled profiles</li><li>kill mode</li><li>audit control</li><li>change profile on exec</li></ul>   | | 2.6.31, 2.6.32  |Removed support for:<ul><li>chown, chmod, and xattr mediation</li><li>Path-based mediation of unix domain sockets</li><li>Set profile interface</li> |
-| [2.5](Release_Notes_2.5)  |   | | 2.6.31   | |
+| [2.5](Release_Notes_2.5)  | <ul><li>Improved policy and DFA verification</li><li>chmod/chown mediation</li><li>change_hatv</li><li>Use CAP_MAC_ADMIN to determine if policy modification is allowed</li><li>hierarchical namespaces</li><li>New profile flags</li><li>Renaming replace</li><li>DFA minimization</li><li>Improved table compression</li><li>New optimization and debugging flags for dfa creation</li><li>aa-decode utility</li><li>apparmor_notifier rewrite</li></ul>  | | 2.6.31   |Removed support for:<ul><li>set capabilities</li><li>Unnecessary /proc//xaddr/* restrictions</li><li>Parallel profile load</li></ul>|
 | [2.5.1](Release_Notes_2.5.1)  |   | | 2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.37   | |
 | [2.5.2](Release_Notes_2.5.2)  |  | |2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.38   | |
 | [2.6.0](Release_Notes_2.6.0)  |  | |2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.38   | |
