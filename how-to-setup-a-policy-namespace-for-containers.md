@@ -22,9 +22,14 @@ Nesting requirement with user namespaces
 # Stacking Kernel Requirements
 
 Caveat: Audit subsystem is not namespaced
-##
 
-* Authority to create a policy namespace and
+## Authority to create a policy namespace
+
+* kernels up to ??? require capability MAC_ADMIN in the user namespace.
+
+* kernels ??? relax this to apparmor policy admin capable due to interaction with other LSMs mediating capability MAC_ADMIN for control of their own policy. IF unconfined apparmor policy admin capable may require cap MAC_ADMIN depending on how the current policy namespace is configured.
+
+* kernels ??? add the ability for users to create/admin their own policy.
 
 ## Nesting Requirement
 
