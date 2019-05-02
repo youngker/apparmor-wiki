@@ -10,7 +10,7 @@
 | [2.5.2](Release_Notes_2.5.2)  |<ul><li>change_hatv(), change_hat_vargs() available via swig interfaces</li><li>Bug fixes</li></ul>  | |2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.38   | Removed utils/severity.pl due to incorrect license/copyright statement|
 | [2.6.0](Release_Notes_2.6.0)  |  | |2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.38   | |
 | [2.6.1](Release_Notes_2.6.1)  |<ul><li>Bug fixes</li></ul> |  |2.6.31 (patched), 2.6.32 (patched), 2.6.33 - 2.6.38 |
-| [2.7](Release_Notes_2.7)  |  | |2.6.35 - 2.6.39, 3.0, 3.1, 3.2   | last point release to support old immunix/suse kernels using out of tree patches and pcre matching engine (v3 abi) |
+| [2.7](Release_Notes_2.7)  |<ul><li>Support for systemd</li><li>Support for CAP_SYSLOG</li><li>Support rlimit cpu</li></ul>| |2.6.35 - 2.6.39, 3.0, 3.1, 3.2   | last point release to support old immunix/suse kernels using out of tree patches and pcre matching engine (v3 abi) |
 | [2.7.2](Release_Notes_2.7.2)  | |  |2.6.35 - 2.6.39, 3.0, 3.1, 3.2   | |
 | [2.8](Release_Notes_2.8)  |  | | 3.3, 3.4   | |
 | [2.8.1](Release_Notes_2.8.1)  |  | |3.3 - 3.6   | |
