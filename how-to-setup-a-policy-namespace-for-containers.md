@@ -2,6 +2,11 @@
 
 bla bla bla, dependent on apparmor version and kernel version
 
+# Base Requirements
+
+* [A kernel that supports LSM stacking](how-to-setup-a-policy-namespace-for-containers#Stacking-Kernel-Requirements)
+* [Authority to create an apparmor policy namespace](how-to-setup-a-policy-namespace-for-containers#Authority-to-create-a-policy-namespace)
+
 # snappy
 
 Is not required for snappy. Snappy applications don't load their own policy, snapd does it for them.
@@ -19,17 +24,22 @@ need the display lsm set
 Lxd already supports creating apparmor child namespaces.
 Nesting requirement with user namespaces
 
-# Stacking Kernel Requirements
 
-Caveat: Audit subsystem is not namespaced
+# Authority to create a policy namespace
 
-## Authority to create a policy namespace
+Depends on apparmor and kernel versions
 
 * kernels up to ??? require capability MAC_ADMIN in the user namespace.
 
 * kernels ??? relax this to apparmor policy admin capable due to interaction with other LSMs mediating capability MAC_ADMIN for control of their own policy. IF unconfined apparmor policy admin capable may require cap MAC_ADMIN depending on how the current policy namespace is configured.
 
 * kernels ??? add the ability for users to create/admin their own policy.
+
+
+# Stacking Kernel Requirements
+
+Caveat: Audit subsystem is not namespaced
+
 
 ## Nesting Requirement
 
