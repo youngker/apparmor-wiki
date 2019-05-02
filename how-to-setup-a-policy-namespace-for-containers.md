@@ -22,6 +22,9 @@ Nesting requirement with user namespaces
 # Stacking Kernel Requirements
 
 Caveat: Audit subsystem is not namespaced
+##
+
+* Authority to create a policy namespace and
 
 ## Nesting Requirement
 
