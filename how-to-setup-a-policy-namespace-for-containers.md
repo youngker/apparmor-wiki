@@ -4,8 +4,8 @@ bla bla bla, dependent on apparmor version and kernel version
 
 # Base Requirements
 
-* [A kernel that supports LSM stacking](how-to-setup-a-policy-namespace-for-containers#Stacking-Kernel-Requirements)
-* [Authority to create an apparmor policy namespace](how-to-setup-a-policy-namespace-for-containers#Authority-to-create-a-policy-namespace)
+* [A kernel that supports LSM stacking](how-to-setup-a-policy-namespace-for-containers#stacking-kernel-requirements)
+* [Authority to create an apparmor policy namespace](how-to-setup-a-policy-namespace-for-containers#authority-to-create-a-policy-namespace)
 
 # snappy
 
