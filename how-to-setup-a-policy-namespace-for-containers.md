@@ -6,7 +6,7 @@ bla bla bla, dependent on apparmor version and kernel version
 
 * [A kernel that supports LSM stacking](how-to-setup-a-policy-namespace-for-containers#stacking-kernel-requirements)
 * [Authority to create an apparmor policy namespace](how-to-setup-a-policy-namespace-for-containers#authority-to-create-a-policy-namespace)
-* ensure securityfs or apparmorfs is mounted (default location /sys/kernel/security/)
+* [ensure securityfs or apparmorfs is mounted (default location /sys/kernel/security/)](how-to-setup-a-policy-namespace-for-containers#mount-securityfs)
 
 # ???
 
@@ -196,6 +196,27 @@ LSM stacking, but hopefully 5.3)
 
 there is flexibility in the ordering but if you stick to the above
 ordering you avoid some of the potential problems.
+
+# Mounting securityfs
+
+AppArmor using a virtual filesystem to interface with the userspace.
+
+Easiest apparmor initscript will make sure securityfs is mounted
+
+mount -t securityfs /sys/kernel/security
+
+## apparmorfs (kernel 5.3)
+
+# securityfs in containers
+
+securityfs is not multiple mount capable. Needs to be bind mounted into the container
+
+# apparmor enabled
+
+AppArmor userspace may need access to ```/sys/module/apparmor/parameters/enabled```
+
+may need to be bind mounted in
+
 
 # Creating an apparmor namespace
 
