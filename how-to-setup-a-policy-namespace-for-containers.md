@@ -203,6 +203,32 @@ LSM stacking, but hopefully 5.3)
 there is flexibility in the ordering but if you stick to the above
 ordering you avoid some of the potential problems.
 
+# The display LSM
+
+The display LSM is how the LSM virtualizes shared interfaces in userspace. The display LSM can be set per task and governs which LSM receives and displays information on shared interfaces. Unfortunately AppArmor, Smack and selinux all share a few user space interfaces.
+
+  /proc/<pid>/attr/
+
+  SO_PEER_CRED
+
+## Setting the display LSM
+
+  lsm-exec
+
+  aa-exec
+
+  writing /proc/<pid>/attr/display
+
+## When setting the display LSM are needed
+
+AppArmor and Smack have been migrating away from the shared interfaces to use private interfaces which will negate the need for setting the display LSM in the future but setting the display LSM is needed for legacy user space Applications that don't support the new interfaces.
+
+AppArmor 2.x: requires the display LSM be set.
+
+AppArmor 3.x: supports the new private interfaces, available on Kernel 5.3 or later.
+
+Note: some applications (eg. LXD, snapd) use AppArmor's lowlevel interfaces directly instead of going through the libapparmor api. For these applications setting the display LSM may be required even if AppArmor 3 is installed on the system.
+
 # Mounting securityfs
 
 AppArmor using a virtual filesystem to interface with the userspace.
