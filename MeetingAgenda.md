@@ -10,6 +10,7 @@ announcements will be sent out to the apparmor mailing list
 Meeting Logs are linked off of the month agenda title.
 
 Next Meeting: IRC Meeting, 18:00 UTC, Tuesday May 14, 2019
+- translation handling (Launchpad, Weblate, ???)
 - anything else
 
 -----------------------------------------------------------------------------
