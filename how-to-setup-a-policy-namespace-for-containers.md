@@ -6,8 +6,20 @@ bla bla bla, dependent on apparmor version and kernel version
 
 * [A kernel that supports LSM stacking](how-to-setup-a-policy-namespace-for-containers#stacking-kernel-requirements)
 * [Authority to create an apparmor policy namespace](how-to-setup-a-policy-namespace-for-containers#authority-to-create-a-policy-namespace)
+* ensure securityfs or apparmorfs is mounted (default location /sys/kernel/security/)
 
-# snappy
+# ???
+
+There is a basic pattern that can be used, modifications and per container notes document specifics needed for each.
+
+## Basic Pattern
+ 
+1. [Create an apparmor namespace](how-to-setup-a-policy-namespace-for-containers#creating-an-apparmor-namespace)
+2. [Switch the display LSM and put root container task into the apparmor namespace.](how-to-setup-a-policy-namespace-for-containers#starting-the-container-in-the-policy-namespace)
+
+   ```aa-exec --setlsm -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
+
+## snappy
 
 Is not required for snappy. Snappy applications don't load their own policy, snapd does it for them.
 
@@ -15,11 +27,11 @@ Can be used on distros that don't use apparmor as the default major lsm
 
 need the display lsm set
 
-# containers (docker ...)
+## containers (docker ...)
 
 ????
 
-# lxd
+## lxd
 
 Lxd already supports creating apparmor child namespaces.
 Nesting requirement with user namespaces
@@ -185,7 +197,7 @@ LSM stacking, but hopefully 5.3)
 there is flexibility in the ordering but if you stick to the above
 ordering you avoid some of the potential problems.
 
-1. Creating an apparmor namespace.
+# Creating an apparmor namespace
 
 AppArmor actually provides two ways for this to happen. Through its
 fs interface, and through policy. I am going to assume you want to
@@ -203,6 +215,8 @@ reap apparmor policy namespaces so when your container dies.
 
   rmdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
 
+
+# starting the container in the policy namespace
 
 2. Switch the display LSM, you basically have to write
   "apparmor" to /proc/current/attr/display
