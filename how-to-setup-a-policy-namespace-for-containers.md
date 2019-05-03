@@ -8,16 +8,22 @@ bla bla bla, dependent on apparmor version and kernel version
 * [Authority to create an apparmor policy namespace](how-to-setup-a-policy-namespace-for-containers#authority-to-create-a-policy-namespace)
 * [ensure securityfs or apparmorfs is mounted (default location /sys/kernel/security/)](how-to-setup-a-policy-namespace-for-containers#mount-securityfs)
 
-# ???
+# Setting up the container
 
 There is a basic pattern that can be used, modifications and per container notes document specifics needed for each.
+
+## Assumption
+
+The basic descriptions assume the AppArmor userspace is installed on the host, with or with out policy. Links to further information are provided detailing what needs to be done if this is not the case.
 
 ## Basic Pattern
  
 1. [Create an apparmor namespace](how-to-setup-a-policy-namespace-for-containers#creating-an-apparmor-namespace)
 2. [Switch the display LSM and put root container task into the apparmor namespace.](how-to-setup-a-policy-namespace-for-containers#starting-the-container-in-the-policy-namespace)
 
-   ```aa-exec --setlsm -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
+   AppArmor 2: ```lsm-exec -l apparmor ; aa-exec -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
+
+   AppArmor 3: ```aa-exec --setlsm -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
 
 ## snappy
 
