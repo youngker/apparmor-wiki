@@ -1,6 +1,8 @@
 # Intro
 
-bla bla bla, dependent on apparmor version and kernel version
+With LSM stacking it is possible to use apparmor in conjunction with another [major LSM](how-to-setup-a-policy-namespace-for-containers#major-lsms-explained). Unfortunately it is not entirely straight forward to do so and because LSM stacking support and support for namespacing an LSM have landed piecemeal there are many complication. This guide endeavours to document what is need to be able to successfully use apparmor with containers in an LSM stacking capable kernel.
+
+
 
 # Base Requirements
 
@@ -303,3 +305,22 @@ has cap mac_admin can load the containers policy.
 
 I should note apparmor audit messages go to the audit subsystem which
 currently isn't namespaced.
+
+# Major LSMs explained
+
+The LSM infrastructure provides ???? . An LSM only needs to use the features that it needs to do its job.
+* hooks
+* security blobs
+* mapping of secids
+* interfaces
+
+Because the ability to stack LSM modules has landed in the kernel in a piece meal fashion a distinction between which LSMs can be stacked was needed.
+
+Minor LSMs are those that only take advantage of parts of the infrastructure that are fully shareable. Any number of minor LSMs can be stacked. When LSM stacking first landed minor LSMs were only allowed to use LSM hooks.
+
+A major LSM is an LSM that can not stack with another major LSM because it is using parts of the infrastructure that are not shareable. A major LSM can stack with any number of minor LSMs but can not stack with another major LSM. When LSM stacking first landed any use of security blobs, secids, or shared interface would prohibit it from stacking from another LSM using those features.
+
+- table of which features/blobs became shareable at which release.
+
+??? A table of which LSMs are major/minor with which release (Casey slides)
+
