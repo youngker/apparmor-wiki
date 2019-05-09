@@ -136,8 +136,15 @@ You can check that apparmor is enabled using the apparmor userspace utils
 or
 
  ```
- $ aa-status
-
+ $ sudo aa-status
+ apparmor module is loaded.
+ 0 profiles are loaded.
+ 0 profiles are in enforce mode.
+ 0 profiles are in complain mode.
+ 0 processes have profiles defined.
+ 0 processes are in enforce mode.
+ 0 processes are in complain mode.
+ 0 processes are unconfined but have a profile defined.
  ```
 
 ## low level interfaces
