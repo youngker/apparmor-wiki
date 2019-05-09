@@ -172,7 +172,7 @@ It is possible to check AppArmor's low level interfaces if the apparmor userspac
 or
  ```
   $ mount | grep apparmorfs
-  apparmorfs on /apparmor type securityfs (rw,nosuid,nodev,noexec,relatime)
+  apparmorfs on /apparmor type apparmorfs (rw,nosuid,nodev,noexec,relatime)
  ```
 
 securityfs is almost always mounted on ```/sys/kernel/security/```
