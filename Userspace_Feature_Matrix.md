@@ -15,9 +15,9 @@
 | [2.8](Release_Notes_2.8)  | <ul><li>Basic mount rules</li><li>New introspection interface</li><li>New aa-exec utility</li><li>New aa-easyprof utility</li><li>Language improvements</li></ul> | | 3.3, 3.4   | Support for basic mount rules requires the mount kernel patch. |
 | [2.8.1](Release_Notes_2.8.1)  |<ul><li>Bug fixes</li></ul>  | |3.3 - 3.6   | |
 | [2.8.2](Release_Notes_2.8.2)  |<ul><li>Bug fixes</li></ul>  | |3.3 - 3.6   | |
-| [2.8.3](Release_Notes_2.8.3)  |<ul><li>Add --create-cache-dir command line option to apparmor_parser</li><li>Bug fixes</li></ul>  | |3.3 - 3.6   | |
-| [2.8.4](Release_Notes_2.8.4)  |<ul><li>Profile updates</li><li>Bug fixes</li></ul> |  |3.3+   | |
-| [2.8.5](Release_Notes_2.8.5)  |<ul><li>Profile updates</li><li>Bug fixes</li></ul>  | |3.3+   | |
+| [2.8.3](Release_Notes_2.8.3)  |<ul><li>Add --create-cache-dir command line option to apparmor_parser</li><li>Bug fixes</li><li>Profile fixes</li></ul>  | |3.3 - 3.6   | |
+| [2.8.4](Release_Notes_2.8.4)  |<ul><li>Policy updates</li><li>Bug fixes</li></ul> |  |3.3+   | |
+| [2.8.5](Release_Notes_2.8.5)  |<ul><li>Policy updates</li><li>Bug fixes</li></ul>  | |3.3+   | |
 | [2.9.0](Release_Notes_2.9.0)  |  | |3.3+   | |
 | [2.9.1](Release_Notes_2.9.1)  |  | |3.3+   | |
 | [2.9.2](Release_Notes_2.9.2)  |  | |3.3+   | |
