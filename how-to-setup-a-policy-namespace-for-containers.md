@@ -123,15 +123,101 @@ or config
   CONFIG_????
 
 
-# AppArmor Policy namespaces
 
-## ensuring apparmor is enabled
+# Ensuring apparmor is enabled
+
+## apparmor userspace
+
+You can check that apparmor is enabled using the apparmor userspace utils
+ ```
+ $ aa-enabled
+ Yes
+ ```
+or
+
+ ```
+ $ aa-status
+
+ ```
+
+## low level interfaces
+
+It is possible to check AppArmor's low level interfaces if the apparmor userspace package is not installed. You will need to establish that the module is enabled and that securityfs is mounted and has an apparmor directory or apparmorfs are mounted to be able to load policy.
+
+ ```
+  $ mount | grep securityfs
+  securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+  $ ls /sys/kernel/security
+  apparmor  evm  ima  lsm  tpm0
+ ```
+
+or
+ ```
+  $ mount | grep apparmorfs
+  apparmorfs on /apparmor type securityfs (rw,nosuid,nodev,noexec,relatime)
+ ```
+
+securityfs is almost always mounted on ```/sys/kernel/security/```
+
+ ```
+   $ cat /sys/module/apparmor/parameters/enabled 
+   Y
+ ```
+or
+ ```
+  $ cat $APPARMORFS/enabled
+  Y
+ ```
+where $APPARMORFS is either the apparmor directory in securityfs ```$SECURITYFS/apparmor``` or where apparmorfs is mounted.
 
 ## ensuring the securityfs filesystem is enabled
 
+For apparmor to be able to load policy its virtual filesystem interface needs to be enabled. This can be done through securityfs or apparmorfs depending on the system. If available apparmorfs might be a better solution inside a container as it can be mult-mounted and doesn't require sysfs or provide other lsm interfaces presented in securityfs.
+
+### apparmor userspace
+If the apparmor userspace package is installed the apparmor initscript or systemd unit will ensure that securityfs or apparmorfs is mounted if the apparmor kernel module is enabled.
+
+### no apparmor userpace package on the host
+
+add the following mount rule to /etc/fstab
+
+```
+  securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime
+```
+
+or if apparmorfs exists in /proc/filesystems you can do
+```
+  apparmorfs /apparmor apparmorfs rw,nosuid,nodev,noexec,relatime
+```
+where /apparmor can be replaced with any appropriate location.
+
+# AppArmor Policy namespaces
+
+To be able to use apparmor in the container you must be able to create a policy namespace which implies having the ability to load policy.
+
+hierarchical
+
+AppArmor actually provides two ways for this to happen. Through its
+fs interface, and through policy.
+
 ## creating via the fs interface
 
+if your task is unconfined by apparmor (it will be if you don't
+have policy on the host) and it has cap mac_admin (root). Then
+you can do
+
+  mkdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
+
+where $(NS_NAME) is basically limited to alphanum with the first
+character being alpha. And unfortunately there is no way to auto
+reap apparmor policy namespaces so when your container dies.
+
+  rmdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
+
+
 ## policy
+
+????
 
 
 # AppArmor Policy on the Host
@@ -251,24 +337,6 @@ AppArmor userspace may need access to ```/sys/module/apparmor/parameters/enabled
 
 may need to be bind mounted in
 
-
-# Creating an apparmor namespace
-
-AppArmor actually provides two ways for this to happen. Through its
-fs interface, and through policy. I am going to assume you want to
-skip policy on the host.
-
-if your task is unconfined by apparmor (it will be if you don't
-have policy on the host) and it has cap mac_admin (root). Then
-you can do
-
-  mkdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
-
-where $(NS_NAME) is basically limited to alphanum with the first
-character being alpha. And unfortunately there is no way to auto
-reap apparmor policy namespaces so when your container dies.
-
-  rmdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
 
 
 # starting the container in the policy namespace
