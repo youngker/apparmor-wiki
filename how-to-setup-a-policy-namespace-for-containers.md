@@ -77,12 +77,15 @@ There is not yet an upstream kernel capable of stacking apparmor and another maj
 
 However the necessary LSM stacking configuration options are present in the 5.1 kernel.
 
+ ```
   lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+ ```
 
 or config
 
+ ```
   CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
-
+ ```
 
 ??? In 5.1 first major LSM wins
 
@@ -112,16 +115,21 @@ The LSM stacking patches in 19.04's 5.0 based kernel is a combination of a backp
 
 same as LSM Stacking development kernels
 
+ ```
   lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+ ```
 
 or config
 
+ ```
   CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
-
+ ```
 
 ### Ubuntu 18.04 (Bionic Badger)
 
+ ```
   security=smack,apparmor
+ ```
 
   CONFIG_????
 
@@ -189,7 +197,17 @@ If the apparmor userspace package is installed the apparmor initscript or system
 
 ### no apparmor userpace package on the host
 
-add the following mount rule to /etc/fstab
+ ```
+  mount -t securityfs /sys/kernel/security
+ ```
+
+or if apparmorfs is available
+
+ ```
+  mount -t apparmorfs /apparmor
+ ```
+
+to make it permanent add the following mount rule to /etc/fstab
 
 ```
   securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime
@@ -335,7 +353,7 @@ Setting the display LSM will affect the task's view of the shared interfaces imm
   ...
  ```
 
-## When setting the display LSM are needed
+## When setting the display LSM is needed
 
 AppArmor and Smack have been migrating away from the shared interfaces to use private interfaces which will negate the need for setting the display LSM in the future but setting the display LSM is needed for legacy user space Applications that don't support the new interfaces.
 
@@ -345,39 +363,14 @@ AppArmor 3.x: supports the new private interfaces, available on Kernel 5.3 or la
 
 Note: some applications (eg. LXD, snapd) use AppArmor's lowlevel interfaces directly instead of going through the libapparmor api. For these applications setting the display LSM may be required even if AppArmor 3 is installed on the system.
 
-# Mounting securityfs
 
-AppArmor using a virtual filesystem to interface with the userspace.
-
-Easiest apparmor initscript will make sure securityfs is mounted
-
-mount -t securityfs /sys/kernel/security
-
-## apparmorfs (kernel 5.3)
-
-# securityfs in containers
-
-securityfs is not multiple mount capable. Needs to be bind mounted into the container
-
-# apparmor enabled
-
-AppArmor userspace may need access to ```/sys/module/apparmor/parameters/enabled```
-
-may need to be bind mounted in
 
 
 
 # starting the container in the policy namespace
 
-2. Switch the display LSM, you basically have to write
-  "apparmor" to /proc/current/attr/display
+??? Move to proper place
 
-   I've attached a basic utility program (lsm-exec), I use to do this.
-   You can rip the code you need from it. Basic usage is
-
-   lsm-exec -l apparmor -- bash
-
-   where bash can be replaced with any executable
 
 3. Put the root task into the apparmor namespace. You can either
    use aa-exec from the apparmor userspace project
