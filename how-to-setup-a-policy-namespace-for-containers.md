@@ -92,12 +92,15 @@ or config
 
 uses the same kernel params and config as 5.1
 
-lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+ ```
+  lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+ ```
 
 or config
 
-CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
-
+ ```
+  CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
+  ```
 
 ## Ubuntu Kernels
 
