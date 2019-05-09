@@ -213,14 +213,17 @@ if your task is unconfined by apparmor (it will be if you don't
 have policy on the host) and it has cap mac_admin (root). Then
 you can do
 
+ ```
   mkdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
+ ```
 
 where $(NS_NAME) is basically limited to alphanum with the first
 character being alpha. And unfortunately there is no way to auto
 reap apparmor policy namespaces so when your container dies.
 
+ ```
   rmdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
-
+ ```
 
 ## policy
 
