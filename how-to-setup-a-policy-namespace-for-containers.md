@@ -305,17 +305,32 @@ ordering you avoid some of the potential problems.
 
 The display LSM is how the LSM virtualizes shared interfaces in userspace. The display LSM can be set per task and governs which LSM receives and displays information on shared interfaces. Unfortunately AppArmor, Smack and selinux all share a few user space interfaces.
 
-  /proc/<pid>/attr/
-
-  SO_PEER_CRED
+*  /proc/self/attr/*
+*  getsockopt SO_PEERCRED
 
 ## Setting the display LSM
 
-  lsm-exec
+Setting the display LSM will affect the task's view of the shared interfaces immediately. The display LSM value will be inherited by the task's children. The task may freely change its display LSM at any time but any changes made after a child is created will not affect the child's view of the shared LSM interfaces.
 
-  aa-exec
+### apparmor userspace
 
-  writing /proc/<pid>/attr/display
+ ```
+  $ lsm-exec -l apparmor -- <cmd to exec>
+ ```
+
+ ```
+  $ aa-exec --setlsm -p $PROFILE -- <cmd to exec>
+ ```
+
+### low level interface
+ ```
+  fd = open("/proc/self/attr/display", O_CLOEXEC | O_WRONLY);
+  if (fd == -1)
+      goto fail;
+  if (write(fd, "apparmor", 7) != 7)
+      goto fail;
+  ...
+ ```
 
 ## When setting the display LSM are needed
 
