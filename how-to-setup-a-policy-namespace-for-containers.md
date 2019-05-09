@@ -381,7 +381,7 @@ has cap mac_admin can load the containers policy.
 I should note apparmor audit messages go to the audit subsystem which
 currently isn't namespaced.
 
-# Major LSMs explained
+# Major and Minor LSMs explained
 
 The LSM infrastructure provides ???? . An LSM only needs to use the features that it needs to do its job.
 * hooks
