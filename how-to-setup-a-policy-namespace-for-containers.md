@@ -23,9 +23,9 @@ The basic descriptions assume the AppArmor userspace is installed on the host, w
 1. [Create an apparmor namespace](how-to-setup-a-policy-namespace-for-containers#creating-an-apparmor-namespace)
 2. [Switch the display LSM and put root container task into the apparmor namespace.](how-to-setup-a-policy-namespace-for-containers#starting-the-container-in-the-policy-namespace)
 
-   AppArmor 2: ```lsm-exec -l apparmor ; aa-exec -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
+   AppArmor 2.x: ```lsm-exec -l apparmor ; aa-exec -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
 
-   AppArmor 3: ```aa-exec --setlsm -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
+   AppArmor 3.x: ```aa-exec --setlsm -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
 
 ## snappy
 
