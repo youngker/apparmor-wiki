@@ -14,7 +14,7 @@
 | [2.7.2](Release_Notes_2.7.2)  |<ul><li>Bug fixes</li><li>Profile fixes and updates</li></ul> |  |2.6.35 - 2.6.39, 3.0, 3.1, 3.2   | |
 | [2.8](Release_Notes_2.8)  | <ul><li>Basic mount rules</li><li>New introspection interface</li><li>New aa-exec utility</li><li>New aa-easyprof utility</li><li>Language improvements</li></ul> | | 3.3, 3.4   | Support for basic mount rules requires the mount kernel patch. |
 | [2.8.1](Release_Notes_2.8.1)  |<ul><li>Bug fixes</li></ul>  | |3.3 - 3.6   | |
-| [2.8.2](Release_Notes_2.8.2)  |  | |3.3 - 3.6   | |
+| [2.8.2](Release_Notes_2.8.2)  |<ul><li>Bug fixes</li></ul>  | |3.3 - 3.6   | |
 | [2.8.3](Release_Notes_2.8.3)  |  | |3.3 - 3.6   | |
 | [2.8.4](Release_Notes_2.8.4)  | |  |3.3+   | |
 | [2.8.5](Release_Notes_2.8.5)  |  | |3.3+   | |
