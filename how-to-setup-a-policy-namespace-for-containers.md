@@ -251,6 +251,59 @@ reap apparmor policy namespaces so when your container dies.
 ???? todo
 
 
+# ??Errors
+
+apparmor enabled
+- apparmor built into the kernel
+- config param set
+- kernel security param set
+
+can't create policy ns
+- apparmor not enabled
+- policy interface not mounted/available
+- No authority to manage policy
+
+policy fails to load
+- apparmor not enabled
+- policy interface not mounted/available
+- No authority to manage policy
+
+can't transition to policy namespace
+- check that the policy namespace was successfully created
+- check for apparmor denials
+  - exec
+    - nnp
+      - ensure you are using a 4.17+ kernel
+    - safe exec
+  - mmap failures
+  - failure open executable
+  - denials leading exec to immediately exit
+  - task being killed
+  - change_profile failures
+
+can't set the display ns
+- checkout that ```/proc/self/attr/display``` exists
+  - if not you need a kernel with the display LSM patches
+- check that the specified LSM exists
+- check that you have permission to write ```/proc/self/attr/display```
+- check that you are not writing another task's ```/proc/self/attr/display```
+- check that if you are using a thread it is writing its own ```/proc/<pid>/attr/display```. One the lead thread can write to ```/proc/self/attr/display```
+
+
+policy interface mounted
+
+
+no-new-privs (nnp)
+
+Tasks can the nnp flag through a prctl which prevents the task and its children from gaining new privileges. The nnp flag can prevent apparmor policy confining the task to transition to a new profile.
+
+The restrictions nnp imposses on apparmor policy have changed over time
+* 3.5 - nnp added. Profile transitions only allowed if task is unconfined
+* 4.13 - nnp restrictions loosend, so profile transition that lead to a strict subset of the current confinement, or add a new element to the stack are allowed.
+* 4.17 - nnp restrictions loosend. AppArmor confinement at the time the nnp flag is set is recorded and profile transitions are allowed as long as the resulting transition is a strict subset of the recorded nnp confinement.
+* 5.3?? - override rules
+
+
 # AppArmor Policy on the Host
 
 # Alternate LSM Policy on the Host
