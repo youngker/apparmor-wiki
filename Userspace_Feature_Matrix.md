@@ -18,7 +18,7 @@
 | [2.8.3](Release_Notes_2.8.3)  |<ul><li>Add --create-cache-dir command line option to apparmor_parser</li><li>Bug fixes</li><li>Profile fixes</li></ul>  | |3.3 - 3.6   | |
 | [2.8.4](Release_Notes_2.8.4)  |<ul><li>Policy updates</li><li>Bug fixes</li></ul> |  |3.3+   | |
 | [2.8.5](Release_Notes_2.8.5)  |<ul><li>Policy updates</li><li>Bug fixes</li></ul>  | |3.3+   | |
-| [2.9.0](Release_Notes_2.9.0)  |  | |3.3+   | |
+| [2.9.0](Release_Notes_2.9.0)  |<ul><li>Support for mediation of<ul><li>dbus</li><li>signals</li><li>ptrace</li><li>unix abstract sockets</li></ul></li><li>New "allow" keyword</li></ul>  | |3.3+   | |
 | [2.9.1](Release_Notes_2.9.1)  |  | |3.3+   | |
 | [2.9.2](Release_Notes_2.9.2)  |  | |3.3+   | |
 | [2.9.3](Release_Notes_2.9.3)  |  | |3.3+   | |
