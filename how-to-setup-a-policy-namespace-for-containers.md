@@ -42,7 +42,7 @@ need the display lsm set
 ## lxd
 
 Lxd already supports creating apparmor child namespaces.
-Nesting requirement with user namespaces
+Requirement when used with user namespaces
 
 
 # Authority to create a policy namespace
@@ -61,7 +61,7 @@ Depends on apparmor and kernel versions
 Caveat: Audit subsystem is not namespaced
 
 
-## Nesting Requirement
+## User namespace requirements
 
 if apparmor policy namespaces are used in conjunction with user namespaces. There is a nesting limit.
 
