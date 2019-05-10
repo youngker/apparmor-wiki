@@ -251,47 +251,47 @@ reap apparmor policy namespaces so when your container dies.
 ???? todo
 
 
-# ??Errors
+# Failures and Issues
 
-apparmor enabled
+* Can't create policy ns
+  - apparmor not enabled
+  - policy interface not mounted/available
+  - No authority to manage policy
+
+* Policy fails to load
+  - apparmor not enabled
+  - policy interface not mounted/available
+  - No authority to manage policy
+
+* Can't transition to policy namespace
+  - check that the policy namespace was successfully created
+  - check for apparmor denials
+    - exec
+      - nnp
+        - ensure you are using a 4.17+ kernel
+      - safe exec
+    - mmap failures
+    - failure open executable
+    - denials leading exec to immediately exit
+    - task being killed
+    - change_profile failures
+
+* Can't set the display LSM
+  - checkout that ```/proc/self/attr/display``` exists
+    - if not you need a kernel with the display LSM patches
+  - check that the specified LSM exists
+  - check that you have permission to write ```/proc/self/attr/display```
+  - check that you are not writing another task's ```/proc/self/attr/display```
+  - check that if you are using a thread it is writing its own ```/proc/<pid>/attr/display```. Only the lead thread can write to ```/proc/self/attr/display```
+
+
+
+AppArmor Enabled
 - apparmor built into the kernel
 - config param set
 - kernel security param set
 
-can't create policy ns
-- apparmor not enabled
-- policy interface not mounted/available
-- No authority to manage policy
-
-policy fails to load
-- apparmor not enabled
-- policy interface not mounted/available
-- No authority to manage policy
-
-can't transition to policy namespace
-- check that the policy namespace was successfully created
-- check for apparmor denials
-  - exec
-    - nnp
-      - ensure you are using a 4.17+ kernel
-    - safe exec
-  - mmap failures
-  - failure open executable
-  - denials leading exec to immediately exit
-  - task being killed
-  - change_profile failures
-
-can't set the display ns
-- checkout that ```/proc/self/attr/display``` exists
-  - if not you need a kernel with the display LSM patches
-- check that the specified LSM exists
-- check that you have permission to write ```/proc/self/attr/display```
-- check that you are not writing another task's ```/proc/self/attr/display```
-- check that if you are using a thread it is writing its own ```/proc/<pid>/attr/display```. One the lead thread can write to ```/proc/self/attr/display```
-
-
 policy interface mounted
-
 
 no-new-privs (nnp)
 
