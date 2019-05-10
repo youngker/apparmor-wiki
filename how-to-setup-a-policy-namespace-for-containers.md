@@ -19,13 +19,48 @@ There is a basic pattern that can be used, modifications and per container notes
 The basic descriptions assume the AppArmor userspace is installed on the host, with or with out policy. Links to further information are provided detailing what needs to be done if this is not the case.
 
 ## Basic Pattern
- 
-1. [Create an apparmor namespace](how-to-setup-a-policy-namespace-for-containers#creating-an-apparmor-namespace)
-2. [Switch the display LSM and put root container task into the apparmor namespace.](how-to-setup-a-policy-namespace-for-containers#starting-the-container-in-the-policy-namespace)
+
+1. Set up the environment.
+2. [Create an apparmor namespace](how-to-setup-a-policy-namespace-for-containers#creating-an-apparmor-namespace)
+3. [Switch the display LSM and put root container task into the apparmor namespace.](how-to-setup-a-policy-namespace-for-containers#starting-the-container-in-the-policy-namespace)
 
    AppArmor 2.x: ```lsm-exec -l apparmor ; aa-exec -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
 
    AppArmor 3.x: ```aa-exec --setlsm -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
+
+
+# Setting up the environment
+
+What needs to be done to setup the environment for AppArmor in the container will depend on the kernel version and how the container itself is setup. There are some configurations that may not be possible without help from the container.
+
+The 
+
+## loading policy in the container vs. loading policy from outside the container
+
+### loading policy in the container
+- requires apparmor enabled interface be available
+- requires securityfs/apparmorfs available/mountable
+- requires Authority to create policy in the container
+- requires transition to policy namespace happen before policy load
+
+### loading policy from outside the container
+
+It is easier to load policy from outside the policy namespace and force the policy on the container. While loading policy on the host has similar requirements as loading policy from with in a container it is usually easier to achieve them on the host and does not require additional setup of the container environment.
+
+- requires apparmor enabled interface be available
+- requires securityfs/apparmorfs available/mountable
+- requires Authority to create policy be available on the host during container setup
+
+Load policy into the namespace
+
+transition to profile in namespace
+
+
+stacking vs. flat
+
+
+
+
 
 ## snappy
 
