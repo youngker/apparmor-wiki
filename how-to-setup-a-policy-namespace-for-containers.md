@@ -20,7 +20,7 @@ The basic descriptions assume the AppArmor userspace is installed on the host, w
 
 ## Basic Pattern
 
-1. Set up the environment.
+1. Set up the container environment needed by apprmor.
 2. [Create an apparmor namespace](how-to-setup-a-policy-namespace-for-containers#creating-an-apparmor-namespace)
 3. [Switch the display LSM and put root container task into the apparmor namespace.](how-to-setup-a-policy-namespace-for-containers#starting-the-container-in-the-policy-namespace)
 
