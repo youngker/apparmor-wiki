@@ -26,6 +26,8 @@
 | 5.1            | <ul><li>LSM stacking with generic blobs (sara/landlock). Does not include secids so insufficient to stack with selinux and smack.</li><li>Bug fixes and code cleanups</li></ul> | no userspace requirements. There is a new kernel parameter <i>lsm=</i> that is used in place of the old <i>security=</i> parameter  |
 | 5.2            | wip <ul><li>fine grained af_unix mediation<ul><li>unix rules<sup>1</sup></li><li>get peer sock label via so_peersec<sup>2</sup><li><li>dbus mediation<sup>3</sup></li></ul></li><li>no-new-privs rules</li></ul>   | ```1``` AppArmor 3.0<br>```2```No userspace support needed to read via getsockopt. Library support for ```aa_getpeercon``` add in AppArmor 2.7<br>```3``` requires AppArmor 3.0 and D-Bus 1.10.0</li></ul>
 
-# Suse kernel
+# SUSE/openSUSE kernel
+
+Network rules are supported since sles11-sp1 (source: https://bugzilla.suse.com/show_bug.cgi?id=917431#c10)
 
 # Ubuntu Kernel
