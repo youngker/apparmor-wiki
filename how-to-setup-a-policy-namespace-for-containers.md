@@ -6,6 +6,43 @@ With LSM stacking it is possible to use multiple LSMs in conjunction with each o
 
 At this time there are two [major and minor](how-to-setup-a-policy-namespace-for-containers#major-lsms-explained) LSMs. The following examples assume you are using a kernel that allows AppArmor to stack with another major LSM, the requirements for AppArmor to be able to stack with another major LSM are be different than say stacking smack with selinux, so what is outlined here may not work for other LSM combiniations.
 
+This document is split into sections outlining a how to/example for different container situations and followed by more generic detailed information that can be used to adapt the examples to other situations.
+
+# Assumptions
+- apparmor userspace
+- kernel
+
+# Docker
+
+## apparmor host, apparmor container
+
+## apparmor host, smack container
+
+## smack host, apparmor container
+
+# LXD
+
+## apparmor host, apparmor container
+
+LXD natively supports using apparmor policy namespaces and policy bounded stacking as of ???.
+
+## apparmor host, smack container
+
+## smack host, apparmor container
+
+# snappy
+
+snappy will use apparmor policy if it is available
+
+## apparmor host, apparmor container
+
+## smack host, apparmor container
+
+
+# flatpak
+
+????
+
 
 # Base Requirements
 
