@@ -1,3 +1,5 @@
+# WARNING this doc is a WIP
+
 # Intro
 
 With LSM stacking it is possible to use apparmor in a container in conjunction with another [LSM](how-to-setup-a-policy-namespace-for-containers#major-lsms-explained) confining the host. Unfortunately it is not entirely straight forward to do so and because LSM stacking support and support for namespacing an LSM have landed piecemeal there are many complications. This guide endeavours to document what is need to be able to successfully use apparmor with containers in an LSM stacking capable kernel.
