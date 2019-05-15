@@ -2,8 +2,9 @@
 
 # Intro
 
-With LSM stacking it is possible to use apparmor in a container in conjunction with another [LSM](how-to-setup-a-policy-namespace-for-containers#major-lsms-explained) confining the host. Unfortunately it is not entirely straight forward to do so and because LSM stacking support and support for namespacing an LSM have landed piecemeal there are many complications. This guide endeavours to document what is need to be able to successfully use apparmor with containers in an LSM stacking capable kernel.
+With LSM stacking it is possible to use multiple LSMs in conjunction with each other. With some care it is possible to set up a container with on LSM while the host is confined with another LSM. Unfortunately it is not entirely straight forward to do so and because LSM stacking support and support for namespacing an LSM have landed piecemeal there are many complications. This guide endeavours to document what is need to be able to successfully use run containers with apparmor and another LSM  stacking capable kernel.
 
+At this time there are two [major and minor](how-to-setup-a-policy-namespace-for-containers#major-lsms-explained) LSMs. The following examples assume you are using a kernel that allows AppArmor to stack with another major LSM, the requirements for AppArmor to be able to stack with another major LSM are be different than say stacking smack with selinux, so what is outlined here may not work for other LSM combiniations.
 
 
 # Base Requirements
