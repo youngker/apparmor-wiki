@@ -16,17 +16,11 @@ This document is split into sections outlining a how to/example for different co
 
 ## apparmor host, apparmor container
 
+ ```
 lsm=apparmor
-
-```
-  lsm="yama,loadpin,safesetid,integrity,apparmor"
  ```
 
-or config
-
- ```
-  CONFIG_LSM="yama,loadpin,safesetid,integrity,apparmor"
- ```
+??? link anchor to setting config/lsm/grub default
 
 ### No host policy on container
  ```
@@ -64,26 +58,18 @@ and to cleanup after the container has exited
 This is not currently possible due to smack not having namespacing support. Any smack policy in the container will also apply to the host
 
 ```
-  lsm="yama,loadpin,safesetid,integrity,apparmor,smack"
+  lsm="apparmor,smack"
  ```
 
-or config
-
- ```
-  CONFIG_LSM="yama,loadpin,safesetid,integrity,apparmor,smack"
- ```
+??? link anchor to config...
 
 ## smack host, apparmor container
 
-```
-  lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+ ```
+  lsm="smack,apparmor"
  ```
 
-or config
-
- ```
-  CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
- ```
+??? link anchor to config ...
 
 
 ### No host policy on container
