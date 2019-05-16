@@ -16,6 +16,34 @@ This document is split into sections outlining a how to/example for different co
 
 ## apparmor host, apparmor container
 
+### No host policy on container
+ ```
+  mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+  lsm-exec -l apparmor ; aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+ ```
+
+and to cleanup after the container has exited
+ ```
+  rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
+
+### Host policy applied to container
+ ```
+  mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
+
+to add a bounding stack to the current host policy
+  lsm-exec -l apparmor ; aa-exec -p "&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+
+to specify the host policy and setup the bounding stack
+  lsm-exec -l apparmor ; aa-exec -p "${HOST_PROFILE}//&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+
+
+and to cleanup after the container has exited
+ ```
+  rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
+
 ## apparmor host, smack container
 
 ## smack host, apparmor container
@@ -64,9 +92,9 @@ The basic descriptions assume the AppArmor userspace is installed on the host, w
 2. [Create an apparmor namespace](how-to-setup-a-policy-namespace-for-containers#creating-an-apparmor-namespace)
 3. [Switch the display LSM and put root container task into the apparmor namespace.](how-to-setup-a-policy-namespace-for-containers#starting-the-container-in-the-policy-namespace)
 
-   AppArmor 2.x: ```lsm-exec -l apparmor ; aa-exec -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
+   AppArmor 2.x: ```lsm-exec -l apparmor ; aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}```
 
-   AppArmor 3.x: ```aa-exec --setlsm -p ":$(NS_NAME):unconfined" -- $(CONTAINER_CMD)```
+   AppArmor 3.x: ```aa-exec --setlsm -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}```
 
 
 # Setting up the environment
@@ -310,15 +338,15 @@ have policy on the host) and it has cap mac_admin (root). Then
 you can do
 
  ```
-  mkdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
+  mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
  ```
 
-where $(NS_NAME) is basically limited to alphanum with the first
+where ${NS_NAME} is basically limited to alphanum with the first
 character being alpha. And unfortunately there is no way to auto
 reap apparmor policy namespaces so when your container dies.
 
  ```
-  rmdir /sys/kernel/security/apparmor/policy/namespaces/$(NS_NAME)
+  rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
  ```
 
 ## policy
@@ -505,13 +533,13 @@ Note: some applications (eg. LXD, snapd) use AppArmor's lowlevel interfaces dire
    https://gitlab.com/apparmor/apparmor/blob/master/binutils/aa_exec.c
 
    with basic usage of
-   aa-exec -p ":$(NS_NAME):unconfined" -- bash
+   aa-exec -p ":${NS_NAME}:unconfined" -- bash
 
    where again you can replace bash
 
    Alternately you can skip aa-exec by writing
 
-      "exec :$(NS_NAME):unconfined" to /proc/self/attr/exec
+      "exec :${NS_NAME}:unconfined" to /proc/self/attr/exec
 
    The profile transition to the new namespace will happen at the next
    exec and that task and its children will inherit confinement in
