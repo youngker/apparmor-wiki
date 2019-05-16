@@ -49,39 +49,11 @@ and to cleanup after the container has exited
 
 ## apparmor host, smack container
 
-### No host policy on container
- ```
-  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
-  lsm-exec -l apparmor -- aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
- ```
-
-and to cleanup after the container has exited
- ```
-  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
- ```
-
-### Host policy applied to container
- ```
-  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
- ```
-
-to add a bounding stack to the current host policy
-```
-  lsm-exec -l apparmor -- aa-exec -p "&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
-```
-
-to specify the host policy and setup the bounding stack
-```
-  lsm-exec -l apparmor -- aa-exec -p "${HOST_PROFILE}//&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
-```
-
-and to cleanup after the container has exited
- ```
-  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
- ```
+This is not currently possible due to smack not having namespacing support. Any smack policy in the container will also apply to the host
 
 ## smack host, apparmor container
 
+
 ### No host policy on container
  ```
   sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
@@ -93,25 +65,6 @@ and to cleanup after the container has exited
   sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
  ```
 
-### Host policy applied to container
- ```
-  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
- ```
-
-to add a bounding stack to the current host policy
-```
-  lsm-exec -l apparmor -- aa-exec -p "&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
-```
-
-to specify the host policy and setup the bounding stack
-```
-  lsm-exec -l apparmor -- aa-exec -p "${HOST_PROFILE}//&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
-```
-
-and to cleanup after the container has exited
- ```
-  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
- ```
 
 # LXD
 
