@@ -33,11 +33,14 @@ and to cleanup after the container has exited
  ```
 
 to add a bounding stack to the current host policy
+```
   lsm-exec -l apparmor ; aa-exec -p "&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+```
 
 to specify the host policy and setup the bounding stack
+```
   lsm-exec -l apparmor ; aa-exec -p "${HOST_PROFILE}//&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
-
+```
 
 and to cleanup after the container has exited
  ```
