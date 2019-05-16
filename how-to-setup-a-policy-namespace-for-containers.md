@@ -16,6 +16,18 @@ This document is split into sections outlining a how to/example for different co
 
 ## apparmor host, apparmor container
 
+lsm=apparmor
+
+```
+  lsm="yama,loadpin,safesetid,integrity,apparmor"
+ ```
+
+or config
+
+ ```
+  CONFIG_LSM="yama,loadpin,safesetid,integrity,apparmor"
+ ```
+
 ### No host policy on container
  ```
   sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
@@ -51,7 +63,27 @@ and to cleanup after the container has exited
 
 This is not currently possible due to smack not having namespacing support. Any smack policy in the container will also apply to the host
 
+```
+  lsm="yama,loadpin,safesetid,integrity,apparmor,smack"
+ ```
+
+or config
+
+ ```
+  CONFIG_LSM="yama,loadpin,safesetid,integrity,apparmor,smack"
+ ```
+
 ## smack host, apparmor container
+
+```
+  lsm="yama,loadpin,safesetid,integrity,smack,apparmor"
+ ```
+
+or config
+
+ ```
+  CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
+ ```
 
 
 ### No host policy on container
@@ -226,6 +258,20 @@ or config
   CONFIG_LSM="yama,loadpin,safesetid,integrity,smack,apparmor"
   ```
 
+or
+
+Modify /etc/default/grub so it looks like the following and run update-grub to update the grub menu. Then reboot.
+
+ ```
+# grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub
+###GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_CMDLINE_LINUX_DEFAULT="security=smack,apparmor"
+
+# update-grub
+ ```
+
+After reboot,
+
 ## Ubuntu Kernels
 
 Some Ubuntu kernels carry a version of the LSM stacking patch set and apparmor necessary to use apparmor stacked with another LSM.
@@ -254,6 +300,19 @@ or config
 
   CONFIG_????
 
+or
+
+Modify /etc/default/grub so it looks like the following and run update-grub to update the grub menu. Then reboot.
+
+ ```
+# grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub
+###GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_CMDLINE_LINUX_DEFAULT="security=smack"
+
+# update-grub
+ ```
+
+After reboot,
 
 
 # Ensuring apparmor is enabled
