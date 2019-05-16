@@ -18,38 +18,100 @@ This document is split into sections outlining a how to/example for different co
 
 ### No host policy on container
  ```
-  mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
-  lsm-exec -l apparmor ; aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+  aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
  ```
 
 and to cleanup after the container has exited
  ```
-  rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
  ```
 
 ### Host policy applied to container
  ```
-  mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
  ```
 
 to add a bounding stack to the current host policy
 ```
-  lsm-exec -l apparmor ; aa-exec -p "&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+  aa-exec -p "&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
 ```
 
 to specify the host policy and setup the bounding stack
 ```
-  lsm-exec -l apparmor ; aa-exec -p "${HOST_PROFILE}//&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+  aa-exec -p "${HOST_PROFILE}//&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
 ```
 
 and to cleanup after the container has exited
  ```
-  rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
  ```
 
 ## apparmor host, smack container
 
+### No host policy on container
+ ```
+  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+  lsm-exec -l apparmor -- aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+ ```
+
+and to cleanup after the container has exited
+ ```
+  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
+
+### Host policy applied to container
+ ```
+  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
+
+to add a bounding stack to the current host policy
+```
+  lsm-exec -l apparmor -- aa-exec -p "&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+```
+
+to specify the host policy and setup the bounding stack
+```
+  lsm-exec -l apparmor -- aa-exec -p "${HOST_PROFILE}//&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+```
+
+and to cleanup after the container has exited
+ ```
+  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
+
 ## smack host, apparmor container
+
+### No host policy on container
+ ```
+  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+  lsm-exec -l apparmor -- aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+ ```
+
+and to cleanup after the container has exited
+ ```
+  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
+
+### Host policy applied to container
+ ```
+  sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
+
+to add a bounding stack to the current host policy
+```
+  lsm-exec -l apparmor -- aa-exec -p "&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+```
+
+to specify the host policy and setup the bounding stack
+```
+  lsm-exec -l apparmor -- aa-exec -p "${HOST_PROFILE}//&:${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
+```
+
+and to cleanup after the container has exited
+ ```
+  sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
+ ```
 
 # LXD
 
@@ -95,7 +157,7 @@ The basic descriptions assume the AppArmor userspace is installed on the host, w
 2. [Create an apparmor namespace](how-to-setup-a-policy-namespace-for-containers#creating-an-apparmor-namespace)
 3. [Switch the display LSM and put root container task into the apparmor namespace.](how-to-setup-a-policy-namespace-for-containers#starting-the-container-in-the-policy-namespace)
 
-   AppArmor 2.x: ```lsm-exec -l apparmor ; aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}```
+   AppArmor 2.x: ```lsm-exec -l apparmor -- aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}```
 
    AppArmor 3.x: ```aa-exec --setlsm -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}```
 
