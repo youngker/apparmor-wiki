@@ -2,9 +2,11 @@
 
 # Intro
 
-With LSM stacking it is possible to use multiple LSMs in conjunction with each other. With some care it is possible to set up a container with on LSM while the host is confined with another LSM. Unfortunately it is not entirely straight forward to do so and because LSM stacking support and support for namespacing an LSM have landed piecemeal there are many complications. This guide endeavours to document what is need to be able to successfully use run containers with apparmor and another LSM  stacking capable kernel.
+With LSM stacking it is possible to use multiple LSMs in conjunction with each other. With some care it is possible to set up a container with on LSM while the host is confined with another LSM. Unfortunately it is not entirely straight forward to do so and because LSM stacking support and support for namespacing an LSM have landed piecemeal there are many complications. This guide endeavours to document what is need to be able to successfully use run containers with apparmor and another LSM under stacking capable kernel.
 
 At this time there are two [major and minor](how-to-setup-a-policy-namespace-for-containers#major-lsms-explained) LSMs. The following examples assume you are using a kernel that allows AppArmor to stack with another major LSM, the requirements for AppArmor to be able to stack with another major LSM are be different than say stacking smack with selinux, so what is outlined here may not work for other LSM combiniations.
+
+LSM namespacing is another issue that must be considered. AppArmor support policy namespacing but smack and selinux do not currently which limits which LSMs can be used successfully within a container.
 
 This document is split into sections outlining a how to/example for different container situations and followed by more generic detailed information that can be used to adapt the examples to other situations.
 
@@ -55,7 +57,7 @@ and to cleanup after the container has exited
 
 ## apparmor host, smack container
 
-This is not currently possible due to smack not having namespacing support. Any smack policy in the container will also apply to the host
+This is not currently possible due to smack not having namespacing support. Any smack policy in the container will also apply to the host.
 
 ```
   lsm="apparmor,smack"
@@ -82,6 +84,12 @@ and to cleanup after the container has exited
  ```
   sudo rmdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
  ```
+
+## smack & apparmor host, apparmor container
+
+## smack & apparmor host, smack container
+
+This is not currently possible due to smack not having namespacing support. Any smack policy in the container will also apply to the host.
 
 
 # LXD
