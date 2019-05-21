@@ -25,6 +25,9 @@ lsm=apparmor
 ??? link anchor to setting config/lsm/grub default
 
 ### No host policy on container
+
+If there is no policy defined at the host level for the container tasks then, a plain transition to the apparmor policy namespace for the container can be done.
+
  ```
   sudo mkdir /sys/kernel/security/apparmor/policy/namespaces/${NS_NAME}
   aa-exec -p ":${NS_NAME}:unconfined" -- ${CONTAINER_CMD}
