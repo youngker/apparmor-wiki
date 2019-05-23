@@ -24,7 +24,7 @@
 | [2.9.3](Release_Notes_2.9.3)  |<ul><li>Policy updates</li><li>Bug fixes</li></ul>  | |3.3+   | |
 | [2.9.4](Release_Notes_2.9.4)  |<ul><li>Policy updates</li><li>Bug fixes</li></ul>  | |3.3+   | |
 | [2.9.5](Release_Notes_2.9.5)  | <ul><li>Policy updates</li><li>Bug fixes</li><li>Fix CVE-2017-6507</li> | |3.3+   | |
-| [2.10](Release_Notes_2.10)  |  | |3.3+   | |
+| [2.10](Release_Notes_2.10)  | <ul> <li>New libapparmor APIs</li> <li>Improved policy compile times</li> <li>Ability to use variables in profile names</li> <li>AppArmor Tools add support for <ul> <li>pux, cux, CUx exec modes</li> <li>Profile attachment specifications</li> <li>Profile de-duplication</li> <li>change_profile rules</li> <li>--no-reload option</li> </ul> </li> </ul> | |3.3+   | |
 | [2.10.1](Release_Notes_2.10.1)  | |  |3.3+   | |
 | [2.10.2](Release_Notes_2.10.2)  |  | |3.3+   | |
 | [2.10.3](Release_Notes_2.10.3)  |  | |3.3+   | |
