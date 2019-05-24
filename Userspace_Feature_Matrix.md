@@ -27,8 +27,7 @@
 | [2.10](Release_Notes_2.10)  | <ul> <li>New libapparmor APIs</li> <li>Improved policy compile times</li> <li>Ability to use variables in profile names</li> <li>AppArmor Tools add support for <ul> <li>pux, cux, CUx exec modes</li> <li>Profile attachment specifications</li> <li>Profile de-duplication</li> <li>change_profile rules</li> <li>--no-reload option</li> </ul> </li> </ul> | |3.3+   | |
 | [2.10.1](Release_Notes_2.10.1)  |<ul> <li>Allow "unspec" (AF_UNSPEC) family in network rules</li> <li>Policy Updates</li> <li>Bug Fixes</li> </ul> |  |3.3+   | |
 | [2.10.2](Release_Notes_2.10.2)  |<ul> <li>Policy Updates</li> <li>Bug Fixes</li> </ul>  | |3.3+   | |
-| [2.10.3](Release_Notes_2.10.3)  | <ul> <li>Policy Updates</li> <li>Bug Fixes</li> <li>Fix CVE-2017-6507</ul>
- | |3.3+   | |
+| [2.10.3](Release_Notes_2.10.3)  | <ul> <li>Policy Updates</li> <li>Bug Fixes</li> <li>Fix CVE-2017-6507</ul> | |3.3+   | |
 | [2.10.4](Release_Notes_2.10.4)  | <ul> <li>Policy Updates</li> <li>Bug Fixes</li> <li>Add support for zsh in logprof.conf</ul> | |3.3+   | |
 | [2.11](Release_Notes_2.11)  | <ul> <li>apparmor_parser supports parallel compiles and loads</li> <li>Utils fully support for dbus, ptrace, and signal rules/events</li> <li>Support stacking in exec and change_profile rules</li> <li>change_profile rules accept exec mode modifier</li> <li>Utils switched to python3 (python2 deprecated)</li> </ul> | |3.3+   | |
 | [2.11.1](Release_Notes_2.11.1)  |  | |3.3+   | |
