@@ -177,11 +177,11 @@ out of the system. Some troubleshooting techniques are:
 
 -   examining the initramfs is useful and can be done with something like:
 
-    ```
+```
 $ mkdir initramfs
 $ cd initramfs
 $ cat /path/to/your/initramfs | gunzip -cd | cpio -i
-    ```
+```
 
 -   It is currently not possible to start a process under one label and
     then apply policy to it with a different label, but it is possible
