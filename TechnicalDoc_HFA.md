@@ -106,6 +106,9 @@ dfa. The pipeline is as follows
       creation of equivalence
           |
           v
+      diff encode
+          |
+          v
       transition table compression
 
 To illustrate the steps of the conversion pipeline the following simple profile is used through out the following discussion
