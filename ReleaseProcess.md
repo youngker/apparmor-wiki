@@ -10,9 +10,11 @@ Making a Kernel Pull request
 
 1. Preparatory Steps
    1. Ensure patches have been staged in linux-next for at least 2 weeks before the request pull is sent
-   1. Built and test the set of patches, preferably with different configs and architectures
-   2. Dump the candidate patches and run checkpatch on them, make adjustments as needed
-   3. Ensure patches have been staged in linux-next for at least 2 weeks before the request pull is sent
+   2. Built and test the set of patches, preferably with different configs and architectures
+   3. Dump the candidate patches and run checkpatch on them, make adjustments as needed
+   4. Check that patches rebase etc has not picked up any additional patches via a bad interactive rebase
+   5. Ensure patches have been staged in linux-next for at least 2 weeks before the request pull is sent
+   
 2. Sending a pull request
 
    $ git checkout work
