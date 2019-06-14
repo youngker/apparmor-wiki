@@ -21,15 +21,18 @@ Tarball
 -   sha256sum: ???
 -   signature: <https://launchpad.net/apparmor/2.11/2.11.3/+download/apparmor-2.11.3.tar.gz.asc>
 
-
+Build Infrastructure
+--------------------
+- fix libapparmor swig 4 failure 'aa_log_record' object has no attribute '__getattr__'
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
-- ???
+- fix parsing of target profile NAME in directed transitions “px -> NAME"
+- clean up error handling 
 
 Init
 ----
-- ???
+- ensure error value is returned correctly
 
 Utils
 -----
@@ -50,7 +53,7 @@ Policy
 
 Tests
 -----
-- ???
+- fix mount test to use next available loop device
 
 Documentation
 -------------
