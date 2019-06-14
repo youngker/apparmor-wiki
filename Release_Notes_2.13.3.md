@@ -1,7 +1,7 @@
 Introduction
 ============
 
-AppArmor 2.13.3 is an maintenance release of the user space components
+AppArmor 2.13.3 is a maintenance release of the user space components
 of the AppArmor security project. The kernel portion of the project
 is maintained and pushed separately.
 
