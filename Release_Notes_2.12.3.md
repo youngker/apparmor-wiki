@@ -1,3 +1,4 @@
+
 Introduction
 ============
 
@@ -25,7 +26,7 @@ Tarball
 
 Build Infrastructure
 --------------------
-- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_'
+- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_' ([AABUG33][AABUG33])
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
@@ -48,7 +49,9 @@ Policy
 
 - Profiles
   - dovecot:
-    - align {pop3,managesieve}-login to imap-login 
+    - align {pop3,managesieve}-login to imap-login
+    - allow dovecot-lda to read anything under /usr/share/dovecot/protocols.d/
+    - allow lmtp the dac_read_search capability
   - syslog-ng: add abstractions/python for python-parser
 
 - Abstractions
@@ -68,7 +71,7 @@ Policy
 
 Tests
 -----
-- ???
+- fix mount test to use next available loop device ([MR379][MR379])
 
 Documentation
 -------------
@@ -82,3 +85,6 @@ There is a semantic change in the 4.8 kernel (commit
 enforcement. Specifically it affects when the m permission bit is
 checked for elf binary executables. Policy and tests within apparmor
 2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
+
+[AABUG33]: https://gitlab.com/apparmor/apparmor/issues/33
+[MR379]: https://gitlab.com/apparmor/apparmor/merge_requests/379
