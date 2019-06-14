@@ -14,6 +14,20 @@ Meeting Logs are linked off of the month agenda title.
 - translation handling (Launchpad, Weblate, ???)
 - anything else
 
+# [IRC Meeting, 18:00 UTC, Tuesday June 13, 2019](IRC_meeting_2019-06-13)
+- policy
+  - split out of apparmor userspace release
+    - merge into profile repo?
+      - how to split mature, and dev
+  - do policy releases
+  - policy repo
+    - organization?
+      - reference policy
+      - reorganize to branches to make it easier to pick patches between different distros
+        - rebase distros on reference so that only the difference is carried in distro branches
+
+
+
 -----------------------------------------------------------------------------
 [IRC Meeting, 18:00 UTC, Tuesday Apr 9 2019](IRC_meeting_2019-04-09)
 -----------------------------------------------------------------------------
