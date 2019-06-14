@@ -32,11 +32,14 @@ Build Infrastructure
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
+- clean up error handling ([bso921866][bso921866], [LP1815294][LP1815294])
 - fix parsing of target profile NAME in directed transitions “px -> NAME"
 - don't skip cache just because parser optimizations are specified
+- determine xmatch priority based on smallest DFA match
 
 Init
 ----
+- ensure error value is returned correctly ([MR352][MR352])
 - ???
 
 Utils
@@ -44,17 +47,19 @@ Utils
 - logprof/genprof:
   - fix error `KeyError: 'logfiles'` when no logprof.conf exists ([MR365][MR365])
   - don't drop later events when user selects to deny a hat ([MR378][MR378])
-
+- update network keyword list and add corresponding tests ([MR350][MR350])
 
 Policy
 ------
 - ???
 
 - Profiles
+  - dnsmasq: Work around breakage caused by {bin,sbin} alternation ([bso1127073][bso1127073], [MR346][MR346])
   - dovecot:
     - align {pop3,managesieve}-login to imap-login
     - allow dovecot-lda to read anything under /usr/share/dovecot/protocols.d/
     - allow lmtp the dac_read_search capability
+    - allow master to use SIGTERM on children that are slow to die
   - identd: allow network netlink dgram ([MR353][MR353])
   - syslog-ng: add abstractions/python for python-parser
 
@@ -79,6 +84,7 @@ Tests
 
 Documentation
 -------------
+- update list of network domain keywords in the `apparmor.d` manpage ([MR349][MR349])
 - drop `to` option for link rules from the `apparmor.d` manpage ([MR368][MR368])
 - ???
 
@@ -92,6 +98,13 @@ checked for elf binary executables. Policy and tests within apparmor
 2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
 
 [AABUG33]: https://gitlab.com/apparmor/apparmor/issues/33
+[bso921866]: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=921866
+[bso1127073]:  https://bugzilla.opensuse.org/show_bug.cgi?id=1127073
+[LP1815294]: https://bugs.launchpad.net/bugs/1815294
+[MR346]: https://gitlab.com/apparmor/apparmor/merge_requests/346
+[MR349]: https://gitlab.com/apparmor/apparmor/merge_requests/349
+[MR350]: https://gitlab.com/apparmor/apparmor/merge_requests/350
+[MR352]: https://gitlab.com/apparmor/apparmor/merge_requests/352
 [MR353]: https://gitlab.com/apparmor/apparmor/merge_requests/353
 [MR365]: https://gitlab.com/apparmor/apparmor/merge_requests/365
 [MR366]: https://gitlab.com/apparmor/apparmor/merge_requests/366
