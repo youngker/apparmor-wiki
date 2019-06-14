@@ -29,7 +29,8 @@ Build Infrastructure
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
-- ???
+- fix parsing of target profile NAME in directed transitions “px -> NAME"
+- don't skip cache just because parser optimizations are specified
 
 Init
 ----
@@ -46,7 +47,9 @@ Policy
 - ???
 
 - Profiles
-  - ???
+  - dovecot:
+    - align {pop3,managesieve}-login to imap-login 
+  - syslog-ng: add abstractions/python for python-parser
 
 - Abstractions
   - fonts: 
@@ -55,6 +58,11 @@ Policy
   - gnome: 
     - allow creating gtk-2, gtk-3 config directories
     - allow read/write access to gtk-3 config directory
+  - ldapclient: allow read/write access to the nslcd socket
+  - nvidia: allow reading nvidia application profiles
+  - postfix-common: make compatible with latest postfix profiles
+  - python: allow /usr/local/lib/python3
+  - qt5: read user configuration
   - ubuntu-browsers.d/multimedia: allow creating and writing to owned .adobe directory
 
 
