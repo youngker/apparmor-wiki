@@ -21,7 +21,11 @@ Tarball
 -   sha256sum: ???
 -   signature: <https://launchpad.net/apparmor/2.12/2.12.3/+download/apparmor-2.12.3.tar.gz.asc>
 
+# Changes in This Release
 
+Build Infrastructure
+--------------------
+- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_'
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
@@ -45,7 +49,13 @@ Policy
   - ???
 
 - Abstractions
-  - ???
+  - fonts: 
+    - allow writing to owned fontconfig directories
+    - allow creating owned fontconfig directories
+  - gnome: 
+    - allow creating gtk-2, gtk-3 config directories
+    - allow read/write access to gtk-3 config directory
+  - ubuntu-browsers.d/multimedia: allow creating and writing to owned .adobe directory
 
 
 Tests
