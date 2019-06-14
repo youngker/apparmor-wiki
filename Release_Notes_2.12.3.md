@@ -26,7 +26,9 @@ Tarball
 
 Build Infrastructure
 --------------------
-- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_' ([AABUG33][AABUG33])
+- add files to .gitignore:
+  - swig auto generated files for ruby ([MR366][MR366])
+- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_' ([BUG33][AABUG33])
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
@@ -39,9 +41,10 @@ Init
 
 Utils
 -----
+- logprof/genprof:
+  - fix error `KeyError: 'logfiles'` when no logprof.conf exists ([MR365][MR365])
+  - don't drop later events when user selects to deny a hat ([MR378][MR378])
 
--  genprof/logprof
-   - ???
 
 Policy
 ------
@@ -52,6 +55,7 @@ Policy
     - align {pop3,managesieve}-login to imap-login
     - allow dovecot-lda to read anything under /usr/share/dovecot/protocols.d/
     - allow lmtp the dac_read_search capability
+  - identd: allow network netlink dgram ([MR353][MR353])
   - syslog-ng: add abstractions/python for python-parser
 
 - Abstractions
@@ -75,6 +79,7 @@ Tests
 
 Documentation
 -------------
+- drop `to` option for link rules from the `apparmor.d` manpage ([MR368][MR368])
 - ???
 
 Note
@@ -87,4 +92,9 @@ checked for elf binary executables. Policy and tests within apparmor
 2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
 
 [AABUG33]: https://gitlab.com/apparmor/apparmor/issues/33
+[MR353]: https://gitlab.com/apparmor/apparmor/merge_requests/353
+[MR365]: https://gitlab.com/apparmor/apparmor/merge_requests/365
+[MR366]: https://gitlab.com/apparmor/apparmor/merge_requests/366
+[MR368]: https://gitlab.com/apparmor/apparmor/merge_requests/368
+[MR378]: https://gitlab.com/apparmor/apparmor/merge_requests/378
 [MR379]: https://gitlab.com/apparmor/apparmor/merge_requests/379
