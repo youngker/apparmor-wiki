@@ -9,12 +9,12 @@ announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
 
-# [Next Meeting: IRC Meeting, 18:00 UTC, Tuesday June 13, 2019](IRC_meeting_2019-06-13)
+# [Next Meeting: IRC Meeting, 18:00 UTC, Tuesday July 16, 2019](IRC_meeting_2019-06-13)
 - stable releases
 - translation handling (Launchpad, Weblate, ???)
 - anything else
 
-# [IRC Meeting, 18:00 UTC, Tuesday June 13, 2019](IRC_meeting_2019-06-13)
+# [IRC Meeting, 18:00 UTC, Thursday June 13, 2019](IRC_meeting_2019-06-13)
 - policy
   - split out of apparmor userspace release
     - merge into profile repo?
