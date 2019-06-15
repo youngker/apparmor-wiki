@@ -21,24 +21,29 @@ Tarball
 -   sha256sum: ???
 -   signature: <https://launchpad.net/apparmor/2.13/2.13.3/+download/apparmor-2.13.3.tar.gz.asc>
 
-# Translations
+# Changes in this Release
+
+Translations
+--------------
 - sync to most up to date language translations available
 
-# Build Infrastructure
+Build Infrastructure
+--------------------
 - add files to .gitignore
-  - swig auto generated files for ruby
-- fix libapparmor swig 4 failure 'aa_log_record' object has no attribute '__getattr__'
+  - swig auto generated files for ruby ([MR366][MR366])
+- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_' ([BUG33][AABUG33])
 
 
-# libapparmor
+libapparmor
+-----------
 - fix segfault in overlaydirat_for_each causing overlayed cache directory failures
 - fix segfault when loading policy cache files
 - fix failure to merge overlay directories in some situations
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
+- clean up error handling ([dbug921866][dbug921866], [LP1815294][LP1815294])
 - fix parsing of target profile NAME in directed transitions “px -> NAME"
-- fix parser failing to handle errors when setting up work causing early abort resulting in failed loads or policy compiles
 - improve runtime attachment by determine xmatch priority based on smallest DFA match
 - don't skip cache loads just because optimizations flags are specified
 
@@ -46,7 +51,7 @@ Policy Compiler (a.k.a apparmor\_parser)
 Init
 ----
 - apparmor.systemd: fix minor issues detected by shellcheck
-- fix return value when removing profiles
+- ensure error value is returned correctly ([MR352][MR352])
 
 
 Utils
