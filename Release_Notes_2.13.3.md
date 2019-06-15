@@ -24,7 +24,7 @@ Tarball
 # Translations
 - sync to most up to date language translations available
 
-# Build & Infrastructure
+# Build Infrastructure
 - add files to .gitignore
   - swig auto generated files for ruby
 - fix libapparmor swig 4 failure 'aa_log_record' object has no attribute '__getattr__'
