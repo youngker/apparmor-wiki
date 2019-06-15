@@ -25,35 +25,35 @@ Tarball
 
 Build Infrastructure
 --------------------
-- add files to .gitignore
-  - swig auto generated files for ruby
-- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_'
+- add files to .gitignore:
+  - swig auto generated files for ruby ([MR366][MR366])
+- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_' ([BUG33][AABUG33])
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 - fix parsing of target profile NAME in directed transitions “px -> NAME"
-- clean up error handling 
+- clean up error handling ([dbug921866][dbug921866], [LP1815294][LP1815294])
 
 Init
 ----
-- ensure error value is returned correctly
+- ensure error value is returned correctly ([MR352][MR352])
 
 Utils
 -----
 - logprof/genprof:
-  - don't drop later events when user selects to deny a hat
+  - don't drop later events when user selects to deny a hat ([MR378][MR378])
 
 Policy
 ------
 - Profiles
   - dovecot
-    - allow FD passing between dovecot and dovecot's anvil
-    - allow chroot'ing the auth processes
-    - let dovecot/anvil rw the auth-penalty socket
-    - auth processes need to read from postfix auth socket
-    - add abstractions/ssl\_certs to lmtp
+    - allow FD passing between dovecot and dovecot's anvil ([MR336][MR336])
+    - allow chroot'ing the auth processes ([MR336][MR336])
+    - let dovecot/anvil rw the auth-penalty socket ([MR336][MR336])
+    - auth processes need to read from postfix auth socket ([MR336][MR336])
+    - add abstractions/ssl\_certs to lmtp ([MR336][MR336])
     - allow master to use SIGTERM on children that are slow to die
-  - identd: allow network netlink dgram
+  - identd: allow network netlink dgram ([MR353][MR353])
 
 - Abstractions
   - ssl\_certs,keys: add support for libdehydrated in /var/lib/
@@ -66,10 +66,21 @@ Policy
 
 Tests
 -----
-- fix mount test to use next available loop device
+- fix mount test to use next available loop device ([MR379][MR379])
 
 Documentation
 -------------
-- drop `to` option for link rules from the `apparmor.d` manpage
+- drop `to` option for link rules from the `apparmor.d` manpage ([MR368][MR368])
 
+
+[AABUG33]: https://gitlab.com/apparmor/apparmor/issues/33
+[dbug921866]: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=921866
+[LP1815294]: https://bugs.launchpad.net/bugs/1815294
+[MR336]: https://gitlab.com/apparmor/apparmor/merge_requests/336
+[MR352]: https://gitlab.com/apparmor/apparmor/merge_requests/352
+[MR353]: https://gitlab.com/apparmor/apparmor/merge_requests/353
+[MR366]: https://gitlab.com/apparmor/apparmor/merge_requests/366
+[MR368]: https://gitlab.com/apparmor/apparmor/merge_requests/368
+[MR378]: https://gitlab.com/apparmor/apparmor/merge_requests/378
+[MR379]: https://gitlab.com/apparmor/apparmor/merge_requests/379
 
