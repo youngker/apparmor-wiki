@@ -34,8 +34,8 @@ Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 - clean up error handling ([dbug921866][dbug921866], [LP1815294][LP1815294])
 - fix parsing of target profile NAME in directed transitions “px -> NAME"
+- improve runtime attachment by determine xmatch priority based on smallest DFA match
 - don't skip cache just because parser optimizations are specified
-- determine xmatch priority based on smallest DFA match
 
 Init
 ----
