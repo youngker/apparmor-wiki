@@ -159,6 +159,7 @@ checked for elf binary executables. Policy and tests within apparmor
 [LP1815294]: https://bugs.launchpad.net/bugs/1815294
 [LP1815294]: https://bugs.launchpad.net/bugs/1815294
 [LP1816470]: https://bugs.launchpad.net/bugs/1816470
+[LP1820068]: https://bugs.launchpad.net/bugs/1820068
 [MR125]: https://gitlab.com/apparmor/apparmor/merge_requests/125
 [MR154]: https://gitlab.com/apparmor/apparmor/merge_requests/154
 [MR165]: https://gitlab.com/apparmor/apparmor/merge_requests/165
@@ -171,6 +172,7 @@ checked for elf binary executables. Policy and tests within apparmor
 [MR302]: https://gitlab.com/apparmor/apparmor/merge_requests/302
 [MR304]: https://gitlab.com/apparmor/apparmor/merge_requests/304
 [MR308]: https://gitlab.com/apparmor/apparmor/merge_requests/308
+[MR309]: https://gitlab.com/apparmor/apparmor/merge_requests/309
 [MR310]: https://gitlab.com/apparmor/apparmor/merge_requests/310
 [MR314]: https://gitlab.com/apparmor/apparmor/merge_requests/314
 [MR320]: https://gitlab.com/apparmor/apparmor/merge_requests/320
@@ -199,5 +201,6 @@ checked for elf binary executables. Policy and tests within apparmor
 [MR378]: https://gitlab.com/apparmor/apparmor/merge_requests/378
 [MR379]: https://gitlab.com/apparmor/apparmor/merge_requests/379
 [MR382]: https://gitlab.com/apparmor/apparmor/merge_requests/382
+[MR385]: https://gitlab.com/apparmor/apparmor/merge_requests/385
 [MR387]: https://gitlab.com/apparmor/apparmor/merge_requests/387
 [MR389]: https://gitlab.com/apparmor/apparmor/merge_requests/389
