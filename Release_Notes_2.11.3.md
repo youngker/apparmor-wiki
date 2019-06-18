@@ -25,13 +25,12 @@ Tarball
 
 Build Infrastructure
 --------------------
-- add files to .gitignore:
-  - swig auto generated files for ruby ([MR366][MR366])
+- add files to .gitignore: swig auto generated files for ruby ([MR366][MR366])
 - fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_' ([BUG33][AABUG33])
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
-- fix parsing of target profile NAME in directed transitions “px -> NAME"
+- fix parsing of target profile NAME in directed transitions “px -> NAME" ([MR334][MR334])
 - clean up error handling ([dbug921866][dbug921866], [LP1815294][LP1815294])
 
 Init
@@ -52,17 +51,17 @@ Policy
     - let dovecot/anvil rw the auth-penalty socket ([MR336][MR336])
     - auth processes need to read from postfix auth socket ([MR336][MR336])
     - add abstractions/ssl\_certs to lmtp ([MR336][MR336])
-    - allow master to use SIGTERM on children that are slow to die
+    - allow master to use SIGTERM on children that are slow to die ([MR357][MR357])
   - identd: allow network netlink dgram ([MR353][MR353])
 
 - Abstractions
-  - ssl\_certs,keys: add support for libdehydrated in /var/lib/
-  - qt5-settings-write: fix anonymous shared memory access
-  -  qt5-compose-cache-write: fix anonymous shared memory access
   - fonts:
-    - allow to read conf-avail dir itself
-    - add various openSUSE-specific font config directories
-  - nameservice: allow access to /run/netconfig/resolv.conf
+    - allow to read conf-avail dir itself ([MR165][MR165])
+    - add various openSUSE-specific font config directories ([MR309][MR309])
+  - nameservice: allow access to /run/netconfig/resolv.conf ([bso1097370][bso1097370])
+  - qt5-compose-cache-write: fix anonymous shared memory access ([MR301][MR301])
+  - qt5-settings-write: fix anonymous shared memory access ([MR302][MR302])
+  - ssl\_certs,keys: add support for libdehydrated in /var/lib/ ([MR299][MR299])
 
 Tests
 -----
@@ -72,15 +71,21 @@ Documentation
 -------------
 - drop `to` option for link rules from the `apparmor.d` manpage ([MR368][MR368])
 
-
 [AABUG33]: https://gitlab.com/apparmor/apparmor/issues/33
+[bso1097370]: https://bugzilla.opensuse.org/show_bug.cgi?id=1097370
 [dbug921866]: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=921866
 [LP1815294]: https://bugs.launchpad.net/bugs/1815294
+[MR165]: https://gitlab.com/apparmor/apparmor/merge_requests/165
+[MR299]: https://gitlab.com/apparmor/apparmor/merge_requests/299
+[MR301]: https://gitlab.com/apparmor/apparmor/merge_requests/301
+[MR302]: https://gitlab.com/apparmor/apparmor/merge_requests/302
+[MR309]: https://gitlab.com/apparmor/apparmor/merge_requests/309
+[MR334]: https://gitlab.com/apparmor/apparmor/merge_requests/334
 [MR336]: https://gitlab.com/apparmor/apparmor/merge_requests/336
 [MR352]: https://gitlab.com/apparmor/apparmor/merge_requests/352
 [MR353]: https://gitlab.com/apparmor/apparmor/merge_requests/353
+[MR357]: https://gitlab.com/apparmor/apparmor/merge_requests/357
 [MR366]: https://gitlab.com/apparmor/apparmor/merge_requests/366
 [MR368]: https://gitlab.com/apparmor/apparmor/merge_requests/368
 [MR378]: https://gitlab.com/apparmor/apparmor/merge_requests/378
 [MR379]: https://gitlab.com/apparmor/apparmor/merge_requests/379
-
