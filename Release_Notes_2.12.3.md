@@ -81,7 +81,7 @@ Policy
   - fonts:
     - allow writing to owned fontconfig directories
     - allow creating owned fontconfig directories
-    - add various openSUSE-specific font config directories ([309][309])
+    - add various openSUSE-specific font config directories ([MR309][MR309])
   - gnome:
     - allow creating gtk-2, gtk-3 config directories
     - allow read/write access to gtk-3 config directory
