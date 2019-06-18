@@ -13,11 +13,11 @@ AppArmor 2.10.5 was released 2019-06-15.
 
 
 # Obtaining the Release
-These release notes cover all changes between 2.10.4 (758ec0cdbd1978ff7b82fb0b18abc92687f81f59) and 2.10.5 (????) [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
+These release notes cover all changes between 2.10.4 (758ec0cdbd1978ff7b82fb0b18abc92687f81f59) and 2.10.5 (6a871a5082e7b9997132d152b27783dfea109a36) [apparmor-2.10 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.10).
 
 Tarball
 -   <https://launchpad.net/apparmor/2.10/2.10.5/+download/apparmor-2.10.5.tar.gz>
--   sha256sum: ???
+-   sha256sum: 94d6db4789423ed6f025e939b12720e1b8536a1dfabb0ff5f3265a584314bf8a
 -   signature: <https://launchpad.net/apparmor/2.10/2.10.5/+download/apparmor-2.10.5.tar.gz.asc>
 
 # Changes in This Release
