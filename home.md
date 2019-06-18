@@ -88,7 +88,7 @@ Prior supported release: 2.11.3
 Prior release: 2.10.5
 
 -   <https://launchpad.net/apparmor/2.10/2.10.5/+download/apparmor-2.10.5.tar.gz>
--   sha256sum: 
+-   sha256sum: 94d6db4789423ed6f025e939b12720e1b8536a1dfabb0ff5f3265a584314bf8a
 -   signature: <https://launchpad.net/apparmor/2.10/2.10.5/+download/apparmor-2.10.5.tar.gz.asc>
 -   [ 2.10.5 release notes](Release_Notes_2.10.5)
 
