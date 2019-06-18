@@ -26,8 +26,7 @@ Tarball
 
 Build Infrastructure
 --------------------
-- add files to .gitignore:
-  - swig auto generated files for ruby ([MR366][MR366])
+- add files to .gitignore: swig auto generated files for ruby ([MR366][MR366])
 - fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_' ([BUG33][AABUG33])
 
 Policy Compiler (a.k.a apparmor\_parser)
@@ -40,7 +39,6 @@ Policy Compiler (a.k.a apparmor\_parser)
 Init
 ----
 - ensure error value is returned correctly ([MR352][MR352])
-- ???
 
 Utils
 -----
@@ -53,10 +51,11 @@ Utils
 
 Policy
 ------
-- ???
 
 - Profiles
-  - dnsmasq: Work around breakage caused by {bin,sbin} alternation ([bso1127073][bso1127073], [MR346][MR346])
+  - dnsmasq:
+    - work around breakage caused by {bin,sbin} alternation ([bso1127073][bso1127073], [MR346][MR346])
+    - allow peer=libvirtd to support named profile ([MR304][MR304])
   - dovecot:
     - allow FD passing between dovecot and dovecot's anvil ([MR336][MR336])
     - allow chroot'ing the auth processes ([MR336][MR336])
@@ -65,19 +64,25 @@ Policy
     - add abstractions/ssl\_certs to lmtp ([MR336][MR336])
     - align {pop3,managesieve}-login to imap-login
     - allow dovecot-lda to read anything under /usr/share/dovecot/protocols.d/
-    - allow lmtp the dac_read_search capability
+    - allow lmtp the dac\_read\_search capability
     - allow master to use SIGTERM on children that are slow to die
+  - msqld ([MR310][MR310]):
+    - add mmap permission for mysqld (4.8 semantic change)
+    - allow mysql to determine which cpus are online
+    - allow locking of mysql files
   - identd: allow network netlink dgram ([MR353][MR353])
   - syslog-ng: add abstractions/python for python-parser
 
 - Abstractions
-  - audio: 
+  - audio:
+    - fix alsa settings access ([MR303][MR303])
     - grant read access to the libao configuration files ([dbug920670][dbug920670], [MR320][MR320])
     - grant read access to the system-wide asound.conf ([dbug920669][dbug920669], [MR320][MR320])
-  - fonts: 
+  - fonts:
     - allow writing to owned fontconfig directories
     - allow creating owned fontconfig directories
-  - gnome: 
+    - add various openSUSE-specific font config directories ([309][309])
+  - gnome:
     - allow creating gtk-2, gtk-3 config directories
     - allow read/write access to gtk-3 config directory
   - kde:
@@ -89,6 +94,9 @@ Policy
   - postfix-common: make compatible with latest postfix profiles
   - python: allow /usr/local/lib/python3
   - qt5: read user configuration
+  - qt5-compose-cache-write: fix anonymous shared memory access ([MR301][MR301])
+  - qt5-settings-write: fix anonymous shared memory access ([MR302][MR302])
+  - ssl\_certs,keys: add support for libdehydrated in /var/lib/ ([MR299][MR299])
   - ubuntu-browsers.d/multimedia: allow creating and writing to owned .adobe directory
   - vulkan: allow reading /etc/vulkan/icd.d/ ([MR329][MR329])
 
@@ -102,7 +110,6 @@ Documentation
 -------------
 - update list of network domain keywords in the `apparmor.d` manpage ([MR349][MR349])
 - drop `to` option for link rules from the `apparmor.d` manpage ([MR368][MR368])
-- ???
 
 Note
 ====
@@ -122,6 +129,13 @@ checked for elf binary executables. Policy and tests within apparmor
 [dbug921866]: https://bugs.debian.org/921866
 [LP1815294]: https://bugs.launchpad.net/bugs/1815294
 [MR297]: https://gitlab.com/apparmor/apparmor/merge_requests/297
+[MR299]: https://gitlab.com/apparmor/apparmor/merge_requests/299
+[MR301]: https://gitlab.com/apparmor/apparmor/merge_requests/301
+[MR302]: https://gitlab.com/apparmor/apparmor/merge_requests/302
+[MR303]: https://gitlab.com/apparmor/apparmor/merge_requests/303
+[MR304]: https://gitlab.com/apparmor/apparmor/merge_requests/304
+[MR309]: https://gitlab.com/apparmor/apparmor/merge_requests/309
+[MR310]: https://gitlab.com/apparmor/apparmor/merge_requests/310
 [MR320]: https://gitlab.com/apparmor/apparmor/merge_requests/320
 [MR327]: https://gitlab.com/apparmor/apparmor/merge_requests/327
 [MR329]: https://gitlab.com/apparmor/apparmor/merge_requests/329
