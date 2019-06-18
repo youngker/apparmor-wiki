@@ -66,31 +66,31 @@ Development release: AppArmor 3.0
     -   query caching
     -   extensible rule support so older parsers don't break on new rule types
 
-Current stable release: 2.13.2
--   <https://launchpad.net/apparmor/2.13/2.13.2/+download/apparmor-2.13.2.tar.gz>
--   sha256sum: 844def9926dfda5c7858428d06e44afc80573f9706458b6e7282edbb40b11a30
--   signature: <https://launchpad.net/apparmor/2.13/2.13.2/+download/apparmor-2.13.2,tar.gz.asc>
--   [ 2.13.2 release notes](Release_Notes_2.13.2)
+Current stable release: 2.13.3
+-   <https://launchpad.net/apparmor/2.13/2.13.3/+download/apparmor-2.13.3.tar.gz>
+-   sha256sum: 267053234c68cdb122c5294d7c276b6e2f5fa7e75c6c2d23e3ce69f95d9a7639
+-   signature: <https://launchpad.net/apparmor/2.13/2.13.3/+download/apparmor-2.13.3.tar.gz.asc>
+-   [ 2.13.3 release notes](Release_Notes_2.13.3)
 
-Prior supported release: 2.12.2
--   <https://launchpad.net/apparmor/2.12/2.12.2/+download/apparmor-2.12.2.tar.gz>
--   sha256sum: a316355e9f14c55831856350ef5f4bb99e0a34ecde6f7d7b07719079fdda5866
--   signature: <https://launchpad.net/apparmor/2.12/2.12.2/+download/apparmor-2.12.2.tar.gz.asc>
--   [ 2.12.2 release notes](Release_Notes_2.12.2)
+Prior supported release: 2.12.3
+-   <https://launchpad.net/apparmor/2.12/2.12.3/+download/apparmor-2.12.3.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.12/2.12.3/+download/apparmor-2.12.3.tar.gz.asc>
+-   [ 2.12.3 release notes](Release_Notes_2.12.3)
 
-Prior supported release: 2.11.2
+Prior supported release: 2.11.3
 
--   <https://launchpad.net/apparmor/2.11/2.11.2/+download/apparmor-2.11.2.tar.gz>
--   sha256sum: e22a6369e6d377dbb606fb8e732fe5eef7d7055c9bf4f69e671aa60cda289c74
--   signature: <https://launchpad.net/apparmor/2.11/2.11.2/+download/apparmor-2.11.2.tar.gz.asc>
--   [ 2.11.2 release notes](Release_Notes_2.11.2)
+-   <https://launchpad.net/apparmor/2.11/2.11.3/+download/apparmor-2.11.3.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.11/2.11.3/+download/apparmor-2.11.3.tar.gz.asc>
+-   [ 2.11.3 release notes](Release_Notes_2.11.3)
 
-Prior release: 2.10.4
+Prior release: 2.10.5
 
--   <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz>
--   sha256sum: 990aafd91905bcced2a8386bc5e45507e847b825c7c693a3c2cbeb5c0b9e7da3
--   signature: <https://launchpad.net/apparmor/2.10/2.10.4/+download/apparmor-2.10.4.tar.gz.asc>
--   [ 2.10.4 release notes](Release_Notes_2.10.4)
+-   <https://launchpad.net/apparmor/2.10/2.10.5/+download/apparmor-2.10.5.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/2.10/2.10.5/+download/apparmor-2.10.5.tar.gz.asc>
+-   [ 2.10.5 release notes](Release_Notes_2.10.5)
 
 
 
