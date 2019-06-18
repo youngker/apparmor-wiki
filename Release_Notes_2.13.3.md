@@ -92,13 +92,13 @@ Policy
 - Tunables
   - share:
     - make it play well with aliases
-    - fix buggy syntax that broke the ~/.local/share part of the @{user_share_dirs} tunable
+    - fix buggy syntax that broke the ~/.local/share part of the @{user\_share\_dirs} tunable
 
 - Abstractions
   - move dirc.d access from mesa to dir-common
   - base: allow mr permission on all *.so* common library paths
   - dri-common: allow reading /dev/dri/
-  - ssl_certs,keys - add support for libdehydrated in /var/lib/
+  - ssl\_certs,keys - add support for libdehydrated in /var/lib/
   - qt5: allow reading user configuration
   - qt5-settings-write: fix anonymous shared memory access
   - qt5-compose-cache-write: fix anonymous shared memory access
@@ -149,3 +149,27 @@ There is a semantic change in the 4.8 kernel (commit
 enforcement. Specifically it affects when the m permission bit is
 checked for elf binary executables. Policy and tests within apparmor
 2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
+
+[AABUG33]: https://gitlab.com/apparmor/apparmor/issues/33
+[bso1097370]: https://bugzilla.opensuse.org/show_bug.cgi?id=1097370
+[bso1120472]: https://bugzilla.opensuse.org/show_bug.cgi?id=1120472
+[bso1127073]: https://bugzilla.opensuse.org/show_bug.cgi?id=1127073
+[dbug920669]: https://bugs.debian.org/920669
+[dbug920670]: https://bugs.debian.org/920670
+[dbug921866]: https://bugs.debian.org/921866
+[LP1815294]: https://bugs.launchpad.net/bugs/1815294
+[MR297]: https://gitlab.com/apparmor/apparmor/merge_requests/297
+[MR320]: https://gitlab.com/apparmor/apparmor/merge_requests/320
+[MR327]: https://gitlab.com/apparmor/apparmor/merge_requests/327
+[MR329]: https://gitlab.com/apparmor/apparmor/merge_requests/329
+[MR331]: https://gitlab.com/apparmor/apparmor/merge_requests/331
+[MR346]: https://gitlab.com/apparmor/apparmor/merge_requests/346
+[MR349]: https://gitlab.com/apparmor/apparmor/merge_requests/349
+[MR350]: https://gitlab.com/apparmor/apparmor/merge_requests/350
+[MR352]: https://gitlab.com/apparmor/apparmor/merge_requests/352
+[MR353]: https://gitlab.com/apparmor/apparmor/merge_requests/353
+[MR365]: https://gitlab.com/apparmor/apparmor/merge_requests/365
+[MR366]: https://gitlab.com/apparmor/apparmor/merge_requests/366
+[MR368]: https://gitlab.com/apparmor/apparmor/merge_requests/368
+[MR378]: https://gitlab.com/apparmor/apparmor/merge_requests/378
+[MR379]: https://gitlab.com/apparmor/apparmor/merge_requests/379
