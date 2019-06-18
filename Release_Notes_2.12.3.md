@@ -32,9 +32,10 @@ Build Infrastructure
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 - clean up error handling ([dbug921866][dbug921866], [LP1815294][LP1815294])
-- fix parsing of target profile NAME in directed transitions “px -> NAME"
-- improve runtime attachment by determine xmatch priority based on smallest DFA match
+- fix parsing of target profile NAME in directed transitions “px -> NAME" ([MR334][MR334])
+- improve runtime attachment by determine xmatch priority based on smallest DFA match ([MR326][MR326])
 - don't skip cache just because parser optimizations are specified
+  ([MR385][MR385], [LP1820068][LP1820068])
 
 Init
 ----
@@ -62,16 +63,16 @@ Policy
     - let dovecot/anvil rw the auth-penalty socket ([MR336][MR336])
     - auth processes need to read from postfix auth socket ([MR336][MR336])
     - add abstractions/ssl\_certs to lmtp ([MR336][MR336])
-    - align {pop3,managesieve}-login to imap-login
-    - allow dovecot-lda to read anything under /usr/share/dovecot/protocols.d/
-    - allow lmtp the dac\_read\_search capability
-    - allow master to use SIGTERM on children that are slow to die
-  - msqld ([MR310][MR310]):
+    - align {pop3,managesieve}-login to imap-login ([MR389][MR389])
+    - allow dovecot-lda to read anything under /usr/share/dovecot/protocols.d/ ([MR386][MR[386])
+    - allow lmtp the dac\_read\_search capability ([MR386][MR386])
+    - allow master to use SIGTERM on children that are slow to die ([MR357][MR357])
+  - mysqld ([MR310][MR310]):
     - add mmap permission for mysqld (4.8 semantic change)
     - allow mysql to determine which cpus are online
     - allow locking of mysql files
   - identd: allow network netlink dgram ([MR353][MR353])
-  - syslog-ng: add abstractions/python for python-parser
+  - syslog-ng: add abstractions/python for python-parser ([MR361][MR361])
 
 - Abstractions
   - audio:
@@ -79,25 +80,25 @@ Policy
     - grant read access to the libao configuration files ([dbug920670][dbug920670], [MR320][MR320])
     - grant read access to the system-wide asound.conf ([dbug920669][dbug920669], [MR320][MR320])
   - fonts:
-    - allow writing to owned fontconfig directories
-    - allow creating owned fontconfig directories
+    - allow writing to owned fontconfig directories ([MR165][MR165])
+    - allow creating owned fontconfig directories ([MR165][MR165])
     - add various openSUSE-specific font config directories ([MR309][MR309])
   - gnome:
-    - allow creating gtk-2, gtk-3 config directories
-    - allow read/write access to gtk-3 config directory
+    - allow creating gtk-2, gtk-3 config directories ([MR165][MR165])
+    - allow read access to gtk-3 cache directory ([MR342][MR342])
   - kde:
     - update kde abstraction for common settings ([MR327][MR327])
     - fix global settings access for Kubuntu and openSUSE ([MR327][MR327])
-  - ldapclient: allow read/write access to the nslcd socket
+  - ldapclient: allow read/write access to the nslcd socket ([LP1575438][LP1575438])
   - nameservice: allow /run/netconfig/resolv.conf ([bso1097370][bso1097370])
-  - nvidia: allow reading nvidia application profiles
-  - postfix-common: make compatible with latest postfix profiles
-  - python: allow /usr/local/lib/python3
-  - qt5: read user configuration
+  - nvidia: allow reading nvidia application profiles ([MR125][MR125])
+  - postfix-common: make compatible with latest postfix profiles ([MR387][MR387])
+  - python: allow /usr/local/lib/python3 ([MR171][MR171])
+  - qt5: read user configuration ([MR335][MR335])
   - qt5-compose-cache-write: fix anonymous shared memory access ([MR301][MR301])
   - qt5-settings-write: fix anonymous shared memory access ([MR302][MR302])
   - ssl\_certs,keys: add support for libdehydrated in /var/lib/ ([MR299][MR299])
-  - ubuntu-browsers.d/multimedia: allow creating and writing to owned .adobe directory
+  - ubuntu-browsers.d/multimedia: allow creating and writing to owned .adobe directory ([MR165][MR165])
   - vulkan: allow reading /etc/vulkan/icd.d/ ([MR329][MR329])
 
 
@@ -127,7 +128,12 @@ checked for elf binary executables. Policy and tests within apparmor
 [dbug920669]: https://bugs.debian.org/920669
 [dbug920670]: https://bugs.debian.org/920670
 [dbug921866]: https://bugs.debian.org/921866
+[LP1575438]: https://bugs.launchpad.net/bugs/1575438
 [LP1815294]: https://bugs.launchpad.net/bugs/1815294
+[LP1820068]: https://bugs.launchpad.net/bugs/1820068
+[MR125]: https://gitlab.com/apparmor/apparmor/merge_requests/125
+[MR165]: https://gitlab.com/apparmor/apparmor/merge_requests/165
+[MR171]: https://gitlab.com/apparmor/apparmor/merge_requests/171
 [MR297]: https://gitlab.com/apparmor/apparmor/merge_requests/297
 [MR299]: https://gitlab.com/apparmor/apparmor/merge_requests/299
 [MR301]: https://gitlab.com/apparmor/apparmor/merge_requests/301
@@ -137,17 +143,27 @@ checked for elf binary executables. Policy and tests within apparmor
 [MR309]: https://gitlab.com/apparmor/apparmor/merge_requests/309
 [MR310]: https://gitlab.com/apparmor/apparmor/merge_requests/310
 [MR320]: https://gitlab.com/apparmor/apparmor/merge_requests/320
+[MR326]: https://gitlab.com/apparmor/apparmor/merge_requests/326
 [MR327]: https://gitlab.com/apparmor/apparmor/merge_requests/327
 [MR329]: https://gitlab.com/apparmor/apparmor/merge_requests/329
 [MR331]: https://gitlab.com/apparmor/apparmor/merge_requests/331
+[MR334]: https://gitlab.com/apparmor/apparmor/merge_requests/334
+[MR335]: https://gitlab.com/apparmor/apparmor/merge_requests/335
 [MR336]: https://gitlab.com/apparmor/apparmor/merge_requests/336
+[MR342]: https://gitlab.com/apparmor/apparmor/merge_requests/342
 [MR346]: https://gitlab.com/apparmor/apparmor/merge_requests/346
 [MR349]: https://gitlab.com/apparmor/apparmor/merge_requests/349
 [MR350]: https://gitlab.com/apparmor/apparmor/merge_requests/350
 [MR352]: https://gitlab.com/apparmor/apparmor/merge_requests/352
 [MR353]: https://gitlab.com/apparmor/apparmor/merge_requests/353
+[MR357]: https://gitlab.com/apparmor/apparmor/merge_requests/357
+[MR361]: https://gitlab.com/apparmor/apparmor/merge_requests/361
 [MR365]: https://gitlab.com/apparmor/apparmor/merge_requests/365
 [MR366]: https://gitlab.com/apparmor/apparmor/merge_requests/366
 [MR368]: https://gitlab.com/apparmor/apparmor/merge_requests/368
 [MR378]: https://gitlab.com/apparmor/apparmor/merge_requests/378
 [MR379]: https://gitlab.com/apparmor/apparmor/merge_requests/379
+[MR385]: https://gitlab.com/apparmor/apparmor/merge_requests/385
+[MR386]: https://gitlab.com/apparmor/apparmor/merge_requests/386
+[MR387]: https://gitlab.com/apparmor/apparmor/merge_requests/387
+[MR389]: https://gitlab.com/apparmor/apparmor/merge_requests/389
