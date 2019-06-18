@@ -54,7 +54,7 @@ Init
 Utils
 -----
 -  genprof/logprof
-  - drop failing corner-case check in logparser.py ([bso1120472][bso1120472], [MR297][MR297])
+  - drop failing corner-case check in logparser.py ([boo1120472][boo1120472], [MR297][MR297])
   - drop unused `get_profile_filename()` from logparser.py ([MR297][MR297])
   - fix error `KeyError: 'logfiles'` when no logprof.conf exists ([MR365][MR365])
   - don't drop later events when user selects to deny a hat ([MR378][MR378])
@@ -66,8 +66,8 @@ Policy
 - Profiles
   - dnsmasq:
     - allow peer=libvirtd to support named profile ([MR304][MR304])
-    - work around breakage caused by {bin,sbin} alternation ([bso1127073][bso1127073], [MR346][MR346])
-    - revert /usr/{bin,sbin}/ alternation in dnsmasq profile name ([bso1127073][bso1127073], [MR346][MR346])
+    - work around breakage caused by {bin,sbin} alternation ([boo1127073][boo1127073], [MR346][MR346])
+    - revert /usr/{bin,sbin}/ alternation in dnsmasq profile name ([boo1127073][boo1127073], [MR346][MR346])
   - dovecot
     - allow FD passing between dovecot and dovecot's anvil ([MR336][MR336])
     - allow chroot'ing the auth processes ([MR336][MR336])
@@ -111,7 +111,7 @@ Policy
   - mesa:
     - allow reading drirc.d ([MR308][MR308])
     - move dirc.d access to dir-common ([MR314][MR314])
-  - nameservice: allow access to /run/netconfig/resolv.conf ([bso1097370][bso1097370])
+  - nameservice: allow access to /run/netconfig/resolv.conf ([boo1097370][boo1097370])
   - nvidia: allow reading nvidia application profiles ([MR125][MR125])
   - postfix-common: make compatible with updated postfix profiles naming ([MR387][MR387])
   - python: allow reading /usr/local/lib/python3 ([MR171][MR171])
@@ -149,9 +149,9 @@ checked for elf binary executables. Policy and tests within apparmor
 
 [AABUG29]: https://gitlab.com/apparmor/apparmor/issues/29
 [AABUG33]: https://gitlab.com/apparmor/apparmor/issues/33
-[bso1097370]: https://bugzilla.opensuse.org/show_bug.cgi?id=1097370
-[bso1120472]: https://bugzilla.opensuse.org/show_bug.cgi?id=1120472
-[bso1127073]: https://bugzilla.opensuse.org/show_bug.cgi?id=1127073
+[boo1097370]: https://bugzilla.opensuse.org/show_bug.cgi?id=1097370
+[boo1120472]: https://bugzilla.opensuse.org/show_bug.cgi?id=1120472
+[boo1127073]: https://bugzilla.opensuse.org/show_bug.cgi?id=1127073
 [dbug920669]: https://bugs.debian.org/920669
 [dbug920670]: https://bugs.debian.org/920670
 [dbug921866]: https://bugs.debian.org/921866

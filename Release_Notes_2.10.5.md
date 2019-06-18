@@ -54,7 +54,7 @@ Policy
   - fonts:
     - allow to read conf-avail dir itself ([MR165][MR165])
     - add various openSUSE-specific font config directories ([MR309][MR309])
-  - nameservice: allow access to /run/netconfig/resolv.conf ([bso1097370][bso1097370])
+  - nameservice: allow access to /run/netconfig/resolv.conf ([boo1097370][boo1097370])
   - qt5-compose-cache-write: fix anonymous shared memory access ([MR301][MR301])
   - qt5-settings-write: fix anonymous shared memory access ([MR302][MR302])
   - ssl\_certs,keys: add support for libdehydrated in /var/lib/ ([MR299][MR299])
@@ -64,7 +64,7 @@ Tests
 - fix mount test to use next available loop device ([MR379][MR379])
 
 [AABUG33]: https://gitlab.com/apparmor/apparmor/issues/33
-[bso1097370]: https://bugzilla.opensuse.org/show_bug.cgi?id=1097370
+[boo1097370]: https://bugzilla.opensuse.org/show_bug.cgi?id=1097370
 [MR165]: https://gitlab.com/apparmor/apparmor/merge_requests/165
 [MR298]: https://gitlab.com/apparmor/apparmor/merge_requests/298
 [MR299]: https://gitlab.com/apparmor/apparmor/merge_requests/299
