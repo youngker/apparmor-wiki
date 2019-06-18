@@ -67,11 +67,11 @@ Policy
     - allow dovecot-lda to read anything under /usr/share/dovecot/protocols.d/ ([MR386][MR[386])
     - allow lmtp the dac\_read\_search capability ([MR386][MR386])
     - allow master to use SIGTERM on children that are slow to die ([MR357][MR357])
+  - identd: allow network netlink dgram ([MR353][MR353])
   - mysqld ([MR310][MR310]):
     - add mmap permission for mysqld (4.8 semantic change)
     - allow mysql to determine which cpus are online
     - allow locking of mysql files
-  - identd: allow network netlink dgram ([MR353][MR353])
   - syslog-ng: add abstractions/python for python-parser ([MR361][MR361])
 
 - Abstractions
@@ -85,7 +85,7 @@ Policy
     - add various openSUSE-specific font config directories ([MR309][MR309])
   - gnome:
     - allow creating gtk-2, gtk-3 config directories ([MR165][MR165])
-    - allow read access to gtk-3 cache directory ([MR342][MR342])
+    - allow read access to gtk-3 cache files ([MR342][MR342])
   - kde:
     - update kde abstraction for common settings ([MR327][MR327])
     - fix global settings access for Kubuntu and openSUSE ([MR327][MR327])
@@ -104,7 +104,7 @@ Policy
 
 Tests
 -----
-- fix various tests to cope with usr-merge ([MR331][MR331])
+- fix various tests to cope with usr-merge where /bin and /sbin are symlinks ([MR331][MR331])
 - fix mount test to use next available loop device ([MR379][MR379])
 
 Documentation
