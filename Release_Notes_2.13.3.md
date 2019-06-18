@@ -53,7 +53,7 @@ Init
 
 Utils
 -----
--  genprof/logprof
+- genprof/logprof
   - drop failing corner-case check in logparser.py ([boo1120472][boo1120472], [MR297][MR297])
   - drop unused `get_profile_filename()` from logparser.py ([MR297][MR297])
   - fix error `KeyError: 'logfiles'` when no logprof.conf exists ([MR365][MR365])
