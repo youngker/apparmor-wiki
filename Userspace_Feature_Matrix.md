@@ -35,7 +35,7 @@
 | [2.12](Release_Notes_2.12)  |<ul> <li>Reworked YaST interface</li> <li>Add support for 'owner' events to aa-logprof and aa-genprof</li> <li>Bug Fixes</li> <li>Policy Updates</li> </ul>  | |3.3+   | |
 | [2.12.1](Release_Notes_2.12.1)  |  | |3.3+   | |
 | [2.12.2](Release_Notes_2.12.2)  | |  |3.3+   | |
-| [2.13](Release_Notes_2.13)  |  | |3.3+   | |
+| [2.13](Release_Notes_2.13)  | <ul> <li>Support conditional includes in policy</li> <li>Allow policy caches to be retained between kernel versions</li> <li>Overlay cache locations</li> <li>Add ablity to customize aa-notify notification message</li> </ul> | |3.3+   | |
 | [2.13.1](Release_Notes_2.13.1)  | |  |3.3+   | |
 | [2.13.2](Release_Notes_2.13.2)  |  | |3.3+   | |
 | [3.0](Release_Notes_3.0) |  | |4.13+   | |
