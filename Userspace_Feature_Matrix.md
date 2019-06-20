@@ -32,7 +32,7 @@
 | [2.11](Release_Notes_2.11)  | <ul> <li>apparmor_parser supports parallel compiles and loads</li> <li>Utils fully support for dbus, ptrace, and signal rules/events</li> <li>Support stacking in exec and change_profile rules</li> <li>change_profile rules accept exec mode modifier</li> <li>Utils switched to python3 (python2 deprecated)</li> </ul> | |3.3+   | |
 | [2.11.1](Release_Notes_2.11.1)  |  | |3.3+   | |
 | [2.11.2](Release_Notes_2.11.2)  |  | |3.3+   | |
-| [2.12](Release_Notes_2.12)  |  | |3.3+   | |
+| [2.12](Release_Notes_2.12)  |<ul> <li>Reworked YaST interface</li> <li>Add support for 'owner' events to aa-logprof and aa-genprof</li> <li>Bug Fixes</li> <li>Policy Updates</li> </ul>  | |3.3+   | |
 | [2.12.1](Release_Notes_2.12.1)  |  | |3.3+   | |
 | [2.12.2](Release_Notes_2.12.2)  | |  |3.3+   | |
 | [2.13](Release_Notes_2.13)  |  | |3.3+   | |
