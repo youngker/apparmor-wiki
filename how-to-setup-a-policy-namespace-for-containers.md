@@ -14,6 +14,8 @@ This document is split into sections outlining a how to/example for different co
 - apparmor userspace
 - kernel
 
+? requirements
+
 # Docker
 
 ## apparmor host, apparmor container
