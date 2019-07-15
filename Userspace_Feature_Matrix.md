@@ -30,7 +30,7 @@
 | [2.10.3](Release_Notes_2.10.3)  | <ul> <li>Policy Updates</li> <li>Bug Fixes</li> <li>Fix CVE-2017-6507</ul> | |3.3+   | |
 | [2.10.4](Release_Notes_2.10.4)  | <ul> <li>Policy Updates</li> <li>Bug Fixes</li> <li>Add support for zsh in logprof.conf</ul> | |3.3+   | |
 | [2.11](Release_Notes_2.11)  | <ul> <li>apparmor_parser supports parallel compiles and loads</li> <li>Utils fully support for dbus, ptrace, and signal rules/events</li> <li>Support stacking in exec and change_profile rules</li> <li>change_profile rules accept exec mode modifier</li> <li>Utils switched to python3 (python2 deprecated)</li> </ul> | |3.3+   | |
-| [2.11.1](Release_Notes_2.11.1)  |  | |3.3+   | |
+| [2.11.1](Release_Notes_2.11.1)  |<ul><li>Add network 'smc' keyword in NetworkRule</li><li>Policy updates</li><li>Bug fixes</li></ul>  | |3.3+   | |
 | [2.11.2](Release_Notes_2.11.2)  |  | |3.3+   | |
 | [2.12](Release_Notes_2.12)  |<ul> <li>Reworked YaST interface</li> <li>Add support for 'owner' events to aa-logprof and aa-genprof</li> <li>Bug Fixes</li> <li>Policy Updates</li> </ul>  | |3.3+   | |
 | [2.12.1](Release_Notes_2.12.1)  |<ul> <li>Add support for conditional includes in policy</li> <li>Policy Updates</li> <li>Bug Fixes</li> </ul>  | |3.3+   | |
