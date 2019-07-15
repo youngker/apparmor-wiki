@@ -36,6 +36,6 @@
 | [2.12.1](Release_Notes_2.12.1)  |<ul> <li>Add support for conditional includes in policy</li> <li>Policy Updates</li> <li>Bug Fixes</li> </ul>  | |3.3+   | |
 | [2.12.2](Release_Notes_2.12.2)  |<ul> <li>Policy Updates</li> <li>Bug Fixes</li> </ul> |  |3.3+   | |
 | [2.13](Release_Notes_2.13)  | <ul> <li>Support conditional includes in policy</li> <li>Allow policy caches to be retained between kernel versions</li> <li>Overlay cache locations</li> <li>Add ablity to customize aa-notify notification message</li> </ul> | |3.3+   | |
-| [2.13.1](Release_Notes_2.13.1)  | |  |3.3+   | |
-| [2.13.2](Release_Notes_2.13.2)  |  | |3.3+   | |
+| [2.13.1](Release_Notes_2.13.1)  |<ul><li>Policy updates</li><li>Bug fixes</li></ul> |  |3.3+   | |
+| [2.13.2](Release_Notes_2.13.2)  |<ul><li>Policy updates</li><li>Bug fixes</li></ul>  | |3.3+   | |
 | [3.0](Release_Notes_3.0) |  | |4.13+   | |
