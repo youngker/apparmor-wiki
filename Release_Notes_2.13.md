@@ -18,7 +18,7 @@ Note
 ====
 
 There is a semantic change in the 4.8 kernel (commit
-9f834ec18defc369d73ccf9e87a2790bfa05bf46) that affects apparmor policy
+9f834ec18defc369d73ccf9e87a2790bfa05bf46 fixing CVE-2019-11190) that affects apparmor policy
 enforcement. Specifically it affects when the m permission bit is
 checked for elf binary executables. Policy and tests within apparmor
 2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
