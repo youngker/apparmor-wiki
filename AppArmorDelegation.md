@@ -123,7 +123,7 @@ In this example @{HOME}/Downloads/* is more specific so the rule is delegated in
 ```
 profile example {
 
-   name foo {
+   label foo {
       rw @{HOME}/**,
       r  /tmp/**,
   }
@@ -137,12 +137,12 @@ profile example {
 ```
 profile example {
 
-   name foo {
+   label foo {
       rw @{HOME}/**,
       r  /tmp/**,
   }
 
-  name bar {
+  label bar {
       r /etc/passwd,
       rw @{HOME/.config/**,
   }
@@ -164,7 +164,7 @@ profile child {
 
 profile example {
 
-   name foo {
+   label foo {
       rw @{HOME}/**,
       r  /tmp/**,
   }
@@ -196,6 +196,34 @@ If a task inherits its parent confinement it will also inherit any delegation it
 eg. ....
 
 
+Also need way to allow to delegate to any child.
+
+
+Does the whole delegation get dropped or do we do intersections.
+
+
+### Delegation of external names that can be shared by multiple profiles
+
+```
+label foo {
+      rw @{HOME}/**,
+      r  /tmp/**,
+  }
+
+profile example {
+  px /usr/bin/child + foo,
+
+}
+```
+
+
+### Delegation is a form of profile composition
+
+#### labels can be given attachments
+
+label example//+foo   /usr/bin/**,
+
+???? ordering with stacking
 
 
 
