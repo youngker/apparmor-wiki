@@ -221,7 +221,13 @@ profile example {
 ```
 
 
-### Delegation is a form of profile composition
+### Delegation task labels
+
+bob//+police
+
+conjunctive normal form
+
+(bob//&jane)//+police => bob//+police//&jane//+police
 
 #### labels can be given attachments
 
