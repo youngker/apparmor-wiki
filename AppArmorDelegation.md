@@ -56,8 +56,71 @@ In AppArmor terms this is exposed in the label by listing the profile names that
 Identity is also used in policy to control which authority is or can be delegated.
 
 
+## Basics
+
+
+To delegate some access to a child task.
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  px /usr/bin/child + {
+      rw @{HOME}/**,
+  }
+
+}
+```
+
+The profile can not delegate permissions it doesn't have
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  px /usr/bin/child + {
+      rw @{HOME}/**,
+      rw /etc/passwd,
+  }
+}
+```
+
+Since the example profile does not have access to ```/etc/passwd``` it can not be delegated. The compile will fail with an error message.
+
+The profile can limit the delegation to already open files using the ```open``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  px /usr/bin/child + {
+      open rw @{HOME}/**,
+  }
+}
+```
+
+Overlapping rules can be used to determine delegation permissions. The ```open``` qualifier is not accumulated like regular permissions but instead applied on a most specific match basis similar to exec rule qualifiers.
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  px /usr/bin/child + {
+      open rw @{HOME}/**,
+      rw @{HOME}/Downloads/*,
+  }
+}
+```
+In this example @{HOME}/Downloads/* is more specific???
+Hrmmm why make this different than other rules.
+
+
+
 
 ## Aspects of delegation
+
+
+Complications move to later
 
 It is important to understand that delegation in AppArmor has multiple aspects to it.
 
