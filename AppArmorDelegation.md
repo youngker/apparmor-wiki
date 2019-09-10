@@ -58,19 +58,21 @@ Identity is also used in policy to control which authority is or can be delegate
 
 ## Basics
 
-
-To delegate some access to a child task.
+Delegation is expressed as extending a task's profile with additional additional rules.  To delegate some rules to a child task the exec rule can be extended with additional rules that extend the target profile.
 
 ```
 profile example {
   rw @{HOME}/**,
 
   px /usr/bin/child + {
+      # extend the profile for /usr/bin/child with the following rules.
       rw @{HOME}/**,
   }
 
 }
 ```
+
+When executed the child task will be confined by the profile for /usr/bin/child but extended by the additional rules.
 
 ### The profile can not delegate permissions it doesn't have
 
