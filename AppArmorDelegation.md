@@ -72,7 +72,7 @@ profile example {
 }
 ```
 
-The profile can not delegate permissions it doesn't have
+### The profile can not delegate permissions it doesn't have
 
 ```
 profile example {
@@ -87,6 +87,8 @@ profile example {
 
 Since the example profile does not have access to ```/etc/passwd``` it can not be delegated. The compile will fail with an error message.
 
+### Delegation can be restricted to open files
+
 The profile can limit the delegation to already open files using the ```open``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
 
 ```
@@ -98,6 +100,8 @@ profile example {
   }
 }
 ```
+
+### Overlapping rules can be used to control delegation
 
 Overlapping rules can be used to determine delegation permissions. The ```open``` qualifier is not accumulated like regular permissions but instead applied on a most specific match basis similar to exec rule qualifiers.
 
@@ -111,8 +115,87 @@ profile example {
   }
 }
 ```
-In this example @{HOME}/Downloads/* is more specific???
-Hrmmm why make this different than other rules.
+In this example @{HOME}/Downloads/* is more specific so the rule is delegated instead of only open files.
+
+
+### Rule sets can be named to avoid having to retype rules.
+
+```
+profile example {
+
+   name foo {
+      rw @{HOME}/**,
+      r  /tmp/**,
+  }
+
+  px /usr/bin/child + foo,
+
+}
+```
+
+### Multiple rule sets can be delegated
+```
+profile example {
+
+   name foo {
+      rw @{HOME}/**,
+      r  /tmp/**,
+  }
+
+  name bar {
+      r /etc/passwd,
+      rw @{HOME/.config/**,
+  }
+
+  px /usr/bin/child + foo + bar + {
+      mr /usr/lib/**,
+  }
+}
+```
+
+### Delegation to tasks that are not directly executed is possible
+
+Delegation to task that is not a directly executed child is allowed via the ```delegate``` rule.
+
+```
+profile child {
+   ...
+}
+
+profile example {
+
+   name foo {
+      rw @{HOME}/**,
+      r  /tmp/**,
+  }
+
+  allow delegate child + foo,
+  allow delegate child + {
+    rw /foo,
+    capability dac_read_search,
+  }
+
+  # hrmmm alternative syntax????
+  allow delegate foo -> child,   #????
+
+}
+```
+
+This form of delegation is not automatically applied when a task is executed but has to be explicitly requested by the task either via the apparmor api or by using fd passing.
+
+The delegated rules are not necessarily delegated as a group but define the set of things that can be delegated. They will be used to limit what is dynamically delegated by the apparmor api (more on this below stacking limits the api rules //+api_rules//&foo ... the and can be decomposed when name is used)
+
+If fd passing is used the delegation is limited as if the ```open``` qualifier was used even if the rule allowing the delegation 
+
+### Delegation is inheritable
+
+Delegation is inheritable by tasks but whether it will be inherited is controlled by policy.
+
+If a task inherits its parent confinement it will also inherit any delegation it parent has. However if the tasks confinement changes the delegation will be re-evaluated to determine if the delegation was allowed to the new profile. If the originally delegating profile allows the delegation to the new profile then the delegation will be inherited.
+
+eg. ....
+
+
 
 
 
