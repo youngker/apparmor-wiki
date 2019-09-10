@@ -76,6 +76,8 @@ When executed the child task will be confined by the profile for /usr/bin/child 
 
 ### The profile can not delegate permissions it doesn't have
 
+The above example the ```rw @{HOME}/**,``` rule appears twice, once in the profile and once in the block of rules being delegated. This is because the profile can not delegate permissions that it does not have.
+
 ```
 profile example {
   rw @{HOME}/**,
