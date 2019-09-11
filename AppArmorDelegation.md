@@ -159,7 +159,10 @@ profile example {
 
 ### Delegation to tasks that are not directly executed is possible
 
-Delegation to task that is not a directly executed child is allowed via the ```delegate``` rule.
+Explicit delegation to a task that is not a directly executed child is possible. This form of delegation is not automatically applied when a task is executed but has to be explicitly requested by the task either via the apparmor delegation api or by using fd passing.
+
+This form of delegation is controlled in policy through the ```delegate``` rule.
+
 
 ```
 profile child {
@@ -185,11 +188,19 @@ profile example {
 }
 ```
 
-This form of delegation is not automatically applied when a task is executed but has to be explicitly requested by the task either via the apparmor api or by using fd passing.
+The set of rules defined by the delegation api are not what is delegated but what could be delegated. The task doing the delegation is free delegate less permissions. The set of delegateable rules is used to dynamically restrict what a task may request via the delegation api.
 
-The delegated rules are not necessarily delegated as a group but define the set of things that can be delegated. They will be used to limit what is dynamically delegated by the apparmor api (more on this below stacking limits the api rules //+api_rules//&foo ... the and can be decomposed when name is used)
+#### fd delegation
 
-If fd passing is used the delegation is limited as if the ```open``` qualifier was used even if the rule allowing the delegation 
+When fd passing all delegation rules are treated as if the ```open``` qualifier was applied to the rule. That is to say fd delegation can only be used to pass already open object and not rules.
+
+#### Rule delegation
+
+When using the delegation api a task can specify a set of rules to delegate. This rules will be restricted to be a subset of the rules allowed by the delegation rules.
+
+??? expression in label???
+They will be used to limit what is dynamically delegated by the apparmor api (more on this below stacking limits the api rules //+api_rules//&foo ... the and can be decomposed when name is used)
+
 
 ### Delegation is inheritable
 
