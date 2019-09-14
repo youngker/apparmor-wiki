@@ -37,7 +37,7 @@ Delegation of Authority helps with authoring policy that adheres to the [princip
 
 # Delegation in AppArmor
 
-In AppArmor delegation is always temporary as it based on passing [authority](AppArmorDelegation#authority) to a task and unless [inheritance](AppArmorDelegation#inheritance) is defined will only lasts the life time the task. 
+In AppArmor delegation is always temporary and dynamic as it based on passing [authority](AppArmorDelegation#authority) to a task. The delegated authority is not given to other tasks in the system even if those tasks are confined by the same profile. The delegated authority might be [inherited](AppArmorDelegation#inheritance) by a tasks children, or [redelegated](AppArmorDelegation#redelegation) if allowed by policy.
 
 
 ## Authority
