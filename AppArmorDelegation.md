@@ -272,9 +272,17 @@ label example=free//&bar
 ???? ordering with stacking
 
 how is composition different from delegation
-- doesn't dynamically track where the permission came from
+- same as delegation when evaluating permission
+- doesn't dynamically track where the permission came from (delegation label is null)
 - segments just drop based on exec, no check to see if it can be inherited?
 
+
+What happens delegation of a block comes from 2 areas (say inheritance + explicit delegation), asingle reference to the block is kept and the delegation label contains both sources. If inheriting/passing both sources are consulted if one doesn't allow it is dropped. Delegation block is only dropped when all its sources are dropped.
+
+This means a label now needs to consist of 2 vecs. 1st vec is label, 2nd is delegators/source with NULL used for authority that wasn't delegated.
+Hrmmm how does this work with nesting? source could have same nesting.
+How does it work with stacking? Just does, its nesting that is the issue.
+Other potential format, vec is array of struct (profile, source)
 
 ### delegation and unconfined
 
