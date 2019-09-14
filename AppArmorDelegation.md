@@ -40,20 +40,9 @@ Delegation of Authority helps with authoring policy that adheres to the [princip
 In AppArmor delegation is always temporary and dynamic as it based on passing [authority](AppArmorDelegation#authority) to a task. The delegated authority is not given to other tasks in the system even if those tasks are confined by the same profile. The delegated authority might be [inherited](AppArmorDelegation#inheritance) by a tasks children, or [redelegated](AppArmorDelegation#redelegation) if allowed by policy.
 
 
-## Authority
-Authority is the right/permission to do something, This is expressed by the set of rules often in a profile but could be a special block of rules.
+## A real world example
 
-
-## Identity
-In AppArmor identity is the name associated with a set of rules. This is often a profile name but could be a random name associated with a set of rule. When a task has multiple identities assigned to it, all identities are equal.
-
-In real world term this is like saying a person Bob is also a police man. The individual is both of those things and has the rights and responsibilities of both Bob and a police man.
-
-In AppArmor terms this is exposed in the label by listing the profile names that contribute to the task's authority.
-
-  Bob//+police_man
-
-Identity is also used in policy to control which authority is or can be delegated.
+sheriff deputizes bob
 
 
 ## Basics
@@ -696,6 +685,21 @@ Policy Rules controlling Delegation
 # Glossary
 
 ## Authority
+Authority is the right/permission to do something, This is expressed by the set of rules often in a profile but could be a special block of rules.
+
+
+## Identity
+In AppArmor identity is the name associated with a set of rules. This is often a profile name but could be a random name associated with a set of rule. When a task has multiple identities assigned to it, all identities are equal.
+
+In real world term this is like saying a person Bob is also a police man. The individual is both of those things and has the rights and responsibilities of both Bob and a police man.
+
+In AppArmor terms this is exposed in the label by listing the profile names that contribute to the task's authority.
+
+  Bob//+police_man
+
+Identity is also used in policy to control which authority is or can be delegated.
+
+## Authority
 
 Authority is the right or permission to perform an action. An example
 would be a police officer has the authority to make an arrest but
@@ -750,5 +754,5 @@ of the tools available in AppArmor to craft policy in such a manner,
 where an application is given a base profile and it is given additional
 access when required, either via policy or trusted helpers.
 
-# [Confused Deputy Problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)
+## [Confused Deputy Problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)
  The [confused deputy problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)
