@@ -229,7 +229,36 @@ conjunctive normal form
 
 (bob//&jane)//+police => bob//+police//&jane//+police
 
-#### labels can be given attachments
+### Delegation of exec rules
+
+  exec rule will cause delegated blob to transition. It says this is inheritable to X
+
+don't put exec rules in delegated rule sets unless you want this
+
+Each delegated permission set will be evaluated based on the profile it was delegated by. If the permission set is allowed then the delegation will carry, otherwise it will be dropped.
+
+what about reducing permissions, allowing delegated set to reduce to a smaller set automatically?
+Requires knowing the smaller set. Could be done with dynamic masking via stack. In some cases could be precomputed.
+
+
+What of fd delegation. fds will be closed if transition profile does not allow it
+Permission check order
+  Find target label
+  fd delegation label is in target label
+  if not check revalidation
+
+
+### Delegation of change_profile rules
+
+
+### dynamic masking
+ +(A&B)
+- dynamically computed using stacking
+- statically computed where possible
+
+#### Profile composition
+
+labels can be given attachments
 
 While not delegation (Move else where) profile attachment can be used with labels.
 
@@ -241,6 +270,19 @@ compound labels can be given a short name alias
 label example=free//&bar
 
 ???? ordering with stacking
+
+how is composition different from delegation
+- doesn't dynamically track where the permission came from
+- segments just drop based on exec, no check to see if it can be inherited?
+
+
+### delegation and unconfined
+
+unconfined delegate fds to all children
+
+delegate to ** {
+  open /**,
+}
 
 
 
