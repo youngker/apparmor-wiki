@@ -231,7 +231,14 @@ conjunctive normal form
 
 #### labels can be given attachments
 
+While not delegation (Move else where) profile attachment can be used with labels.
+
 label example//+foo   /usr/bin/**,
+label example//&bar//+foo  /usr/bin/**,
+label example//&(bar//+foo)  /usr/bin/**
+
+compound labels can be given a short name alias
+label example=free//&bar
 
 ???? ordering with stacking
 
