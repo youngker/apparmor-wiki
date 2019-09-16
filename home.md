@@ -70,6 +70,8 @@ Current stable release: 2.13.3
 -   <https://launchpad.net/apparmor/2.13/2.13.3/+download/apparmor-2.13.3.tar.gz>
 -   sha256sum: 267053234c68cdb122c5294d7c276b6e2f5fa7e75c6c2d23e3ce69f95d9a7639
 -   signature: <https://launchpad.net/apparmor/2.13/2.13.3/+download/apparmor-2.13.3.tar.gz.asc>
+-   gitlab tar.gz sha25sum: 2e32413a83108c3213d60f439ec2865432eb839a577425ee92489c45ac8ce7e4
+-   [gitlab tar.gz signature](2.13.3_signature)
 -   [ 2.13.3 release notes](Release_Notes_2.13.3)
 
 Prior supported release: 2.12.3
