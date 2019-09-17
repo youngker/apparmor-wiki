@@ -205,6 +205,17 @@ AppArmor can intigrate with the IMA/EVM subsystem to provide policy restrictions
 
 TODO: ????
 
+
+# Pain points
+- early boot policy
+- mount namespacing, disconnected paths ...
+- special casing of applications
+  - setuids/setguid
+  - change_profile/change_hat  (use namespacing, need scope and view work for visibility)
+  - having to enumerate all allowed mediation classes instead of a generic allow rule.
+  - overlapping exec rule permissions
+- mounts
+
 # Dealing with mount
 
 mount can be used to by pass global restrictions so it must be tightly controlled
