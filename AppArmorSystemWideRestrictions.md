@@ -183,6 +183,31 @@ profile global /** {
 
 Notice there needs to be a special profile that specifies the xattr tag. This profile can be shared between all applications run under the tag or different profiles can be used. Also notice that the exec rule uses ```px``` in this case instead of ```pix``` to force execution to fail if the xattr tag does not match.
 
+### denying execution based on a tag
+
+Unfortunately it is not currently possible to directly deny execution of application based on a tag. It can however be done by using a stub profile.
+
+```
+profile deny
+        xattrs=(
+           # TODO: RFC on tag format
+           security.tagged=denied
+        )
+{
+    # no permissions
+}
+
+profile global /** {
+   include <global>
+
+   allow px @{HOME}/** -> deny//&@{profile_name}
+   ...
+}
+```
+
+This special deny profile will allow the exec to "succeed" with the deny profile being attached. But as soon as the application begins to execute it will fail and die because it does not have permissions to do anything.
+
+Unfortunately this will manifest as an application segfault so it is best not to use this technique if the application execution can be denied another way.
 
 ### xattr tagging with userspace prompting.
 
