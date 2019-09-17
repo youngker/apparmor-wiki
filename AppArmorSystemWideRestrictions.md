@@ -260,6 +260,58 @@ AppArmor can intigrate with the IMA/EVM subsystem to provide policy restrictions
 
 TODO: ????
 
+## Limitations
+
+This approach to application white listing has the disadvantage that the global policy must be aware of application policy transitions that are different from the system profiles.
+
+Eg. Say we launch evince from firefox, with the following profiles.
+
+```
+profile global {
+   include <global>
+
+   allow pix /bin/bash -> &@{profile_name},
+   allow pix /usr/bin/evince -> &@{profile_name},
+   allow pix /usr/bin/firefox -> &@{profile_name},
+   ...
+}
+
+profile firefox {
+
+   allow cx /usr/bin/evince,
+   ...
+
+   profile evince {
+      ...
+   }
+}
+```
+
+When firefox is run it will be confined by ```firefox//&global```, which is what is expected. However when firefox runs evince the confinement becomes ```firefox//evince//&evince//&global```, which is almost certainly not what is desired. This occurs because the ```firefox``` profile transitions to the child profile ```firefox//evince``` and the ```global``` profile transitions to ```evince//&global```. This results in three distinct profiles that can not be reduced.
+
+To fix this the global profile needs to be split into multiple profiles (in this case 2) that can track application transitions correctly.
+
+```
+profile global {
+   include <global>
+
+   allow ix /bin/bash -> &global,
+   allow px /usr/bin/evince -> &global2,
+   allow px /usr/bin/firefox -> &global2,
+   ...
+}
+
+profile global2 {
+   include <global>
+
+   allow ix /usr/bin/evince,
+   allow ix /usr/bin/firefox,
+   ...
+}
+```
+
+Another solution is to use the [alternative method to enforce system wide restrictions](????).
+
 
 # Pain points
 - early boot policy
