@@ -32,51 +32,192 @@ and users.
 There are two variants of deploying system wide restrictions dependent
 on whether or how the restriction should be visible.
 
-Early policy
-============
+# The Basics
 
-Visible system wide restrictions
-================================
-
-The apparmor initial confinement is set to be a stack of
+The basic global confinement profile is fairly simple to set-up. 
 
 ```
-default//&unconfined.
-```
-
-where default can be any profile name that is desired. When the system
-starts up the default profile will be in a special unconfined state
-until the profile for default is replaced. Policy will then begin to
-be enforced.
-
-Example 1: Single global confinement profile
---------------------------------------------
-
-The basic global confinement profile is fairly simple to set-up. Generally it is treated as a white list and the set of restrictions is listed as deny rule.
-
-```
- profile global flags=(default-allow) {
-    deny w /etc/passwd,
- }
-```
-
-The profile flag is just a short hand for the set of apparmor rules
-required to allow everything and an inherit (ix) transition for execs.
-
-```
- profie global {
+ profile global {
    allow file,
    allow network,
-   ...
+   # ... everything else to allow by default
    ix /**,
 
    deny w /etc/passwd,
  }
 ```
 
-The unconfined profile in the stack will proceed to behave as if
-AppArmor started normally and transition to other profiles where
-specified by policy.
+This profile is loaded early in boot and applied to every process on the system.
+
+
+# Early policy
+
+For global confinement to be truly global it has to be loaded very early in boot and init must attach to it. This means that a global confinement policy needs to be built into the initrd/initramfs and the init system must have apparmor support built in.
+
+## A slightly more flexible approach
+
+Instead of building support for apparmor into the init system, a profile with an attachment can be used.
+
+```
+profile global /** {
+   #...
+}
+```
+
+This profile will attach to every application executed after the profile is loaded. If the profile is loaded before exec re-execs itself it will attach to the new init. However if loaded later or after init this profile will not be applied to tasks that are already running.
+
+This may be sufficient as init and early boot may not need to be confined by the global policy.
+
+# Working with system policy
+
+The basic profile presented above will not allow for regular application policy to be used. We can fix this by changing the exec rule.
+
+## Application policy escape
+
+To allow application policy to escape the global profile the exec rule is modified to use ```pix```.
+
+```
+profile global /** {
+   #...
+
+   allow pix /**,
+}
+```
+
+This will allow the application policy to be applied without the global policy profile. Application policy then needs to use ```px/pix``` exec transition rules, transition children tasks back to the global profile if an application profile is not defined.
+
+## Composing with application policy
+
+Generally when using a global policy it is because there are restrictions you want applied to everything (or almost everything), and allowing application policy to escape the restriction is not desirable. There are two ways to address this.
+
+### composing through an include.
+
+The application policy restrictions, without the exec rule, can be placed in an include file. That is included by the global profile as well as all the application profiles.
+
+```
+$ cat /etc/apparmor.d/abstractions/global
+   allow file,
+   allow network,
+   # ... everything else to allow by default
+
+   deny w /etc/passwd,
+```
+
+The global confinement profile then becomes
+```
+profile global /** {
+   include <global>
+
+   allow pix /**,
+}
+```
+
+The application profiles can be modified to have ```include <global>```, or if modifying every application profile is not desirable the ```abstractions/base``` file is included by almost every profile, so the ```include <global> rule could be added to it.
+
+### dynamic composition
+
+Recent apparmor versions provide an alternate method to achieve profile composition through profile [stacking](AppArmorStacking). To use stacking the global policy exec rule is modified.
+
+```
+profile global /** {
+   include <global>
+
+   allow pix /** -> &@{profile_name},
+}
+```
+
+This rule will allow application policy to be used at the same time as the ```global``` profile is being applied and when there isn't an application profile only the global profile will be applied.
+
+When introspecting a tasks confinement, this will look like
+
+```
+$ ps -Z
+LABEL                             PID TTY          TIME CMD
+firefox//&global                 9724 pts/3    00:03:17 firefox
+evince//&global                 11898 pts/3    00:01:44 evince
+global                          17167 pts/3    00:00:02 bash
+global                          21420 pts/3    00:00:00 ps
+```
+
+When tasks confined by a stack of profiles execute an application without an application profile, the stack will collapse back into the application being confined by just the global profile.
+
+
+# Application white listing
+
+A global profile can be used to implement application white listing. Instead of just allowing any file to be run under the global profile. The exec rule is replaced with a list of files that are allowed to be executed.
+
+```
+profile global /** {
+   include <global>
+
+   allow pix /bin/bash -> &@{profile_name},
+   allow pix /bin/ls -> &@{profile_name},
+   allow pix /usr/bin/** -> &@{profile_name},
+   ...
+}
+```
+
+## xattr tagging
+
+As a further restriction on what can be run. Known executables can be tagged with an xattr that can be tied to apparmor policy. This can be used to restrict applications from running that are not properly tagged. For example applications downloaded to a users home directory could be restricted from running if they have not been tagged. This can be used in combination with a desktop prompt to ask the user if they really want to run the application.
+
+```
+profile user_downloaded
+        xattrs=(
+           # TODO: RFC on tag format
+           security.tagged=allowed
+        )
+{
+  ...
+}
+
+profile global /** {
+   include <global>
+
+   allow px @{HOME}/** -> user_downloaded//&@{profile_name}
+   ...
+}
+```
+
+Notice that the exec rule uses ```px``` in this case instead of ```pix``` to force execution to fail if the xattr tag does not match.
+
+### xattr tagging with userspace prompting.
+
+In the previous example apparmor will not prompt the user if they want to allow the application to be run, it will just be denied.
+
+To have apparmor prompt the user the profile must be modified by replacing the ```allow``` keyword with the ```prompt``` keyword.
+
+```
+profile global /** {
+   include <global>
+
+   prompt px @{HOME}/** -> user_downloaded//&@{profile_name}
+   ...
+}
+```
+
+This tells apparmor that it should send a prompt notification to userspace if the rule fails. This also requires that the user is running a notification daemon that will do the actual prompting and tag the file if the user decides to allow execution.
+
+
+## Application whitelisting for signed binaries
+
+AppArmor can intigrate with the IMA/EVM subsystem to provide policy restrictions based on integrity measurements. This allows for application white listing to be done based on whether the application has a valid signature.
+
+TODO: ????
+
+# Dealing with mount
+
+mount can be used to by pass global restrictions so it must be tightly controlled
+
+
+# older text follows, needs to be reworked and incorportated
+
+
+Visible system wide restrictions
+================================
+
+
+
 
 Allowing selective applications elevated privileges
 ===================================================
