@@ -144,7 +144,7 @@ When tasks confined by a stack of profiles execute an application without an app
 
 # Application white listing
 
-A global profile can be used to implement application white listing. Instead of just allowing any file to be run under the global profile. The exec rule is replaced with a list of files that are allowed to be executed.
+A global profile can be used to implement application white listing. Instead of just allowing any file to be run under the global profile. The single exec rule is replaced with a list of files that are allowed to be executed.
 
 ```
 profile global /** {
@@ -156,6 +156,8 @@ profile global /** {
    ...
 }
 ```
+
+Files that do not have a matching exec rule will not be allowed to be executed.
 
 ## xattr tagging
 
@@ -214,6 +216,7 @@ TODO: ????
   - change_profile/change_hat  (use namespacing, need scope and view work for visibility)
   - having to enumerate all allowed mediation classes instead of a generic allow rule.
   - overlapping exec rule permissions
+- interpreters
 - mounts
 
 # Dealing with mount
