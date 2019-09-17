@@ -161,7 +161,7 @@ Files that do not have a matching exec rule will not be allowed to be executed.
 
 ## xattr tagging
 
-As a further restriction on what can be run. Known executables can be tagged with an xattr that can be tied to apparmor policy. This can be used to restrict applications from running that are not properly tagged. For example applications downloaded to a users home directory could be restricted from running if they have not been tagged. This can be used in combination with a desktop prompt to ask the user if they really want to run the application.
+As a further restriction on what can be run. Known executables can be tagged with an xattr that can be tied to apparmor policy. This can be used to restrict applications from running that are not properly tagged. For example applications downloaded to a users home directory could be restricted from running if they have not been tagged.
 
 ```
 profile user_downloaded
@@ -181,13 +181,14 @@ profile global /** {
 }
 ```
 
-Notice that the exec rule uses ```px``` in this case instead of ```pix``` to force execution to fail if the xattr tag does not match.
+Notice there needs to be a special profile that specifies the xattr tag. This profile can be shared between all applications run under the tag or different profiles can be used. Also notice that the exec rule uses ```px``` in this case instead of ```pix``` to force execution to fail if the xattr tag does not match.
+
 
 ### xattr tagging with userspace prompting.
 
-In the previous example apparmor will not prompt the user if they want to allow the application to be run, it will just be denied.
+It is possible to use xattr tagging in combination with a desktop prompt to allow the user to interactively control whether files downloaded from the internet should be run.
 
-To have apparmor prompt the user the profile must be modified by replacing the ```allow``` keyword with the ```prompt``` keyword.
+In the previous examples apparmor will just deny the execution if the application is not tagged. To have apparmor prompt the user the profile must be modified by replacing the ```allow``` keyword with the ```prompt``` keyword.
 
 ```
 profile global /** {
@@ -198,8 +199,35 @@ profile global /** {
 }
 ```
 
-This tells apparmor that it should send a prompt notification to userspace if the rule fails. This also requires that the user is running a notification daemon that will do the actual prompting and tag the file if the user decides to allow execution.
+This tells apparmor that if the rule fails it should send a prompt notification to userspace. This also requires that the user is running a notification daemon that will do the actual prompting and tag the file if the user decides to allow execution.
 
+### xattr tagging for different trust levels
+
+In apparmor xattr tagging can go beyond just the basic allow/deny decision used in the example above. It can also be used to run applications at different trust levels. Extending the above example instead of out right denying untagged files they can be run in a very restrictive profile.
+
+```
+profile trusted @{HOME}/**
+        xattrs=(
+           # TODO: RFC on tag format
+           security.tagged=allowed
+        )
+{
+  ...
+}
+
+profile untrusted @{HOME}/** {
+  ...
+}
+
+profile global /** {
+   include <global>
+
+   allow px @{HOME}/** -> &@{profile_name}
+   ...
+}
+```
+
+While the trusted and untrusted profiles use the same attachment the xattr specification will make the trusted profile preferred over the untrusted profile if the xattr tag is present. Conversely if the xattr tag is not present the trusted profile will not match so the untrusted profile will be used.
 
 ## Application whitelisting for signed binaries
 
