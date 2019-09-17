@@ -246,6 +246,7 @@ TODO: ????
   - overlapping exec rule permissions
 - interpreters
 - mounts
+- developing/maintaining the white list for a distro
 
 # Dealing with mount
 
