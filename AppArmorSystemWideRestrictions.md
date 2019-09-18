@@ -310,7 +310,7 @@ profile global2 {
 }
 ```
 
-Another solution is to use the [alternative method to enforce system wide restrictions](????).
+Another solution is to use the [alternative methods to enforce system wide restrictions](AlternativeMethodsforSystemWideRestrictions).
 
 
 # Pain points
