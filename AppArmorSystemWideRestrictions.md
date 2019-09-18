@@ -1,17 +1,14 @@
-WARNING
-=======
+# WARNING
 
 This document is a work in progress and requires at a minimum the
 development version of apparmor 4.x???
 
-Requirements
-============
+# Requirements
 
 -   AppArmor Kernel module - 4.x??
 -   AppArmor Userspace - 4.x???
 
-Related Documentation
-=====================
+# Related Documentation
 
 -   [Stacking profiles in AppArmor](AppArmorStacking)
 -   [AppArmor Policy Namespaces](AppArmorNamespaces)
@@ -24,8 +21,7 @@ Related Documentation
 -   [Programatic application policy in AppArmor](AppArmorProgramaticApplicationPolicy)
 -   [Putting it all together](AppArmorStackingAndNSFullPolicy)
 
-Introduction
-============
+# Introduction
 
 ??? This is a details document on how to implement, need to make this easier by having some tooling and conventions, have a simple how to use document.
 ???
@@ -111,7 +107,6 @@ global//&unconfined             21420 pts/3    00:00:00 ps
 A global profile can be used to implement application white listing. Instead of just allowing any file to be run under the global profile. The single exec rule is replaced with a list of files that are allowed to be executed.
 
 ```
-
 profile global {
    include <global>
 
@@ -123,103 +118,20 @@ profile global {
 
 Files that do not have a matching exec rule will not be allowed to be executed even if allowed by ```unconfined``` or by an application profile.
 
-## xattr tagging
+# Hiding System wide restrictions
 
-????? hrmmm this doesn't work with unconfined. At least not without the empty profile trick below
+use namespaces
 
-As a further restriction on what can be run. Known executables can be tagged with an xattr that can be tied to apparmor policy. This can be used to restrict applications from running that are not properly tagged. For example applications downloaded to a users home directory could be restricted from running if they have not been tagged.
+# Realities of System Wide restrictions
 
-```
-profile tagged @{HOME}/**
-        xattrs=(
-           # TODO: RFC on tag format
-           security.tagged=allowed
-        )
-{
-  ...
-}
+reality is in most cases you don't want system wide restrictions applied to all tasks. You want to split it to separate groups.
 
-profile denied @{HOME}/**
-        xattrs=(
-           # TODO: RFC on tag format
-           security.tagged=denied
-        )
-{
-    # no permissions
-}
+admin
 
-profile global /** {
-   ...
+user
 
-   allow ix @{HOME}/** -> user_downloaded//&@{profile_name}
-   ...
-}
-```
 
-Notice there needs to be a special profile that specifies the xattr tag. This profile can be shared between all applications run under the tag or different profiles can be used. Also notice that the exec rule uses ```px``` in this case instead of ```pix``` to force execution to fail if the xattr tag does not match.
-
-### denying execution based on a tag
-
-Unfortunately it is not currently possible to directly deny execution of application based on a tag. It can however be done by using a stub profile.
-
-```
-
-profile global /** {
-   include <global>
-
-   allow px @{HOME}/** -> deny//&@{profile_name}
-   ...
-}
-```
-
-This special deny profile will allow the exec to "succeed" with the deny profile being attached. But as soon as the application begins to execute it will fail and die because it does not have permissions to do anything.
-
-Unfortunately this will manifest as an application segfault so it is best not to use this technique if the application execution can be denied another way.
-
-### xattr tagging with userspace prompting.
-
-It is possible to use xattr tagging in combination with a desktop prompt to allow the user to interactively control whether files downloaded from the internet should be run.
-
-In the previous examples apparmor will just deny the execution if the application is not tagged. To have apparmor prompt the user the profile must be modified by replacing the ```allow``` keyword with the ```prompt``` keyword.
-
-```
-profile global /** {
-   include <global>
-
-   prompt px @{HOME}/** -> user_downloaded//&@{profile_name}
-   ...
-}
-```
-
-This tells apparmor that if the rule fails it should send a prompt notification to userspace. This also requires that the user is running a notification daemon that will do the actual prompting and tag the file if the user decides to allow execution.
-
-### xattr tagging for different trust levels
-
-In apparmor xattr tagging can go beyond just the basic allow/deny decision used in the example above. It can also be used to run applications at different trust levels. Extending the above example instead of out right denying untagged files they can be run in a very restrictive profile.
-
-```
-profile trusted @{HOME}/**
-        xattrs=(
-           # TODO: RFC on tag format
-           security.tagged=allowed
-        )
-{
-  ...
-}
-
-profile untrusted @{HOME}/** {
-  ...
-}
-
-profile global /** {
-   include <global>
-
-   allow px @{HOME}/** -> &@{profile_name}
-   ...
-}
-```
-
-While the trusted and untrusted profiles use the same attachment the xattr specification will make the trusted profile preferred over the untrusted profile if the xattr tag is present. Conversely if the xattr tag is not present the trusted profile will not match so the untrusted profile will be used.
+## IMA integration
 
 ## Application whitelisting for signed binaries
 
@@ -229,55 +141,7 @@ TODO: ????
 
 ## Limitations
 
-This approach to application white listing has the disadvantage that the global policy must be aware of application policy transitions that are different from the system profiles.
-
-Eg. Say we launch evince from firefox, with the following profiles.
-
-```
-profile global {
-   include <global>
-
-   allow pix /bin/bash -> &@{profile_name},
-   allow pix /usr/bin/evince -> &@{profile_name},
-   allow pix /usr/bin/firefox -> &@{profile_name},
-   ...
-}
-
-profile firefox {
-
-   allow cx /usr/bin/evince,
-   ...
-
-   profile evince {
-      ...
-   }
-}
-```
-
-When firefox is run it will be confined by ```firefox//&global```, which is what is expected. However when firefox runs evince the confinement becomes ```firefox//evince//&evince//&global```, which is almost certainly not what is desired. This occurs because the ```firefox``` profile transitions to the child profile ```firefox//evince``` and the ```global``` profile transitions to ```evince//&global```. This results in three distinct profiles that can not be reduced.
-
-To fix this the global profile needs to be split into multiple profiles (in this case 2) that can track application transitions correctly.
-
-```
-profile global {
-   include <global>
-
-   allow ix /bin/bash -> &global,
-   allow px /usr/bin/evince -> &global2,
-   allow px /usr/bin/firefox -> &global2,
-   ...
-}
-
-profile global2 {
-   include <global>
-
-   allow ix /usr/bin/evince,
-   allow ix /usr/bin/firefox,
-   ...
-}
-```
-
-Another solution is to use the [alternative methods to enforce system wide restrictions](AlternativeMethodsforSystemWideRestrictions).
+???
 
 
 # Pain points
