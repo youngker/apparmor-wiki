@@ -54,7 +54,7 @@ This profile is loaded early in boot and applied to every process on the system.
 
 # Early policy
 
-For global confinement to be truly global it has to be loaded very early in boot and init must attach to it. This means that a global confinement policy needs to be built into the initrd/initramfs and the init system must have apparmor support built in.
+For global confinement to be truly system wide it has to be loaded very early in boot and init must attach to it. This means that a global confinement policy needs to be built into the initrd/initramfs and the init system must have apparmor support built in.
 
 ## Late policy load requires an alternate approach.
 
