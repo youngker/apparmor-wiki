@@ -13,6 +13,10 @@ Requirements
 Related Documentation
 =====================
 
+- SystemWideRestrictions
+  -   [Application White Listing](ApplicationWhiteListing)
+  -   [Alternative methods to enforce system wide restrictions](AlternativeMethodsforSystemWideRestrictions)
+
 -   [Stacking profiles in AppArmor](AppArmorStacking)
 -   [AppArmor Policy Namespaces](AppArmorNamespaces)
 -   [Confining Users with Stacking](StackingConfiningUsers)
