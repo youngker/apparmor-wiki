@@ -27,6 +27,9 @@ Related Documentation
 Introduction
 ============
 
+??? This is a details document on how to implement, need to make this easier by having some tooling and conventions, have a simple how to use document.
+???
+
 AppArmor [stacking](AppArmorStacking) and [Policy
 Namespaces](AppArmorNamespaces) provides the ability to apply system
 wide restrictions, while continuing to apply other policy to tasks
@@ -73,39 +76,11 @@ This may be sufficient as init and early boot may not need to be confined by the
 
 # Working with system policy
 
-The basic profile presented above will not allow for regular application policy to be used (the system has a single profile). We can fix this by using setting up a profile stack in init.
-
-## Application policy escape
-??? move else where to discussion about breaking up global policy into sub units with different permissions
-
-To allow application policy to escape the global profile the exec rule is modified to use ```pix```.
-
-```
-profile global {
-   #...
-
-   allow pix /**,
-}
-```
-
-??? once escaped application profile would be responsible for setting up stack again.
-
-This will allow the application policy to be applied without the global policy profile. If Application policy desires to opt back into global confinement it needs to setup the stack again.
-
-Eg.
-```
-   allow px /** -> &global,
-```
-
-Note: if [namespacing is used to hide global policy](???insert link here???) then application policy is not capable of re-establishing the stack.
-
-## Composing with application policy
-
-To allow composition with application policy init sets up a stack with both the global profile and unconfined.
+The basic profile presented above will not allow for regular application policy to be used (the system has a single profile). We can fix this by using setting up a profile stack between the global profile and unconfined in init.
 
 ```global//&unconfined```
 
-The global profile remains unchanged.
+The global profile remains the same as above
 
 ```
 profile global {
@@ -136,24 +111,26 @@ global//&unconfined             21420 pts/3    00:00:00 ps
 A global profile can be used to implement application white listing. Instead of just allowing any file to be run under the global profile. The single exec rule is replaced with a list of files that are allowed to be executed.
 
 ```
-profile global /** {
+
+profile global {
    include <global>
 
-   allow pix /bin/bash -> &@{profile_name},
-   allow pix /bin/ls -> &@{profile_name},
-   allow pix /usr/bin/** -> &@{profile_name},
-   ...
+   allow ix /bin/bash,
+   allow ix /bin/ls,
+   allow ix /usr/bin/**,
 }
 ```
 
-Files that do not have a matching exec rule will not be allowed to be executed.
+Files that do not have a matching exec rule will not be allowed to be executed even if allowed by ```unconfined``` or by an application profile.
 
 ## xattr tagging
+
+????? hrmmm this doesn't work with unconfined. At least not without the empty profile trick below
 
 As a further restriction on what can be run. Known executables can be tagged with an xattr that can be tied to apparmor policy. This can be used to restrict applications from running that are not properly tagged. For example applications downloaded to a users home directory could be restricted from running if they have not been tagged.
 
 ```
-profile user_downloaded
+profile tagged @{HOME}/**
         xattrs=(
            # TODO: RFC on tag format
            security.tagged=allowed
@@ -162,10 +139,19 @@ profile user_downloaded
   ...
 }
 
-profile global /** {
-   include <global>
+profile denied @{HOME}/**
+        xattrs=(
+           # TODO: RFC on tag format
+           security.tagged=denied
+        )
+{
+    # no permissions
+}
 
-   allow px @{HOME}/** -> user_downloaded//&@{profile_name}
+profile global /** {
+   ...
+
+   allow ix @{HOME}/** -> user_downloaded//&@{profile_name}
    ...
 }
 ```
@@ -177,14 +163,6 @@ Notice there needs to be a special profile that specifies the xattr tag. This pr
 Unfortunately it is not currently possible to directly deny execution of application based on a tag. It can however be done by using a stub profile.
 
 ```
-profile deny
-        xattrs=(
-           # TODO: RFC on tag format
-           security.tagged=denied
-        )
-{
-    # no permissions
-}
 
 profile global /** {
    include <global>
@@ -322,6 +300,29 @@ mount can be used to by pass global restrictions so it must be tightly controlle
 # older text follows, needs to be reworked and incorportated
 
 
+## Application policy escape
+??? move else where to discussion about breaking up global policy into sub units with different permissions
+
+To allow application policy to escape the global profile the exec rule is modified to use ```pix```.
+
+```
+profile global {
+   #...
+
+   allow pix /**,
+}
+```
+
+??? once escaped application profile would be responsible for setting up stack again.
+
+This will allow the application policy to be applied without the global policy profile. If Application policy desires to opt back into global confinement it needs to setup the stack again.
+
+Eg.
+```
+   allow px /** -> &global,
+```
+
+Note: if [namespacing is used to hide global policy](???insert link here???) then application policy is not capable of re-establishing the stack.
 Visible system wide restrictions
 ================================
 
