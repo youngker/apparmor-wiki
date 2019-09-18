@@ -14,6 +14,7 @@ Related Documentation
 =====================
 
 - SystemWideRestrictions
+  -   [Recommended Method to enforce system wide restriction](AppArmorSystemWideRestrictions)
   -   [Application White Listing](ApplicationWhiteListing)
   -   [Alternative methods to enforce system wide restrictions](AlternativeMethodsforSystemWideRestrictions)
 
