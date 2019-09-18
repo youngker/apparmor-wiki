@@ -32,8 +32,7 @@ Namespaces](AppArmorNamespaces) provides the ability to apply system
 wide restrictions, while continuing to apply other policy to tasks
 and users.
 
-There are two variants of deploying system wide restrictions dependent
-on whether or how the restriction should be visible.
+There are several possible ways to deploy system wide restrictions each with their own advantages and disadvantages. This document covers the recommend method of implementing system wide restrictions.
 
 # The Basics
 
@@ -57,7 +56,11 @@ This profile is loaded early in boot and applied to every process on the system.
 
 For global confinement to be truly global it has to be loaded very early in boot and init must attach to it. This means that a global confinement policy needs to be built into the initrd/initramfs and the init system must have apparmor support built in.
 
-## A slightly more flexible approach
+## Side note on allowing late start
+
+??? where to move this
+
+Problem is it doesn't setup the stack with unconfined. 
 
 Instead of building support for apparmor into the init system, a profile with an attachment can be used.
 
@@ -73,63 +76,52 @@ This may be sufficient as init and early boot may not need to be confined by the
 
 # Working with system policy
 
-The basic profile presented above will not allow for regular application policy to be used. We can fix this by changing the exec rule.
+The basic profile presented above will not allow for regular application policy to be used (the system has a single profile). We can fix this by using setting up a profile stack in init.
 
 ## Application policy escape
+??? move else where to discussion about breaking up global policy into sub units with different permissions
 
 To allow application policy to escape the global profile the exec rule is modified to use ```pix```.
 
 ```
-profile global /** {
+profile global {
    #...
 
    allow pix /**,
 }
 ```
 
-This will allow the application policy to be applied without the global policy profile. Application policy then needs to use ```px/pix``` exec transition rules, transition children tasks back to the global profile if an application profile is not defined.
+??? once escaped application profile would be responsible for setting up stack again.
+
+This will allow the application policy to be applied without the global policy profile. If Application policy desires to opt back into global confinement it needs to setup the stack again.
+
+Eg.
+```
+   allow px /** -> &global,
+```
+
+Note: if [namespacing is used to hide global policy](???insert link here???) then application policy is not capable of re-establishing the stack.
 
 ## Composing with application policy
 
-Generally when using a global policy it is because there are restrictions you want applied to everything (or almost everything), and allowing application policy to escape the restriction is not desirable. There are two ways to address this.
+To allow composition with application policy init sets up a stack with both the global profile and unconfined.
 
-### composing through an include.
+```global//&unconfined```
 
-The application policy restrictions, without the exec rule, can be placed in an include file. That is included by the global profile as well as all the application profiles.
+The global profile remains unchanged.
 
 ```
-$ cat /etc/apparmor.d/abstractions/global
+profile global {
    allow file,
    allow network,
    # ... everything else to allow by default
+   ix /**,
 
    deny w /etc/passwd,
-```
-
-The global confinement profile then becomes
-```
-profile global /** {
-   include <global>
-
-   allow pix /**,
 }
 ```
 
-The application profiles can be modified to have ```include <global>```, or if modifying every application profile is not desirable the ```abstractions/base``` file is included by almost every profile, so the ```include <global> rule could be added to it.
-
-### dynamic composition
-
-Recent apparmor versions provide an alternate method to achieve profile composition through profile [stacking](AppArmorStacking). To use stacking the global policy exec rule is modified.
-
-```
-profile global /** {
-   include <global>
-
-   allow pix /** -> &@{profile_name},
-}
-```
-
-This rule will allow application policy to be used at the same time as the ```global``` profile is being applied and when there isn't an application profile only the global profile will be applied.
+The unconfined profile will take care of transitions to application profiles that are defined.
 
 When introspecting a tasks confinement, this will look like
 
@@ -138,12 +130,9 @@ $ ps -Z
 LABEL                             PID TTY          TIME CMD
 firefox//&global                 9724 pts/3    00:03:17 firefox
 evince//&global                 11898 pts/3    00:01:44 evince
-global                          17167 pts/3    00:00:02 bash
-global                          21420 pts/3    00:00:00 ps
+global//&unconfined             17167 pts/3    00:00:02 bash
+global//&unconfined             21420 pts/3    00:00:00 ps
 ```
-
-When tasks confined by a stack of profiles execute an application without an application profile, the stack will collapse back into the application being confined by just the global profile.
-
 
 # Application white listing
 
