@@ -56,13 +56,9 @@ This profile is loaded early in boot and applied to every process on the system.
 
 For global confinement to be truly global it has to be loaded very early in boot and init must attach to it. This means that a global confinement policy needs to be built into the initrd/initramfs and the init system must have apparmor support built in.
 
-## Side note on allowing late start
+## Late policy load requires an alternate approach.
 
-??? where to move this
-
-Problem is it doesn't setup the stack with unconfined. 
-
-Instead of building support for apparmor into the init system, a profile with an attachment can be used.
+It is possible to provide a mostly system wide policy by specifying an attachment.
 
 ```
 profile global /** {
@@ -70,9 +66,10 @@ profile global /** {
 }
 ```
 
-This profile will attach to every application executed after the profile is loaded. If the profile is loaded before exec re-execs itself it will attach to the new init. However if loaded later or after init this profile will not be applied to tasks that are already running.
+This profile will attach to every application executed after the profile is loaded. If the profile is loaded before init re-execs itself it will attach to the new init. However if loaded later or after init this profile will not be applied to tasks that are already running.
 
-This may be sufficient as init and early boot may not need to be confined by the global policy.
+This may be sufficient as init and early boot may not need to be confined by the global policy. This approach is also incompatible with the recommended method of applying system wide restrictions, and requires profile transitions to be accounted for in the global profile. For more information on this method please see [alternative methods to enforce system wide restrictions](AlternativeMethodsforSystemWideRestrictions).
+
 
 # Working with system policy
 
