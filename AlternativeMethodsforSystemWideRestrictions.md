@@ -13,15 +13,13 @@ Requirements
 Related Documentation
 =====================
 
-- SystemWideRestrictions
-  -   [Recommended Method to enforce system wide restriction](AppArmorSystemWideRestrictions)
-  -   [Application White Listing](ApplicationWhiteListing)
-  -   Alternative methods to enforce system wide restrictions (This Document)
-
 -   [Stacking profiles in AppArmor](AppArmorStacking)
 -   [AppArmor Policy Namespaces](AppArmorNamespaces)
 -   [Confining Users with Stacking](StackingConfiningUsers)
--   [Applying system wide restrictions in AppArmor](AppArmorSystemWideRestrictions)
+-   Applying system wide restrictions in AppArmor
+    -   [Recommended Method to enforce system wide restriction](AppArmorSystemWideRestrictions)
+    -   [Application White Listing](ApplicationWhiteListing)
+    -   Alternative methods to enforce system wide restrictions (This Document)
 -   [User defined policy in AppArmor](AppArmorUserDefinedPolicy)
 -   [Programatic application policy in AppArmor](AppArmorProgramaticApplicationPolicy)
 -   [Putting it all together](AppArmorStackingAndNSFullPolicy)
