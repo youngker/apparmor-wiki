@@ -16,7 +16,7 @@ Related Documentation
 - SystemWideRestrictions
   -   [Recommended Method to enforce system wide restriction](AppArmorSystemWideRestrictions)
   -   [Application White Listing](ApplicationWhiteListing)
-  -   [Alternative methods to enforce system wide restrictions](AlternativeMethodsforSystemWideRestrictions)
+  -   Alternative methods to enforce system wide restrictions (This Document)
 
 -   [Stacking profiles in AppArmor](AppArmorStacking)
 -   [AppArmor Policy Namespaces](AppArmorNamespaces)
@@ -265,7 +265,9 @@ AppArmor can intigrate with the IMA/EVM subsystem to provide policy restrictions
 
 TODO: ????
 
-## Limitations
+# Limitations
+
+## application white list needs to be aware of special application transitions
 
 This approach to application white listing has the disadvantage that the global policy must be aware of application policy transitions that are different from the system profiles.
 
@@ -315,7 +317,14 @@ profile global2 {
 }
 ```
 
-Another solution is to use the [alternative methods to enforce system wide restrictions](AlternativeMethodsforSystemWideRestrictions).
+Another solution is to use the [recommended method to enforce system wide restrictions](AppArmorSystemWideRestrictions).
+
+## Application Whitelist/Global policy can not be hidden by namespacing
+
+Because the global policy profile is used to setup the transitions to application policy it is
+
+hrmm actually you can use namespaces to hide it, its just different/harder
+
 
 
 # Pain points
