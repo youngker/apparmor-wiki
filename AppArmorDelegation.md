@@ -182,10 +182,30 @@ If multiple permission rule sets are delegated the delegation have
 each component in arbitrary order
 
 ```
- bob//+policy//+father
+  bob//+policy//+father
 ```
 
 The order of the Delegation is unimportant, the [identity](AppArmorDelegation#Identity) of the task is all of the profiles in the label. 
+
+
+#### task labels with delegated objects
+
+When delegation to a task is limited to objects
+
+```
+profile example {
+
+  px /** -> bob + {
+     open rw /dev/pts/*,
+  }
+}
+
+then the task label is NOT extended by the rule set name instead a trailing ```//*``` is added.
+
+```
+  bob//*
+```
+
 
 
 conjunctive normal form
