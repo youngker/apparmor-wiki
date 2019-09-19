@@ -144,7 +144,8 @@ as well as for bug targeting. To create a new milestone:
     -   Update current release information on the [main page](Main_Page#Userspace)
         -   if major release or point release for the most recent major release, update **Current stable release**
         -   if point release for an older release series, update **Prior supported release**
-1. Mirror to kernel.org (require kernel.org account)
+    - update [Kernel](Kernel_Feature_Matrix) and [Userspace](Userspace_Feature_Matrix) feature matrixes
+14. Mirror to kernel.org (require kernel.org account)
     -   Mirror release tarball
         -   If major release create a release directory in **/pub/linux/security/apparmor/**.
             -   minor releases use the major release directory, but have the point release as part of their name
