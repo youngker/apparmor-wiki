@@ -168,7 +168,7 @@ profile two {
 
 ```
 
-### Delegation task labels
+### Task labels under delegation
 
 In AppArmor delegation is exposed to the label by appending the
 Delegate information to the profile name (label) with character
@@ -293,6 +293,10 @@ Does the whole delegation get dropped or do we do intersections.
 
 
 ### Delegation of exec rules
+
+- if delegated rule set has a matching exec rule it causes the profile to transition (the delegator allowed this), it does not replace the delegator though.
+- if the delegated rule set does not have a matching exec rule. The delegator is checked to see if the rule set can be delegated to the new target. What is the new target? when the label existing of multiple profiles.
+- if no delegation allowed the rule set dropped.
 
   exec rule will cause delegated blob to transition. It says this is inheritable to X
 
