@@ -146,8 +146,50 @@ profile example {
 }
 ```
 
+### Sharing rules sets
+
+Rule sets can be shared between multiple profiles
+
+```
+label shared {
+      rw @{HOME}/**,
+      r  /tmp/**,
+  }
+
+profile one {
+  px /usr/bin/child + foo,
+
+}
+
+profile two {
+  px /usr/bin/bash + foo,
+
+}
+
+```
+
+### Delegation task labels
+
+Delegation extends the task label.
+
+```
+bob//+police
+```
+
+
+
+
+conjunctive normal form
+
+(bob//&jane)//+police => bob//+police//&jane//+police
+
+
+
+
+
 ### Delegation to tasks that are not directly executed is possible
 
+??? Move to later, lets just deal with direct case first ???
 Explicit delegation to a task that is not a directly executed child is possible. This form of delegation is not automatically applied when a task is executed but has to be explicitly requested by the task either via the apparmor delegation api or by using fd passing.
 
 This form of delegation is controlled in policy through the ```delegate``` rule.
@@ -206,28 +248,6 @@ Also need way to allow to delegate to any child.
 Does the whole delegation get dropped or do we do intersections.
 
 
-### Delegation of external names that can be shared by multiple profiles
-
-```
-label foo {
-      rw @{HOME}/**,
-      r  /tmp/**,
-  }
-
-profile example {
-  px /usr/bin/child + foo,
-
-}
-```
-
-
-### Delegation task labels
-
-bob//+police
-
-conjunctive normal form
-
-(bob//&jane)//+police => bob//+police//&jane//+police
 
 ### Delegation of exec rules
 
