@@ -32,7 +32,7 @@ The following table identifies which version of AppArmor different types of dele
 # Introduction
 AppArmor 4 extends AppArmor to be a hybrid of [Domain Type Enforcement (DTE)](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.1501) and a [capability system](https://en.wikipedia.org/wiki/Capability-based_security). This is achieved by allowing a profile or task to delegate some of its [authority](AppArmorDelegation#authority) to other applications, allowing them to perform operations or access data that they could not normally do or access under their confinement.
 
-Delegation of Authority helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola). Which means policy can be tighter and then expanded to allow access to data as needed. Delegation can also help avoiding problems like the [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem)
+Delegation of [Authority](AppArmorDelegation#authority) helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola). Which means policy can be tighter and then expanded to allow access to data as needed. Delegation can also help avoiding problems like the [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem)
 
 
 # Delegation in AppArmor
@@ -42,7 +42,7 @@ In AppArmor delegation is always temporary and dynamic as it based on passing [a
 
 ## A real world example
 
-sheriff deputizes bob
+The sheriff deputizes bob giving him the authority to enforce the law while he remains a deputy.
 
 
 ## Basics
@@ -170,13 +170,22 @@ profile two {
 
 ### Delegation task labels
 
-Delegation extends the task label.
+In AppArmor delegation is exposed to the label by appending the
+Delegate information to the profile name (label) with character
+sequence *//+*.
 
 ```
 bob//+police
 ```
 
+If multiple permission rule sets are delegated the delegation have
+each component in arbitrary order
 
+```
+ bob//+policy//+father
+```
+
+The order of the Delegation is unimportant, the [identity](AppArmorDelegation#Identity) of the task is all of the profiles in the label. 
 
 
 conjunctive normal form
@@ -220,6 +229,20 @@ profile example {
 ```
 
 The set of rules defined by the delegation api are not what is delegated but what could be delegated. The task doing the delegation is free delegate less permissions. The set of delegateable rules is used to dynamically restrict what a task may request via the delegation api.
+
+
+
+
+Names and authority
+-------------------
+
+Authority combinations can be grouped together into a common name.
+
+```
+ label police = A//+B//+C
+```
+
+
 
 #### fd delegation
 
@@ -356,40 +379,6 @@ Inheritance of delegation is not based only based on a tasks parent child hierac
 Without inheritance rules the delegated objects and rules can not cross a profile boundary.
 
 
-How Delegation is Expressed
-===========================
-
-In AppArmor delegation is exposed to the label by appending the
-Delegate information to the profile name (label) with character
-sequence *//+*. If the permission rule set R1 is delegated to a task
-confined by profile A, its confinement label will be expressed as:
-
-```
- A//+R1
-```
-
-If multiple permission rule sets are delegated the delegation have
-each component in arbitrary order
-
-```
- A//+R1//+R2
-```
-
-The order of the Delegation is important in that the profile name
-(identity) will always be first with the Delegate information following
-in an implementation determined order.
-
-While the delegation syntax will seldom be used in policy it will
-show up during task introspection and in audit logs.
-
-Names and authority
--------------------
-
-Authority combinations can be grouped together into a common name.
-
-```
- label police = A//+B//+C
-```
 
 Delegation applies to tasks
 ===========================
