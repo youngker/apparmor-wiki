@@ -71,7 +71,7 @@ The application profiles can be modified to have ```include <global>```, or if m
 # global profile and stacking alternative method
 
 - advantages: works without the need to have init setup the profile stack
-- disadvantages: has limitation quirks around profile transitions
+- disadvantages: requires two global profiles
 
 ## The Basics
 
@@ -171,6 +171,76 @@ profile global /** {
 ```
 
 Files that do not have a matching exec rule will not be allowed to be executed.
+
+## Two global profiles are necessary
+
+Unfortunately there is an issue with application white listing as currently presented.
+
+Eg. Say we launch evince from firefox, with the following profiles.
+
+```
+profile global {
+   include <global>
+
+   allow pix /bin/bash -> &@{profile_name},
+   allow pix /usr/bin/evince -> &@{profile_name},
+   allow pix /usr/bin/firefox -> &@{profile_name},
+   ...
+}
+
+profile firefox {
+
+   allow cx /usr/bin/evince,
+   ...
+
+   profile evince {
+      ...
+   }
+}
+```
+
+When firefox is run it will be confined by
+
+  ```firefox//&global```
+
+which is what is expected. However when firefox runs evince the confinement becomes
+
+  ```firefox//evince//&evince//&global```
+
+which is almost certainly not what is desired. This occurs because the new label is created by combining the transitions done by each profile
+
+-  ```firefox``` transitions to ```firefox//evince```
+-  ```global```  transitions to ```evince//&global```
+
+Results in three distinct profile combination of ```firefox//evince//&evince//&global```
+
+
+To fix this the global profile needs to be split into an init global profile and a global profile for the rest of the system.
+
+```
+profile init /** {
+   include <global>
+
+   allow px /bin/bash -> &global,
+   allow px /usr/bin/evince -> &global,
+   allow px /usr/bin/firefox -> &global,
+   ...
+}
+
+profile global {
+   include <global>
+
+   allow ix /usr/bin/evince,
+   allow ix /usr/bin/firefox,
+   ...
+}
+```
+
+Init profile has an attachment it will attach to execs from any unconfined process, init or any of its children started before the apparmor profile was loaded.
+
+unconfined is not an escape
+
+
 
 ### xattr tagging
 
@@ -275,55 +345,7 @@ TODO: ????
 
 # Limitations
 
-## application white list needs to be aware of special application transitions
 
-This approach to application white listing has the disadvantage that the global policy must be aware of application policy transitions that are different from the system profiles.
-
-Eg. Say we launch evince from firefox, with the following profiles.
-
-```
-profile global {
-   include <global>
-
-   allow pix /bin/bash -> &@{profile_name},
-   allow pix /usr/bin/evince -> &@{profile_name},
-   allow pix /usr/bin/firefox -> &@{profile_name},
-   ...
-}
-
-profile firefox {
-
-   allow cx /usr/bin/evince,
-   ...
-
-   profile evince {
-      ...
-   }
-}
-```
-
-When firefox is run it will be confined by ```firefox//&global```, which is what is expected. However when firefox runs evince the confinement becomes ```firefox//evince//&evince//&global```, which is almost certainly not what is desired. This occurs because the ```firefox``` profile transitions to the child profile ```firefox//evince``` and the ```global``` profile transitions to ```evince//&global```. This results in three distinct profiles that can not be reduced.
-
-To fix this the global profile needs to be split into multiple profiles (in this case 2) that can track application transitions correctly.
-
-```
-profile global {
-   include <global>
-
-   allow ix /bin/bash -> &global,
-   allow px /usr/bin/evince -> &global2,
-   allow px /usr/bin/firefox -> &global2,
-   ...
-}
-
-profile global2 {
-   include <global>
-
-   allow ix /usr/bin/evince,
-   allow ix /usr/bin/firefox,
-   ...
-}
-```
 
 Another solution is to use the [recommended method to enforce system wide restrictions](AppArmorSystemWideRestrictions).
 
