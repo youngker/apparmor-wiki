@@ -63,7 +63,7 @@ profile example {
 
 When executed the child task will be confined by the profile for /usr/bin/child but extended by the additional rules.
 
-### The profile can not delegate permissions it doesn't have
+### The profile can not accidentally delegate permissions it doesn't have
 
 The above example the ```rw @{HOME}/**,``` rule appears twice, once in the profile and once in the block of rules being delegated. This is because the profile can not delegate permissions that it does not have.
 
@@ -78,7 +78,22 @@ profile example {
 }
 ```
 
-Since the example profile does not have access to ```/etc/passwd``` it can not be delegated. The compile will fail with an error message.
+Since the example profile does not have access to ```/etc/passwd``` it can not be delegated. The compile will fail with an error message. In the case of run time application directed ?link? delegation the delegated rule set will be dynamically bounded by the profile ensuring that this restriction is enforced.
+
+It is possible to delegate authority that the profile does not have. This is akin to specifying a transition to a profile that has more permissions. To do this a tag is added to the delegation.
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  px /usr/bin/child +(extra) {
+      rw @{HOME}/**,
+      rw /etc/passwd,
+  }
+}
+```
+
+??? better tag than (extra)
 
 ### Delegation can be restricted to open files
 
