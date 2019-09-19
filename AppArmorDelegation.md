@@ -343,6 +343,10 @@ how is composition different from delegation
 - doesn't dynamically track where the permission came from (delegation label is null)
 - segments just drop based on exec, no check to see if it can be inherited?
 
+file inheritance
+- check if original delegator allows passing to target
+- if not revalidate
+
 
 What happens delegation of a block comes from 2 areas (say inheritance + explicit delegation), asingle reference to the block is kept and the delegation label contains both sources. If inheriting/passing both sources are consulted if one doesn't allow it is dropped. Delegation block is only dropped when all its sources are dropped.
 
