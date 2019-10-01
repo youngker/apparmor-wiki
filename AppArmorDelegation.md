@@ -45,9 +45,13 @@ In AppArmor delegation is always temporary and dynamic as it based on passing [a
 The sheriff deputizes bob giving him the authority to enforce the law while he remains a deputy.
 
 
-## Basics
+# Policy directed delegation
 
-Delegation is expressed as extending a task's profile with additional additional rules.  To delegate some rules to a child task the exec rule can be extended with additional rules that extend the target profile.
+### The Basics
+
+Policy directed delegation is done on behalf of the task without any task initiated action and is expressed as extending a task's profile with additional rules. In effect it is defining a new custom extended profile except that ipc rules to the extend profile label will continue to work and there is the possibility of partial dynamic replacement.
+
+To delegate some rules to a child task the exec rule can be extended with additional rules that extend the target profile.
 
 ```
 profile example {
@@ -63,9 +67,9 @@ profile example {
 
 When executed the child task will be confined by the profile for /usr/bin/child but extended by the additional rules.
 
-### The profile can not accidentally delegate permissions it doesn't have
+### The task can not delegate permissions it doesn't have
 
-The above example the ```rw @{HOME}/**,``` rule appears twice, once in the profile and once in the block of rules being delegated. This is because the profile can not delegate permissions that it does not have.
+The above example the ```rw @{HOME}/**,``` rule appears twice, once in the profile and once in the block of rules being delegated. This is because the task (and hence the profile) can not delegate permissions that it does not have.
 
 ```
 profile example {
@@ -80,20 +84,22 @@ profile example {
 
 Since the example profile does not have access to ```/etc/passwd``` it can not be delegated. The compile will fail with an error message. In the case of run time application directed ?link? delegation the delegated rule set will be dynamically bounded by the profile ensuring that this restriction is enforced.
 
-It is possible to delegate authority that the profile does not have. This is akin to specifying a transition to a profile that has more permissions. To do this a tag is added to the delegation.
+#### Policy directed delegation exception
+
+With policy directed delegation it is possible to delegate authority that the profile does not have. This is akin to specifying a transition to a profile that has more permissions. To do this a tag is added to the delegation.
 
 ```
 profile example {
   rw @{HOME}/**,
 
-  px /usr/bin/child +(extra) {
+  px /usr/bin/child +(override???) {
       rw @{HOME}/**,
       rw /etc/passwd,
   }
 }
 ```
 
-??? better tag than (extra)
+??? better tag than (override???)
 
 ### Delegation can be restricted to open files
 
@@ -183,7 +189,63 @@ profile two {
 
 ```
 
-### Task labels under delegation
+
+# Application directed delegation
+
+Applications can take action to delegate some or all of their authority.
+
+
+## Application directed delegation has to be allowed by the profile
+
+```
+profile example {
+  allow delegation,
+}
+```
+
+```
+profile example {
+  allow delegation -> foo,
+  allow delegation -> bar,
+}
+```
+
+```
+profile example {
+  allow delegation -> (foo bar),
+```
+
+??? children vs. profile
+
+## A task can not delegate permissions it doesn't have
+
+The application can only delegate permissions granted in the profile.
+
+
+way to express more limited permissions? Bounded by the profile, no way to extend beyond profile permsissions
+
+```
+profile example {
+  allow delegation -> foo + {
+      rw /**,
+  },
+  allow delegation -> bar,
+}
+```
+
+
+## Task delegated authority is expressed as a special profile
+
+When a task delegates rules it is expressed as a special profile name
+
+example//+taskpid???
+
+
+##
+
+
+
+# Task labels under delegation
 
 In AppArmor delegation is exposed to the label by appending the
 Delegate information to the profile name (label) with character
@@ -203,7 +265,7 @@ bob//+policy//+father
 The order of the Delegation is unimportant, the [identity](AppArmorDelegation#Identity) of the task is all of the profiles in the label. 
 
 
-#### task labels with delegated objects
+## task labels with delegated objects
 
 When delegation to a task is limited to objects
 
