@@ -23,7 +23,7 @@ sand box
 The following table identifies which version of AppArmor different types of delegation are available in.
 
 
-| ** Delegation** | [Policy directed](AppArmorDelegation#Policydirecteddelegation) | [Application directed](AppArmorDelegation#Applicationdirecteddelegation) |
+| ** Delegation** | [Policy directed](AppArmorDelegation#policy-directed-delegation) | [Application directed](AppArmorDelegation#application-directed-delegation) |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
 | rule based   |        ?        |          ?           |
