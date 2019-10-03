@@ -23,7 +23,7 @@ sand box
 The following table identifies which version of AppArmor different types of delegation are available in.
 
 
-| ** Delegation** | Policy Directed | Application Directed |
+| ** Delegation** | [Policy directed](AppArmorDelegation#Policydirecteddelegation) | [Application directed](AppArmorDelegation#Applicationdirecteddelegation) |
 |--------------|-----------------|----------------------|
 | object based |        ?        |          ?           |
 | rule based   |        ?        |          ?           |
@@ -34,16 +34,33 @@ AppArmor 4 extends AppArmor to be a hybrid of [Domain Type Enforcement (DTE)](ht
 
 Delegation of [Authority](AppArmorDelegation#authority) helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola). Which means policy can be tighter and then expanded to allow access to data as needed. Delegation can also help avoiding problems like the [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem)
 
+## A real world example
+
+The sheriff deputizes Bob (a father) giving him the authority to enforce the law while he is a deputy. Bob now has both the authority of being a parent to his children and the authority of a deputy, and Bob can has the [identity](AppArmorDelegation#Identity) of Bob, Father and Deputy.
 
 # Delegation in AppArmor
 
-In AppArmor delegation is always temporary and dynamic as it based on passing [authority](AppArmorDelegation#authority) to a task. The delegated authority is not given to other tasks in the system even if those tasks are confined by the same profile. The delegated authority might be [inherited](AppArmorDelegation#inheritance) by a tasks children, or [redelegated](AppArmorDelegation#redelegation) if allowed by policy.
+In AppArmor the [authority](AppArmorDelegation#authority) is the rules in the profile, and the [identity](AppArmorDelegation#Identity) is the profile name. Delegation is always temporary and dynamic as it based on passing [authority](AppArmorDelegation#authority) to a task. The delegated authority is not given to other tasks in the system even if those tasks are confined by the same profile. The delegated authority might be [inherited](AppArmorDelegation#inheritance) by a tasks children, or [redelegated](AppArmorDelegation#redelegation) if allowed by policy.
 
+As noted in the [availability of delegation](AppArmorDelegation#AvailabilityofDelegation) there are multiple ways in which delegation can be used and expressed. [Application directed](AppArmorDelegation#Applicationdirecteddelegation) delegation is when a task takes a deliberate action to delegate to another task (usually a child). [Policy directed](AppArmorDelegation#Policydirecteddelegation) delegation is used when the policy causes delegation to occur without an explicit action from the task. Both of these types of delegations can be further split into whether rules are being delegated or just access to a specific object (file descriptor).
 
-## A real world example
+## Task labels under delegation
 
-The sheriff deputizes bob giving him the authority to enforce the law while he remains a deputy.
+Because delegation is task based a tasks label will be composed of the different [identities](AppArmorDelegation#Identity). This is done by appending the delegated information to the profile name with the character sequence *//+*. separating the components.
 
+For the above example the task label might be
+
+```
+Bob//+deputy
+```
+
+and if the authority of ```father``` is split into its own [identity](AppArmorDelegation#Identity) separate from Bob we would have
+
+```
+Bob//+deputy//+father
+```
+
+The order of the Delegation is unimportant, the [identity](AppArmorDelegation#Identity) of the task is all of the profiles in the label.
 
 # Policy directed delegation
 
@@ -192,7 +209,15 @@ profile two {
 
 # Application directed delegation
 
-Applications can take action to delegate some or all of their authority.
+Applications can take action to delegate some or all of their authority to another application. This is done by the application taking an explicit action to either delegate an open file descriptor or to delegate profile rules. Applications can perform delegation via
+
+- unix domain socket fd passing
+- apparmor api for fd delegation
+- apparmor api for rule delegation
+
+It is important to note that the default of task's inheriting open files is not an explicit action and does cause delegation of authority. If this behavior is desired it can be achieved through policy directed delegation.
+
+In addition
 
 
 ## Application directed delegation has to be allowed by the profile
@@ -245,24 +270,6 @@ example//+taskpid???
 
 
 
-# Task labels under delegation
-
-In AppArmor delegation is exposed to the label by appending the
-Delegate information to the profile name (label) with character
-sequence *//+*.
-
-```
-bob//+police
-```
-
-If multiple permission rule sets are delegated the delegation have
-each component in arbitrary order
-
-```
-bob//+policy//+father
-```
-
-The order of the Delegation is unimportant, the [identity](AppArmorDelegation#Identity) of the task is all of the profiles in the label. 
 
 
 ## task labels with delegated objects
