@@ -8,6 +8,15 @@ If there are reasons to move the time or date we will, and
 announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
+# Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Jan 14, 2019
+- policy
+  - {/usr,}/etc conversion
+  - split out of apparmor userspace release. Into profile repo? Something else
+  - policy releases
+- 2.14
+- stable releases
+- translation handling (Launchpad, Weblate, ???)
+- anything else
 
 # [Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Oct 8, 2019](IRC_meeting_2019-10-08)
 - policy
