@@ -1,3 +1,4 @@
+
 # Warning this document and feature are a WIP
 
 Required Versions
@@ -44,29 +45,169 @@ In AppArmor the [authority](AppArmorDelegation#authority) is the rules in the pr
 
 As noted in the [availability of delegation](AppArmorDelegation#availability-of-delegation) there are multiple ways in which delegation can be used and expressed. [Application directed](AppArmorDelegation#application-directed-delegation) delegation is when a task takes a deliberate action to delegate to another task (usually a child). [Policy directed](AppArmorDelegation#policy-directed-delegation) delegation is used when the policy causes delegation to occur without an explicit action from the task. Both of these types of delegations can be further split into whether rules are being delegated or just access to a specific object (file descriptor).
 
-## Task labels under delegation
 
-Because delegation is task based a tasks label will be composed of the different [identities](AppArmorDelegation#identity). This is done by appending the delegated information to the profile name with the character sequence *//+*. separating the components.
+# Application directed delegation
 
-For the above example the task label might be
+Applications can take action to delegate some or all of their authority to another application, if allowed by the confining profile. This is done by the application taking an explicit action to either delegate an open file descriptor or to delegate profile rules. This mean the application must have code that will direct apparmor on what should be delegated.
+
+To delegate objects an application uses
+- unix domain socket fd passing, to pass fd objects to an existing task+
+- apparmor api for object delegation, to control inheritance of open fds*
+
+To delegate rule the application uses
+- apparmor api for rule delegation
+
+In addition to the application having to take explicit action to delegate authority (rule or object) the applications confinement must also allow the delegation.
+
++ the use of standard unix fd passing over sockets means many applications support object delegation without needing to be moified explicitly to support apparmor.
+\* It is important to note that the default of task's inheriting open files is not an explicit action and does cause delegation of authority. If this behavior is desired it can be achieved through [policy directed delegation](AppArmorDelegation#application-directed-delegation).
+
+
+### Application directed delegation has to be allowed by the profile
+
+For an application to perform delegation the profile must contain a rule allowing delegation.
 
 ```
-Bob//+deputy
+profile example {
+  # allow delegating to any profile
+  allow delegation,
+}
 ```
 
-and if the authority of ```father``` is split into its own [identity](AppArmorDelegation#identity) separate from Bob we would have
+Delegation can be restricted to specific profiles by specifying the profile name as a target.
 
 ```
-Bob//+deputy//+father
+profile example {
+  allow delegation -> foo,
+  allow delegation -> bar,
+}
 ```
 
-The order of the Delegation is unimportant, the [identity](AppArmorDelegation#identity) of the task is all of the profiles in the label.
+Like capability names profile names can be collapsed into a list.
+
+```
+profile example {
+  allow delegation -> (foo bar),
+```
+
+Pattern matching can be used in the target profile name to allow multiple profiles with a single name.
+
+```
+profile example {
+  allow delegation -> foo*,
+```
+
+This can be particularly useful when combined with namespaces to allow all profiles in a given namespace.
+
+```
+profile example {
+  allow delegation -> :ns:**,
+```
+
+### Delegation can have additional restrictions
+Delegation can have additional restrictions and qualifiers. In particular delegation can be restricted to children tasks.
+
+```
+profile example {
+  # allow delegating to any child, no matter its profile
+  allow child delegation,
+}
+```
+
+and these restriction can be combined with the profile restriction
+
+```
+profile example {
+  allow child delegation -> foo,
+}
+```
+
+### A task can not delegate permissions it doesn't have
+
+In addition to delegation being limited by the delegation rule, the application can only delegate permissions granted in the profile.
+
+The profile
+
+```
+profile example {
+  allow delegation -> foo,
+  allow delegation -> bar,
+}
+```
+
+does not actually allow delegating anything as it does not have any rules that grant permission.
+
+The profile
+
+```
+profile example {
+  allow delegation -> foo,
+  allow delegation -> bar,
+
+  rw @{HOME}/**,
+}
+```
+
+would be limited to delegating read write access to files in @{HOME}.
+
+### The set of rules that can be delegated can be limited in policy
+
+By default the task can delegate any permission granted by its profile, but the set of what can be delegated to a profile can be further controlled to a limited subset of the profiles permissions.
+
+```
+profile example {
+  allow delegation -> foo <= {
+      rw /**,
+  },
+  allow delegation -> bar,
+}
+```
+
+It is important to note that if the set of rules limiting the delegation contains permissions not granted by the profile those permissions will be dropped. The rule block is only for reducing the possible set of permissions delegated it is not possible for the task to delegate permissions the profile does not have.
+
+#### Rule sets can be named
+
+Rule sets can be given a name, by making them a profile, which can then be used in place of the block of rules.
+
+```
+profile bar {
+  rw /**,
+}
+
+profile example {
+  allow delegation -> foo <= bar,
+}
+```
+
+### Delegation can be restricted to open objects
+
+The profile can limit the delegation to already open files using the ```open``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  allow delegation -> /usr/bin/child <= {
+      open rw @{HOME}/**,
+  }
+}
+```
+
+Rules that do not have the ```open``` only restriction restriction will also allow for object delegation, but the open restriction does not allow rules to be delegated.
+
+
+### What happens when object delegation fails
+
+If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won't be done under delegated authority. Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
+
 
 # Policy directed delegation
 
-### The Basics
+Policy directed delegation is done on behalf of the task at exec time without any additional task initiated action and is expressed as extending a task's profile with additional rules. In effect it is defining a new custom extended profile except that ipc rules to the profile label will continue to work and there is the possibility of partial dynamic replacement.
 
-Policy directed delegation is done on behalf of the task without any task initiated action and is expressed as extending a task's profile with additional rules. In effect it is defining a new custom extended profile except that ipc rules to the extend profile label will continue to work and there is the possibility of partial dynamic replacement.
+It is important to note that policy directed delegation is done at exec time and hence is always limited to children tasks.
+
+### Policy directed delegation is always done through profile rules.
 
 To delegate some rules to a child task the exec rule can be extended with additional rules that extend the target profile.
 
@@ -151,10 +292,12 @@ In this example @{HOME}/Downloads/* is more specific so the rule is delegated in
 
 ### Rule sets can be named to avoid having to retype rules.
 
+Like with application directed delegation the rule sets can be named by making them non-attaching profiles.
+
 ```
 profile example {
 
-   label foo {
+   profile foo {
       rw @{HOME}/**,
       r  /tmp/**,
   }
@@ -168,12 +311,12 @@ profile example {
 ```
 profile example {
 
-   label foo {
+   profile foo {
       rw @{HOME}/**,
       r  /tmp/**,
   }
 
-  label bar {
+  profile bar {
       r /etc/passwd,
       rw @{HOME/.config/**,
   }
@@ -189,7 +332,7 @@ profile example {
 Rule sets can be shared between multiple profiles
 
 ```
-label shared {
+profile shared {
       rw @{HOME}/**,
       r  /tmp/**,
   }
@@ -206,164 +349,39 @@ profile two {
 
 ```
 
+# task labels under delegation
 
-# Application directed delegation
+Delegation affects the task label, but it is different based on whether rules or objects are being delegated.
 
-Applications can take action to delegate some or all of their authority to another application, if allowed by the confining profile. This is done by the application taking an explicit action to either delegate an open file descriptor or to delegate profile rules. This mean the application must have code that will direct apparmor on what should be delegated.
+## Task labels under Rule delegation
 
-To delegate objects an application uses
-- unix domain socket fd passing, to pass fd objects to an existing task+
-- apparmor api for object delegation, to control inheritance of open fds*
+Because delegation is task based a tasks label will be composed of the different [identities](AppArmorDelegation#identity). This is done by appending the delegated information to the profile name with the character sequence *//+*. separating the components.
 
-To delegate rule the application uses
-- apparmor api for rule delegation
-
-In addition to the application having to take explicit action to delegate authority (rule or object) the applications confinement must also allow the delegation.
-
-+ the use of standard unix fd passing over sockets means many applications support object delegation without needing to be moified explicitly to support apparmor.
-\* It is important to note that the default of task's inheriting open files is not an explicit action and does cause delegation of authority. If this behavior is desired it can be achieved through [policy directed delegation](AppArmorDelegation#application-directed-delegation).
-
-
-## Application directed delegation has to be allowed by the profile
-
-For an application to perform delegation the profile must contain a rule allowing delegation.
+For the introductory real world example, the task label in apparmor might be expressed as
 
 ```
-profile example {
-  allow delegation,
-}
+Bob//+deputy
 ```
 
-Delegation can be restricted to specific profiles by specifying the profile name as a target.
+and if the authority of ```father``` is split into its own [identity](AppArmorDelegation#identity) separate from Bob we would have
 
 ```
-profile example {
-  allow delegation -> foo,
-  allow delegation -> bar,
-}
+Bob//+deputy//+father
 ```
 
-Like capability names profile names can be collapsed into a list.
-
-```
-profile example {
-  allow delegation -> (foo bar),
-```
-
-Pattern matching can be used in the target profile name to allow multiple profiles with a single name.
-
-```
-profile example {
-  allow delegation -> foo*,
-```
-
-This can be particularly useful when combined with namespaces to allow all profiles in a given namespace.
-
-```
-profile example {
-  allow delegation -> :ns:**,
-```
+The order of the Delegation is unimportant, the [identity](AppArmorDelegation#identity) of the task is all of the profiles in the label.
 
 
-## A task can not delegate permissions it doesn't have
 
-In addition to delegation being limited by the delegation rule, the application can only delegate permissions granted in the profile.
+### Task labels under Object delegation
 
-The profile
-
-```
-profile example {
-  allow delegation -> foo,
-  allow delegation -> bar,
-}
-```
-
-does not actually allow delegating anything as it does not have any rules that grant permission.
-
-The profile
-
-```
-profile example {
-  allow delegation -> foo,
-  allow delegation -> bar,
-
-  rw @{HOME}/**,
-}
-```
-
-would be limited to delegating read write access to files in @{HOME}.
-
-## The set of rules that can be delegated can be limited in policy
-
-By default the task can delegate any permission granted by its profile, but the set of what can be delegated to a profile can be further controlled to a limited subset of the profiles permissions.
-
-```
-profile example {
-  allow delegation -> foo <= {
-      rw /**,
-  },
-  allow delegation -> bar,
-}
-```
-
-It is important to note that if the set of rules limiting the delegation contains permissions not granted by the profile those permissions will be dropped. The rule block is only for reducing the possible set of permissions delegated it is not possible for the task to delegate permissions the profile does not have.
-
-### Rule sets can be named
-
-```
-label bar {
-  rw /**,
-}
-
-profile example {
-  allow delegation -> foo <= bar,
-}
-```
-
-### Delegation can be restricted to open files
-
-The profile can limit the delegation to already open files using the ```open``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
-
-```
-profile example {
-  rw @{HOME}/**,
-
-  allow delegation -> /usr/bin/child <= {
-      open rw @{HOME}/**,
-  }
-}
-```
-
-## What happens when object delegation fails
-
-If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won't be done under delegated authority. Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
-
-## object delegation and rules
-??? where to put maybe up with open
-object delegation is allowed by rules but the rule does not get delegated with the object
-
-# Run time implications of delegation
-
-## task labels
-
-### task labels with delegated objects
-
-When delegation to a task is limited to objects
-
-```
-profile example {
-
-  px /** -> bob + {
-     open rw /dev/pts/*,
-  }
-}
-```
-
-then the task label is NOT extended by the rule set name instead a trailing ```//*``` is added.
+When delegation to a task is limited to objects it does not explicitly extend the task (subjects) authority with a new set of rules, so it does not manifest in the tasks labell ing the same way. Instead the tasks label remains the same as a task that has no delegation except it carries a trailing ```//*``` mark indicating that objects have been delegated extending its authority.
 
 ```
 bob//*
 ```
+
+the actual set of objects that have been delegated to the task can be found by looking in the tasks ```/proc/<pid>/fd/``` directory.
 
 ### conjunctive normal form
 
@@ -377,7 +395,7 @@ When a task delegates rules it is expressed as a special profile name
 example//+taskpid???
 
 
-
+# Run time implications of delegation
 
 
 # Advanced topics
