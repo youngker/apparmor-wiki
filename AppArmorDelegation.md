@@ -196,11 +196,6 @@ profile example {
 Rules that do not have the ```open``` only restriction restriction will also allow for object delegation, but the open restriction does not allow rules to be delegated.
 
 
-### What happens when object delegation fails
-
-If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won't be done under delegated authority. Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
-
-
 # Policy directed delegation
 
 Policy directed delegation is done on behalf of the task at exec time without any additional task initiated action and is expressed as extending a task's profile with additional rules. In effect it is defining a new custom extended profile except that ipc rules to the profile label will continue to work and there is the possibility of partial dynamic replacement.
@@ -349,11 +344,11 @@ profile two {
 
 ```
 
-# task labels under delegation
+# Task labels under delegation
 
-Delegation affects the task label, but it is different based on whether rules or objects are being delegated.
+Delegation affects what the task label is and how it is displayed. How the label is affected different based on whether rules or objects are being delegated.
 
-## Task labels under Rule delegation
+### Task labels under Rule delegation
 
 Because delegation is task based a tasks label will be composed of the different [identities](AppArmorDelegation#identity). This is done by appending the delegated information to the profile name with the character sequence *//+*. separating the components.
 
@@ -372,10 +367,53 @@ Bob//+deputy//+father
 The order of the Delegation is unimportant, the [identity](AppArmorDelegation#identity) of the task is all of the profiles in the label.
 
 
+#### Unamed rule blocks and labels
+
+When an unamed rule block is used to specify delegation. Eg.
+
+```
+profile example {
+
+  px /usr/bin/child + {
+      rw @{HOME}/**,
+  }
+}
+```
+
+The rule block will be a created as child profile assigned a unique name based on the exec rule, and that will be name that appears as part of the task label during delegation.
+
+Eg.
+
+```
+/usr/bin/child//+example//delegate_usr/bin/child
+```
+
+#### Task delegated Rules and labels
+
+When a task explicitly delegates rules as special child profile with a unique name is created for the delegation. Eg.
+
+* task T1 is confined by profile example
+* task T2 is confined by profile target
+
+```
+profile example {
+  allow delegation -> target,
+  ...
+}
+```
+
+task T1 delegates some rules to T2 via the apparmor rule delgation api. Then task T2 is confined by the label
+
+```
+target//+example//#<T1 pid>_<unique>
+```
+
+where `<T1 pid>` is task T1s pid and `<unique>` is an additional unique identifier if needed.
+
 
 ### Task labels under Object delegation
 
-When delegation to a task is limited to objects it does not explicitly extend the task (subjects) authority with a new set of rules, so it does not manifest in the tasks labell ing the same way. Instead the tasks label remains the same as a task that has no delegation except it carries a trailing ```//*``` mark indicating that objects have been delegated extending its authority.
+When delegation to a task is limited to objects it does not explicitly extend the task (subjects) authority with a new set of rules, so it does not manifest in the tasks labell ing the same way as rule. Instead the tasks label remains the same as a task that has no delegation except it carries a trailing ```//*``` mark indicating that objects have been delegated extending its authority.
 
 ```
 bob//*
@@ -385,14 +423,50 @@ the actual set of objects that have been delegated to the task can be found by l
 
 ### conjunctive normal form
 
-(bob//&jane)//+police => bob//+police//&jane//+police
+When apparmor labels contain both stacking and delegation, the label can be complicated to understand. In the label stacking always has higher priority than delegation. The exception is when ```()``` to indicate a higher priority grouping. Eg.
+
+```
+(bob//&jane)//+police
+```
+
+the above label may be decomposed into [conjunctive normal form](https://en.wikipedia.org/wiki/Conjunctive_normal_form) to remove the ```()``` grouping.
+
+```
+bob//+police//&jane//+police
+```
+
+Both forms are valid and what form is used during display is implementation specific.
+
+Regardles of the form used to display the label, the object delegation mark will always be the last element of a label.
 
 
-## Task delegated authority is expressed as a special profile
+# Object delegation
 
-When a task delegates rules it is expressed as a special profile name
+### object delegation against non-open rules.
 
-example//+taskpid???
+When object delegation is used permission to delegate the object is not limited to rules with the open qualifier. Eg.
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  allow delegation -> /usr/bin/child <= {
+      rw @{HOME}/**,
+  }
+}
+```
+
+Profile example can be used to delegate any object allowed by the rule `rw @{HOME}/**`. Basically for object delegation all rules are treated as if the ```open``` qualifier was applied. That is to say object delegation can only be used to pass already open object and not rules.
+
+
+# Rule delegation
+
+#### Rule delegation
+
+When using the delegation api a task can specify a set of rules to delegate. This rules will be restricted to be a subset of the rules allowed by the delegation rules.
+
+??? expression in label???
+They will be used to limit what is dynamically delegated by the apparmor api (more on this below stacking limits the api rules //+api_rules//&foo ... the and can be decomposed when name is used)
 
 
 # Run time implications of delegation
@@ -400,9 +474,23 @@ example//+taskpid???
 
 # Advanced topics
 
-## unconfined delegation
+### What happens when object delegation fails
 
-The unconfined state delegates its open object access. This behavior has always existed in apparmor, but the ability was not available in profiles.
+If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won''t be done under delegated authority. Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
+
+### unconfined delegation
+
+The unconfined state delegates its open object access. This behavior has always existed in apparmor, but the ability was not available in profiles. It is equivalent to
+
+```
+profile unconfined {
+  allow delegation <= {
+    open /**,
+  }
+
+}
+```
+
 
 
 ## Delegating permissions to a stack
@@ -429,71 +517,10 @@ the reference profile is updated, potentially resulting in new restrictions or n
 
 ## Delegation and no_new_privs (nnp)
 
-Delegation is restricted under no_new_privs 
+Delegation can not be used to circumvent the no_new_privs restrictions. While delegation may be allowed task confinement will be enforced such that neither object nor rule delegation can be used to expand a tasks authority.
 
 
 
-
-
-
-### Delegation to tasks that are not directly executed is possible
-
-??? Move to later, lets just deal with direct case first ???
-Explicit delegation to a task that is not a directly executed child is possible. This form of delegation is not automatically applied when a task is executed but has to be explicitly requested by the task either via the apparmor delegation api or by using fd passing.
-
-This form of delegation is controlled in policy through the ```delegate``` rule.
-
-
-```
-profile child {
-   ...
-}
-
-profile example {
-
-   label foo {
-      rw @{HOME}/**,
-      r  /tmp/**,
-  }
-
-  allow delegate child + foo,
-  allow delegate child + {
-    rw /foo,
-    capability dac_read_search,
-  }
-
-  # hrmmm alternative syntax????
-  allow delegate foo -> child,   #????
-
-}
-```
-
-The set of rules defined by the delegation api are not what is delegated but what could be delegated. The task doing the delegation is free delegate less permissions. The set of delegateable rules is used to dynamically restrict what a task may request via the delegation api.
-
-
-
-
-Names and authority
--------------------
-
-Authority combinations can be grouped together into a common name.
-
-```
- label police = A//+B//+C
-```
-
-
-
-#### fd delegation
-
-When fd passing all delegation rules are treated as if the ```open``` qualifier was applied to the rule. That is to say fd delegation can only be used to pass already open object and not rules.
-
-#### Rule delegation
-
-When using the delegation api a task can specify a set of rules to delegate. This rules will be restricted to be a subset of the rules allowed by the delegation rules.
-
-??? expression in label???
-They will be used to limit what is dynamically delegated by the apparmor api (more on this below stacking limits the api rules //+api_rules//&foo ... the and can be decomposed when name is used)
 
 
 ### Delegation is inheritable
@@ -520,7 +547,7 @@ Does the whole delegation get dropped or do we do intersections.
 
   exec rule will cause delegated blob to transition. It says this is inheritable to X
 
-don't put exec rules in delegated rule sets unless you want this
+dont put exec rules in delegated rule sets unless you want this
 
 Each delegated permission set will be evaluated based on the profile it was delegated by. If the permission set is allowed then the delegation will carry, otherwise it will be dropped.
 
@@ -560,7 +587,7 @@ label example=free//&bar
 
 how is composition different from delegation
 - same as delegation when evaluating permission
-- doesn't dynamically track where the permission came from (delegation label is null)
+- doesn''t dynamically track where the permission came from (delegation label is null)
 - segments just drop based on exec, no check to see if it can be inherited?
 
 file inheritance
@@ -586,192 +613,7 @@ delegate to ** {
 
 
 
-## Aspects of delegation
 
-
-Complications move to later
-
-It is important to understand that delegation in AppArmor has multiple aspects to it.
-
-
-
-## Object or Rule
-One aspect is whether the delegation is happening at the object or rule level.
-
-* object based - when an object (file handle, socket, ...) is delegated between tasks.
-* rule based - when rules are used to extend what a task can do
-
-Object delegation allows for live objects to be passed without giving the receiving task privileges beyond access to the already opened object. Rule based delegation extends a tasks confinement so that it has increased authority and can create new objects its old confinement wouldn't allow.
-
-Object delegation happens through three mechanisms
-- fd inheritance
-- fd passing
-- application directing delegation of the fd
-
-Object delegation and rule delegation are often combined to provide for [inheritance](AppArmorDelegation#inheritance) of delegated objects.
-
-
-## Policy directed or Application directed
-* Policy directed - the delegation is specified by rules in policy
-* Application directed - the application takes action to delegate some authority. The ability to do this is it self mediated by policy.
-
-
-## Inheritance
-
-Inheritance only applies to task and is always temporary
-
-Delegation is across profile boundaries
-
-Inheritance of delegation is not based only based on a tasks parent child hierachy. Instead, all inheritance, whether object or rule based, is controlled by a set of rules that is it self part of the delegation.
-
-Without inheritance rules the delegated objects and rules can not cross a profile boundary.
-
-
-
-Delegation applies to tasks
-===========================
-
-Delegation is a task oriented extension of permissions that in effect
-makes a special “new” version of the profile that will confine
-the task. That is to say delegation is a dynamic property, and it can
-be lost when a service is restarted, policy is removed or the system
-is rebooted.
-
-With that said it is possible to express delegation within policy
-making it permanent. When a profile specifies
-
-```
- px /bin/foo -> +bar,
-```
-
-The delegation will always be applied as part of the exec transition,
-resulting in a confinement of /bin/foo//+bar for that task.
-
-Delegation in Policy
-====================
-
-declaring policy chunks that can be delegated
----------------------------------------------
-
-Permissions can be grouped together into a set of authority that can
-be named.
-
-```
- authority foo {
-   ...
- }
-```
-
-The authority block is just a specialized profile that can't be directly transitioned to by an exec transition or the change_profile/change_hat apis. In fact profiles can be used as an authority block and be delegated to another profile.
-
-
-## Delegating rules at profile transition in policy
-
-Rules can be delegated as part of a domain transition.
-
-```
- # transition to profile bar with the added rules in foo
- px /foo -> bar + foo;
-```
-
-
-```
- # transition to the profile that attaches to /foo with the added rules in foo
- px /foo -> + foo;
-```
-
-### localized authority
-
-Authority blocks can be localized to a profile just like child profiles.
-
-```
- profile A {
-   authority foo {
-     ...
-   }
-
-   px /foo -> + foo,
- }
-```
-
-#### unnamed local authority
-
-A rule block without an associated name can be specified by doing
-
-```
- px /foo -> bar + {
-    ...
- }
-```
-
-```
- px /foo -> + {
-   ...
- }
-```
-
-This will result in a localized authority with a unique local name
-that is generated by the compiler.
-
-### how localized authority appears in labels
-
-Just as authority in a label is not distinguished from a profile, the
-localized authority set is treated as a special hat or child profile,
-and will appear as such in labels.
-
-E.g. the confinement of /foo when started from the confinement of profile A with the following rules
-
-```
- profile A {
-   authority foo {
-     ...
-   }
-
-   px /foo -> B + foo,
- }
-```
-
-would be
-
-```
- B//+A//foo
-
-B is the profile transitioned to and A//foo is the name of the local authority block.
-```
-
-controlling application directed delegation
--------------------------------------------
-
-What rules an application can delegate are controlled by rules in the profile.
-
-```
- delegate +foo,
-```
-
-tying the delegation to an exec
-
-```
- delegate /** -> +foo,
-```
-
-tying delegation to a target label. Hrmmm should this be used instead
-of the exec tying, and then tie to the exec label.
-
-```
- delegate ???
-```
-
-### restricting to delegation to an object
-
-Normally delegation is passed as a rule, but delegation can be
-restricted to an object that matches a delegation rule by specifying
-
-```
- delegate object +foo,
-```
-
-Allowing a profile to receive delegation
-----------------------------------------
 
 # Delegation and Domain transitions
 
@@ -810,7 +652,7 @@ Rules being delegated go through a compile to transform the rules into a form th
 
   A//+xxxx
 
-If the profile block is not part of existing policy it will be dynamically constrained by the label is delegated from. That is if a task with confinement A delegates a block of rules A.13 to a task confined by B. Task B's resulting confinement is
+If the profile block is not part of existing policy it will be dynamically constrained by the label is delegated from. That is if a task with confinement A delegates a block of rules A.13 to a task confined by B. Task B''s resulting confinement is
   B//+A.13 but A.13 rules will not blindly extend B, they will first be dynamically intersected with A to ensure that A.13 is a true subset of A.
 
 
