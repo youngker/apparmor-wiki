@@ -20,7 +20,7 @@ sand box
 - isolation + controlled sharing
 
 
-# Availability of Delegation
+# Availability of Delegation of authority
 The following table identifies which version of AppArmor different types of delegation are available in.
 
 
@@ -33,13 +33,13 @@ The following table identifies which version of AppArmor different types of dele
 # Introduction
 AppArmor 4 extends AppArmor to be a hybrid of [Domain Type Enforcement (DTE)](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.1501) and a [capability system](https://en.wikipedia.org/wiki/Capability-based_security). This is achieved by allowing a profile or task to delegate some of its [authority](AppArmorDelegation#authority) to other applications, allowing them to perform operations or access data that they could not normally do or access under their confinement.
 
-Delegation of [Authority](AppArmorDelegation#authority) helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola). Which means policy can be tighter and then expanded to allow access to data as needed. Delegation can also help avoiding problems like the [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem)
+Delegation of [Authority](AppArmorDelegation#authority) (abreviated to just delegation in this document) helps with authoring policy that adheres to the [principle of Least authority](AppArmorDelegation#principle-of-least-authority-pola). Which means policy can be tighter and then expanded to allow access to data as needed. Delegation can also help avoiding problems like the [confused deputy](https://en.wikipedia.org/wiki/Confused_deputy_problem)
 
 ## A real world example
 
 The sheriff deputizes Bob (a father) giving him the authority to enforce the law while he is a deputy. Bob now has both the authority of being a parent to his children and the authority of a deputy, and Bob can has the [identity](AppArmorDelegation#identity) of Bob, Father and Deputy.
 
-# Delegation in AppArmor
+# Delegation (of authority) in AppArmor
 
 In AppArmor the [authority](AppArmorDelegation#authority) is the rules in the profile, and the [identity](AppArmorDelegation#identity) is the profile name. Delegation is always temporary and dynamic as it based on passing [authority](AppArmorDelegation#authority) to a task. The delegated authority is not given to other tasks in the system even if those tasks are confined by the same profile. The delegated authority might be [inherited](AppArmorDelegation#inheritance) by a tasks children, or [redelegated](AppArmorDelegation#redelegation) if allowed by policy.
 
@@ -344,6 +344,76 @@ profile two {
 
 ```
 
+# Notes on object & rule delegation
+
+There are aspects of object and rule delegation that are common regardless if the delegation was done via an application directing the delegation or by policy rules.
+
+dynamic masking????
+ +(A&B)
+- dynamically computed using stacking
+- statically computed where possible
+
+### Object Delegation
+
+delegator is tracked .... ????
+
+#### object delegation against non-open rules.
+
+When object delegation is used permission to delegate the object is not limited to rules with the open qualifier. Eg.
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  allow delegation -> /usr/bin/child <= {
+      rw @{HOME}/**,
+  }
+}
+```
+
+#### What happens when object delegation fails
+
+If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won''t be done under delegated authority. Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
+
+
+Profile example can be used to delegate any object allowed by the rule `rw @{HOME}/**`. Basically for object delegation all rules are treated as if the ```open``` qualifier was applied. That is to say object delegation can only be used to pass already open object and not rules.
+
+
+### Rule delegation
+
+Delegating rules are a subset of the delegating profile.
+
+#### Application directed rule delegation
+When using the delegation api a task can specify a set of rules to delegate. This rules will be restricted to be a subset of the rules allowed by the delegation rules.
+
+profile, delegator is tracked, intersection ... ????
+
+?????
+Rules being delegated go through a compile to transform the rules into a form that can be used by the kernel. It is best to group multiple rules into a single group. Each group of rules delegated results in a new profile block and that will be used as part of the delegated label.
+
+  A//+xxxx
+
+If the profile block is not part of existing policy it will be dynamically constrained by the label is delegated from. That is if a task with confinement A delegates a block of rules A.13 to a task confined by B. Task B''s resulting confinement is
+  B//+A.13 but A.13 rules will not blindly extend B, they will first be dynamically intersected with A to ensure that A.13 is a true subset of A.
+
+
+Since delegation requires a confined user to be able to be able to do a restricted policy load, the loaded rule set must be verified to be a subset of the confinement of the task doing the delegation. To guarantee that the rule set is a subset, apparmor will do a dynamic intersection check of the delegated rules and the confinement of the task that did the delegation.
+
+  effectively B//+(A.13&A)
+
+the intersection check can be avoided if the delegated object is predefined in policy (normal delegating tasks cannot change the predefined policy objects so it is possible to know in advance whether the intersection is needed).
+
+
+delegation api basically needs to cache and create per task the delegated object. Attempt to load the object
+and then use the object. Can fail at any point.
+ 
+each delegated rule set also carries a mark where the authority came from, and that is used to limit
+
+#### Policy directed rule delegation and named rule sets.
+
+Policy directed delegation has flexibility on how to handle named rule sets. If the named rule set is compiled with the profile doing the delegating AppArmor can do compile time optimizations that can guarentee the delegated rule set is a subset of the delegating profile. This optimization will reduce the run time overhead of delegating rules as AppArmor will not have to perform an intersection on the delegated rule set like it have to do for Application directed rule delegation.
+
+
 # Task labels under delegation
 
 Delegation affects what the task label is and how it is displayed. How the label is affected different based on whether rules or objects are being delegated.
@@ -440,45 +510,53 @@ Both forms are valid and what form is used during display is implementation spec
 Regardles of the form used to display the label, the object delegation mark will always be the last element of a label.
 
 
-# Object delegation
 
-### object delegation against non-open rules.
+# Inheritance
+### Delegation is inheritable
 
-When object delegation is used permission to delegate the object is not limited to rules with the open qualifier. Eg.
+Delegation is inheritable by tasks but whether it will be inherited is controlled by policy.
 
-```
-profile example {
-  rw @{HOME}/**,
+If a task inherits its parent confinement it will also inherit any delegation it parent has. However if the tasks confinement changes the delegation will be re-evaluated to determine if the delegation was allowed to the new profile. If the originally delegating profile allows the delegation to the new profile then the delegation will be inherited.
 
-  allow delegation -> /usr/bin/child <= {
-      rw @{HOME}/**,
-  }
-}
-```
-
-Profile example can be used to delegate any object allowed by the rule `rw @{HOME}/**`. Basically for object delegation all rules are treated as if the ```open``` qualifier was applied. That is to say object delegation can only be used to pass already open object and not rules.
+eg. ....
 
 
-# Rule delegation
-
-#### Rule delegation
-
-When using the delegation api a task can specify a set of rules to delegate. This rules will be restricted to be a subset of the rules allowed by the delegation rules.
-
-??? expression in label???
-They will be used to limit what is dynamically delegated by the apparmor api (more on this below stacking limits the api rules //+api_rules//&foo ... the and can be decomposed when name is used)
+Also need way to allow to delegate to any child.
 
 
-# Run time implications of delegation
+Does the whole delegation get dropped or do we do intersections.
+
+Inheritance of Delegation by Children
+=====================================
+
+Delegation is inherited by children as long as their AppArmor
+confinement remains unchanged. When a tasks confinement is changed
+via exec rules, application directed transitions or other means the
+delegation is re-evaluated and my be entirely dropped, partially
+dropped, or full inherited depending as specified by policy.
+
+To determine how the delegation will be handled the original delegotor
+policy is checked to determine if it allows delegating to the new
+confinement.
+
+At this time it is not possible for the original delegator to delegate
+this ability to a child, but it may be added in the future if the
+need arises.
+
+Delegation across profile transition boundaries
+===============================================
+
+Delegation on objects??? may be dropped, and access still retained,
+if the the target confinement contains permissions.
+
+
 
 
 # Advanced topics
 
-### What happens when object delegation fails
+## Run time implications of delegation
 
-If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won''t be done under delegated authority. Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
-
-### unconfined delegation
+### delegation and unconfined
 
 The unconfined state delegates its open object access. This behavior has always existed in apparmor, but the ability was not available in profiles. It is equivalent to
 
@@ -499,7 +577,6 @@ profile unconfined {
 
 ## Profile transitions
 
-## Inheritance
 
 ## Delegation to Profiles that contain the delegated authority
 
@@ -522,20 +599,6 @@ Delegation can not be used to circumvent the no_new_privs restrictions. While de
 
 
 
-
-### Delegation is inheritable
-
-Delegation is inheritable by tasks but whether it will be inherited is controlled by policy.
-
-If a task inherits its parent confinement it will also inherit any delegation it parent has. However if the tasks confinement changes the delegation will be re-evaluated to determine if the delegation was allowed to the new profile. If the originally delegating profile allows the delegation to the new profile then the delegation will be inherited.
-
-eg. ....
-
-
-Also need way to allow to delegate to any child.
-
-
-Does the whole delegation get dropped or do we do intersections.
 
 
 
@@ -565,10 +628,6 @@ Permission check order
 ### Delegation of change_profile rules
 
 
-### dynamic masking
- +(A&B)
-- dynamically computed using stacking
-- statically computed where possible
 
 #### Profile composition
 
@@ -602,14 +661,6 @@ Hrmmm how does this work with nesting? source could have same nesting.
 How does it work with stacking? Just does, its nesting that is the issue.
 Other potential format, vec is array of struct (profile, source)
 
-### delegation and unconfined
-
-unconfined delegate fds to all children
-
-delegate to ** {
-  open /**,
-}
-
 
 
 
@@ -633,40 +684,8 @@ delegating to a stack
 
 
 
-Application Directed Delegation
-===============================
-
-Delegation is inherently an task initiated operation. Either via an
-exec that has the delegation encoded in policy, or by an action at
-run time such as passing an object to another task.
-
-object delegation via fd passing
---------------------------------
-
-rule delegation vis api
------------------------
-
-Applications can delegate rules instead of just objects. Rule delegation requires access to the rule delegation api (which requires access to certain files and the ability to load policy in certain places), and there is some overhead associated with it.
-
-Rules being delegated go through a compile to transform the rules into a form that can be used by the kernel. It is best to group multiple rules into a single group. Each group of rules delegated results in a new profile block and that will be used as part of the delegated label.
-
-  A//+xxxx
-
-If the profile block is not part of existing policy it will be dynamically constrained by the label is delegated from. That is if a task with confinement A delegates a block of rules A.13 to a task confined by B. Task B''s resulting confinement is
-  B//+A.13 but A.13 rules will not blindly extend B, they will first be dynamically intersected with A to ensure that A.13 is a true subset of A.
 
 
-Since delegation requires a confined user to be able to be able to do a restricted policy load, the loaded rule set must be verified to be a subset of the confinement of the task doing the delegation. To guarantee that the rule set is a subset, apparmor will do a dynamic intersection check of the delegated rules and the confinement of the task that did the delegation.
-
-  effectively B//+(A.13&A)
-
-the intersection check can be avoided if the delegated object is predefined in policy (normal delegating tasks cannot change the predefined policy objects so it is possible to know in advance whether the intersection is needed).
-
-
-delegation api basically needs to cache and create per task the delegated object. Attempt to load the object
-and then use the object. Can fail at any point.
- 
-each delegated rule set also carries a mark where the authority came from, and that is used to limit
 
 delegation through inheritance
 onexec
@@ -770,83 +789,24 @@ user interaction and trusted helpers
 
 delegation of authority vs identity
 
-Static vs. Dynamic Delegation
-=============================
 
-Like static some delegation can be computed statically at compile
-time, while some needs to be computed dynamically. Just what can be
-computed statically will depend on the rule sets and what parts of
-policy (profiles) are compiled together. Simple policy rules like
 
-```
- px /bin/A -> B//+C,
-```
-
-can be precomputed as long as the necessary profiles are compiled
-together. Object delegation and application directed delegation will
-almost always have to be computed dynamically.
-
-As with stacking static computation can result in longer compile times
-and larger compiled policy but reduces the computational overhead at
-run time.
-
-Types of Delegation
-===================
-
-There are two distinct ways that authority can be delegated, either
-by extending an applications policy with a set of rules, or by passing
-an object handle to an application.
-
-Rule Delegation
----------------
-
-Object Delegation
------------------
-
-Policy based Delegation
------------------------
-
-Application Directed Delegation
--------------------------------
-
-Inheritance of Delegation by Children
-=====================================
-
-Delegation is inherited by children as long as their AppArmor
-confinement remains unchanged. When a tasks confinement is changed
-via exec rules, application directed transitions or other means the
-delegation is re-evaluated and my be entirely dropped, partially
-dropped, or full inherited depending as specified by policy.
-
-To determine how the delegation will be handled the original delegotor
-policy is checked to determine if it allows delegating to the new
-confinement.
-
-At this time it is not possible for the original delegator to delegate
-this ability to a child, but it may be added in the future if the
-need arises.
-
-Delegation across profile transition boundaries
-===============================================
-
-Delegation on objects??? may be dropped, and access still retained,
-if the the target confinement contains permissions.
 
 Delegation and Stacking
 =======================
 
-Policy Rules controlling Delegation
-===================================
 
 # Glossary
 
-## Authority
+### Authority & Privielge
 Authority is the right or permission to perform an action (do something). An example would be a police officer has the authority to make an arrest but he does not have the authority to determine the sentence of the arrested person. Authority in the real world is often associated with an identity or position and some time authority can be delegated to another, Eg. a sheriff deputizing a person to assist him.
+
+Privilege is usually (and in AppArmor) used as a synanym for authority.
 
 In AppArmor authority can be delegated to extend profiles with access to objects or rules that they would not normally have.
 
 
-## Identity
+### Identity
 
 The fact of being who or what a person or thing is
 
@@ -863,7 +823,7 @@ In AppArmor terms this is exposed in the label by listing the profile names that
 Identity is also used in policy to control which authority is or can be delegated.
 
 
-## Identity
+### Identity
 
 In AppArmor authority and identity are different. Authority is the
 right/permission to do something while identity is the who. In real
@@ -875,7 +835,7 @@ In AppArmor terms identity is the profile name or label, and delegated
 authority can be associated with the identity. The delegated authority
 may or may not have an name (identity) associated with it.
 
-## Principle of Least Authority (PoLA)
+### Principle of Least Authority (PoLA)
 
 The [principle of least authority](https://en.wikipedia.org/wiki/Principle_of_least_privilege) (also known as the principle of least privilege) is that a task
 should not have any more privilege/permissions than it needs to do
@@ -906,5 +866,6 @@ of the tools available in AppArmor to craft policy in such a manner,
 where an application is given a base profile and it is given additional
 access when required, either via policy or trusted helpers.
 
-## [Confused Deputy Problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)
- The [confused deputy problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)
+### [Confused Deputy Problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)
+ The [confused deputy problem](https://en.wikipedia.org/wiki/Confused_deputy_problem) is a type of privilege escalation where an application with more privilege is tricked by an application into doing some for it that it does not have the authority to do. Delegation can help reduce/remove the confused deputy problem by giving an application the minimum privelege to do what it needs removing the need for applications to interacte with application that have more privilege than is required.
+ 
