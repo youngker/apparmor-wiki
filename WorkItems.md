@@ -7,7 +7,7 @@ current code base.
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
 # wi list
 
-- ###full stack (kernel, compiler, testing, utils, library, documentation)
+###- full stack (kernel, compiler, testing, utils, library, documentation)
   - text policy
     - kernel: support loading text policy and compress it
     - parser: keep or regen text policy, load into kernel
