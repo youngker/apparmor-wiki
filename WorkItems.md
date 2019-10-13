@@ -32,6 +32,16 @@ For a list of improvements and extensions to AppArmor see the [development roadm
     - rule
   - dynamic include (dependency: rule delegation)
   - nnp override rules
+  - application/task policy
+    - create custom application profiles
+      - in current ns vs. requiring unprivileged user ns
+    - method to lock profile
+      - no permission to load policy once profile is loaded
+      - nnp
+      - custom lock flag via apparmor similar to nnp but apparmor specific?
+    - lib so application can compile and load policy
+    - policy management rules
+    - control of profile memory
   - early policy load
     - library routines: to setup, mount ...
     - tooling to build caches into initramfs/initrd
@@ -39,8 +49,10 @@ For a list of improvements and extensions to AppArmor see the [development roadm
     - init support (systemd)
       - early direct load
       - secondary late phase that can recompile/reload policy
+  - criu for labeled and delegated objects
 
 ### kernel
+  - nnp restrictions via stacking
   - fuzz interfaces
   - permission remap work
   - type cache (dependency: permission remapping work)
