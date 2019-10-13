@@ -40,37 +40,37 @@ For a list of improvements and extensions to AppArmor see the [development roadm
       - early direct load
       - secondary late phase that can recompile/reload policy
 
-- kernel
+### - kernel
   - fuzz interfaces
   - permission remap work
   - type cache (dependency: permission remapping work)
   - support overlayfs
 
 
-- library
+### - library
 
-- tooling
+### - tooling
 
-- init
+### - init
   - systemd link against libapparmor init, direct early load
 
-- testing
+### - testing
   - convert test generators away from perl (python)?
   - convert regression tests to new infrastructure
   - 
 
-- policy
+### - policy
   - refactor apparmor profiles
     - single tree
       - distro dirs as branches
     - move apparmor.d out of userspace release
 
-- infrastructure
+### - infrastructure
   - top level build target to build whole project
   - fix --strip not being passed through correctly in build
   - remove deprecated perl from repo (not perl generated swig interface) (issue ??)
   
-- misc
+### - misc
   - update apparmor logo on cii best practices
 
 
