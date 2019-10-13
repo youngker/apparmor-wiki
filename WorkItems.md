@@ -7,15 +7,32 @@ current code base.
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
 # wi list
 
-list of immediate WIs
+- kernel
+  - fuzz interfaces
 
-- policy raw_data compression
-  - how to handle dedup of individual profiles within blob?
-- parser exception warning
-- fuzzing interfaces
-- kernel pull request
-- David Howell's LSM in continers, CC on RFC
-- update apparmor logo on cii best practices
+- library
+
+- tooling
+
+- init
+
+- testing
+  - convert test generators away from perl (python)?
+  - convert regression tests to new infrastructure
+  - 
+
+- policy
+
+- infrastructure
+  - top level build target to build whole project
+  - fix --strip not being passed through correctly in build
+  - remove deprecated perl from repo (not perl generated swig interface) (issue ??)
+  
+- misc
+  - update apparmor logo on cii best practices
+
+
+
 - nnp
   - kernel patch review & revision
   - userspace support
