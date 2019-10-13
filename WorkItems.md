@@ -8,6 +8,17 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 # wi list
 
 - full stack (kernel, compiler, testing, utils, library, documentation)
+  - text policy
+    - kernel: support loading text policy and compress it
+    - parser: keep or regen text policy, load into kernel
+    - library: provide easy access to text policy interface, support using decompile if text policy interface is not present
+
+  - policy decompile
+    - library
+      - fns to grab binary policy
+      - fns to decompile binary policy
+    - tool to dump loaded policy as decompiled text
+
   - audit rework
     - lib upate to handle
     - audit caching dedup
@@ -23,6 +34,8 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - delegation
     - object
     - rule
+  - dynamic include (dependency: rule delegation)
+
   - nnp override rules
   - early policy load
     - library routines: to setup, mount ...
