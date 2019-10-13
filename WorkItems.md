@@ -7,14 +7,44 @@ current code base.
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
 # wi list
 
+- full stack (kernel, compiler, testing, utils, library, documentation)
+  - audit rework
+    - lib upate to handle
+    - audit caching dedup
+    - mem off stack, cleanup reduce entries
+    - share info/dedup
+
+  - prompt
+    - kernel
+      - type cach
+  - extended permissions (dependency: permission remap work)
+
+  - fine grained network
+  - delegation
+    - object
+    - rule
+  - nnp override rules
+  - early policy load
+    - library routines: to setup, mount ...
+    - tooling to build caches into initramfs/initrd
+    - binary util (example) to load policy
+    - init support (systemd)
+      - early direct load
+      - secondary late phase that can recompile/reload policy
+
 - kernel
   - fuzz interfaces
+  - permission remap work
+  - type cache (dependency: permission remapping work)
+  - support overlayfs
+
 
 - library
 
 - tooling
 
 - init
+  - systemd link against libapparmor init, direct early load
 
 - testing
   - convert test generators away from perl (python)?
@@ -22,6 +52,10 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - 
 
 - policy
+  - refactor apparmor profiles
+    - single tree
+      - distro dirs as branches
+    - move apparmor.d out of userspace release
 
 - infrastructure
   - top level build target to build whole project
@@ -33,21 +67,13 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 
 
-- nnp
-  - kernel patch review & revision
-  - userspace support
-- support labels, early
+
 - fs subtype for mount
-- lsm stacking
-  - cosmic
-  - review for kees
-- prompt
-  - audit rework
-  - audit caching
+
+
 
 - LPC talk
 - a//b exec target bug
-- overlayfs support
 - apparmor 3
   - overlay
     - policy
