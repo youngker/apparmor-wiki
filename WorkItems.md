@@ -24,7 +24,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
     - share info/dedup
   - prompt
     - kernel
-      - type cach
+      - type cache
   - extended permissions (dependency: permission remap work)
   - fine grained network
   - delegation
