@@ -13,6 +13,8 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - permission remap work
   - type cache (dependency: permission remapping work)
   - support overlayfs
+  - split apparmorfs and make it directly mountable
+  - make apparmorfs dynamic (see nsfs)
 
 
 ### library
@@ -62,8 +64,11 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - extended permissions (dependency: permission remap work)
   - profile flags
     - prompt
-    - kill
+    - kill + signal control
     - debug
+  - audit
+    - make audit flags available in profile
+    - new control flags quitet_allow, per class
   - extended conditionals
     - instruction stream for match
     - nnp
@@ -102,7 +107,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 
 
-- LPC talk
+
 - a//b exec target bug
 - apparmor 3
   - overlay
@@ -127,9 +132,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - multi-query
 
   
-  - audit flags
-    - audit
-    - quite_allow
+
   - prefix
     - quiet
     - kill
