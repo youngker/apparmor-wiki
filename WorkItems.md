@@ -44,6 +44,19 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - update apparmor logo on cii best practices
 
 ### multiple elements of the stack (kernel, compiler, testing, utils, library, documentation, ...)
+  - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, object delegation, locking rework, buffer rework, type cache)
+    - kernel
+      - type cache
+  - extended permissions (dependency: kernel permission remap work)
+  - profile flags
+    - prompt
+    - kill + signal control
+    - debug
+  - audit rework
+    - lib update to handle
+    - kernel: audit caching dedup
+    - kernel: mem off stack, cleanup reduce entries
+    - kernel: share info/dedup
   - text policy
     - kernel: support loading text policy and compress it
     - parser: keep or regen text policy, load into kernel
@@ -53,19 +66,6 @@ For a list of improvements and extensions to AppArmor see the [development roadm
       - fns to grab binary policy
       - fns to decompile binary policy
     - tool to dump loaded policy as decompiled text
-  - audit rework
-    - lib upate to handle
-    - audit caching dedup
-    - mem off stack, cleanup reduce entries
-    - share info/dedup
-  - prompt (dendencies: extended permissions, profile flags, audit rework, object delegation, locking rework, buffer rework, type cache)
-    - kernel
-      - type cache
-  - extended permissions (dependency: permission remap work)
-  - profile flags
-    - prompt
-    - kill + signal control
-    - debug
   - audit
     - make audit flags available in profile
     - new control flags quitet_allow, per class
