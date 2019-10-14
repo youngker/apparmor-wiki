@@ -7,50 +7,6 @@ current code base.
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
 # wi list
 
-### full stack (kernel, compiler, testing, utils, library, documentation)
-  - text policy
-    - kernel: support loading text policy and compress it
-    - parser: keep or regen text policy, load into kernel
-    - library: provide easy access to text policy interface, support using decompile if text policy interface is not present
-  - policy decompile
-    - library
-      - fns to grab binary policy
-      - fns to decompile binary policy
-    - tool to dump loaded policy as decompiled text
-  - audit rework
-    - lib upate to handle
-    - audit caching dedup
-    - mem off stack, cleanup reduce entries
-    - share info/dedup
-  - prompt
-    - kernel
-      - type cache
-  - extended permissions (dependency: permission remap work)
-  - fine grained network
-  - delegation
-    - object
-    - rule
-  - dynamic include (dependency: rule delegation)
-  - nnp override rules
-  - application/task policy
-    - create custom application profiles
-      - in current ns vs. requiring unprivileged user ns
-    - method to lock profile
-      - no permission to load policy once profile is loaded
-      - nnp
-      - custom lock flag via apparmor similar to nnp but apparmor specific?
-    - lib so application can compile and load policy
-    - policy management rules
-    - control of profile memory
-  - early policy load
-    - library routines: to setup, mount ...
-    - tooling to build caches into initramfs/initrd
-    - binary util (example) to load policy
-    - init support (systemd)
-      - early direct load
-      - secondary late phase that can recompile/reload policy
-  - criu for labeled and delegated objects
-
 ### kernel
   - nnp restrictions via stacking
   - fuzz interfaces
@@ -85,10 +41,64 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 ### misc
   - update apparmor logo on cii best practices
 
+### multiple elements of the stack (kernel, compiler, testing, utils, library, documentation, ...)
+  - text policy
+    - kernel: support loading text policy and compress it
+    - parser: keep or regen text policy, load into kernel
+    - library: provide easy access to text policy interface, support using decompile if text policy interface is not present
+  - policy decompile
+    - library
+      - fns to grab binary policy
+      - fns to decompile binary policy
+    - tool to dump loaded policy as decompiled text
+  - audit rework
+    - lib upate to handle
+    - audit caching dedup
+    - mem off stack, cleanup reduce entries
+    - share info/dedup
+  - prompt (dendencies: extended permissions, profile flags, audit rework, object delegation, locking rework, buffer rework, type cache)
+    - kernel
+      - type cache
+  - extended permissions (dependency: permission remap work)
+  - profile flags
+    - prompt
+    - kill
+    - debug
+  - extended conditionals
+    - instruction stream for match
+    - nnp
+    - suid/guid
+    - fs subtype for mount
+    - uid
+  - fine grained network
+  - delegation
+    - object
+    - rule
+  - dynamic include (dependency: rule delegation)
+  - nnp override rules
+  - application/task policy
+    - create custom application profiles
+      - in current ns vs. requiring unprivileged user ns
+    - method to lock profile
+      - no permission to load policy once profile is loaded
+      - nnp
+      - custom lock flag via apparmor similar to nnp but apparmor specific?
+    - lib so application can compile and load policy
+    - policy management rules
+    - control of profile memory
+  - early policy load
+    - library routines: to setup, mount ...
+    - tooling to build caches into initramfs/initrd
+    - binary util (example) to load policy
+    - init support (systemd)
+      - early direct load
+      - secondary late phase that can recompile/reload policy
+  - criu for labeled and delegated objects
 
 
 
-- fs subtype for mount
+
+
 
 
 
@@ -115,14 +125,8 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - abi
   - fd interface
   - multi-query
-  - query caching
-  - network
-  - nnp
-  - evm xattr match support
-  - profile flags
-    - prompt
-    - kill
-    - debug
+
+  
   - audit flags
     - audit
     - quite_allow
