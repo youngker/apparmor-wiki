@@ -47,15 +47,18 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 ### kernel
+  - [x] `JJ`: Rework Kernel locking to support prompting
+  - [x] `JJ`: Rework buffer allocation to support prompting
   - [x] `Chris`: In kernel raw policy data compression
+  - [ ] `Mike`: split apparmorfs and make it directly mountable
+  - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
   - [ ] nnp restrictions via stacking
   - [ ] fuzz interfaces
   - [ ] permission remap work
   - [ ] type cache (dependency: permission remapping work)
   - [ ] support overlayfs
-  - [ ] `Mike`: split apparmorfs and make it directly mountable
-  - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
-
+  - [ ] Make label tree have lockless read side
+  - [ ] Remove profile list (Requires: Make label tree have lockless read size)
 
 ### library
   - [ ] remove overlay macro for fn
