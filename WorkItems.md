@@ -47,17 +47,19 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 ### kernel
-- [x] `JJ`: Rework Kernel locking to support prompting
-- [x] `JJ`: Rework buffer allocation to support prompting
+- [x] `JJ`: Rework Kernel locking to support prompting and realtime <br>required by: prompting
+- [x] `JJ`: Rework buffer allocation to support prompting and realtime <br>required by: promtpting
 - [x] `Chris`: In kernel raw policy data compression
-- [ ] `Mike`: split apparmorfs and make it directly mountable
+- [ ] `Mike`: split apparmorfs and make it directly mountable <br>required by: contextless container boot
 - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
-- [ ] `JJ`: nnp restrictions via stacking
-- [ ] `JJ`: permission remap work
-- [ ] type cache (requires: permission remapping work)
-- [ ] split label iterator individual component iterators
-- [ ] object delegation for prompting (requires: type cache, split label iterator)
-- [ ] kernel: prompting (requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations)
+- [ ] `JJ`: nnp restrictions via stacking <br>required by: nnp override rules
+- [ ] `JJ`: permission remap work <br>required by: extended permissions
+- [ ] type cache (requires: permission remapping work <br> required by: extended permissions
+- [ ] split label iterator individual component iterators <br>required by: delegation
+- [ ] object delegation for prompting <br>requires: type cache, split label iterator <br>required by: prompting, delegation
+- [ ] generic object delegation <br>requires: object delegation for prompting <br>required by: delegation
+- [ ] rule delegation <br>requires: ? <br>required by: delegation
+- [ ] kernel: prompting <br>requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations <br> required by: prompting
   - [ ] interface file
   - [ ] ioctl interface control
   - [ ] ioctl uapi api
@@ -80,15 +82,16 @@ Most work items cover more than one section of the stack, however there are seve
 - [ ] Fix mediation to do single path name lookup and share across label iterator
 - [ ] task based debug flags
 - [ ] rework debug messages into multiple classes, so we can selectively turn on/off debug output
-- [ ] virtualize remaining interfaces to policy namespace
-- [ ] split scope & view in code
+- [ ] virtualize remaining interfaces to policy namespace <br> requires: ? <br>required by: containers, application policy, unpriviliged user policy
+- [ ] split scope & view in code <br> requires: ? <br>required by: containers, application policy, unprivileged user policy
   - [ ] rename fns etc to scope, view or ns
   - [ ] implement scope & view functionality
   - [ ] move children profiles to special child namespace
 - [ ] Verify profile, ns, etc names meet specification
-- [ ] on unpack create empty profiles/labels referenced by policy
-- [ ] on unpack, prelink profile lookups etc where possible (requires: on unpack, create empty profiles/labels referenced by policy)
+- [ ] on unpack create empty profiles/labels referenced by policy <br>required by: on unpack, prelink profile lookups, where possible
+- [ ] on unpack, prelink profile lookups etc where possible <br>requires: on unpack, create empty profiles/labels referenced by policy
 - [ ] support multiple policy namespace elements in single policy blob
+- [ ] policy resource accounting <br>required by: unprivileged user policy, application policy
 
 
 
