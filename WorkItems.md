@@ -52,38 +52,38 @@ Most work items cover more than one section of the stack, however there are seve
 - [x] `Chris`: In kernel raw policy data compression
 - [ ] `Mike`: split apparmorfs and make it directly mountable <br>_required by: contextless container boot_
 - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
-- [ ] `JJ`: nnp restrictions via stacking <br>required by: nnp override rules
-- [ ] `JJ`: permission remap work <br>required by: extended permissions
-- [ ] type cache (requires: permission remapping work <br> required by: extended permissions
-- [ ] split label iterator individual component iterators <br>required by: delegation
-- [ ] object delegation for prompting <br>requires: type cache, split label iterator <br>required by: prompting, delegation
-- [ ] generic object delegation <br>requires: object delegation for prompting <br>required by: delegation
-- [ ] rule delegation <br>requires: ? <br>required by: delegation
-- [ ] kernel: prompting <br>requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations <br> required by: prompting
+- [ ] `JJ`: nnp restrictions via stacking <br>_required by: nnp override rules_
+- [ ] `JJ`: permission remap work <br>_required by: extended permissions_
+- [ ] type cache (requires: permission remapping work <br>_required by: extended permissions_
+- [ ] split label iterator individual component iterators <br>_required by: delegation_
+- [ ] object delegation for prompting <br>_requires: type cache, split label iterator_ <br>_required by: prompting, delegation_
+- [ ] generic object delegation <br>_requires: object delegation for prompting_ <br>_required by: delegation_
+- [ ] rule delegation <br>_requires: ?_ <br>_required by: delegation_
+- [ ] kernel: prompting <br>_requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations_ <br> _required by: prompting_
   - [ ] interface file
   - [ ] ioctl interface control
   - [ ] ioctl uapi api
   - [ ] ns wait queue for tasks waiting on event
   - [ ] ns wait queue for tasks waiting on reply
   - [ ] profile prompt flag (requires: profile flags)
-    - [ ] use of in kernel permission checks (requires: rework file mediation to use new code)
+    - [ ] use of in kernel permission checks <br>_requires: rework file mediation to use new code_
     - [ ] unpack
     - [ ] abi support flag
     - [ ] audit info for prompt
-  - [ ] prompt rule qualifiers (requires: extended permissions, profile prompt flag)
+  - [ ] prompt rule qualifiers _requires: extended permissions, profile prompt flag_
     - [ ] ???
     - [ ] unpack
     - [ ] abi support flag
   - policy unpack
 - [ ] support overlayfs
 - [ ] Make label tree have lockless read side
-- [ ] Remove profile list (Requires: Make label tree have lockless read size)
+- [ ] Remove profile list _requires: Make label tree have lockless read size_
 - [ ] fuzz interfaces
 - [ ] Fix mediation to do single path name lookup and share across label iterator
 - [ ] task based debug flags
 - [ ] rework debug messages into multiple classes, so we can selectively turn on/off debug output
-- [ ] virtualize remaining interfaces to policy namespace <br> requires: ? <br>required by: containers, application policy, unpriviliged user policy
-- [ ] split scope & view in code <br> requires: ? <br>required by: containers, application policy, unprivileged user policy
+- [ ] virtualize remaining interfaces to policy namespace <br> _requires: ? _<br>_required by: containers, application policy, unpriviliged user policy_
+- [ ] split scope & view in code <br> _requires: ?_ <br>_required by: containers, application policy, unprivileged user policy_
   - [ ] rename fns etc to scope, view or ns
   - [ ] implement scope & view functionality
   - [ ] move children profiles to special child namespace
