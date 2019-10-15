@@ -59,10 +59,20 @@ Most work items cover more than one section of the stack, however there are seve
   - [ ] Make label tree have lockless read side
   - [ ] Remove profile list (Requires: Make label tree have lockless read size)
   - [ ] fuzz interfaces
-  - [ ] Fix mediation to do single path name lookup and share across label it
-  - [ ] split label iterator it individual component iterators
+  - [ ] Fix mediation to do single path name lookup and share across label iterator
+  - [ ] split label iterator individual component iterators
   - [ ] task based debug flags
   - [ ] rework debug messages into multiple classes, so we can selectively turn on/off debug output
+  - [ ] virtualize remaining interfaces to policy namespace
+  - [ ] split scope & view in code
+        - [ ] rename fns etc to scope, view or ns
+        - [ ] implement scope & view functionality
+        - [ ] move children profiles to special child namespace
+  - [ ] Verify profile, ns, etc names meet specification
+  - [ ] on unpack create empty profiles/labels referenced by policy
+  - [ ] on unpack, prelink profile lookups etc where possible (requires: on unpack, create empty profiles/labels referenced by policy)
+
+
 
 ### library
   - [ ] remove overlay macro for fn
