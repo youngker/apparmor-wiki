@@ -13,6 +13,8 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - [ ] finish review/merge of outstanding merge requests (attachment xattrs)
   - [ ] alpha
   - [ ] release
+
+
 - [ ] 3.0 - target: early spring 2020
   - [ ] prompting and dependencies
   - [ ] policy hash
@@ -54,35 +56,35 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 ### library
-  - remove overlay macro for fn
+  - [ ] remove overlay macro for fn
 
 ### tooling
 
 ### init
-  - systemd link against libapparmor init, direct early load
+  - [ ] systemd link against libapparmor init, direct early load
 
 ### testing
-  - convert test generators away from perl (python)?
-  - convert regression tests to new infrastructure
+  - [ ] convert test generators away from perl (python)?
+  - [ ] convert regression tests to new infrastructure
 
 ### policy
-  - refactor apparmor profiles
-    - single tree
-      - distro dirs as branches
-    - move apparmor.d out of userspace release
+  - [ ] refactor apparmor profiles
+    - [ ] single upstream tree
+      - [ ] distro dirs as branches
+    - [ ] move apparmor.d out of userspace release
 
 ### infrastructure
-  - top level build target to build whole project
-  - fix --strip not being passed through correctly in build
-  - remove deprecated perl from repo (not perl generated swig interface) (issue ??)
-  - build flags default locations
-    - policy
-    - cache
-    - config
-  - support USE_SYSTEM=1 in parts of build not currently supported)
+  - [ ] `Joy`: top level build target to build whole project
+  - [ ] `Joy`: fix --strip not being passed through correctly in build
+  - [ ] remove deprecated perl from repo (not perl generated swig interface) (issue ??)
+  - [ ] build flags default locations. Make part of `common/`
+    - [ ] policy
+    - [ ] cache
+    - [ ] config
+  - [ ] support USE_SYSTEM=1 in parts of build not currently supported)
 
 ### misc
-  - update apparmor logo on cii best practices
+  - [ ] update apparmor logo on cii best practices
 
 ### multiple elements of the stack (kernel, compiler, testing, utils, library, documentation, ...)
   - policy_hash (apparmor 3.0)
