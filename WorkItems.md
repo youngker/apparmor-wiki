@@ -13,7 +13,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - permission remap work
   - type cache (dependency: permission remapping work)
   - support overlayfs
-  - split apparmorfs and make it directly mountable
+  - Mike: split apparmorfs and make it directly mountable
   - make apparmorfs dynamic (see nsfs)
 
 
