@@ -54,13 +54,30 @@ Most work items cover more than one section of the stack, however there are seve
 - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
 - [ ] `JJ`: nnp restrictions via stacking
 - [ ] `JJ`: permission remap work
-- [ ] type cache (dependency: permission remapping work)
+- [ ] type cache (requires: permission remapping work)
+- [ ] split label iterator individual component iterators
+- [ ] object delegation for prompting (requires: type cache, split label iterator)
+- [ ] kernel: prompting (requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations)
+  - [ ] interface file
+  - [ ] ioctl interface control
+  - [ ] ioctl uapi api
+  - [ ] ns wait queue for tasks waiting on event
+  - [ ] ns wait queue for tasks waiting on reply
+  - [ ] profile prompt flag (requires: profile flags)
+    - [ ] use of in kernel permission checks (requires: rework file mediation to use new code)
+    - [ ] unpack
+    - [ ] abi support flag
+    - [ ] audit info for prompt
+  - [ ] prompt rule qualifiers (requires: extended permissions, profile prompt flag)
+    - [ ] ???
+    - [ ] unpack
+    - [ ] abi support flag
+  - policy unpack
 - [ ] support overlayfs
 - [ ] Make label tree have lockless read side
 - [ ] Remove profile list (Requires: Make label tree have lockless read size)
 - [ ] fuzz interfaces
 - [ ] Fix mediation to do single path name lookup and share across label iterator
-- [ ] split label iterator individual component iterators
 - [ ] task based debug flags
 - [ ] rework debug messages into multiple classes, so we can selectively turn on/off debug output
 - [ ] virtualize remaining interfaces to policy namespace
@@ -72,6 +89,8 @@ Most work items cover more than one section of the stack, however there are seve
 - [ ] on unpack create empty profiles/labels referenced by policy
 - [ ] on unpack, prelink profile lookups etc where possible (requires: on unpack, create empty profiles/labels referenced by policy)
 - [ ] support multiple policy namespace elements in single policy blob
+
+
 
 
 
