@@ -7,6 +7,41 @@ current code base.
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
 # wi list
 
+# Release target 
+
+- 2.14 - late Oct/early Nov 2019
+  - out standing merge requests (attachment xattrs)
+  - alpha
+  - release
+
+- 3.0 - early spring 2020
+  - prompting and dependencies
+  - policy hash
+  - Build config of default locations for policy, configs, cache, ...
+  - overlay of
+    - policy
+    - configs
+  - cache
+    - fallback if exact match not found
+    - support warn if exact match not found
+  - allow all,
+  - compiler
+    - intersection of kernel abi and specified abi
+    - document abi priotity
+  - when does policy abi override, compiler specified abi, vs defaulting to kernel abi
+    - cleanup warnings
+  - abi
+  - fd interface
+  - multi-query
+
+- 3.1
+  - tbd
+
+## By subsystem break down
+
+Most work items cover more than one section of the stack, however there are several smaller items that affect just one area. Document those here so they can be opportunistically picked off.
+
+
 ### kernel
   - nnp restrictions via stacking
   - fuzz interfaces
@@ -18,6 +53,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 
 ### library
+  - remove overlay macro for fn
 
 ### tooling
 
@@ -27,7 +63,6 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 ### testing
   - convert test generators away from perl (python)?
   - convert regression tests to new infrastructure
-  - 
 
 ### policy
   - refactor apparmor profiles
@@ -39,11 +74,22 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - top level build target to build whole project
   - fix --strip not being passed through correctly in build
   - remove deprecated perl from repo (not perl generated swig interface) (issue ??)
-  
+  - build flags default locations
+    - policy
+    - cache
+    - config
+  - support USE_SYSTEM=1 in parts of build not currently supported)
+
 ### misc
   - update apparmor logo on cii best practices
 
 ### multiple elements of the stack (kernel, compiler, testing, utils, library, documentation, ...)
+  - policy_hash (apparmor 3.0)
+    - kernel:
+      - ignore if present
+      - export support of ignore
+    - parser: compute and compare
+    - library: load to strip hash if not supported by kernel
   - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, object delegation, locking rework, buffer rework, type cache)
     - kernel
       - type cache
@@ -99,6 +145,13 @@ For a list of improvements and extensions to AppArmor see the [development roadm
       - early direct load
       - secondary late phase that can recompile/reload policy
   - criu for labeled and delegated objects
+  - rule prefixes front end (accept in language but drop/ignore)
+    - quiet
+    - kill
+    - prompt
+    - access
+    - complain
+  - rule prefixes backend (requires: rule prefixes front end, extended permissions)
 
 
 
@@ -109,34 +162,11 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 
 - a//b exec target bug
-- apparmor 3
-  - overlay
-    - policy
-    - configs
-  - cache
-    - fallback if exact match not found
-    - support warn if exact match not found
-  - allow all,
-  - compiler
-    - intersection of kernel abi and specified abi
-    - document abi priotity
-  - when does policy abi override, compiler specified abi, vs defaulting to kernel abi
-    - cleanup warnings
-  - build flags default locations
-    - policy
-    - cache
-    - config
-  - policy_hash
-  - abi
-  - fd interface
-  - multi-query
+
 
   
 
-  - prefix
-    - quiet
-    - kill
-    - complain
+
   - proc interface replacement in lib
   - aa-policy
     - default location, overlay support
