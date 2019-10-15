@@ -7,32 +7,32 @@ current code base.
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
 # wi list
 
-# Release target 
+# Release targets
 
-- 2.14 - late Oct/early Nov 2019
-  - out standing merge requests (attachment xattrs)
-  - alpha
-  - release
+- [ ] 2.14 - target: late Oct/early Nov 2019
+  - [ ] finish review/merge of outstanding merge requests (attachment xattrs)
+  - [ ] alpha
+  - [ ] release
 
-- 3.0 - early spring 2020
-  - prompting and dependencies
-  - policy hash
-  - Build config of default locations for policy, configs, cache, ...
-  - overlay of
-    - policy
-    - configs
-  - cache
-    - fallback if exact match not found
-    - support warn if exact match not found
-  - allow all,
-  - compiler
-    - intersection of kernel abi and specified abi
-    - document abi priotity
-  - when does policy abi override, compiler specified abi, vs defaulting to kernel abi
-    - cleanup warnings
-  - abi
-  - fd interface
-  - multi-query
+- [ ] 3.0 - target: early spring 2020
+  - [ ] prompting and dependencies
+  - [ ] policy hash
+  - [ ] Build config of default locations for policy, configs, cache, ...
+  - [ ] overlay of
+    - [ ] policy
+    - [ ] configs
+  - [ ] cache
+    - [ ] fallback if exact match not found
+    - [ ] support warn if exact match not found
+  - [ ] allow all,
+  - [ ] compiler
+    - [ ] intersection of kernel abi and specified abi
+    - [ ] document abi priotity
+  - [ ] when does policy abi override, compiler specified abi, vs defaulting to kernel abi
+    - [ ] cleanup warnings
+  - [ ] abi
+  - [ ] fd interface
+  - [ ] multi-query
 
 - 3.1
   - tbd
@@ -43,6 +43,7 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 ### kernel
+  - [x] In kernel raw policy data compression (Chris)
   - nnp restrictions via stacking
   - fuzz interfaces
   - permission remap work
