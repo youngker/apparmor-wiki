@@ -36,6 +36,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - [ ] fd interface
   - [ ] multi-query
 
+---
 
 - 3.1
   - tbd
