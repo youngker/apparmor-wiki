@@ -47,7 +47,7 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 ### kernel
-- [x] `JJ`: Rework Kernel locking to support prompting and realtime <br>required by: prompting
+- [x] `JJ`: Rework Kernel locking to support prompting and realtime <br>`#FFFF00required by: prompting`
 - [x] `JJ`: Rework buffer allocation to support prompting and realtime <br>required by: promtpting
 - [x] `Chris`: In kernel raw policy data compression
 - [ ] `Mike`: split apparmorfs and make it directly mountable <br>required by: contextless container boot
