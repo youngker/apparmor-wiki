@@ -54,7 +54,7 @@ Most work items cover more than one section of the stack, however there are seve
   - [ ] type cache (dependency: permission remapping work)
   - [ ] support overlayfs
   - [ ] `Mike`: split apparmorfs and make it directly mountable
-  - [ ] make apparmorfs dynamic (see nsfs)
+  - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
 
 
 ### library
