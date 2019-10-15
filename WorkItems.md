@@ -71,6 +71,7 @@ Most work items cover more than one section of the stack, however there are seve
 - [ ] Verify profile, ns, etc names meet specification
 - [ ] on unpack create empty profiles/labels referenced by policy
 - [ ] on unpack, prelink profile lookups etc where possible (requires: on unpack, create empty profiles/labels referenced by policy)
+- [ ] support multiple policy namespace elements in single policy blob
 
 
 
