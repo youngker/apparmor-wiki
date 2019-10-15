@@ -13,7 +13,6 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - [ ] finish review/merge of outstanding merge requests (attachment xattrs)
   - [ ] alpha
   - [ ] release
-
 - [ ] 3.0 - target: early spring 2020
   - [ ] prompting and dependencies
   - [ ] policy hash
@@ -34,6 +33,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - [ ] fd interface
   - [ ] multi-query
 
+
 - 3.1
   - tbd
 
@@ -43,14 +43,14 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 ### kernel
-  - [x] In kernel raw policy data compression (Chris)
-  - nnp restrictions via stacking
-  - fuzz interfaces
-  - permission remap work
-  - type cache (dependency: permission remapping work)
-  - support overlayfs
-  - Mike: split apparmorfs and make it directly mountable
-  - make apparmorfs dynamic (see nsfs)
+  - [x] (Chris): In kernel raw policy data compression
+  - [ ] nnp restrictions via stacking
+  - [ ] fuzz interfaces
+  - [ ] permission remap work
+  - [ ] type cache (dependency: permission remapping work)
+  - [ ] support overlayfs
+  - [ ] (Mike): split apparmorfs and make it directly mountable
+  - [ ] make apparmorfs dynamic (see nsfs)
 
 
 ### library
