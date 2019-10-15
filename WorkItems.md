@@ -14,7 +14,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
   - [ ] alpha
   - [ ] release
 
-
+<br>
 
 - [ ] 3.0 - target: early spring 2020
   - [ ] prompting and dependencies
