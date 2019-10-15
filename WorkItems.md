@@ -59,6 +59,10 @@ Most work items cover more than one section of the stack, however there are seve
   - [ ] Make label tree have lockless read side
   - [ ] Remove profile list (Requires: Make label tree have lockless read size)
   - [ ] fuzz interfaces
+  - [ ] Fix mediation to do single path name lookup and share across label it
+  - [ ] split label iterator it individual component iterators
+  - [ ] task based debug flags
+  - [ ] rework debug messages into multiple classes, so we can selectively turn on/off debug output
 
 ### library
   - [ ] remove overlay macro for fn
