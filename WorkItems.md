@@ -43,13 +43,13 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 ### kernel
-  - [x] (Chris): In kernel raw policy data compression
+  - [x] `Chris`: In kernel raw policy data compression
   - [ ] nnp restrictions via stacking
   - [ ] fuzz interfaces
   - [ ] permission remap work
   - [ ] type cache (dependency: permission remapping work)
   - [ ] support overlayfs
-  - [ ] (Mike): split apparmorfs and make it directly mountable
+  - [ ] `Mike`: split apparmorfs and make it directly mountable
   - [ ] make apparmorfs dynamic (see nsfs)
 
 
