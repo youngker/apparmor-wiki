@@ -47,10 +47,10 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 ### kernel
-- [x] `JJ`: Rework Kernel locking to support prompting and realtime <br><p style="color:#FF0000;">required by: prompting</p>
-- [x] `JJ`: Rework buffer allocation to support prompting and realtime <br>required by: promtpting
+- [x] `JJ`: Rework Kernel locking to support prompting and realtime <br>_required by: prompting_
+- [x] `JJ`: Rework buffer allocation to support prompting and realtime <br>_required by: prompting_
 - [x] `Chris`: In kernel raw policy data compression
-- [ ] `Mike`: split apparmorfs and make it directly mountable <br>required by: contextless container boot
+- [ ] `Mike`: split apparmorfs and make it directly mountable <br>_required by: contextless container boot_
 - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
 - [ ] `JJ`: nnp restrictions via stacking <br>required by: nnp override rules
 - [ ] `JJ`: permission remap work <br>required by: extended permissions
