@@ -306,10 +306,9 @@ Most work items cover more than one section of the stack, however there are seve
 
 ```mermaid
 graph TD;
-  Prompting --> Prompting Kernel Work;
+  Prompting --> "Prompting Kernel Work";
   Prompting --> Parser;
-  Prompting --> libapparmor api;
-  Prompting --> libapparmor audit parsing;
+  Prompting --> B;
   B --> C;
   B --> D;
   C --> F;
