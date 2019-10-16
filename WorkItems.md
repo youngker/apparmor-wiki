@@ -305,13 +305,12 @@ Most work items cover more than one section of the stack, however there are seve
   PromptKernel[Prompting Kernel] -> KernelBuffer[Rework buffer allocation to support prompting and realtime]
 
 ```mermaid
-graph TD;
-  Prompting --> "Prompting Kernel Work";
-  Prompting --> Parser;
-  Prompting --> B;
-  B --> C;
-  B --> D;
-  C --> F;
+graph TB
+  subgraph "Prompting Dependencies"
+  Prompting[Prompting] --> KernelWork[Prompting Kernel Work]
+  Prompting --> ProfileFlags[Profile Flags]
+  Prompting --> ProfilePrefix[Rule Prefixes]
+end
 ```
 
 
