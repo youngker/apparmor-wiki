@@ -349,11 +349,11 @@ graph TB
   ExtendedPerms --> PrefixKernel[Kernel prefix support]
   ExtendedPerms --> PrefixPolicy[Prefix Support in policy]
   ExtendedPerms --> PermsUnpack[Kernel Unpack extended perms]
-  ExtendedPerms --> MovePermPacktoBackend[Permission Mapping in Backend of Compiler]
+  ExtendedPerms --> MovePermPack[Permission Mapping in Backend of Compiler]
   PrefixKernel --> PrefixPolicy
   PrefixPolicy --> ParserPrefix[Prefix support in Parser]
   PrefixPolicy --> UtilsPrefix[Prefix support in Utils]
-  PrefixPolicy ->> MovePermPacktoBackend
+  PrefixPolicy --> MovePermPack
 end
 ```
 
