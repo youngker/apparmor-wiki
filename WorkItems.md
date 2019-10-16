@@ -44,6 +44,8 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 # Prompting
 
+### Dependencies
+
 ```mermaid
 graph TB
   subgraph "Prompting Dependencies"
@@ -99,6 +101,7 @@ graph TB
 end
 ```
 
+### Work Items
 - [x] `JJ`: Rework Kernel locking to support prompting and realtime
 - [x] `JJ`: Rework buffer allocation to support prompting and realtime
 - [ ] `JJ`: permission remap work
