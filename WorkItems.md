@@ -341,7 +341,7 @@ graph TB
   UtilsNotifyPolicy --> LibNotifyPolicy
   UtilsNotifyPolicy --> ParserNotifyPolicy
   TypeCache --> ObjType[Object Type]
-  ObjType -> PermRemap[permission remap]
+  ObjType --> PermRemap[permission remap]
   KernelWork --> AuditRework[Rework AppArmor Audit]
   ObjectDelegationBase --> TypeCache
   ObjectDelegationBase --> LabelIt[Split Label Iterator]
