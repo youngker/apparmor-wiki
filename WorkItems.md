@@ -300,16 +300,59 @@ Most work items cover more than one section of the stack, however there are seve
 # expanded wi
 
 ## Prompting
+- [ ] object delegation for prompting <br>_requires: type cache, split label iterator_ <br>_required by: prompting, delegation_
+- [ ] kernel: prompting <br>_requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations_ <br> _required by: prompting_
+  - [ ] interface file
+  - [ ] ioctl interface control
+  - [ ] ioctl uapi api
+  - [ ] ns wait queue for tasks waiting on event
+  - [ ] ns wait queue for tasks waiting on reply
+  - [ ] profile prompt flag (requires: profile flags)
+    - [ ] use of in kernel permission checks <br>_requires: rework file mediation to use new code_
+    - [ ] unpack
+    - [ ] abi support flag
+    - [ ] audit info for prompt
+  - [ ] prompt rule qualifiers _requires: extended permissions, profile prompt flag_
+    - [ ] ???
+    - [ ] unpack
+    - [ ] abi support flag
+  - policy unpack
+  - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, object delegation, locking rework, buffer rework, type cache)
+    - kernel
+      - type cache
+  - extended permissions (dependency: kernel permission remap work)
+  - profile flags
+    - prompt
+    - kill + signal control
+    - debug
+  - audit rework
+    - lib update to handle
+    - kernel: audit caching dedup
+    - kernel: mem off stack, cleanup reduce entries
+    - kernel: share info/dedup
+- rule prefixes front end (accept in language but drop/ignore)
+    - quiet
+    - kill
+    - prompt
+    - access
+    - complain
+  - rule prefixes backend (requires: rule prefixes front end, extended permissions)
 
-  PromptKernel[Prompting Kernel] -> KernelLock[Rework Kernel locking to support prompting and realtime]
-  PromptKernel[Prompting Kernel] -> KernelBuffer[Rework buffer allocation to support prompting and realtime]
+
 
 ```mermaid
 graph TB
   subgraph "Prompting Dependencies"
-  Prompting[Prompting] --> KernelWork[Prompting Kernel Work]
+  Prompting[Prompting] --> KernelWork[Base Kernel Changes]
   Prompting --> ProfileFlags[Profile Flags]
+  ProfileFlags --> KernelFlag[Profile Flags in Kernel]
+  KernelFlags --> ParserFlags[Parser support for prompt flag]
+  ProfileFlags --> UserSpaceFlags[Profile Flags in Userspace]
+  UserSpaceFlags --> ParserFlags
+  UserSpaceFlags --> UtilsFlags[Utils support for prompt flag]
   Prompting --> ProfilePrefix[Rule Prefixes]
+  KernelWork --> KernelLock[Locking Rework]
+  KernelWork --> KernelBuffer[Buffer Rework]
 end
 ```
 
