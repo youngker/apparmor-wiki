@@ -300,40 +300,27 @@ Most work items cover more than one section of the stack, however there are seve
 # expanded wi
 
 ## Prompting
-- [ ] object delegation for prompting <br>_requires: type cache, split label iterator_ <br>_required by: prompting, delegation_
+
 - [ ] kernel: prompting <br>_requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations_ <br> _required by: prompting_
   - [ ] interface file
   - [ ] ioctl interface control
   - [ ] ioctl uapi api
   - [ ] ns wait queue for tasks waiting on event
   - [ ] ns wait queue for tasks waiting on reply
-  - [ ] profile prompt flag (requires: profile flags)
-    - [ ] use of in kernel permission checks <br>_requires: rework file mediation to use new code_
-    - [ ] unpack
-    - [ ] abi support flag
-    - [ ] audit info for prompt
   - [ ] prompt rule qualifiers _requires: extended permissions, profile prompt flag_
     - [ ] ???
     - [ ] unpack
     - [ ] abi support flag
   - policy unpack
   - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, object delegation, locking rework, buffer rework, type cache)
-    - kernel
-      - type cache
-  - extended permissions (dependency: kernel permission remap work)
+
+  - 
 
   - audit rework
     - lib update to handle
     - kernel: audit caching dedup
     - kernel: mem off stack, cleanup reduce entries
     - kernel: share info/dedup
-- rule prefixes front end (accept in language but drop/ignore)
-    - quiet
-    - kill
-    - prompt
-    - access
-    - complain
-  - rule prefixes backend (requires: rule prefixes front end, extended permissions)
 
 
 
@@ -344,6 +331,7 @@ graph TB
   Prompting --> ProfileFlags[Profile Flags]
   ProfileFlags --> KernelFlags[Profile Flags in Kernel]
   KernelFlags --> ParserFlags[Parser support for prompt flag]
+  KernelFlags --> KernelPermsCheck[Rework file Perm check]
   ProfileFlags --> UserSpaceFlags[Profile Flags in Userspace]
   UserSpaceFlags --> ParserFlags
   UserSpaceFlags --> UtilsFlags[Utils support for prompt flag]
@@ -354,6 +342,15 @@ graph TB
   KernelWork --> TypeCache[Type Cache]
   KernelWork --> AuditRework[Rework AppArmor Audit]
   ObjectDelegationBase --> TypeCache
+  ObjectDelegationBase --> LabelIt[Split Label Iterator]
+  Prompting --> RulePrefixes [Prompt Rule Prefix]
+  RulePrefixes --> ExtendedPerms[extended permissions]
+  ExtendedPerms --> PermRemap[permission remap]
+  ExtendedPerms --> PrefixKernel [Kernel prefix support]
+  ExtendedPerms --> PrefixPolicy [Prefix Support in policy]
+  PrefixKernel --> PrefixPolicy
+  PrefixPolicy --> ParserPrefix [Prefix support in Parser]
+  PrefixPolicy --> UtilsPrefix [Prefix support in Utils]
 
 end
 ```
