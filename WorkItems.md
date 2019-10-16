@@ -301,11 +301,11 @@ Most work items cover more than one section of the stack, however there are seve
 
 ## Prompting
 
-```mermaid
-graph TD
-
   PromptKernel[Prompting Kernel] -> KernelLock[Rework Kernel locking to support prompting and realtime]
   PromptKernel[Prompting Kernel] -> KernelBuffer[Rework buffer allocation to support prompting and realtime]
+
+```mermaid
+graph TD
 
   SubGraph1 --> SubGraph1Flow
   subgraph "SubGraph 1 Flow"
