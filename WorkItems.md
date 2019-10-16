@@ -301,7 +301,7 @@ Most work items cover more than one section of the stack, however there are seve
 
 ## Prompting
 
-- [ ] kernel: prompting <br>_requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations_ <br> _required by: prompting_
+- [ ] kernel: prompting <br>_requires: 
   - [ ] interface file
   - [ ] ioctl interface control
   - [ ] ioctl uapi api
@@ -312,7 +312,7 @@ Most work items cover more than one section of the stack, however there are seve
     - [ ] unpack
     - [ ] abi support flag
   - policy unpack
-  - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, object delegation, locking rework, buffer rework, type cache)
+  - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, o
 
   - 
 
@@ -348,16 +348,19 @@ graph TB
   ExtendedPerms --> PermRemap[permission remap]
   ExtendedPerms --> PrefixKernel[Kernel prefix support]
   ExtendedPerms --> PrefixPolicy[Prefix Support in policy]
+  ExtendedPerms --> PermsUnpack[Kernel Unpack extended perms]
+  ExtendedPerms --> MovePermPacktoBackend[Permission Mapping in Backend of Compiler]
   PrefixKernel --> PrefixPolicy
   PrefixPolicy --> ParserPrefix[Prefix support in Parser]
   PrefixPolicy --> UtilsPrefix[Prefix support in Utils]
+  PrefixPolicy ->> MovePermPacktoBackend
 end
 ```
 
 
 
 
-- kernel: policy blob compression
+## kernel: policy blob compression `(DONE)`
   - dependencies: none
   - description: improve kernel memory usage by compressing the policy blobs which are used for dedup and check point and restore.
   - kernel: make transparent to userspace
