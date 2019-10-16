@@ -307,18 +307,11 @@ Most work items cover more than one section of the stack, however there are seve
 ```mermaid
 graph TD
 
-  SubGraph1 --> SubGraph1Flow
-  subgraph "SubGraph 1 Flow"
-  SubGraph1Flow(SubNode 1)
-  SubGraph1Flow -- Choice1 --> DoChoice1
-  SubGraph1Flow -- Choice2 --> DoChoice2
-  end
-
-  subgraph "Main Graph"
-  Node1[Node 1] --> Node2[Node 2]
-  Node2 --> SubGraph1[Jump to SubGraph1]
-  SubGraph1 --> FinalThing[Final Thing]
-
+  A -> B
+  A -> D
+  B -> C
+  B -> D
+  C -> F
 
 end
 ```
