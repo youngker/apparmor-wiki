@@ -306,8 +306,10 @@ Most work items cover more than one section of the stack, however there are seve
 
 ```mermaid
 graph TD;
-  A --> B;
-  A --> D;
+  Prompting --> Prompting Kernel Work;
+  Prompting --> Parser;
+  Prompting --> libapparmor api;
+  Prompting --> libapparmor audit parsing;
   B --> C;
   B --> D;
   C --> F;
@@ -481,7 +483,6 @@ graph TD;
   - allocate unique id for each message diverted to userspace
   - add messages to cache so we can dedup
 
-- prompting
 
 
 
