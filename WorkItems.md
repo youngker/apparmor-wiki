@@ -301,14 +301,6 @@ Most work items cover more than one section of the stack, however there are seve
 
 # Prompting
 
-  - audit rework
-    - lib update to handle
-    - kernel: audit caching dedup
-    - kernel: mem off stack, cleanup reduce entries
-    - kernel: share info/dedup
-
-
-
 ```mermaid
 graph TB
   subgraph "Prompting Dependencies"
@@ -330,6 +322,7 @@ graph TB
   KernelWork --> ioctluapi[ioctl uapi]
   KernelWork --> fdqueue[fd interface queues]
   KernelWork --> taskqueue[task queues]
+  KernelWork --> AuditEventQueue[Queue for prompt audit events]
   Prompting --> UserAPI[libapparmor API]
   UserAPI --> ioctluapi
   UserAPI --> kernelInterface
@@ -355,6 +348,11 @@ graph TB
   PrefixPolicy --> ParserPrefix[Prefix support in Parser]
   PrefixPolicy --> UtilsPrefix[Prefix support in Utils]
   PrefixPolicy --> MovePermPack
+  AuditEventQueue -->AuditRecordReroute[Reroute events from Audit to Prompt subsystem]
+  KernelWork --> AuditDeDup[Dedup audit records]
+  AuditRecordReroute --> AuditCache[Caching of Audit records]
+  AuditCache --> AuditObject[Audit Record allocation]
+  AuditObject --> AuditStack[AuditRecordOffStack]
 end
 ```
 
