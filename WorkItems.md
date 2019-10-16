@@ -308,7 +308,7 @@ Most work items cover more than one section of the stack, however there are seve
 graph TD
 
   A --> B;
-  A --help--> D;
+  A -- help --> D;
   B --> C;
   B --> D;
   C --> F;
