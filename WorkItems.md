@@ -42,7 +42,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 - 3.1
   - tbd
 
-# Prompting
+# Notifications: Prompting
 
 ### Dependencies
 
