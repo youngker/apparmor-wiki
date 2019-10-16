@@ -299,22 +299,7 @@ Most work items cover more than one section of the stack, however there are seve
 
 # expanded wi
 
-## Prompting
-
-- [ ] kernel: prompting <br>_requires: 
-  - [ ] interface file
-  - [ ] ioctl interface control
-  - [ ] ioctl uapi api
-  - [ ] ns wait queue for tasks waiting on event
-  - [ ] ns wait queue for tasks waiting on reply
-  - [ ] prompt rule qualifiers _requires: extended permissions, profile prompt flag_
-    - [ ] ???
-    - [ ] unpack
-    - [ ] abi support flag
-  - policy unpack
-  - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, o
-
-  - 
+# Prompting
 
   - audit rework
     - lib update to handle
@@ -341,11 +326,27 @@ graph TB
   KernelWork --> KernelBuffer[Buffer Rework]
   KernelWork --> ObjectDelegationBase[Internal Object Delegation]
   KernelWork --> TypeCache[Type Cache]
+  KernelWork --> kernelInterface[kernel interface]
+  KernelWork --> ioctluapi[ioctl uapi]
+  KernelWork --> fdqueue[fd interface queues]
+  KernelWork --> taskqueue[task queues]
+  Prompting --> UserAPI[libapparmor API]
+  UserAPI --> ioctluapi
+  UserAPI --> kernelInterface
+  Prompting --> NotifyPolicy[Notification Policy]
+  NotifyPolicy --> KernNotifPolicy[Kernel check notify policy]
+  NotifyPolicy --> ParserNotifyPolicy[Parser support Notify policy]
+  NotifyPolicy --> UtilsNotifyPolicy[Utils support Notify policy]
+  NotifyPolicy --> LibNotifyPolicy[Library parse notification audit]
+  UtilsNotifyPolicy --> LibNotifyPolicy
+  UtilsNotifyPolicy --> ParserNotifyPolicy
+  TypeCache --> ObjType[Object Type]
+  ObjType -> PermRemap[permission remap]
   KernelWork --> AuditRework[Rework AppArmor Audit]
   ObjectDelegationBase --> TypeCache
   ObjectDelegationBase --> LabelIt[Split Label Iterator]
   RulePrefixes --> ExtendedPerms[extended permissions]
-  ExtendedPerms --> PermRemap[permission remap]
+  ExtendedPerms --> PermRemap
   ExtendedPerms --> PrefixKernel[Kernel prefix support]
   ExtendedPerms --> PrefixPolicy[Prefix Support in policy]
   ExtendedPerms --> PermsUnpack[Kernel Unpack extended perms]
@@ -360,7 +361,7 @@ end
 
 
 
-## kernel: policy blob compression `(DONE)`
+# kernel: policy blob compression `(DONE)`
   - dependencies: none
   - description: improve kernel memory usage by compressing the policy blobs which are used for dedup and check point and restore.
   - kernel: make transparent to userspace
