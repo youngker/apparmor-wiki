@@ -305,7 +305,7 @@ Most work items cover more than one section of the stack, however there are seve
   PromptKernel[Prompting Kernel] -> KernelBuffer[Rework buffer allocation to support prompting and realtime]
 
 ```mermaid
-graph TD
+graph TD;
 
   A --> B;
   A --> D;
