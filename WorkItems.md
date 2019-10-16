@@ -1,8 +1,9 @@
 Work Items
 ==========
 
-This is a list of outstanding work items that can be done against the
-current code base.
+This is a list of outstanding work items that can be done against the current code base.
+
+Some items are grouped by a targeted feature, others by the subsystem they are in.
 
 For a list of improvements and extensions to AppArmor see the [development roadmap](DevelopmentRoadmap)
 # wi list
@@ -41,40 +42,118 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 - 3.1
   - tbd
 
-## By subsystem break down
+# Prompting
+
+```mermaid
+graph TB
+  subgraph "Prompting Dependencies"
+  Prompting[Prompting] --> KernelWork[Base Kernel Changes]
+  Prompting --> ProfileFlags[Profile Flags]
+  Prompting --> RulePrefixes[Prompt Rule Prefix]
+  ProfileFlags --> KernelFlags[Profile Flags in Kernel]
+  KernelFlags --> ParserFlags[Parser support for prompt flag]
+  KernelFlags --> KernelPermsCheck[Rework file Perm check]
+  ProfileFlags --> UserSpaceFlags[Profile Flags in Userspace]
+  UserSpaceFlags --> ParserFlags
+  UserSpaceFlags --> UtilsFlags[Utils support for prompt flag]
+  Prompting --> ProfilePrefix[Rule Prefixes]
+  KernelWork --> KernelLock[Locking Rework]
+  KernelWork --> KernelBuffer[Buffer Rework]
+  KernelWork --> ObjectDelegationBase[Internal Object Delegation]
+  KernelWork --> TypeCache[Type Cache]
+  KernelWork --> kernelInterface[kernel interface]
+  KernelWork --> ioctluapi[ioctl uapi]
+  KernelWork --> fdqueue[fd interface queues]
+  KernelWork --> taskqueue[task queues]
+  KernelWork --> AuditEventQueue[Queue for prompt audit events]
+  Prompting --> UserAPI[libapparmor API]
+  UserAPI --> ioctluapi
+  UserAPI --> kernelInterface
+  Prompting --> NotifyPolicy[Notification Policy]
+  NotifyPolicy --> KernNotifPolicy[Kernel check notify policy]
+  NotifyPolicy --> ParserNotifyPolicy[Parser support Notify policy]
+  NotifyPolicy --> UtilsNotifyPolicy[Utils support Notify policy]
+  NotifyPolicy --> LibNotifyPolicy[Library parse notification audit]
+  UtilsNotifyPolicy --> LibNotifyPolicy
+  UtilsNotifyPolicy --> ParserNotifyPolicy
+  TypeCache --> ObjType[Object Type]
+  ObjType --> PermRemap[permission remap]
+  KernelWork --> AuditRework[Rework AppArmor Audit]
+  ObjectDelegationBase --> TypeCache
+  ObjectDelegationBase --> LabelIt[Split Label Iterator]
+  RulePrefixes --> ExtendedPerms[extended permissions]
+  ExtendedPerms --> PermRemap
+  ExtendedPerms --> PrefixKernel[Kernel prefix support]
+  ExtendedPerms --> PrefixPolicy[Prefix Support in policy]
+  ExtendedPerms --> PermsUnpack[Kernel Unpack extended perms]
+  ExtendedPerms --> MovePermPack[Permission Mapping in Backend of Compiler]
+  PrefixKernel --> PrefixPolicy
+  PrefixPolicy --> ParserPrefix[Prefix support in Parser]
+  PrefixPolicy --> UtilsPrefix[Prefix support in Utils]
+  PrefixPolicy --> MovePermPack
+  AuditEventQueue -->AuditRecordReroute[Reroute events from Audit to Prompt subsystem]
+  KernelWork --> AuditDeDup[Dedup audit records]
+  AuditRecordReroute --> AuditCache[Caching of Audit records]
+  AuditCache --> AuditObject[Audit Record allocation]
+  AuditObject --> AuditStack[AuditRecordOffStack]
+end
+```
+
+- [x] `JJ`: Rework Kernel locking to support prompting and realtime
+- [x] `JJ`: Rework buffer allocation to support prompting and realtime
+- [ ] `JJ`: permission remap work
+- [ ] type cache (requires: permission remapping work
+- [ ] split label iterator individual component iterators
+- [ ] object delegation for prompting
+- [ ] interface file
+- [ ] ioctl interface control
+- [ ] ioctl uapi api
+- [ ] ns wait queue for tasks waiting on event
+- [ ] ns wait queue for tasks waiting on reply
+- [ ] profile prompt flag (requires: profile flags)
+  - [ ] use of in kernel permission checks <br>_requires: rework file mediation to use new code_
+  - [ ] unpack
+  - [ ] abi support flag
+  - [ ] audit info for prompt
+- [ ] prompt rule qualifiers _requires: extended permissions, profile prompt flag_
+  - [ ] ???
+  - [ ] unpack
+  - [ ] abi support flag
+- policy unpack
+  - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, object delegation, locking rework, buffer rework, type cache)
+    - kernel
+      - type cache
+  - extended permissions (dependency: kernel permission remap work)
+  - profile flags
+    - prompt
+    - kill + signal control
+    - debug
+  - audit rework
+    - lib update to handle
+    - kernel: audit caching dedup
+    - kernel: mem off stack, cleanup reduce entries
+    - kernel: share info/dedup
+  - rule prefixes front end (accept in language but drop/ignore)
+    - quiet
+    - kill
+    - prompt
+    - access
+    - complain
+  - rule prefixes backend (requires: rule prefixes front end, extended permissions)
+
+
+
+# By subsystem break down
 
 Most work items cover more than one section of the stack, however there are several smaller items that affect just one area. Document those here so they can be opportunistically picked off.
 
-
 ### kernel
-- [x] `JJ`: Rework Kernel locking to support prompting and realtime <br>_required by: prompting_
-- [x] `JJ`: Rework buffer allocation to support prompting and realtime <br>_required by: prompting_
 - [x] `Chris`: In kernel raw policy data compression
 - [ ] `Mike`: split apparmorfs and make it directly mountable <br>_required by: contextless container boot_
 - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
 - [ ] `JJ`: nnp restrictions via stacking <br>_required by: nnp override rules_
-- [ ] `JJ`: permission remap work <br>_required by: extended permissions_
-- [ ] type cache (requires: permission remapping work <br>_required by: extended permissions_
-- [ ] split label iterator individual component iterators <br>_required by: delegation_
-- [ ] object delegation for prompting <br>_requires: type cache, split label iterator_ <br>_required by: prompting, delegation_
 - [ ] generic object delegation <br>_requires: object delegation for prompting_ <br>_required by: delegation_
 - [ ] rule delegation <br>_requires: ?_ <br>_required by: delegation_
-- [ ] kernel: prompting <br>_requires: object delegation, permission remap, rework kernel locking, rework kernel buffer allocations_ <br> _required by: prompting_
-  - [ ] interface file
-  - [ ] ioctl interface control
-  - [ ] ioctl uapi api
-  - [ ] ns wait queue for tasks waiting on event
-  - [ ] ns wait queue for tasks waiting on reply
-  - [ ] profile prompt flag (requires: profile flags)
-    - [ ] use of in kernel permission checks <br>_requires: rework file mediation to use new code_
-    - [ ] unpack
-    - [ ] abi support flag
-    - [ ] audit info for prompt
-  - [ ] prompt rule qualifiers _requires: extended permissions, profile prompt flag_
-    - [ ] ???
-    - [ ] unpack
-    - [ ] abi support flag
-  - policy unpack
 - [ ] support overlayfs
 - [ ] Make label tree have lockless read side
 - [ ] Remove profile list _requires: Make label tree have lockless read size_
@@ -92,9 +171,6 @@ Most work items cover more than one section of the stack, however there are seve
 - [ ] on unpack, prelink profile lookups etc where possible <br>requires: on unpack, create empty profiles/labels referenced by policy
 - [ ] support multiple policy namespace elements in single policy blob
 - [ ] policy resource accounting <br>required by: unprivileged user policy, application policy
-
-
-
 
 
 ### library
@@ -135,19 +211,6 @@ Most work items cover more than one section of the stack, however there are seve
       - export support of ignore
     - parser: compute and compare
     - library: load to strip hash if not supported by kernel
-  - prompt (dendencies: extended permissions, profile flags, kernel: audit rework, object delegation, locking rework, buffer rework, type cache)
-    - kernel
-      - type cache
-  - extended permissions (dependency: kernel permission remap work)
-  - profile flags
-    - prompt
-    - kill + signal control
-    - debug
-  - audit rework
-    - lib update to handle
-    - kernel: audit caching dedup
-    - kernel: mem off stack, cleanup reduce entries
-    - kernel: share info/dedup
   - text policy
     - kernel: support loading text policy and compress it
     - parser: keep or regen text policy, load into kernel
@@ -190,14 +253,6 @@ Most work items cover more than one section of the stack, however there are seve
       - early direct load
       - secondary late phase that can recompile/reload policy
   - criu for labeled and delegated objects
-  - rule prefixes front end (accept in language but drop/ignore)
-    - quiet
-    - kill
-    - prompt
-    - access
-    - complain
-  - rule prefixes backend (requires: rule prefixes front end, extended permissions)
-
 
 
 
@@ -298,63 +353,6 @@ Most work items cover more than one section of the stack, however there are seve
 
 
 # expanded wi
-
-# Prompting
-
-```mermaid
-graph TB
-  subgraph "Prompting Dependencies"
-  Prompting[Prompting] --> KernelWork[Base Kernel Changes]
-  Prompting --> ProfileFlags[Profile Flags]
-  Prompting --> RulePrefixes[Prompt Rule Prefix]
-  ProfileFlags --> KernelFlags[Profile Flags in Kernel]
-  KernelFlags --> ParserFlags[Parser support for prompt flag]
-  KernelFlags --> KernelPermsCheck[Rework file Perm check]
-  ProfileFlags --> UserSpaceFlags[Profile Flags in Userspace]
-  UserSpaceFlags --> ParserFlags
-  UserSpaceFlags --> UtilsFlags[Utils support for prompt flag]
-  Prompting --> ProfilePrefix[Rule Prefixes]
-  KernelWork --> KernelLock[Locking Rework]
-  KernelWork --> KernelBuffer[Buffer Rework]
-  KernelWork --> ObjectDelegationBase[Internal Object Delegation]
-  KernelWork --> TypeCache[Type Cache]
-  KernelWork --> kernelInterface[kernel interface]
-  KernelWork --> ioctluapi[ioctl uapi]
-  KernelWork --> fdqueue[fd interface queues]
-  KernelWork --> taskqueue[task queues]
-  KernelWork --> AuditEventQueue[Queue for prompt audit events]
-  Prompting --> UserAPI[libapparmor API]
-  UserAPI --> ioctluapi
-  UserAPI --> kernelInterface
-  Prompting --> NotifyPolicy[Notification Policy]
-  NotifyPolicy --> KernNotifPolicy[Kernel check notify policy]
-  NotifyPolicy --> ParserNotifyPolicy[Parser support Notify policy]
-  NotifyPolicy --> UtilsNotifyPolicy[Utils support Notify policy]
-  NotifyPolicy --> LibNotifyPolicy[Library parse notification audit]
-  UtilsNotifyPolicy --> LibNotifyPolicy
-  UtilsNotifyPolicy --> ParserNotifyPolicy
-  TypeCache --> ObjType[Object Type]
-  ObjType --> PermRemap[permission remap]
-  KernelWork --> AuditRework[Rework AppArmor Audit]
-  ObjectDelegationBase --> TypeCache
-  ObjectDelegationBase --> LabelIt[Split Label Iterator]
-  RulePrefixes --> ExtendedPerms[extended permissions]
-  ExtendedPerms --> PermRemap
-  ExtendedPerms --> PrefixKernel[Kernel prefix support]
-  ExtendedPerms --> PrefixPolicy[Prefix Support in policy]
-  ExtendedPerms --> PermsUnpack[Kernel Unpack extended perms]
-  ExtendedPerms --> MovePermPack[Permission Mapping in Backend of Compiler]
-  PrefixKernel --> PrefixPolicy
-  PrefixPolicy --> ParserPrefix[Prefix support in Parser]
-  PrefixPolicy --> UtilsPrefix[Prefix support in Utils]
-  PrefixPolicy --> MovePermPack
-  AuditEventQueue -->AuditRecordReroute[Reroute events from Audit to Prompt subsystem]
-  KernelWork --> AuditDeDup[Dedup audit records]
-  AuditRecordReroute --> AuditCache[Caching of Audit records]
-  AuditCache --> AuditObject[Audit Record allocation]
-  AuditObject --> AuditStack[AuditRecordOffStack]
-end
-```
 
 
 
