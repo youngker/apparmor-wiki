@@ -329,6 +329,7 @@ graph TB
   subgraph "Prompting Dependencies"
   Prompting[Prompting] --> KernelWork[Base Kernel Changes]
   Prompting --> ProfileFlags[Profile Flags]
+  Prompting --> RulePrefixes [Prompt Rule Prefix]
   ProfileFlags --> KernelFlags[Profile Flags in Kernel]
   KernelFlags --> ParserFlags[Parser support for prompt flag]
   KernelFlags --> KernelPermsCheck[Rework file Perm check]
@@ -343,7 +344,6 @@ graph TB
   KernelWork --> AuditRework[Rework AppArmor Audit]
   ObjectDelegationBase --> TypeCache
   ObjectDelegationBase --> LabelIt[Split Label Iterator]
-  Prompting --> RulePrefixes [Prompt Rule Prefix]
   RulePrefixes --> ExtendedPerms[extended permissions]
   ExtendedPerms --> PermRemap[permission remap]
   ExtendedPerms --> PrefixKernel [Kernel prefix support]
@@ -351,7 +351,6 @@ graph TB
   PrefixKernel --> PrefixPolicy
   PrefixPolicy --> ParserPrefix [Prefix support in Parser]
   PrefixPolicy --> UtilsPrefix [Prefix support in Utils]
-
 end
 ```
 
