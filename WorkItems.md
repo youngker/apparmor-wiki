@@ -321,10 +321,7 @@ Most work items cover more than one section of the stack, however there are seve
     - kernel
       - type cache
   - extended permissions (dependency: kernel permission remap work)
-  - profile flags
-    - prompt
-    - kill + signal control
-    - debug
+
   - audit rework
     - lib update to handle
     - kernel: audit caching dedup
@@ -345,7 +342,7 @@ graph TB
   subgraph "Prompting Dependencies"
   Prompting[Prompting] --> KernelWork[Base Kernel Changes]
   Prompting --> ProfileFlags[Profile Flags]
-  ProfileFlags --> KernelFlag[Profile Flags in Kernel]
+  ProfileFlags --> KernelFlags[Profile Flags in Kernel]
   KernelFlags --> ParserFlags[Parser support for prompt flag]
   ProfileFlags --> UserSpaceFlags[Profile Flags in Userspace]
   UserSpaceFlags --> ParserFlags
@@ -353,6 +350,11 @@ graph TB
   Prompting --> ProfilePrefix[Rule Prefixes]
   KernelWork --> KernelLock[Locking Rework]
   KernelWork --> KernelBuffer[Buffer Rework]
+  KernelWork --> ObjectDelegationBase[Internal Object Delegation]
+  KernelWork --> TypeCache[Type Cache]
+  KernelWork --> AuditRework[Rework AppArmor Audit]
+  ObjectDelegationBase --> TypeCache
+
 end
 ```
 
