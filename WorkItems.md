@@ -307,11 +307,11 @@ Most work items cover more than one section of the stack, however there are seve
 ```mermaid
 graph TD
 
-  A -> B
-  A -> D
-  B -> C
-  B -> D
-  C -> F
+  A --> B;
+  A --help--> D;
+  B --> C;
+  B --> D;
+  C --> F;
 
 end
 ```
