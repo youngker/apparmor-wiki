@@ -173,6 +173,7 @@ Most work items cover more than one section of the stack, however there are seve
 - [ ] on unpack create empty profiles/labels referenced by policy <br>required by: on unpack, prelink profile lookups, where possible
 - [ ] on unpack, prelink profile lookups etc where possible <br>requires: on unpack, create empty profiles/labels referenced by policy
 - [ ] support multiple policy namespace elements in single policy blob
+- [ ] support removing multiple profiles in a single remove
 - [ ] policy resource accounting <br>required by: unprivileged user policy, application policy
 
 
