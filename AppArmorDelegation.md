@@ -348,14 +348,11 @@ profile two {
 
 There are aspects of object and rule delegation that are common regardless if the delegation was done via an application directing the delegation or by policy rules.
 
-dynamic masking????
- +(A&B)
-- dynamically computed using stacking
-- statically computed where possible
+The delegator of objects or rules is tracked along with the object or set of rules that is delegated. The tracked delegator is used during revalidation and [inheritance](AppArmorDelegation#Inheritance). In addition to the delegator being tracked additional information can be tracked like the set of restrictions placed on delegated rules or the set of profiles an object could be delegated to.
+
+This tracked information is used as part of mediation, however profile replacement may causes changes that causes revalidation, and a change in information and delegation can be lost due to revalidation.
 
 ### Object Delegation
-
-delegator is tracked .... ????
 
 #### object delegation against non-open rules.
 
@@ -411,7 +408,7 @@ each delegated rule set also carries a mark where the authority came from, and t
 
 #### Policy directed rule delegation and named rule sets.
 
-Policy directed delegation has flexibility on how to handle named rule sets. If the named rule set is compiled with the profile doing the delegating AppArmor can do compile time optimizations that can guarentee the delegated rule set is a subset of the delegating profile. This optimization will reduce the run time overhead of delegating rules as AppArmor will not have to perform an intersection on the delegated rule set like it have to do for Application directed rule delegation.
+Policy directed delegation has flexibility on how to handle named rule sets. If the named rule set is compiled with the profile doing the delegating AppArmor can do compile time optimizations that can guarantee the delegated rule set is a subset of the delegating profile. This optimization will reduce the run time overhead of delegating rules as AppArmor will not have to perform an intersection on the delegated rule set like it have to do for Application directed rule delegation.
 
 
 # Task labels under delegation
@@ -510,6 +507,9 @@ Both forms are valid and what form is used during display is implementation spec
 Regardles of the form used to display the label, the object delegation mark will always be the last element of a label.
 
 
+----
+
+```WIP```
 
 # Inheritance
 ### Delegation is inheritable
