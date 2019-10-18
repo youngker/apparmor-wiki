@@ -71,6 +71,9 @@ graph TB
   Prompting --> UserAPI[libapparmor API]
   UserAPI --> ioctluapi
   UserAPI --> kernelInterface
+  UserAPI --> filtering[filter generation]
+  filtering --> filterparse[filter rule parsing]
+  filtering --> libapparmorre[make re lib available to applications]
   Prompting --> NotifyPolicy[Notification Policy]
   NotifyPolicy --> KernNotifPolicy[Kernel check notify policy]
   NotifyPolicy --> ParserNotifyPolicy[Parser support Notify policy]
