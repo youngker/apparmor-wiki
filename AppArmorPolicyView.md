@@ -1,7 +1,7 @@
 # Related Documents
 
 - [Policy Namespaces](AppArmorNamespaces)
-- Policy View (this document)
+- Policy View (This Document)
 - [Policy Scope](AppArmorPolicyScope)
 
 Introduction
