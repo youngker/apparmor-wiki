@@ -162,6 +162,8 @@ profile example {
       rw /**,
   },
   allow delegation -> bar,
+
+  rwk /**,
 }
 ```
 
@@ -183,19 +185,19 @@ profile example {
 
 ### Delegation can be restricted to open objects
 
-The profile can limit the delegation to already open files using the ```open``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
+The profile can limit the delegation to already open files using the ```object``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
 
 ```
 profile example {
   rw @{HOME}/**,
 
   allow delegation -> /usr/bin/child <= {
-      open rw @{HOME}/**,
+      object rw @{HOME}/**,
   }
 }
 ```
 
-Rules that do not have the ```open``` only restriction restriction will also allow for object delegation, but the open restriction does not allow rules to be delegated.
+Rules that do not have the ```object``` only restriction restriction will also allow for object delegation, but the object restriction does not allow rules to be delegated.
 
 
 # Policy directed delegation
@@ -258,28 +260,28 @@ profile example {
 
 ### Delegation can be restricted to open files
 
-The profile can limit the delegation to already open files using the ```open``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
+The profile can limit the delegation to already open files using the ```object``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
 
 ```
 profile example {
   rw @{HOME}/**,
 
   px /usr/bin/child + {
-      open rw @{HOME}/**,
+      object rw @{HOME}/**,
   }
 }
 ```
 
 ### Overlapping rules can be used to control delegation
 
-Overlapping rules can be used to determine delegation permissions. The ```open``` qualifier is not accumulated like regular permissions but instead applied on a most specific match basis similar to exec rule qualifiers.
+Overlapping rules can be used to determine delegation permissions. The ```object``` qualifier is not accumulated like regular permissions but instead applied on a most specific match basis similar to exec rule qualifiers.
 
 ```
 profile example {
   rw @{HOME}/**,
 
   px /usr/bin/child + {
-      open rw @{HOME}/**,
+      object rw @{HOME}/**,
       rw @{HOME}/Downloads/*,
   }
 }
@@ -360,7 +362,7 @@ delegator is tracked .... ????
 
 #### object delegation against non-open rules.
 
-When object delegation is used permission to delegate the object is not limited to rules with the open qualifier. Eg.
+When object delegation is used, permission to delegate the object is not limited to rules with the object qualifier. Eg.
 
 ```
 profile example {
@@ -379,7 +381,7 @@ Allows delegation of any object that matched the `rw @{HOME}/**,` rule when it w
 If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won''t be done under delegated [authority](AppArmorDelegation#authority-privilege). Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
 
 
-Profile example can be used to delegate any object allowed by the rule `rw @{HOME}/**`. Basically for object delegation all rules are treated as if the ```open``` qualifier was applied. That is to say object delegation can only be used to pass already open object and not rules.
+Profile example can be used to delegate any object allowed by the rule `rw @{HOME}/**`. Basically for object delegation all rules are treated as if the ```object``` qualifier was applied. That is to say object delegation can only be used to pass already open object and not rules.
 
 
 ### Rule delegation
@@ -576,7 +578,7 @@ The unconfined state delegates its open object access. This behavior has always 
 ```
 profile unconfined {
   allow delegation <= {
-    open /**,
+    object /**,
   }
 
 }
