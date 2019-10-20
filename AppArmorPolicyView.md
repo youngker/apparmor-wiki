@@ -1,5 +1,8 @@
-Related Documents
-=================
+# Related Documents
+
+- [Policy Namespaces](AppArmorNamespaces)
+- Policy View (this document)
+- [Policy Scope](AppArmorPolicyScope)
 
 Introduction
 ============
