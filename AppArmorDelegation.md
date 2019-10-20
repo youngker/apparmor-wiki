@@ -37,7 +37,9 @@ Delegation of [authority](AppArmorDelegation#authority-privilege) (abreviated to
 
 ## A real world example
 
-The sheriff deputizes Bob (a father) giving him the [authority](AppArmorDelegation#authority-privilege) to enforce the law while he is a deputy. Bob now has both the [authority](AppArmorDelegation#authority-privilege) of being a parent to his children and the [authority](AppArmorDelegation#authority-privilege) of a deputy, and Bob can has the [identity](AppArmorDelegation#identity) of Bob, Father and Deputy.
+The sheriff deputizes Bob (a father) giving him the [authority](AppArmorDelegation#authority-privilege) to enforce the law while he is a deputy. Bob now has both the [authority](AppArmorDelegation#authority-privilege) of being a parent to his children and the [authority](AppArmorDelegation#authority-privilege) of a deputy. When Bob was deputized he retained the his [identity](AppArmorDelegation#identity) as Bob, and also that of Father and in addition gained not only authority of being a deputy to the sheriff but also the identify of being a deputy.
+
+The distinction between the identity of being a deputy and the authority in the example is subtle yet important. People may talk to Bob about a crime because he is a deputy but he might not have the authority to say release someone who was arrested from jail. In which he will deny the request or refer them to the sheriff who does have the authority.
 
 # Delegation (of [authority](AppArmorDelegation#authority-privilege)) in AppArmor
 
