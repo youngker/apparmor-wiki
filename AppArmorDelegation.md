@@ -152,7 +152,7 @@ profile example {
 
 would be limited to delegating read write access to files in @{HOME}.
 
-### The set of rules that can be delegated can be limited in policy
+### The set of rules that can be delegated can be further limited
 
 By default the task can delegate any permission granted by its profile, but the set of what can be delegated to a profile can be further controlled to a limited subset of the profiles permissions.
 
@@ -167,7 +167,28 @@ profile example {
 }
 ```
 
+### The task can not delegate permissions it doesn't have
+
 It is important to note that if the set of rules limiting the delegation contains permissions not granted by the profile those permissions will be dropped. The rule block is only for reducing the possible set of permissions delegated it is not possible for the task to delegate permissions the profile does not have.
+
+For example
+
+```
+profile example {
+  allow delegation -> foo <= {
+      rw /**,
+  },
+  allow delegation -> bar,
+
+  r /**,
+}
+```
+
+even though the delegation rules allow delegating of write permissions the profile does not contain any write permissions so it will not be possible for the task to delegate write permissions.
+
+AppArmor allows for this type of situation without issuing an error or warning during compile for a few reasons.
+- It allows for easier sharing and reuse of rule through includes.
+- It is not always possible to detect at policy compile time that the policy is allowing delegation of permissions that exceed what is allowed by the profile. As will be seen below the rule set controling delegation can be something that is changed dynamically at run time. AppArmor will ensure even in this situation that delegation can not be used to circumvent the profiles restrictions.
 
 #### Rule sets can be named
 
@@ -256,7 +277,11 @@ profile example {
 }
 ```
 
-??? better tag than (override??? extends???)
+??? better tag than (extends???)
+
+#### Why isn't the exception behavior the default?
+
+Defaulting to the delegation being limited to the authority is consistent with how application directed delegation works. It also makes the reuse of rule groupings through includes or naming easier as the policy author does not have to worry about granting authority that the profile does not contain.
 
 ### Delegation can be restricted to open files
 
@@ -350,73 +375,51 @@ profile two {
 
 # Notes on object & rule delegation
 
+???? Move to advanced ????
+
 There are aspects of object and rule delegation that are common regardless if the delegation was done via an application directing the delegation or by policy rules.
 
 The delegator of objects or rules is tracked along with the object or set of rules that is delegated. The tracked delegator is used during revalidation and [inheritance](AppArmorDelegation#Inheritance). In addition to the delegator being tracked additional information can be tracked like the set of restrictions placed on delegated rules or the set of profiles an object could be delegated to.
 
 This tracked information is used as part of mediation, however profile replacement may causes changes that causes revalidation, and a change in information and delegation can be lost due to revalidation.
 
-### Object Delegation
-
-delegator is tracked .... ????
-
-#### object delegation against non-open rules.
-
-When object delegation is used, permission to delegate the object is not limited to rules with the object qualifier. Eg.
+Eg. 1: If `/usr/bin/child` is executed from the confinement of
 
 ```
-profile example {
-  rw @{HOME}/**,
+profile child /usr/bin/child {
+  ...
+}
 
-  allow delegation -> /usr/bin/child <= {
-      rw @{HOME}/**,
-  }
+profile one {
+  px /usr/bin/child + foo,
+  ...
 }
 ```
 
-Allows delegation of any object that matched the `rw @{HOME}/**,` rule when it was opened.
+then `/usr/bin/child` has a confinement of `child//+foo`. If the profile `foo` is replaced with a new profile revision tht has fewer permissions then, the authority of `child//+foo` is also reduced, as this delegation is computed dynamically.
 
-#### What happens when object delegation fails
+Eg. 2: Loss of delegation at revalidation
 
-If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won''t be done under delegated [authority](AppArmorDelegation#authority-privilege). Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
+Given
 
+```
+profile one {
+  allow delegation -> child,
+  allow delegation -> two,
+  ...
+}
+```
 
-Profile example can be used to delegate any object allowed by the rule `rw @{HOME}/**`. Basically for object delegation all rules are treated as if the ```object``` qualifier was applied. That is to say object delegation can only be used to pass already open object and not rules.
+and that profile `one` delegated some objects to `child`. The resulting
+confinement is `child//+????`. If profile `one` is replaced so that the delegation rules are removed.
 
+```
+profile one {
+  ...
+}
+```
 
-### Rule delegation
-
-Delegated rules are a subset of the delegating profile. As noted above the delegator is tracked and this information is used to determine if rules can be inherited or redelegated. This information is also used to dynamically restricted delegated rules via a hidden stack ensuring that dynamic rule sets can not have more [authority](AppArmorDelegation#authority-privilege) than the delegator.
-
-#### Application directed rule delegation
-When using the delegation api a task can specify a set of rules to delegate. This rules will be restricted to be a subset of the rules allowed by the delegation rules. This is done via a dynamic hidden stack as previously mentions.
-
-profile, delegator is tracked, intersection ... ????
-
-?????
-Rules being delegated go through a compile to transform the rules into a form that can be used by the kernel. It is best to group multiple rules into a single group. Each group of rules delegated results in a new profile block and that will be used as part of the delegated label.
-
-  A//+xxxx
-
-If the profile block is not part of existing policy it will be dynamically constrained by the label is delegated from. That is if a task with confinement A delegates a block of rules A.13 to a task confined by B. Task B''s resulting confinement is
-  B//+A.13 but A.13 rules will not blindly extend B, they will first be dynamically intersected with A to ensure that A.13 is a true subset of A.
-
-
-Since delegation requires a confined user to be able to be able to do a restricted policy load, the loaded rule set must be verified to be a subset of the confinement of the task doing the delegation. To guarantee that the rule set is a subset, apparmor will do a dynamic intersection check of the delegated rules and the confinement of the task that did the delegation.
-
-  effectively B//+(A.13&A)
-
-the intersection check can be avoided if the delegated object is predefined in policy (normal delegating tasks cannot change the predefined policy objects so it is possible to know in advance whether the intersection is needed).
-
-
-delegation api basically needs to cache and create per task the delegated object. Attempt to load the object
-and then use the object. Can fail at any point.
- 
-each delegated rule set also carries a mark where the [authority](AppArmorDelegation#authority-privilege) came from, and that is used to limit
-
-#### Policy directed rule delegation and named rule sets.
-
-Policy directed delegation has flexibility on how to handle named rule sets. If the named rule set is compiled with the profile doing the delegating AppArmor can do compile time optimizations that can guarentee the delegated rule set is a subset of the delegating profile. This optimization will reduce the run time overhead of delegating rules as AppArmor will not have to perform an intersection on the delegated rule set like it have to do for Application directed rule delegation.
+Then at any point there is a redelgation or revalidation check the previously delegated objects will loose their delegated authority and access to them will be lost unless the remaining confinement allows access to those objects.
 
 
 # Task labels under delegation
@@ -568,6 +571,67 @@ if the the target confinement contains permissions.
 
 
 # Advanced topics
+
+### Object Delegation
+
+#### object delegation against non-open rules.
+
+When object delegation is used, permission to delegate the object is not limited to rules with the object qualifier. Eg.
+
+```
+profile example {
+  rw @{HOME}/**,
+
+  allow delegation -> /usr/bin/child <= {
+      rw @{HOME}/**,
+  }
+}
+```
+
+Allows delegation of any object that matched the `rw @{HOME}/**,` rule when it was opened.
+
+#### What happens when object delegation fails
+
+If the application tries to delegate an object and the delegation is not allowed the object may still be allowed to be passed, it just won''t be done under delegated [authority](AppArmorDelegation#authority-privilege). Instead when delegation fails the object is revalidated against the target tasks confinement, and if allowed by the target tasks confinement the object may still be passed. This fall back is how apparmor handle object passing and inheritance before delegation was supported.
+
+
+Profile example can be used to delegate any object allowed by the rule `rw @{HOME}/**`. Basically for object delegation all rules are treated as if the ```object``` qualifier was applied. That is to say object delegation can only be used to pass already open object and not rules.
+
+
+### Rule delegation
+
+Delegated rules are a subset of the delegating profile. As noted above the delegator is tracked and this information is used to determine if rules can be inherited or redelegated. This information is also used to dynamically restricted delegated rules via a hidden stack ensuring that dynamic rule sets can not have more [authority](AppArmorDelegation#authority-privilege) than the delegator.
+
+#### Application directed rule delegation
+When using the delegation api a task can specify a set of rules to delegate. This rules will be restricted to be a subset of the rules allowed by the delegation rules. This is done via a dynamic hidden stack as previously mentions.
+
+profile, delegator is tracked, intersection ... ????
+
+?????
+Rules being delegated go through a compile to transform the rules into a form that can be used by the kernel. It is best to group multiple rules into a single group. Each group of rules delegated results in a new profile block and that will be used as part of the delegated label.
+
+  A//+xxxx
+
+If the profile block is not part of existing policy it will be dynamically constrained by the label is delegated from. That is if a task with confinement A delegates a block of rules A.13 to a task confined by B. Task B''s resulting confinement is
+  B//+A.13 but A.13 rules will not blindly extend B, they will first be dynamically intersected with A to ensure that A.13 is a true subset of A.
+
+
+Since delegation requires a confined user to be able to be able to do a restricted policy load, the loaded rule set must be verified to be a subset of the confinement of the task doing the delegation. To guarantee that the rule set is a subset, apparmor will do a dynamic intersection check of the delegated rules and the confinement of the task that did the delegation.
+
+  effectively B//+(A.13&A)
+
+the intersection check can be avoided if the delegated object is predefined in policy (normal delegating tasks cannot change the predefined policy objects so it is possible to know in advance whether the intersection is needed).
+
+
+delegation api basically needs to cache and create per task the delegated object. Attempt to load the object
+and then use the object. Can fail at any point.
+ 
+each delegated rule set also carries a mark where the [authority](AppArmorDelegation#authority-privilege) came from, and that is used to limit
+
+#### Policy directed rule delegation and named rule sets.
+
+Policy directed delegation has flexibility on how to handle named rule sets. If the named rule set is compiled with the profile doing the delegating AppArmor can do compile time optimizations that can guarentee the delegated rule set is a subset of the delegating profile. This optimization will reduce the run time overhead of delegating rules as AppArmor will not have to perform an intersection on the delegated rule set like it have to do for Application directed rule delegation.
+
 
 ## Run time implications of delegation
 
