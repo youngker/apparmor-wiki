@@ -373,55 +373,6 @@ profile two {
 
 ```
 
-# Notes on object & rule delegation
-
-???? Move to advanced ????
-
-There are aspects of object and rule delegation that are common regardless if the delegation was done via an application directing the delegation or by policy rules.
-
-The delegator of objects or rules is tracked along with the object or set of rules that is delegated. The tracked delegator is used during revalidation and [inheritance](AppArmorDelegation#Inheritance). In addition to the delegator being tracked additional information can be tracked like the set of restrictions placed on delegated rules or the set of profiles an object could be delegated to.
-
-This tracked information is used as part of mediation, however profile replacement may causes changes that causes revalidation, and a change in information and delegation can be lost due to revalidation.
-
-Eg. 1: If `/usr/bin/child` is executed from the confinement of
-
-```
-profile child /usr/bin/child {
-  ...
-}
-
-profile one {
-  px /usr/bin/child + foo,
-  ...
-}
-```
-
-then `/usr/bin/child` has a confinement of `child//+foo`. If the profile `foo` is replaced with a new profile revision tht has fewer permissions then, the authority of `child//+foo` is also reduced, as this delegation is computed dynamically.
-
-Eg. 2: Loss of delegation at revalidation
-
-Given
-
-```
-profile one {
-  allow delegation -> child,
-  allow delegation -> two,
-  ...
-}
-```
-
-and that profile `one` delegated some objects to `child`. The resulting
-confinement is `child//+????`. If profile `one` is replaced so that the delegation rules are removed.
-
-```
-profile one {
-  ...
-}
-```
-
-Then at any point there is a redelgation or revalidation check the previously delegated objects will loose their delegated authority and access to them will be lost unless the remaining confinement allows access to those objects.
-
-
 # Task labels under delegation
 
 Delegation affects what the task label is and how it is displayed. How the label is affected different based on whether rules or objects are being delegated.
@@ -571,6 +522,55 @@ if the the target confinement contains permissions.
 
 
 # Advanced topics
+
+# Notes on object & rule delegation
+
+???? Move to advanced ????
+
+There are aspects of object and rule delegation that are common regardless if the delegation was done via an application directing the delegation or by policy rules.
+
+The delegator of objects or rules is tracked along with the object or set of rules that is delegated. The tracked delegator is used during revalidation and [inheritance](AppArmorDelegation#Inheritance). In addition to the delegator being tracked additional information can be tracked like the set of restrictions placed on delegated rules or the set of profiles an object could be delegated to.
+
+This tracked information is used as part of mediation, however profile replacement may causes changes that causes revalidation, and a change in information and delegation can be lost due to revalidation.
+
+Eg. 1: If `/usr/bin/child` is executed from the confinement of
+
+```
+profile child /usr/bin/child {
+  ...
+}
+
+profile one {
+  px /usr/bin/child + foo,
+  ...
+}
+```
+
+then `/usr/bin/child` has a confinement of `child//+foo`. If the profile `foo` is replaced with a new profile revision tht has fewer permissions then, the authority of `child//+foo` is also reduced, as this delegation is computed dynamically.
+
+Eg. 2: Loss of delegation at revalidation
+
+Given
+
+```
+profile one {
+  allow delegation -> child,
+  allow delegation -> two,
+  ...
+}
+```
+
+and that profile `one` delegated some objects to `child`. The resulting
+confinement is `child//+????`. If profile `one` is replaced so that the delegation rules are removed.
+
+```
+profile one {
+  ...
+}
+```
+
+Then at any point there is a redelgation or revalidation check the previously delegated objects will loose their delegated authority and access to them will be lost unless the remaining confinement allows access to those objects.
+
 
 ### Object Delegation
 
