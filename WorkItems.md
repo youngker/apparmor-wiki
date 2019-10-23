@@ -154,7 +154,7 @@ end
 Most work items cover more than one section of the stack, however there are several smaller items that affect just one area. Document those here so they can be opportunistically picked off.
 
 ### kernel
-- [x] `Chris`: In kernel raw policy data compression
+- [x] `Chris`: In kernel raw policy data compression `DONE`
 - [ ] `Mike`: split apparmorfs and make it directly mountable <br>_required by: contextless container boot_
 - [ ] `Chris`: make apparmorfs dynamic (see nsfs)
 - [ ] `JJ`: nnp restrictions via stacking <br>_required by: nnp override rules_
