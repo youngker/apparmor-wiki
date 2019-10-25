@@ -53,8 +53,8 @@ As noted in the [availability of delegation](AppArmorDelegation#availability-of-
 Applications can take action to delegate some or all of their authority to another application, if allowed by the confining profile. This is done by the application taking an explicit action to either delegate an open file descriptor or to delegate profile rules. This mean the application must have code that will direct apparmor on what should be delegated.
 
 To delegate objects an application uses
-- unix domain socket fd passing, to pass fd objects to an existing task_+_
-- apparmor api for object delegation, to control inheritance of open fds_*_
+- unix domain socket fd passing, to pass fd objects to an existing task _+_
+- apparmor api for object delegation, to control inheritance of open fds _*_
 
 To delegate rule the application uses
 - apparmor api for rule delegation
