@@ -46,7 +46,13 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 ### Dependencies
 
-```mermaid
+<!--
+
+Use mermaid live editor to rerender dependency graph
+
+https://mermaidjs.github.io/mermaid-live-editor/
+
+
 graph TB
   subgraph "Prompting Dependencies"
   Prompting[Prompting] --> KernelWork[Base Kernel Changes]
@@ -102,7 +108,11 @@ graph TB
   AuditCache --> AuditObject[Audit Record allocation]
   AuditObject --> AuditStack[AuditRecordOffStack]
 end
-```
+
+
+-->
+
+![Dependency Graph for Prompting WorkItem](img/prompting-dependencies.svg "Prompting Dependencies")
 
 ### Work Items
 - [x] `JJ`: Rework Kernel locking to support prompting and realtime
