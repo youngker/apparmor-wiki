@@ -46,7 +46,8 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 ### Dependencies
 
-<!---
+
+```{r echo=FALSE, eval=FALSE}
 
 Use mermaid live editor to rerender dependency graph
 
@@ -110,7 +111,7 @@ graph TB
 end
 
 
--->
+```
 
 ![Dependency Graph for Prompting WorkItem](img/prompting-dependencies.svg "Prompting Dependencies")
 
