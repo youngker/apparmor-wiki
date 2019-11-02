@@ -53,8 +53,7 @@ Use mermaid live editor to rerender dependency graph
 https://mermaidjs.github.io/mermaid-live-editor/
 
 
-graph TB
-  subgraph "Prompting Dependencies"
+graph TD
   Prompting[Prompting] --> KernelWork[Base Kernel Changes]
   Prompting --> ProfileFlags[Profile Flags]
   Prompting --> RulePrefixes[Prompt Rule Prefix]
@@ -107,7 +106,6 @@ graph TB
   AuditRecordReroute --> AuditCache[Caching of Audit records]
   AuditCache --> AuditObject[Audit Record allocation]
   AuditObject --> AuditStack[AuditRecordOffStack]
-end
 
 {:/comment}
 
