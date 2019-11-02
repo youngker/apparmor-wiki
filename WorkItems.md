@@ -46,7 +46,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 ### Dependencies
 
-<!--
+<!---
 
 Use mermaid live editor to rerender dependency graph
 
