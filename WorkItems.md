@@ -46,8 +46,7 @@ For a list of improvements and extensions to AppArmor see the [development roadm
 
 ### Dependencies
 
-
-```{r echo=FALSE, eval=FALSE}
+{% comment %} 
 
 Use mermaid live editor to rerender dependency graph
 
@@ -110,8 +109,7 @@ graph TB
   AuditObject --> AuditStack[AuditRecordOffStack]
 end
 
-
-```
+{% endcomment %}
 
 ![Dependency Graph for Prompting WorkItem](img/prompting-dependencies.svg "Prompting Dependencies")
 
