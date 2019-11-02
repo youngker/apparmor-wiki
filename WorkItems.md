@@ -109,8 +109,18 @@ graph TD
 
 {:/comment}
 
+<style>
+#chart {
+    width: 3246px;
+    height: 542px;
+}
+</style>
+
+<div id="chart">
 
 ![Dependency Graph for Prompting WorkItem](img/prompting-dependencies.svg "Prompting Dependencies")
+
+</div>
 
 ### Work Items
 - [x] `JJ`: Rework Kernel locking to support prompting and realtime
