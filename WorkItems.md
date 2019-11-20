@@ -122,12 +122,12 @@ graph TD
 - [ ] type cache (requires: permission remapping work
 - [ ] split label iterator individual component iterators
 - [ ] object delegation for prompting
-- [ ] interface file
-- [ ] ioctl interface control
-- [ ] ioctl uapi api
-- [ ] ns wait queue for tasks waiting on event
-- [ ] ns wait queue for tasks waiting on reply
-- [ ] profile prompt flag (requires: profile flags)
+- [x] `JJ`: interface file
+- [x] `JJ`: ioctl interface control
+- [x] `JJ`: ioctl uapi api
+- [x] listener wait queue for tasks waiting on event
+- [x] notification message for tasks waiting on reply
+- [x] profile prompt flag (requires: profile flags)
   - [ ] use of in kernel permission checks <br>_requires: rework file mediation to use new code_
   - [ ] unpack
   - [ ] abi support flag
