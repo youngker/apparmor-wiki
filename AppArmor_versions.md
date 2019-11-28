@@ -73,7 +73,7 @@ Released Versions of AppArmor Userspace Utils
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.14)
--   Development target: Bug fixes and policy improvements for AppArmor 2.14
+-   Development target: xattr attachment conditional
 
 [AppArmor 2.13.3](Release_Notes_2.13.3)
 ---------------------------------------------
@@ -82,7 +82,7 @@ Released Versions of AppArmor Userspace Utils
 -   Shipped in:
 -   Kernels supported: 3.3 and upwards
 -   [Release Notes](Release_Notes_2.13.3)
--   Development target: xattr attachment conditional
+-   Development target: Bug fixes and policy improvements for AppArmor 2.13.2
 
 [AppArmor 2.13.2](Release_Notes_2.13.2)
 ---------------------------------------------
