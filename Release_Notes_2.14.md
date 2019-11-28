@@ -25,7 +25,10 @@ checked for elf binary executables. Policy and tests within apparmor
 
 
 - 
-    
+
+- Includes all the bug fixes and improvements in
+  - [2.13.3](Release_Notes_2.13.3)
+
 
 ## Obtaining the Release
 These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46) and 2.14 (???) [apparmor-2.14 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.14).
