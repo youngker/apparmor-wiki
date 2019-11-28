@@ -11,7 +11,7 @@ apparmor patches applied). And supports features released in the 4.16
 kernel and ubuntu 16.10 kernel with the apparmor 3 development patches.
 
 Note: These release notes cover all changes between 2.12 (7f72fd0fcacf8a856b0357261f2f521d90d1bb25)
-and 2.13 (???).
+and 2.13 (f97782b100733770eebc7cf2839ba43683a74f46).
 
 
 Note
