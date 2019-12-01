@@ -27,9 +27,11 @@ Tarball
 ## Changes in this Release
 
 Includes all the bug fixes and improvements in
-- [2.13.3](Release_Notes_2.13.3)
-- [2.13.2](Release_Notes_2.13.2)
 - [2.13.1](Release_Notes_2.13.1)
+- [2.13.2](Release_Notes_2.13.2)
+- [2.13.3](Release_Notes_2.13.3)
+
+
 
 And the following improvements
 
