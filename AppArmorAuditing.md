@@ -2,16 +2,24 @@ todo apparmor auditing
 
 # Intro
 
-AppArmor uses the Linux kernel's audit subsystem to audit events, but it does not require the use of auditd, allowing system administrators flexibility in their choice of audit system. If auditd is used AppArmor integrates with it and its records will be recorded with other messages.
+AppArmor uses the Linux kernel's audit subsystem to audit events, but it does not require the use of auditd, allowing system administrators flexibility in their choice of an audit system. If auditd is used AppArmor integrates with it and its records will be recorded with other audit messages.
 
 # Kernel Audit Subsystem
+type=1400 AVC
+type=??? USER_AVC
 
 # configuration
 
+AppArmor auditing will be affected by either auditd configuration, or if auditd the kernels printk configuration.
+
 ## auditd
 
-type=1400 AVC
-type=??? USER_AVC
+link to auditd config docs
+
+buffer size
+rate limiting
+
+filter rules
 
 ## no auditd
 
