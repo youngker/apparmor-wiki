@@ -2,9 +2,23 @@ todo apparmor auditing
 
 # Intro
 
+AppArmor uses the Linux kernel's audit subsystem to audit events, but it does not require the use of auditd, allowing system administrators flexibility in their choice of audit system. If auditd is used apparmor integrates with it and its records will be recorded with other messages.
+
 # Kernel Audit Subsystem
 
-# Auditd
+# configuration
+
+## auditd
+
+type=1400 AVC
+type=??? USER_AVC
+
+## no auditd
+
+/proc/sys/kernel/printk_ratelimit
+
+
+# comparison to Auditd syscall and file watch rules
 
 It is recommended that apparmor rules are used in place of auditd's file watch rules or when applicable syscall rules.
 
@@ -21,6 +35,9 @@ It is recommended that apparmor rules are used in place of auditd's file watch r
 * AppArmor will audit ```*at``` calls with a path for the descriptor. This makes it much easier to determine what is being done by execveat, fchmod etc.
 * AppArmor has partial container support. While apparmor's to the audit subsystem retains the limitation of a single autdit daemon (auditd) if the container orchastrator supports apparmor namespaces, apparmor rules can be defined for the container separate from the system. In addition system audit rules can be applied on the container at the same time as the container audit rules.
 * AppArmor rules can do more than audit, they can also be used to deny access or even kill the task.
+* Does NOT require audid (userspace daemon of the audit subsystem). When auditd is not present apparmor audit messages will be sent to the kernel ring buffer allowing alternate userspace logging systems to be used.
 
 ## Disadvantages
 * can't audit individual syscalls
+* can't match on some of the conditionals that audit rules allow
+* won't generate full syscall log trace unless syscall tracking enabled, via audit rule or ???
