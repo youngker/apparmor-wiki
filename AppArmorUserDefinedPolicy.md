@@ -40,6 +40,10 @@ System policy controls whether a user can create a policy namespace, what resour
 User defined policy is stored in a namespace with limits defined by system policy. The namespace will be owned by the user and refcounted so that it will exist as long as a user task is running.
 
 ??? auto create and enter, vs. having the ns setup and already entered ???
+entering ns needs to be early, before policy load because load task would be child or .profile
+- could be done as part of policy as a ns rule setuid -> &:ns:unconfined
+
+or instead of being explicit part of the ns setup rule, and encode it as part of the policy to do that transition.
 
 ## Permission to load policy
 
