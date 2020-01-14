@@ -10,11 +10,8 @@ announcements will be sent out to the apparmor mailing list
 Meeting Logs are linked off of the month agenda title.
 # Next Meeting: IRC Meeting, 18:00 UTC, Tuesday Jan 14, 2019
 - policy
-  - ABI decisions
   - {/usr,}/etc conversion
   - reorg: split out of apparmor userspace release. Into profile repo? Something else
-  - policy overlays
-  - policy locations
   - policy releases
 - dropping 2.14
 - 3.0 alpas
