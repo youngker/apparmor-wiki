@@ -8,7 +8,7 @@ If there are reasons to move the time or date we will, and
 announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
-# [IRC Meeting, 18:00 UTC, Tuesday Feb 11, 2020](IRC_meeting_2020-02-11)
+# [IRC Meeting, 18:00 UTC, Wed Feb 12, 2020](IRC_meeting_2020-02-12)
 - policy
   - {/usr,}/etc conversion
   - reorg: split out of apparmor userspace release. Into profile repo? Something else
@@ -18,6 +18,9 @@ Meeting Logs are linked off of the month agenda title.
 - stable releases
 - translation handling (Launchpad, Weblate, ???)
 - anything else
+
+# [IRC Meeting, 18:00 UTC, Tuesday Feb 11, 2020](IRC_meeting_2020-02-11)
+- apparmor.net web page
 
 # [IRC Meeting, 18:00 UTC, Tuesday Jan 14, 2020](IRC_meeting_2020-01-14)
 - policy
