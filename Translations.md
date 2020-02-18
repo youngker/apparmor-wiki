@@ -34,3 +34,32 @@ launchpad translations project as each commit happens.
 
 [Launchpad Translations help
 page](https://help.launchpad.net/Translations)
+
+Performing Merges from Launchpad
+--------------------------------
+
+To merge from the Launchpad translations branch stored in bzr into the master git tree, the following steps need to be taken:
+
+*  Ensure that a bzr remote plugin is installed for use from within git. On an Ubuntu system, this would be the bzr-git package; unfortunately, this has been broken in the current (as 2020.02.17) 20.04 release's transition to breezy, so an 18.04 host/vm is needed.
+*  Checkout the translations branch in git: 
+```bash
+$ git clone bzr::lp:~apparmor-dev/apparmor/launchpad-translations-branch/ apparmor-lp-translations
+```
+*  Find the first commit that is newer than what has been previously merged and export the patches:
+```bash
+$ git format-patch --output-directory ~/patches/apparmor-translations 1b977565c519bfa382dc9d8a142696f86f2de5e2..
+```
+*  Switch to your apparmor git tree and create/checkout a translations branch
+```bash
+$ git checkout -b translations master
+```
+*  Import the patches into your branch:
+```bash
+$ git am -s ~/patches/apparmor-translations/*
+```
+*  Check that the commit history looks sane, push to a personal repository on gitlab to ensure that it passes CI
+*  Once you're happy, merge the translations to master:
+```bash
+$ git checkout master
+$ git merge --signoff --no-ff  translations
+```
