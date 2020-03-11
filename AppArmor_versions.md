@@ -75,6 +75,15 @@ Released Versions of AppArmor Userspace Utils
 -   [Release Notes](Release_Notes_2.14)
 -   Development target: xattr attachment conditional
 
+[AppArmor 2.13.4](Release_Notes_2.13.4)
+---------------------------------------------
+
+-   Release Date: 2020-03-11
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.13.4)
+-   Development target: Bug fixes and policy improvements for AppArmor 2.13.3
+
 [AppArmor 2.13.3](Release_Notes_2.13.3)
 ---------------------------------------------
 
