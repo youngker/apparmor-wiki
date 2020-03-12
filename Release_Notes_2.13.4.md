@@ -1,6 +1,7 @@
 Introduction
 ============
 
+
 AppArmor 2.13.4 is a maintenance release of the user space components
 of the AppArmor security project. The kernel portion of the project
 is maintained and pushed separately.
@@ -14,9 +15,9 @@ AppArmor 2.13.4 was released 2020-03-12.
 
 
 # Obtaining the Release
-These release notes cover all changes between 2.13.3 (2f9d9ea7e01a115b29858455d3b1b5c6a0bab75c) and 2.13.4 (df0ac742f7a1146181d8734d03334494f2015134) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
+These release notes cover all changes between 2.13.3 [2f9d9ea7e01a115b29858455d3b1b5c6a0bab75c](https://gitlab.com/apparmor/apparmor/-/commit2f9d9ea7e01a115b29858455d3b1b5c6a0bab75c) and 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
 
-Tarball
+###Tarball
 -   <https://launchpad.net/apparmor/2.13/2.13.4/+download/apparmor-2.13.4.tar.gz>
 -   sha256sum: 90bf86c07ffbe2c22be46d75c7345fad12d5911653c59750a37d59c63ad5d10e
 -   signature: <https://launchpad.net/apparmor/2.13/2.13.4/+download/apparmor-2.13.4.tar.gz.asc>
@@ -26,30 +27,30 @@ Tarball
 
 Build Infrastructure
 --------------------
-- Enable continuous integration testing on the 2.13 branch ([MR436])
-- Fix autoconf check for Python 3.8 ([MR430])
-- Fix vim syntax highlighting for capability ([MR421])
-- Fix cross compile by allowing overriding of ar ([issue41])
-- Allow installing apparmor_parser to a custom sbin location ([MR111])
+- Enable continuous integration testing on the 2.13 branch ([MR436](https://gitlab.com/apparmor/apparmor/merge_requests/436))
+- Fix autoconf check for Python 3.8 ([MR430](https://gitlab.com/apparmor/apparmor/merge_requests/430))
+- Fix vim syntax highlighting for capability ([MR421](https://gitlab.com/apparmor/apparmor/merge_requests/421))
+- Fix cross compile by allowing overriding of ar ([AABUG41](https://gitlab.com/apparmor/apparmor/issues/41))
+- Allow installing apparmor_parser to a custom sbin location ([MR111](https://gitlab.com/apparmor/apparmor/merge_requests/111))
 
 
 libapparmor
 -----------
-- Fix log parsing for logs with an embedded newline ([MR395])
+- Fix log parsing for logs with an embedded newline ([MR395](https://gitlab.com/apparmor/apparmor/merge_requests/395))
 
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
-- Fix typo in usage message ([MR406])
+- Fix typo in usage message ([MR406](https://gitlab.com/apparmor/apparmor/merge_requests/406))
 
 
 Utils
 -----
 - aa-status
-  - handle profile names containing '(' ([MR415])
+  - handle profile names containing '(' ([MR415](https://gitlab.com/apparmor/apparmor/merge_requests/415))
 - genprof/logprof
-  - Fix crash due to local includes ([lp1848227], [MR427])
-  - Fix crash when log message contains a filename with unbalanced parenthesis ([MR406])
+  - Fix crash due to local includes ([lp1848227](https://bugs.launchpad.net/bugs/1848227), [MR427](https://gitlab.com/apparmor/apparmor/merge_requests/427))
+  - Fix crash when log message contains a filename with unbalanced parenthesis ([MR406](https://gitlab.com/apparmor/apparmor/merge_requests/406))
 
 
 
@@ -57,35 +58,35 @@ Policy
 ------
 - Abstractions
   - authentication
-    - add support for /usr/etc used by some RO root images ([boo1153162], [MR426]) 
+    - add support for /usr/etc used by some RO root images ([boo1153162](https://bugzilla.opensuse.org/show_bug.cgi?id=1153162), [MR426](https://gitlab.com/apparmor/apparmor/merge_requests/426)) 
   - base
-    - allow access to /run/uuidd/request ([MR445])
-    - allow access to top level ecryptfs directories ([LP1848919], [MR443])
-    - allow reading per-user themes from $XDG_DATA_HOME ([MR442])
+    - allow access to /run/uuidd/request ([MR445](https://gitlab.com/apparmor/apparmor/merge_requests/445))
+    - allow access to top level ecryptfs directories ([LP1848919](https://bugs.launchpad.net/bugs/1848919), [MR443](https://gitlab.com/apparmor/apparmor/merge_requests/443))
+    - allow reading per-user themes from $XDG_DATA_HOME ([MR442](https://gitlab.com/apparmor/apparmor/merge_requests/442))
   - fonts
-    - don't allow writing to fontconfig cache ([MR420])
+    - don't allow writing to fontconfig cache ([MR420](https://gitlab.com/apparmor/apparmor/merge_requests/420))
   - gnome
-    - allow access to xdg mimeapps.list ([LP1792027], [MR444])
+    - allow access to xdg mimeapps.list ([LP1792027](https://bugs.launchpad.net/bugs/1792027), [MR444](https://gitlab.com/apparmor/apparmor/merge_requests/444))
   - kerberosclient
-    - allow reading /etc/krb5.conf.d/ ([MR425])
+    - allow reading /etc/krb5.conf.d/ ([MR425](https://gitlab.com/apparmor/apparmor/merge_requests/425))
   - ssl_certs/ssl_keys
-    - add support for cert bot ([MR397])
+    - add support for cert bot ([MR397](https://gitlab.com/apparmor/apparmor/merge_requests/397))
   - X
-    - allow reading the Xauth file that mutter passes to Xwayland ([dbug935058], [MR419])
+    - allow reading the Xauth file that mutter passes to Xwayland ([dbug935058](https://bugs.debian.org/935058), [MR419](https://gitlab.com/apparmor/apparmor/merge_requests/419))
 
 
 Tests
 -----
-- Fix mult_mount test for cases where the block size is greater than 1K ([LP1834192], [MR396])
+- Fix mult_mount test for cases where the block size is greater than 1K ([LP1834192](https://bugs.launchpad.net/bugs/1834192), [MR396](https://gitlab.com/apparmor/apparmor/merge_requests/396))
 
 
 Documentation
 -------------
 
 - apparmor.d (7)
-  - fix typos in documentation for dbus and unix rules ([LP1838991], [MR410])
+  - fix typos in documentation for dbus and unix rules ([LP1838991](https://bugs.launchpad.net/bugs/1838991), [MR410](https://gitlab.com/apparmor/apparmor/merge_requests/410))
 - README.md
-  - Document how to use PYFLAKES during testing ([MR429])
+  - Document how to use PYFLAKES during testing ([MR429](https://gitlab.com/apparmor/apparmor/merge_requests/429))
 
 
 Note
@@ -96,3 +97,35 @@ There is a semantic change in the 4.8 kernel (commit
 enforcement. Specifically it affects when the m permission bit is
 checked for elf binary executables. Policy and tests within apparmor
 2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
+
+
+# References
+
+[AABUG41: https://gitlab.com/apparmor/apparmor/issues/41](https://gitlab.com/apparmor/apparmor/issues/41)
+[boo1153162: https://bugzilla.opensuse.org/show_bug.cgi?id=1153162](https://bugzilla.opensuse.org/show_bug.cgi?id=1153162)
+[dbug935058: https://bugs.debian.org/935058](https://bugs.debian.org/935058)
+[lp1848227: https://bugs.launchpad.net/bugs/1848227](https://bugs.launchpad.net/bugs/1848227)
+[LP1848919: https://bugs.launchpad.net/bugs/1848919](https://bugs.launchpad.net/bugs/1848919)
+[LP1792027: https://bugs.launchpad.net/bugs/1792027](https://bugs.launchpad.net/bugs/1792027)
+[LP1834192: https://bugs.launchpad.net/bugs/1834192](https://bugs.launchpad.net/bugs/1834192)
+[LP1838991: https://bugs.launchpad.net/bugs/1838991](https://bugs.launchpad.net/bugs/1838991)
+[MR111: https://gitlab.com/apparmor/apparmor/merge_requests/111](https://gitlab.com/apparmor/apparmor/merge_requests/111)
+[MR395: https://gitlab.com/apparmor/apparmor/merge_requests/395](https://gitlab.com/apparmor/apparmor/merge_requests/395)
+[MR396: https://gitlab.com/apparmor/apparmor/merge_requests/396](https://gitlab.com/apparmor/apparmor/merge_requests/396)
+[MR397: https://gitlab.com/apparmor/apparmor/merge_requests/397](https://gitlab.com/apparmor/apparmor/merge_requests/397)
+[MR406: https://gitlab.com/apparmor/apparmor/merge_requests/406](https://gitlab.com/apparmor/apparmor/merge_requests/406)
+[MR410: https://gitlab.com/apparmor/apparmor/merge_requests/410](https://gitlab.com/apparmor/apparmor/merge_requests/410)
+[MR415: https://gitlab.com/apparmor/apparmor/merge_requests/415](https://gitlab.com/apparmor/apparmor/merge_requests/415)
+[MR419: https://gitlab.com/apparmor/apparmor/merge_requests/419](https://gitlab.com/apparmor/apparmor/merge_requests/419)
+[MR420: https://gitlab.com/apparmor/apparmor/merge_requests/420](https://gitlab.com/apparmor/apparmor/merge_requests/420)
+[MR421: https://gitlab.com/apparmor/apparmor/merge_requests/421](https://gitlab.com/apparmor/apparmor/merge_requests/421)
+[MR425: https://gitlab.com/apparmor/apparmor/merge_requests/425](https://gitlab.com/apparmor/apparmor/merge_requests/425)
+[MR426: https://gitlab.com/apparmor/apparmor/merge_requests/426](https://gitlab.com/apparmor/apparmor/merge_requests/426)
+[MR427: https://gitlab.com/apparmor/apparmor/merge_requests/427](https://gitlab.com/apparmor/apparmor/merge_requests/427)
+[MR429: https://gitlab.com/apparmor/apparmor/merge_requests/429](https://gitlab.com/apparmor/apparmor/merge_requests/429)
+[MR430: https://gitlab.com/apparmor/apparmor/merge_requests/430](https://gitlab.com/apparmor/apparmor/merge_requests/430)
+[MR436: https://gitlab.com/apparmor/apparmor/merge_requests/436](https://gitlab.com/apparmor/apparmor/merge_requests/436)
+[MR442: https://gitlab.com/apparmor/apparmor/merge_requests/442](https://gitlab.com/apparmor/apparmor/merge_requests/442)
+[MR443: https://gitlab.com/apparmor/apparmor/merge_requests/443](https://gitlab.com/apparmor/apparmor/merge_requests/443)
+[MR444: https://gitlab.com/apparmor/apparmor/merge_requests/444](https://gitlab.com/apparmor/apparmor/merge_requests/444)
+[MR445: https://gitlab.com/apparmor/apparmor/merge_requests/445](https://gitlab.com/apparmor/apparmor/merge_requests/445)
