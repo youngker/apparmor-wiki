@@ -10,7 +10,7 @@ This version of the userspace should work with all kernel versions from
 apparmor patches applied). And supports features released in the 4.18
 kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
-AppArmor 2.13.4 was released 2020-03-11.
+AppArmor 2.13.4 was released 2020-03-12.
 
 
 # Obtaining the Release
