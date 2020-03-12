@@ -30,9 +30,8 @@ Translations
 
 Build Infrastructure
 --------------------
-????
-- add files to .gitignore: swig auto generated files for ruby ([MR366][MR366])
-- fix libapparmor swig 4 failure 'aa\_log\_record' object has no attribute '\_\_getattr\_\_' ([BUG33][AABUG33])
+- Enable continuous integration testing on the 2.13 branch ([436])
+- Fix a Python 3.8 autoconf check ([430])
 
 libapparmor
 -----------
@@ -60,14 +59,10 @@ Init
 
 Utils
 -----
-???
-
+- aa-status
+  - handle profile names containing '(' ([415])
 - genprof/logprof
-  - drop failing corner-case check in logparser.py ([boo1120472][boo1120472], [MR297][MR297])
-  - drop unused `get_profile_filename()` from logparser.py ([MR297][MR297])
-  - fix error `KeyError: 'logfiles'` when no logprof.conf exists ([MR365][MR365])
-  - don't drop later events when user selects to deny a hat ([MR378][MR378])
-- update network keyword list and add corresponding tests ([MR350][MR350])
+  - Fix crash due to local includes ([lp1848227], [MR427])
 
 
 Policy
@@ -75,80 +70,46 @@ Policy
 ???
 
 - Profiles
-  - dnsmasq:
-    - allow peer=libvirtd to support named profile ([MR304][MR304])
-    - work around breakage caused by {bin,sbin} alternation ([boo1127073][boo1127073], [MR346][MR346])
-    - revert /usr/{bin,sbin}/ alternation in dnsmasq profile name ([boo1127073][boo1127073], [MR346][MR346])
-  - dovecot
-    - allow FD passing between dovecot and dovecot's anvil ([MR336][MR336])
-    - allow chroot'ing the auth processes ([MR336][MR336])
-    - let dovecot/anvil rw the auth-penalty socket ([MR336][MR336])
-    - auth processes need to read from postfix auth socket ([MR336][MR336])
-    - add abstractions/ssl\_certs to lmtp ([MR336][MR336])
-    - allow master to use SIGTERM on children that are slow to die ([MR357][MR357])
-    - align {pop3,managesieve}-login to imap-login ([MR389][MR389])
-  - identd: allow network netlink dgram ([MR353][MR353])
-  - lsb\_release profile: new abstraction ([MR154][MR154])
-  - mysqld ([MR310][MR310]):
-    - add mmap permission for mysqld (4.8 semantic change)
-    - allow mysql to determine which cpus are online
-    - allow locking of mysql files
-  - syslog-ng: add abstractions/python for python-parser ([MR361][MR361])
 
 
 - Tunables
-  - share:
-    - make it play well with aliases ([MR300][MR300])
-    - fix buggy syntax that broke the ~/.local/share part of the @{user\_share\_dirs} tunable ([LP1816470][LP1816470], [MR344][MR344])
 
 - Abstractions
-  - audio:
-    - fix alsa settings access
-    - grant read access to the system-wide asound.conf ([dbug920669][dbug920669], [MR320][MR320])
-    - grant read access to the libao configuration files ([dbug920670][dbug920670], [MR320][MR320])
-  - base: allow mr permission on all *.so* common library paths ([MR345][MR345])
-  - dri-common: allow reading /dev/dri/ ([AABUG29][AABUG29], [MR382][MR382])
-  - fonts:
-    - allow to read conf-avail dir itself ([MR165][MR165])
-    - allow creating/writing config dirs ([MR165][MR165])
-    - add various openSUSE-specific font config directories ([MR309][MR309])
-  - gnome:
-    - allow reading gtk-3.0 cache files ([MR342][MR342])
-    - allow creating config dirs ([MR165][MR165])
-  - kde:
-    - allow access to common KDE-specific settings ([MR327][MR327])
-    - allow access to global KDE settings ([MR327][MR327])
-  - ldapclient: allow rw access to the nslcd socket ([LP1575438][LP1575438])
-  - mesa:
-    - allow reading drirc.d ([MR308][MR308])
-    - move dirc.d access to dir-common ([MR314][MR314])
-  - nameservice: allow access to /run/netconfig/resolv.conf ([boo1097370][boo1097370])
-  - nvidia: allow reading nvidia application profiles ([MR125][MR125])
-  - postfix-common: make compatible with updated postfix profiles naming ([MR387][MR387])
-  - python: allow reading /usr/local/lib/python3 ([MR171][MR171])
-  - qt5: allow reading user configuration ([MR335][MR335])
-  - qt5-compose-cache-write: fix anonymous shared memory access ([MR301][MR301])
-  - qt5-settings-write: fix anonymous shared memory access ([MR302][MR302])
-  - ssl\_certs,keys - add support for libdehydrated in /var/lib/ ([MR299][MR299])
-  - ubuntu-browsers.d/multimedia: allow creating/writing config dirs ([MR165][MR165])
-  - vulcan: allow reading /etc/vulkan/icd.d/ ([MR329][MR329])
+  - authentication
+    - add support for /usr/etc used by some RO root images ([boo1153162], [MR426]) 
+  - base
+    - allow access to /run/uuidd/request ([MR445])
+    - allow access to top level ecryptfs directories ([LP1848919], [MR443])
+    - allow reading per-user themes from $XDG_DATA_HOME ([MR442])
+  - fonts
+    - don't allow writing to fontconfig cache ([MR420])
+  - gnome
+    - allow access to xdg mimeapps.list ([LP1792027], [MR444])
+  - kerberosclient
+    - allow reading /etc/krb5.conf.d/ ([MR425])
 
+
+
+
+
+??ex    - grant read access to the system-wide asound.conf ([dbug920669][dbug920669], [MR320][MR320])
 
 Tests
 -----
-???
 
-- fix mount test to use next available loop device ([MR379][MR379])
-- update tests to support distros with user-merge where /bin and /sbin are symlinks ([MR331][MR331])
-- fix regression test failures around new binary cache layout ([MR348][MR348])
-- update tests for new network domain keywords ([MR349][MR349])
-- update tests for base abstraction changes ([MR358][MR358])
+????- fix mount test to use next available loop device ([MR379][MR379])
 
 
 Documentation
 -------------
-???
 
+- apparmor.d (7)
+  - fix typos
+- README.md
+  - Document how to use PYFLAKES during testing ([429])
+
+
+???
 - apparmor.d (7):
   - update list of network domain keywords ([MR349][MR349])
   - drop unsupported 'to' option for link rules from manpage ([MR368][MR368])
