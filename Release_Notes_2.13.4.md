@@ -14,11 +14,11 @@ AppArmor 2.13.4 was released 2020-03-12.
 
 
 # Obtaining the Release
-These release notes cover all changes between 2.13.3 (2f9d9ea7e01a115b29858455d3b1b5c6a0bab75c) and 2.13.4 (XXXXX) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
+These release notes cover all changes between 2.13.3 (2f9d9ea7e01a115b29858455d3b1b5c6a0bab75c) and 2.13.4 (df0ac742f7a1146181d8734d03334494f2015134) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
 
 Tarball
 -   <https://launchpad.net/apparmor/2.13/2.13.4/+download/apparmor-2.13.4.tar.gz>
--   sha256sum: 
+-   sha256sum: 90bf86c07ffbe2c22be46d75c7345fad12d5911653c59750a37d59c63ad5d10e
 -   signature: <https://launchpad.net/apparmor/2.13/2.13.4/+download/apparmor-2.13.4.tar.gz.asc>
 
 # Changes in this Release
