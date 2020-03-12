@@ -23,10 +23,6 @@ Tarball
 
 # Changes in this Release
 
-Translations
---------------
-???
-- sync to most up to date language translations available
 
 Build Infrastructure
 --------------------
@@ -34,41 +30,31 @@ Build Infrastructure
 - Fix autoconf check for Python 3.8 ([MR430])
 - Fix vim syntax highlighting for capability ([MR421])
 - Fix cross compile by allowing overriding of ar ([issue41])
+- Allow installing apparmor_parser to a custom sbin location ([MR111])
+
 
 libapparmor
 -----------
-- Fix log parsing for logs with an embedded \n ([MR395])
+- Fix log parsing for logs with an embedded newline ([MR395])
+
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
 - Fix typo in usage message ([MR406])
 
-Init
-----
-???
-
-- apparmor.systemd: fix minor issues detected by shellcheck ([MR293][MR293])
-- ensure error value is returned correctly ([MR352][MR352])
 
 Utils
 -----
 - aa-status
-  - handle profile names containing '(' ([415])
+  - handle profile names containing '(' ([MR415])
 - genprof/logprof
   - Fix crash due to local includes ([lp1848227], [MR427])
-  - Fix crash when log message contains a filename with unbalanced parenthesis ([406])
+  - Fix crash when log message contains a filename with unbalanced parenthesis ([MR406])
 
 
 
 Policy
 ------
-???
-
-- Profiles
-
-
-- Tunables
-
 - Abstractions
   - authentication
     - add support for /usr/etc used by some RO root images ([boo1153162], [MR426]) 
@@ -82,19 +68,15 @@ Policy
     - allow access to xdg mimeapps.list ([LP1792027], [MR444])
   - kerberosclient
     - allow reading /etc/krb5.conf.d/ ([MR425])
+  - ssl_certs/ssl_keys
+    - add support for cert bot ([MR397])
   - X
     - allow reading the Xauth file that mutter passes to Xwayland ([dbug935058], [MR419])
 
 
-
-
-
-??ex    - grant read access to the system-wide asound.conf ([dbug920669][dbug920669], [MR320][MR320])
-
 Tests
 -----
-
-????- fix mount test to use next available loop device ([MR379][MR379])
+- Fix mult_mount test for cases where the block size is greater than 1K ([LP1834192], [MR396])
 
 
 Documentation
@@ -105,11 +87,6 @@ Documentation
 - README.md
   - Document how to use PYFLAKES during testing ([MR429])
 
-
-???
-- apparmor.d (7):
-  - update list of network domain keywords ([MR349][MR349])
-  - drop unsupported 'to' option for link rules from manpage ([MR368][MR368])
 
 Note
 ====
