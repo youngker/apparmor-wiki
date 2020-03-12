@@ -37,7 +37,7 @@ Build Infrastructure
 
 libapparmor
 -----------
-- Fix log parsing for logs with an embedded /n ([395])
+- Fix log parsing for logs with an embedded \n ([MR395])
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
