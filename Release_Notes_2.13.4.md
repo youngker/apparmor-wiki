@@ -50,7 +50,7 @@ Utils
   - handle profile names containing '(' ([MR415](https://gitlab.com/apparmor/apparmor/merge_requests/415))
 - genprof/logprof
   - Fix crash due to local includes ([lp1848227](https://bugs.launchpad.net/bugs/1848227), [MR427](https://gitlab.com/apparmor/apparmor/merge_requests/427))
-  - Fix crash when log message contains a filename with unbalanced parenthesis ([MR406](https://gitlab.com/apparmor/apparmor/merge_requests/406))
+  - Fix crash when log message contains a filename with unbalanced parenthesis ([MR402](https://gitlab.com/apparmor/apparmor/merge_requests/402))
 
 
 
