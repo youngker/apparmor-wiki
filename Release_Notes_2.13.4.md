@@ -30,25 +30,18 @@ Translations
 
 Build Infrastructure
 --------------------
-- Enable continuous integration testing on the 2.13 branch ([436])
-- Fix autoconf check for Python 3.8 ([430])
+- Enable continuous integration testing on the 2.13 branch ([MR436])
+- Fix autoconf check for Python 3.8 ([MR430])
+- Fix vim syntax highlighting for capability ([MR421])
+- Fix cross compile by allowing overriding of ar ([issue41])
 
 libapparmor
 -----------
-????
-- fix segfault in `overlaydirat_for_each()` causing overlaid cache directory failures
-- fix segfault when loading policy cache files ([MR348][MR348])
-- fix failure to merge overlay directories in some situations ([MR348][MR348])
+- Fix log parsing for logs with an embedded /n ([395])
 
 Policy Compiler (a.k.a apparmor\_parser)
 ----------------------------------------
-???
-
-- clean up error handling ([dbug921866][dbug921866], [LP1815294][LP1815294])
-- fix parsing of target profile NAME in directed transitions “px -> NAME" ([MR334][MR334])
-- improve runtime attachment by determine xmatch priority based on smallest DFA match ([MR326][MR326])
-- don't skip cache loads just because optimizations flags are specified
-  ([MR385][MR385], [LP1820068][LP1820068])
+- Fix typo in usage message ([MR406])
 
 Init
 ----
@@ -63,6 +56,8 @@ Utils
   - handle profile names containing '(' ([415])
 - genprof/logprof
   - Fix crash due to local includes ([lp1848227], [MR427])
+  - Fix crash when log message contains a filename with unbalanced parenthesis ([406])
+
 
 
 Policy
@@ -87,6 +82,8 @@ Policy
     - allow access to xdg mimeapps.list ([LP1792027], [MR444])
   - kerberosclient
     - allow reading /etc/krb5.conf.d/ ([MR425])
+  - X
+    - allow reading the Xauth file that mutter passes to Xwayland ([dbug935058], [MR419])
 
 
 
@@ -104,9 +101,9 @@ Documentation
 -------------
 
 - apparmor.d (7)
-  - fix typos
+  - fix typos in documentation for dbus and unix rules ([LP1838991], [MR410])
 - README.md
-  - Document how to use PYFLAKES during testing ([429])
+  - Document how to use PYFLAKES during testing ([MR429])
 
 
 ???
