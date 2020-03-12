@@ -31,7 +31,7 @@ Translations
 Build Infrastructure
 --------------------
 - Enable continuous integration testing on the 2.13 branch ([436])
-- Fix a Python 3.8 autoconf check ([430])
+- Fix autoconf check for Python 3.8 ([430])
 
 libapparmor
 -----------
