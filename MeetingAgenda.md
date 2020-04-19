@@ -8,9 +8,10 @@ If there are reasons to move the time or date we will, and
 announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
-Meeting Logs are linked off of the month agenda title.
-# [IRC Meeting, 18:00 UTC, Tue April 14, 2020](IRC_meeting_2020-04-10)
+
+# [IRC Meeting, 18:00 UTC, Tue April 21, 2020](IRC_meeting_2020-04-21)
 - release cadence
+- bugreport links in manpages etc. - launchpad, gitlab, both?
 - anything else
 
 # [IRC Meeting, 18:00 UTC, Tue March 10, 2020](IRC_meeting_2020-03-10)
