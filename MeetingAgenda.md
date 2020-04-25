@@ -12,6 +12,7 @@ Meeting Logs are linked off of the month agenda title.
 # [IRC Meeting, 18:00 UTC, Tue April 28, 2020](IRC_meeting_2020-04-28)
 - release cadence
 - bugreport links in manpages etc. - launchpad, gitlab, both?
+- switch local/ files to `include if exists` and no longer create them by default?
 - anything else
 
 # [IRC Meeting, 18:00 UTC, Tue March 10, 2020](IRC_meeting_2020-03-10)
