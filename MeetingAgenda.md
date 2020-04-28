@@ -9,6 +9,10 @@ announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
 
+# [IRC Meeting, 18:00 UTC, Tue June 9, 2020](IRC_meeting_2020-06-09)
+- ???
+- anything else
+
 # [IRC Meeting, 18:00 UTC, Tue April 28, 2020](IRC_meeting_2020-04-28)
 - release cadence
 - bugreport links in manpages etc. - launchpad, gitlab, both?
