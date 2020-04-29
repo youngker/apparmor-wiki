@@ -1,4 +1,4 @@
-# Warning WIP release notes for apparmor 3.0 userspace that has not been finalized nor released yet.
+# Warning WIP will be fully updated in the next few days
 
 AppArmor 3.0 was released 2020-04-29.
 
