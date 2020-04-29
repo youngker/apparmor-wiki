@@ -1,7 +1,6 @@
 # Warning WIP release notes for apparmor 3.0 userspace that has not been finalized nor released yet.
 
-Introduction
-============
+# Introduction
 
 AppArmor 3.0 is a major new release of the AppArmor user space that makes an important change to policy development and support. Its focus is transitioning policy to the new features abi and as such other new features have been limited.
 
@@ -14,14 +13,9 @@ kernel.
 
 The kernel portion of the project is maintained and pushed separately.
 
-Note: These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46)
-and 3.0 (wip covers up to f2de2952da73bc3fb0190c2cba70365c43a14865???????) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
 
-In addition to the changes noted below AppArmor 3.0 includes all the bug fixes and improvements made in 2.13.1 .. 2.13.5
+# Highlighted new features
 
-
-Highlighted new features
-========================
 - Policy now must declare the feature abi it was developed for if it is to use any new features. 
 
 - support profile modes
@@ -40,37 +34,53 @@ Highlighted new features
 - improved support for kernels that support LSM stacking
 
 
-Build Infrastructure
---------------------
+# Obtaining the Release
+These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46) and 3.0 (???) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
+
+Tarball
+-   <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.tar.gz>
+-   sha256sum: 
+-   signature: <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.tar.gz.asc>
+
+# Changes in this Release
+
+Includes all the bug fixes and improvements in
+- [2.13.1](Release_Notes_2.13.1)
+- [2.13.2](Release_Notes_2.13.2)
+- [2.13.3](Release_Notes_2.13.3)
+- [2.13.4](Release_Notes_2.13.4)
+- [2.13.5](Release_Notes_2.13.5)
 
 
-Policy Compiler (a.k.a apparmor\_parser)
-----------------------------------------
+And the following improvements
+
+## Build Infrastructure
+
+
+
+## Policy Compiler (a.k.a apparmor\_parser)
+
 - fix bugs in --config-file handling
 - make --config-file so it is no longer required to be the first option passed to the parser
 - move default cache location to /var/cache
 - ??? fix transition profile name mess
 - profile name validation???
 
-Init
-----
+## Init
 
 
-Library
--------
+
+## Library
+
 - APIs
 
 
-pam_apparmor
-------------
+
+## Utils
 
 
-Utils
------
 
-
-Policy
-------
+## Policy
 
 - profiles:
   - support distributions which merge sbin into bin
@@ -83,16 +93,16 @@ Policy
     - support void linux binary location
   - dnsmasq: add paths for NetworkManager connection sharing
 
-Documentation
--------------
+## Documentation
 
 
-Translations
-------------
+
+## Translations
 
 
-Tests
------
+
+## Tests
+
 - use --config-file in tests so they are unaffected by the system parser.conf file
 
 -   parser
