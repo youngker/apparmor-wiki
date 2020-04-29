@@ -1,5 +1,7 @@
 # Warning WIP release notes for apparmor 3.0 userspace that has not been finalized nor released yet.
 
+AppArmor 3.0 was released 2020-04-29.
+
 # Introduction
 
 AppArmor 3.0 is a major new release of the AppArmor user space that makes an important change to policy development and support. Its focus is transitioning policy to the new features abi and as such other new features have been limited.
