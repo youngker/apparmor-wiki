@@ -8,7 +8,7 @@ Environment variables can be used to alter program behavior and have been levera
 
 safe/unsafe version of exec rules, environment is scrubbed by glibc, list changes depending on version of glibc, may not be scrubbed if different libc is used.
 
-# AppArmor environment variable mediation and scrubbing
+# Profile environment variable mediation and scrubbing
 
 Because libc environment scrubbing is insufficient in many cases (eg. interpreters), AppArmor provides a means to specify what the environment should look like when an application starts running.
 
@@ -19,9 +19,26 @@ It is important to note that AppArmor environment variable filtering is only app
 profile python /usr/bin/python {
 
   environment {
-     PATH=
+       deny XFOO,
+       deny XBAR=x*,
+       filter XFRED,
+       filter XGEORGE=x*,
+       filter PATH in? x*
+       set PATH=FOO
+       append PATH=BAR
+       prepend PATH=BAR
+       replace PATH in X* -> foo,
 
   }
 
 }
+
+# Exec rule environment modification
+
+In addition to being able to specify environment controls on a per profile basis, AppArmor allows individual exec rules to specify the same type of mediation and modification. This allows policy to take into account exec relationships when setting up environment variable mediation.
+
+It is important to note that exec rule environment mediation is applied before profile based environment mediation.
+
+??? way to override
+
 
