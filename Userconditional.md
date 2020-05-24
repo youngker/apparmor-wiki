@@ -66,7 +66,7 @@ Creating profiles doing
  }
 ```
 
-Is not always convenient, some times it is cleaner to specify them at the profile attachment level.
+Is not always convenient, some times it is cleaner to specify them as a profile attachment conditional.
 
 ```
  profile firefox user=alice {
@@ -77,7 +77,7 @@ Is not always convenient, some times it is cleaner to specify them at the profil
  }
 ```
 
-doing this can be more convenient. This is functionally equivalent. It
+doing this can be more convenient and is functionally equivalent. It
 does not mean there are multiple versions of the profile just different
 [variants](profile_variants) based on the attachments.
 
@@ -90,25 +90,31 @@ multiple versions of a profile with different user conditions
 -------------------------------------------------------------
 
 ```
+ profile firefox {}
  profile firefox user=alice {}
  profile firefox user=bob {}
 ```
 
-A profile with different versions based off of the attachment conditional (including user=) are known as variants.
+A profile with different versions based off of the attachment conditional (including user=) are known as variants. Profile variants with a user conditional are considered to be more specific than profiles with out a user attachment conditional and will be preferred when they match.
 
--   **???** Maybe make user=  and explicit part of the attachment; i.e.:
 
-    ```
-profile firefox attachment=(file=/foo user=alice) { }
-    ```
+
+# Profile replacement
+
+When user conditionals are used they only replace profiles that have the same user conditional. This means that if you change the profile user attachment conditional to include an extra user it will not replace a previously loaded version of the profile. This means it possible to have both the old and new versions of the profile present if replacement is not done carefully.
 
 It is recommended that all profiles defined with user conditionals be
-compiled and loaded together at the same time. This is to ensure that
+compiled and loaded together at the same time. This allows the compiler to ensure that
 there are no inconsistencies between the conditionals and all variants
 are replaced atomically. If this guideline is not being followed then
 it is recommended that all variants have none over lapping attachment
-conditionals, otherwise no guarantees can be made about which profile
+conditionals, otherwise it is hard to make guarantees can be made about which profile
 variant will be attached.
+
+# Profile Variants and change_hat
+
+profile variants when used with change_hat can result in different hats being attached based on the user invoking the change_hat call.
+
 
 profile variants with overlapping profile conditions
 ----------------------------------------------------
