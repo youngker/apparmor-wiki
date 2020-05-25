@@ -36,7 +36,7 @@ The basic structure of an environment rule is as follows.
    ENVIRONMENT_RULE := ( AUDIT_QUALIFIER QUALIFIER 'environment' VARIABLES ('='VALUES)? [ ':=' VALUE ] ',' | 'environment '{' ( AUDIT_QUALIFIER QUALIFIER VARIABLES ['=' VALUES] [ ':=' VALUE ] ',' )* '}' )
 
    AUDIT_QUALIFIER := (audit|quiet|access)
-   QUALIFIER := (deny|require|filter|set)
+   QUALIFIER := (allow|deny|require|filter|delete|set)
    VARIABLES := pattern of variable names
    VALUES := pattern of variable values that the rule matches
  ```
@@ -48,7 +48,8 @@ The qualifiers that can be used are
 - allow - if the rule is matched the environment variable will be allowed
 - deny - if the rule is matched execution will be denied
 - require - if the rule is not matched execution will be denied
-- filter - if the rule is matched the variable will be filtered (removed) from the environment. ???Filter part of rule
+- filter - if the rule is matched the variable's value will be filtered . ???Filter part of rule
+- delete - if the rule is matched the variable will deleted from the environment.
 - set - if the rule is matched the variable will be set to the provided value
 
 ??? IF no environment rules default allow, else default deny ???
@@ -125,6 +126,19 @@ profile foo {
 ```
 
 
+```
+profile foo {
+   environment {
+      # make this a black list
+      allow  *,
+      deny LD_PRELOAD,
+      delete PYTHON_PATH,
+      filter PATH=?????,
+      require HOME,
+      set APPARMOR_SESSION := yes,
+   }
+}
+```
 
 profile python /usr/bin/python {
 
