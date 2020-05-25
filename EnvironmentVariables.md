@@ -23,7 +23,7 @@ Environment controls begin with the keyword ```environment``` followed by an ind
 The basic structure of an environment rule is as follows.
 
  ```
-   ENVIRONMENT_RULE := AUDIT_QUALIFIER QUALIFIER 'environment' VARIABLES ('='VALUES)? [ ':=' VALUE ],
+   ENVIRONMENT_RULE := ( AUDIT_QUALIFIER QUALIFIER 'environment' VARIABLES ('='VALUES)? [ ':=' VALUE ] ',' | 'environment '{' ( AUDIT_QUALIFIER QUALIFIER VARIABLES ['=' VALUES] [ ':=' VALUE ] ',' )* '}' )
 
    AUDIT_QUALIFIER := (audit|quiet|access)
    QUALIFIER := (deny|require|filter|set)
@@ -33,13 +33,15 @@ The basic structure of an environment rule is as follows.
 
 it is important to note that if the optional VALUES are not specified the rule will match the variable regardless of the value.
 
-The commands that can be used are
+The qualifiers that can be used are
 
+- allow - if the rule is matched the environment variable will be allowed
 - deny - if the rule is matched execution will be denied
 - require - if the rule is not matched execution will be denied
 - filter - if the rule is matched the variable will be filtered (removed) from the environment. ???Filter part of rule
-
 - set - if the rule is matched the variable will be set to the provided value
+
+??? IF no environment rules default allow, else default deny ???
 
 ???allow do we make env rules white listing + black list
 
