@@ -10,11 +10,40 @@ safe/unsafe version of exec rules, environment is scrubbed by glibc, list change
 
 # Profile environment variable mediation and scrubbing
 
-Because libc environment scrubbing is insufficient in many cases (eg. interpreters), AppArmor provides a means to specify what the environment should look like when an application starts running.
+Because libc environment scrubbing is insufficient in many cases (eg. interpreters have their own special environment variables that libc doesn't know about), AppArmor provides a means to specify what the environment should look like when an application starts running.
 
-AppArmor can filter out environment variables, filter out parters of environment variables values, deny exec based on the presence of an environment variable or its values, and can even set or modify environment variables.
+AppArmor can filter out environment variables, filter out parts of environment variables values, deny exec based on the presence of an environment variable or its values, and can even set or modify environment variables.
 
 It is important to note that AppArmor environment variable filtering is only applied at exec time and does not mediate what a task does to its environment at run time.
+
+## environment rules
+
+Environment controls begin with the keyword ```environment``` followed by an individual rule or a block of rules. If a block of rules is used only environment rules may appear in the block. Multiple rules or blocks can be declared and as other AppArmor rules the affects are declarative (order doesn't matter) and cumulative. As a matter of style it is recommend to keep environment variables together in a block at the top of the profile, to make it easier for people to understand but multiple rules spread throughout the profile are allowed to fascilitate their use in abstractions.
+
+The basic structure of an environment rule is as follows.
+
+ ```
+   ENVIRONMENT_RULE := CMD VARIABLES ('='VALUES)?,
+
+   CMD := (deny|require|filter|set)
+   VARIABLES := pattern of variable names
+   VALUES := pattern of variable values that the rule matches
+ ```
+
+it is important to note that if the optional VALUES are not specified the rule will match the variable regardless of the value.
+
+The commands that can be used are
+
+- deny - if the rule is matched execution will be denied
+- require - if the rule is not matched execution will be denied
+- filter - if the rule is matched the variable will be filtered (removed) from the environment. ???Filter part of rule
+
+- set - if the rule is matched the variable will be set to the provided value
+
+??? anchored vs. unanchored expressions
+
+
+
 
 profile python /usr/bin/python {
 
