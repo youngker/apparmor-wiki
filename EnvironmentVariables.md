@@ -56,6 +56,7 @@ eg. a section of the path
 we could add ^$ anchors to expressions
 
 
+maybe special keyword for PATH elements because it is so common
 
 
 ### Examples
