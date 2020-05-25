@@ -23,9 +23,10 @@ Environment controls begin with the keyword ```environment``` followed by an ind
 The basic structure of an environment rule is as follows.
 
  ```
-   ENVIRONMENT_RULE := CMD VARIABLES ('='VALUES)?,
+   ENVIRONMENT_RULE := AUDIT_QUALIFIER QUALIFIER 'environment' VARIABLES ('='VALUES)? [ ':=' VALUE ],
 
-   CMD := (deny|require|filter|set)
+   AUDIT_QUALIFIER := (audit|quiet|access)
+   QUALIFIER := (deny|require|filter|set)
    VARIABLES := pattern of variable names
    VALUES := pattern of variable values that the rule matches
  ```
@@ -39,6 +40,8 @@ The commands that can be used are
 - filter - if the rule is matched the variable will be filtered (removed) from the environment. ???Filter part of rule
 
 - set - if the rule is matched the variable will be set to the provided value
+
+???allow do we make env rules white listing + black list
 
 ??? anchored vs. unanchored expressions
 = using ^ and $ vs contains
