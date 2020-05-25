@@ -1,5 +1,15 @@
 # Warning this document is a WIP
 
+## to figure out
+
+- default allow if no rules specified (ie no additional restrictions)
+  - if env rules present?
+    - default deny, white list. like rest of policy?
+    - default allow, black list
+
+- anchoring? vs. contains
+- how to identify subpattern in rule that should be filtered
+
 # Introduction
 
 Environment variables can be used to alter program behavior and have been leveraged to exploit programs. As such some environment variables are dangerous and must be handled carefully. AppArmor provides several ways to make sure the applications environment is safe
