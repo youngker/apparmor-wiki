@@ -33,7 +33,7 @@ Environment controls begin with the keyword ```environment``` followed by an ind
 The basic structure of an environment rule is as follows.
 
  ```
-   ENVIRONMENT_RULE := ( AUDIT_QUALIFIER QUALIFIER 'environment' VARIABLES ('='VALUES)? [ ':=' VALUE ] ',' | 'environment '{' ( AUDIT_QUALIFIER QUALIFIER VARIABLES ['=' VALUES] [ ':=' VALUE ] ',' )* '}' )
+   ENVIRONMENT_RULE := <br>  ( AUDIT_QUALIFIER QUALIFIER 'environment' VARIABLES ('='VALUES)? [ ':=' VALUE ] ',' | <br>'environment '{' ( AUDIT_QUALIFIER QUALIFIER VARIABLES ['=' VALUES] [ ':=' VALUE ] ',' )* '}' )
 
    AUDIT_QUALIFIER := (audit|quiet|access)
    QUALIFIER := (allow|deny|require|filter|delete|set)
