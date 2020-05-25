@@ -48,7 +48,7 @@ The commands that can be used are
 
 ???? what of matching portion, we need follow on/tail to match do match but grouping to find value to remove
 eg. a section of the path
-  PATH contains {@{HOME}/bin/:,@{HOME}$}
+  PATH contains \^(@{HOME}/+bin/*.*(:|$)|:.*(@{HOME}/+bin/*.*(:|$))
 
 we could add ^$ anchors to expressions
 
