@@ -41,7 +41,72 @@ The commands that can be used are
 - set - if the rule is matched the variable will be set to the provided value
 
 ??? anchored vs. unanchored expressions
+= using ^ and $ vs contains
 
+
+???? use remove and filter or filter value? ??? to indicate whether to remove the var or delete the value.
+
+???? what of matching portion, we need follow on/tail to match do match but grouping to find value to remove
+eg. a section of the path
+  PATH contains {@{HOME}/bin/:,@{HOME}$}
+
+we could add ^$ anchors to expressions
+
+
+
+
+### Examples
+
+Deny execution if the PATH variable is present in the environment
+
+```
+profile foo {
+
+   deny environment PATH,
+}
+```
+
+---
+
+Deny execution if the users PATH is present in the the path environment variable.
+
+```
+profile foo {
+   deny environment PATH contains @{HOME}{:*,},
+
+}
+```
+
+---
+
+Remove the PATH variable if present
+
+```
+profile foo {
+
+   filter environment PATH,
+}
+```
+
+---
+
+Remove the PATH variable if it contains @{HOME} in the path value
+
+```
+profile foo {
+   filter environment PATH contains @{HOME}{:*,},
+}
+```
+
+---
+
+Filter the portion of the PATH variable that matches
+
+```
+profile foo {
+   filter environment PATH contains @{HOME}{:*,}, ?????
+}
+```
 
 
 
