@@ -16,7 +16,6 @@ Meeting Logs are linked off of the month agenda title.
 # [IRC Meeting, 18:00 UTC, Tue June 9, 2020](IRC_meeting_2020-06-09)
 - convert #include -> include?
 - 3.0 release date
-- 
 - 3.1 target
 - anything else
 
