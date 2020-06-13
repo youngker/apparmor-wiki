@@ -21,27 +21,27 @@ Unix/Linux permission system consisting of a subject (ie owner,
 group and other) and its access permission (ie, read, write, execute,
 setuid, setgid and sticky).
 
-### What is Default Deny (White listing)
+### What is Default Deny (Allow listing)
 
 Default deny describes the default action applied to a request that
 is not listed in policy, in this case deny. Policy that is based on
-default deny provides a list of actions that are allowed (white list)
-and any thing not listed in policy is denied.
+default deny provides a list of actions that are allowed and any thing
+not listed in policy is denied.
 
 Default deny is considered more secure than default allow because it
 only allows known good behavior.
 
-### What is Default Allow (Black listing)
+### What is Default Allow (Block listing)
 
 Default allow describes the default action applied to a request that
 is not listed in policy, in this case allow. Policy that is based
 on default allow provides a list of actions that are NOT allowed
-(black list) and any thing not listed in the policy is allowed.
+and any thing not listed in the policy is allowed.
 
 Default allow is considered less secure than default deny because it
 only stops known bad behavior.
 
-### Is AppArmor policy Default Deny (White listing)
+### Is AppArmor policy Default Deny (Allow listing)
 
 Yes, and no. AppArmor profiles are based on default deny, that is the
 rules list what is allowed and everything else is denied. AppArmor
