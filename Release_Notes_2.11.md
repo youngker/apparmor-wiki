@@ -189,7 +189,7 @@ other profile changes:
     -   allow paranoia mode
     -   allow reading libvirt/dnsmasq/\*.status
 -   usr.lib.apache2.mpm-prefork.apache2: allow CAP\_CHOWN
--   usr.sbin.sshd: allow reading blacklisted host keys
+-   usr.sbin.sshd: allow reading blocklisted host keys
 
 Documentation
 -------------
