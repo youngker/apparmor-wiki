@@ -4,8 +4,8 @@
 
 - default allow if no rules specified (ie no additional restrictions)
   - if env rules present?
-    - default deny, white list. like rest of policy?
-    - default allow, black list
+    - default deny, allow list. like rest of policy?
+    - default allow, block list
 
 - anchoring? vs. contains
 - how to identify subpattern in rule that should be filtered
@@ -57,7 +57,7 @@ The qualifiers that can be used are
 
 ??? IF no environment rules default allow, else default deny ???
 
-???allow do we make env rules white listing + black list
+???allow do we make env rules allow listing + block list
 
 ??? anchored vs. unanchored expressions
 = using ^ and $ vs contains
@@ -132,7 +132,7 @@ profile foo {
 ```
 profile foo {
    environment {
-      # make this a black list
+      # make this a block list
       allow  *,
       deny LD_PRELOAD,
       delete PYTHON_PATH,
