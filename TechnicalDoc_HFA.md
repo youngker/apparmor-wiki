@@ -94,22 +94,28 @@ dfa. The pipeline is as follows
       expression tree simplification
           |
           v
+      permission simplification (ie. removing denied set from accept and then dropping denied)
+          |
+          v
       dfa creation
           |
           v
-      dfa minimization
+  +-> dfa minimization
+  |       |
+  |       v
+  |   dfa unreachable state removal
+  |       |
+  |       v
+  +-- if multiple dfas, dfa boolean operations (intersect, union, subtract)
           |
           v
-      dfa unreachable state removal
+      creation of equivalence classes
           |
           v
-      creation of equivalence
+      diff encode (compression of transitions relative to other states)
           |
           v
-      diff encode
-          |
-          v
-      transition table compression
+      compressed dfa creation (comb compression of transition tables (next/check)
 
 To illustrate the steps of the conversion pipeline the following simple profile is used through out the following discussion
 
