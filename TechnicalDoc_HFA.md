@@ -53,23 +53,15 @@ Specific issues with the current implementation
 
 -   it generates large tables that need to be loaded into kernel consuming memory that could be used else where
 -   it takes a relatively long time to compute
-    -   the generation of the dfa without the factoring steps can be impractical even on modern hardware
     -   the dfa is subject to exponential state explosion.
     -   equivalence classes (if used) are applied post generation
 -   the table compression algorithm is a simple and straight forward
     with O(n^2) running time (slow). The compression achieved is not
     perfect but is fairly good given the limits of the compression
     format.
--   the table compression format is simple and direct and does not
-    leverage any state or transition redundancies, resulting in poor
-    compression compared to what could be achieved
 -   The implementation needs to be cleaned up
 
-Overall the dfa engine needs to be updated and replaced with a better
-atomata representation that keeps many of the dfas properties while
-being flexible, faster to compute (control state explosion), and
-leverages a better compression format. Better alternative exist so
-it is only a matter of examining the alternatives and implementing.
+
 
 Rule to DFA conversion
 ======================
