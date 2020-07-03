@@ -1,13 +1,41 @@
 # Versioning in AppArmor Table of Contents
 - [AppArmor Versioning](Apparmorversioning)
- - [Policy Feature ABI](AppArmorpolicyfeaturesabi)
+ - [Policy Feature ABI](AppArmorpolicyfeaturesabi) This Document
+ - [Policy Feature ABI low level examination](AppArmorFeatureABI)
  - [Policy Versioning](AppArmorpolicyversioning)
 
 # Introduction
 
-???? this doesn't belong in feature abi
+AppArmor uses features set ABIs to track what is supported???.
+
+# AppArmor 2.x ABIs
+
+The AppArmor series used a single feature ABI to determine what features where supported. When policy was compiled the ABI was checked for support of a given feature.
+
+By default the compiler would use the feature ABI presented by the kernel, but the feature ABI could be changed by either specifying a specific ABI to the policy compiler (apparmor_parser) or Pinning the feature ABI.
+
+## Specifying the feature ABI to the policy compiler
+
+## Pinning
+
+## Loading policy into the kernel
+
+The kernel is often updated independent of the userspace. It is not uncommon to find new kernels being used on Linux distro userspaces that are several years old, because of this the apparmor kernel module supports multiple feature ABIs to remain backwards compatible with different userspaces.
+
+
+enforce features policy wasn't designed for
+
+fail to load policy
+
+
+## Problems
+
+### Policy not designed for the feature ABI
+
+
+# Component ABI interaction
+
 AppArmor is a long lived project and the set of features that are supported have evolved over time, and continues to evolve. Not only does the supported feature set change but there are independent parts: kernel, userspace tools, policy and trusted helpers each co-evolving but with independent changes. In addition the components evolve partially independently, but components from different versions may be used together so its important to understand their interactions and the limitations that this imparts when dealing with apparmor policy enforcement.
-????
 
 kernel feature abi
 policy api exported by compiler to policy
