@@ -146,6 +146,7 @@ graph TD;
   A(Start State) --> |Class File| F;
   A --> |Class Signal| S(Signal State, no perms:<br> Signal not supported);
   A --> |Class Network| N;
+  F(File State, read perm:<br> file supported) --> |/| Fi;
 ```
 
 This allows the kernel to detect whether the policy had supported a given rule class. The policy can be encoded to have the state transition even if the kernel does not support a given class, in which case the kernel will not know to query the class.
