@@ -142,8 +142,14 @@ The full text feature ABI is not included in the binary (compiled) policy. Inste
 The Policy DB state machine encodes binary support for a rule class in the target state of the class or subclass transition.
 
 ```mermaid
+graph TD:
+  A-->B;
+  A-->C;
+```
+
+```mermaid
 graph TD;
-  Start State -- Class File --> File State (read - file supported);
+  "Start State" -- "Class File" --> File State (read - file supported);
   Start State -- Class Signal --> Signal State (no perms - Signal not supported);
   Start State -- Class Network --> Network State (read - Network supported);
   File State -- / --> File Internal State;
