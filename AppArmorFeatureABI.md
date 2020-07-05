@@ -143,7 +143,7 @@ The Policy DB state machine encodes binary support for a rule class in the targe
 
 ```mermaid
 graph TD;
-  A-->B;
+  A -->B;
   A-->C;
 ```
 
