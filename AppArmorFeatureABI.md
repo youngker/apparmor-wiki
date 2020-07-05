@@ -139,10 +139,22 @@ The full text feature ABI is not included in the binary (compiled) policy. Inste
 
 ## Policy DB encoding of support for a rule class
 
-The Policy DB state machine encodes binary support for a rule class in the target of the first transition.
+The Policy DB state machine encodes binary support for a rule class in the target state of the class or subclass transition.
 
 ```mermaid
 graph TD;
-  A -- Choice 1 --> B;
-  A -- Choice 2 --> C;
+  Start State -- Class File --> File State (read - file supported);
+  Start State -- Class Signal --> Signal State (no perms - Signal not supported);
+  Start State -- Class Network --> Network State (read - Network supported)
+  File State -- / --> File Internal State;
+  Class Network -- subclass Unix --> Unix State (no perms - unix not supported)
+  Class Network -- subclass IPv4 --> IPv4 State (read - IPv4 supported)
 ```
+
+This allows the kernel to detect whether the policy had supported a given rule class. The policy can be encoded to have the state transition even if the kernel does not support a given class, in which case the kernel will not know to query the class.
+
+While this encoding allows policy support multiple kernels (both those that do and don't support a given rule class) at a course level it does not provide a fine grained revisions of to policy rule encoding.
+
+### Fine grained rule encoding flags
+
+????
