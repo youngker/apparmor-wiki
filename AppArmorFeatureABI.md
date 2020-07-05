@@ -146,9 +146,9 @@ graph TD;
   A(Start State) --> |Class File| F;
   A --> |Class Signal| S(Signal State: no perms<br> Signal not supported);
   A --> |Class Network| N;
-  F(File State: read perm<br> file supported) --> |/| Fi;
+  F(File State: read perm<br> file supported) --> |/| Fi(Internal File State);
   N(Network State: read perm<br> Network supported) --> |subclass Unix| U(Unix State: no perms<br> unix not supported);
-  I --> |subclass IPv4| ipv4(IPv4 State: read perms<br>IPv4 supported);
+  N --> |subclass IPv4| ipv4(IPv4 State: read perms<br>IPv4 supported);
 
 ```
 
