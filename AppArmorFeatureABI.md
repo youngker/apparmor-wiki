@@ -143,18 +143,12 @@ The Policy DB state machine encodes binary support for a rule class in the targe
 
 ```mermaid
 graph TD;
-  "A or D" -->B;
-  A-->C;
-```
-
-```mermaid
-graph TD;
-  "Start State" -- "Class File" --> File State (read - file supported);
-  Start State -- Class Signal --> Signal State (no perms - Signal not supported);
-  Start State -- Class Network --> Network State (read - Network supported);
-  File State -- / --> File Internal State;
-  Class Network -- subclass Unix --> Unix State (no perms - unix not supported);
-  Class Network -- subclass IPv4 --> IPv4 State (read - IPv4 supported);
+  A(Start State) -- [Class File] --> F;
+  A -- [Class Signal] --> S(Signal State, no perms: Signal not supported);
+  A -- [Class Network] --> N;
+  F(File State, read perm: file supported) -- [/] --> Fi;
+  N(Network State, read perm: Network supported) -- [subclass Unix] --> U(Unix State, no perms - unix not supported);
+  I -- [subclass IPv4] --> ipv4(IPv4 State, read - IPv4 supported);
 ```
 
 This allows the kernel to detect whether the policy had supported a given rule class. The policy can be encoded to have the state transition even if the kernel does not support a given class, in which case the kernel will not know to query the class.
