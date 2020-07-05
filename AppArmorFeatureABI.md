@@ -150,9 +150,15 @@ graph LR;
   N(Network State: read perm<br> Network supported) --> |subclass Unix| U([Unix State: no perms<br> unix not supported]);
   N --> |subclass IPv4| I(IPv4 State: read perms<br>IPv4 supported);
   I --> |Address Family| ipv4(Internal IPv4 State);
+  Fi --> Y1[...];
+  Fi --> Y2[...];
+  Fi --> Y3[...];
+  Fi --> Y4[...];
+  Fi --> Y5[...];
   ipv4 --> X1[...];
   ipv4 --> X2[...];
   ipv4 --> X3[...];
+  ipv4 --> X4[...];
 ```
 
 This allows the kernel to detect whether the policy had supported a given rule class. The policy can be encoded to have the state transition even if the kernel does not support a given class, in which case the kernel will not know to query the class.
