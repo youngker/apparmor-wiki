@@ -144,10 +144,10 @@ The Policy DB state machine encodes binary support for a rule class in the targe
 ```mermaid
 graph TD;
   A(Start State) --> |Class File| F;
-  A --> |Class Signal| S(Signal State: no perms<br> Signal not supported);
+  A --> |Class Signal| S([Signal State: no perms<br> Signal not supported]);
   A --> |Class Network| N;
   F(File State: read perm<br> file supported) --> |/| Fi(Internal File State);
-  N(Network State: read perm<br> Network supported) --> |subclass Unix| U(Unix State: no perms<br> unix not supported);
+  N(Network State: read perm<br> Network supported) --> |subclass Unix| U([Unix State: no perms<br> unix not supported]);
   N --> |subclass IPv4| I(IPv4 State: read perms<br>IPv4 supported);
   I --> |Address Family| ipv4(Internal IPv4 State);
 ```
