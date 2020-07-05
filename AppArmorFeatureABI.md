@@ -142,7 +142,7 @@ The full text feature ABI is not included in the binary (compiled) policy. Inste
 The Policy DB state machine encodes binary support for a rule class in the target state of the class or subclass transition.
 
 ```mermaid
-graph TD:
+graph TD;
   A-->B;
   A-->C;
 ```
