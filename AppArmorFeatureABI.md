@@ -130,3 +130,19 @@ v5 {yes
 }
 }
 ```
+
+# Binary Policy
+
+The full text feature ABI is not included in the binary (compiled) policy. Instead the version is encoded in the header and then additional information is encoded as needed within the policy encoding.
+
+????
+
+## Policy DB encoding of support for a rule class
+
+The Policy DB state machine encodes binary support for a rule class in the target of the first transition.
+
+```mermaid
+graph TD;
+  A -- Choice 1 --> B;
+  A -- Choice 2 --> C;
+```
