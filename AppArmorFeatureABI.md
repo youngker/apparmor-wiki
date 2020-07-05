@@ -145,10 +145,10 @@ The Policy DB state machine encodes binary support for a rule class in the targe
 graph TD;
   Start State -- Class File --> File State (read - file supported);
   Start State -- Class Signal --> Signal State (no perms - Signal not supported);
-  Start State -- Class Network --> Network State (read - Network supported)
+  Start State -- Class Network --> Network State (read - Network supported);
   File State -- / --> File Internal State;
-  Class Network -- subclass Unix --> Unix State (no perms - unix not supported)
-  Class Network -- subclass IPv4 --> IPv4 State (read - IPv4 supported)
+  Class Network -- subclass Unix --> Unix State (no perms - unix not supported);
+  Class Network -- subclass IPv4 --> IPv4 State (read - IPv4 supported);
 ```
 
 This allows the kernel to detect whether the policy had supported a given rule class. The policy can be encoded to have the state transition even if the kernel does not support a given class, in which case the kernel will not know to query the class.
