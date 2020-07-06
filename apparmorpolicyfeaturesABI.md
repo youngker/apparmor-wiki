@@ -10,10 +10,71 @@
 
 AppArmor uses features set ABIs to track what is supported???.
 
+# How this affects Policy
+
+Policy now needs to contain an abi rule to indicate which feature abi the policy was developed under.
+
+```
+  abi <abi/3.0>,
+```
+
+The abi rule needs to be in the preamble of the profile file before the first include file.
+
+```
+abi <abi/3.0>,
+
+include <tunables/global>
+profile example {
+   ...
+}
+```
+
+## What if policy is missing an abi rule
+
+The AppArmor 3.0 policy compiler (apparmor_parser) will emit a warning
+
+```
+Warning from stdin (stdin line 1): ./apparmor_parser: File 'example' missing feature abi, falling back to default policy feature abi.
+```
+
+It will then set the profile to use a default feature ABI that is pre v8 networking feature compatible (This means network mediation will not work with upstream kernels but will work with kernel's patched with the out of tree v7 networking patches).
+
+AppArmor 2.x policy should largely just continue to work under the default ABI rule, allowing for a gradual transition to AppArmor 3.x policy.
+
+## ABI rules in include files
+
+Include files can contain a feature ABI rule at their head. The affect of this ABI rule will depend on the apparmor_parser in use and compiler flags.
+
+In AppArmor 3.0 the compiler will check that the include is the same as the feature ABI file declared in the policy (if no abi rule was declared the default ABI is used). If they differ the policy compile will fail.
+
+In the future it may be possible for policy to switch between ABIs during compile but this is not currently possible.
 
 
+# Developing Policy
 
-## Kernel
+Feature ABI rules make policy development harder in that new kernel features are not used right away. Instead to use new features the abi rule must be updated.
+
+AppArmor allows for a special abi rule for policy developers that allows for the old AppArmor 2.x development behavior.
+
+```
+   abi <kernel>,
+```
+
+Once the policy has been updated to the developer ABI rule, policy development can proceed as normal under AppArmor 2.x. The policy should be reloaded and the kernel will log violations for newly supported features. Once the policy has been updated with an new rules that are necessary. The abi rule must be updated to point to the new abi that is in use.
+
+```WARNING: The AppArmor project will not accept profiles or policy patches that set the abi rule to <kernel>.``` This is to ensure policy works as expected for users and to ensure that the AppArmor project will be able to continue to land new feature support in the upstream kernel.
+
+## How to find the Kernel feature ABI that is in use
+
+???
+
+### Extracting the new abi to an abi file
+
+???
+
+# Why were feature ABI rules added
+
+# Kernel
 - The kernel presents a set of features that it can enforce to userspace. This is known as the kernel feature set or abi.
 - The kernel can not enforce features that are not compiled into it, but its policy support is flexible and it can do partial policy enforcement. As long as the loaded policy passes the kernels policy consistency checks it can be loaded and enforced to the best of the kernels ability.
 - policy using the policydb format can specify rule types the kernel may not be able to enforce.
