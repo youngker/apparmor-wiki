@@ -34,7 +34,7 @@ profile example {
 The AppArmor 3.0 policy compiler (apparmor_parser) will emit a warning
 
 ```
-Warning from stdin (stdin line 1): ./apparmor_parser: File 'example' missing feature abi, falling back to default policy feature abi.
+Warning from stdin (stdin line 1): apparmor_parser: File 'example' missing feature abi, falling back to default policy feature abi.
 ```
 
 It will then set the profile to use a default feature ABI that is pre v8 networking feature compatible (This means network mediation will not work with upstream kernels but will work with kernel's patched with the out of tree v7 networking patches).
