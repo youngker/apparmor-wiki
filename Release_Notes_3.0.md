@@ -18,23 +18,27 @@ The kernel portion of the project is maintained and pushed separately.
 
 # Highlighted new features
 
-- Policy now must declare the feature abi it was developed for if it is to use any new features. 
+- Policy now must declare the feature abi it was developed for if it is to use any new features. For further information please see the [wiki](AppArmorpolicyfeaturesabi).
  
 - Support for new kernel features (requires appropriate features abi tagging in policy)
   - upstream v8 network socket rules
   - xattr attachment conditionals
   - capabilities PERFMON and BPF
 
+
 - rewritten aa-status
   - supports use in systems/images where python is not available
   - supports kill, unconfined and mixed profile modes
 
+
 - improved support for kernels that support LSM stacking
+
 
 - experimental support profile modes
   - enforce (default)
   - kill
   - unconfined
+
 
 # Obtaining the Release
 These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46) and 3.0 (???) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
