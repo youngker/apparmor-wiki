@@ -1,5 +1,6 @@
 # AppArmor Feature ABI Table of Contents
  - [Policy Feature ABI](AppArmorpolicyfeaturesabi)
+ - [Developing Profiles with the features ABI](AppArmorpolicyfeaturesDev)
  - [Feature ABI in AppArmor 2.x](AppArmor2FeatureABI) (This Document)
  - [Policy Feature ABI Interactions in Depth](AppArmorFeatureABIinteractions)
  - [Policy Feature ABI low level examination](AppArmorFeatureABI)
