@@ -50,28 +50,9 @@ In AppArmor 3.0 the compiler will check that the include is the same as the feat
 
 In the future it may be possible for policy to switch between ABIs during compile but this is not currently possible.
 
+# Developing Profiles in with the feature ABI
 
-# Developing Policy
-
-Feature ABI rules make policy development harder in that new kernel features are not used right away. Instead to use new features the abi rule must be updated.
-
-AppArmor allows for a special abi rule for policy developers that allows for the old AppArmor 2.x development behavior.
-
-```
-   abi <kernel>,
-```
-
-Once the policy has been updated to the developer ABI rule, policy development can proceed as normal under AppArmor 2.x. The policy should be reloaded and the kernel will log violations for newly supported features. Once the policy has been updated with an new rules that are necessary. The abi rule must be updated to point to the new abi that is in use.
-
-```WARNING: The AppArmor project will not accept profiles or policy patches that set the abi rule to <kernel>.``` This is to ensure policy works as expected for users and to ensure that the AppArmor project will be able to continue to land new feature support in the upstream kernel.
-
-## How to find the Kernel feature ABI that is in use
-
-???
-
-### Extracting the new abi to an abi file
-
-???
+The addition of a feature ABI means that there are a few extra steps in profile development because new kernel features are not automatically used by policy. For more information please see ????.
 
 # Why were feature ABI rules added
 
