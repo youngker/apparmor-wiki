@@ -9,6 +9,9 @@
 
 # Introduction
 
+The addition of a feature ABI means that there are a few extra steps in profile development because new kernel features are not automatically used by policy.
+
+
 # Developing Policy
 
 Feature ABI rules make policy development harder in that new kernel features are not used right away. Instead to use new features the abi rule must be updated.
