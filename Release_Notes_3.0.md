@@ -6,7 +6,7 @@ AppArmor 3.0 was released 2020-06-07.
 
 AppArmor 3.0 is a major new release of the AppArmor user space that makes an important change to policy development and support. Its focus is transitioning policy to the new features abi and as such other new features have been limited.
 
-Apprmor 3.0 is a bridge release between older AppArmor 2.x policy and the newer AppArmor 3.x style policy which requires the declaration of a features abi. As such AppArmor 3.0 will be a short lived release, and will not receive long term support. The following AppArmor 3.1 feature release is planned to be a regular release, please take this into account when including AppArmor 3.0 into a distro release.
+Apprmor 3.0 is a bridge release between older AppArmor 2.x policy and the newer AppArmor 3 style policy which requires the declaration of a features abi. As such AppArmor 3.0 will be a short lived release, and will not receive long term support. The following AppArmor 3.1 feature release is planned to be a regular release, please take this into account when including AppArmor 3.0 into a distro release.
 
 This version of the userspace should work with all kernel versions from
 2.6.15 and later (some earlier version of the kernel if they have the
