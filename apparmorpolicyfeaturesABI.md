@@ -9,7 +9,8 @@
 
 # Introduction
 
-AppArmor uses features set ABIs to track what is supported???.
+AppArmor 3.0 uses feature set ABIs as part of policy to help provide better compatibility across different systems. The feature ABI being tied to policy allows AppArmor to know which set of features the policy was developed under so that the kernel can be updated to newer versions without fear of breakage due to new features being introduced.
+
 
 # How this affects Policy
 
@@ -56,81 +57,20 @@ The addition of a feature ABI means that there are a few extra steps in profile 
 
 # Why were feature ABI rules added
 
-# Kernel
-- The kernel presents a set of features that it can enforce to userspace. This is known as the kernel feature set or abi.
-- The kernel can not enforce features that are not compiled into it, but its policy support is flexible and it can do partial policy enforcement. As long as the loaded policy passes the kernels policy consistency checks it can be loaded and enforced to the best of the kernels ability.
-- policy using the policydb format can specify rule types the kernel may not be able to enforce.
-- the kernel can support older policy that does not support all the features that the kernel supports. In this case the kernel will not enforce features that the policy was not authored for.
+Adding the feature ABI to policy allows AppArmor to better handle a couple of different situations.
+* using kernel with support for new features is used on a userspace with policy that wasn't developed to support those features.
+* profiles being developed separate from the system's policy and being shipped with an application.
 
-## Userspace tools
+Under AppArmor 2.x releases if a user upgraded their kernel they could find themselves in a situation where AppArmor policy that previously worked now results in denials and application failures. This then required the user to update the policy to work with the new kernel. Distros could deal with by testing and updating policy before shipping a kernel but for users who update or use none distro kernels this could result in frustration and an overall poor user experience.
 
-### Policy compiler (aka apparmor_parser)
-The policy compiler is the only part of the userspace tool chain required enable apparmor it converts text policy into the binary policy format and can load the binary policy into the kernel for enforcement.
+The user experience is also improved for applications that ship profiles as part of their package instead of being part of the system policy. Under AppArmor 2.x if application profiles where not updated with the system profiles it could result in failures just as with changing the kernel. Even worse many devs were not in a position to update the applications profiles for the different distros the application ships on. With the feature ABI declared as part of the profile AppArmor can now support multiple feature ABIs, allowing application developers to update their profiles as works best for them.
 
-It is the glue between the policy and the kernel and trusted helpers. For a policy rule to be compiled it must be understood by the parser. The parser however can down grade or ignore policy rules that a kernel does not understand allowing for newer policy to work on older kernel versions.
+# Does AppArmor 3 still support AppArmor 2.x feature pinning
 
-- supports older feature abis and kernels
-- will fail on policy it doesn't understand.
--- policy using new features needs newer versions of the apparmor_parser
-
-### Init scripts/systemd
-
-TODO
-
-### Libapparmor
-
-TODO
-
-### Other userspace tools
-The remaining userspace tools are not required for the enforcement of policy but can make an admin or policy authors life much easier. If one of the tools is used with a policy feature it must understand the feature enough to handle parsing the text, so generally newer tools will work with older policy but not visa versa.
-
-## Policy
-
-TODO see policy links
-
-- limits applications
-- often dependent on application versions, OS release versions
-- dependent on supported features of userspace and kernel
-
-## Trusted helpers
-- similar to kernel for policy, but rely on kernel and userspace support for to help with their policy enforcement.
-
-# Packaging
-
-TODO
+Yes AppArmor 3 still allows for the features ABI to specified as part of the compiler command line or pinned in the configuration file. Care must be taken however because this will override the feature ABI declared in policy.
+???? ah crud
+must fix
 
 
 
-# AppArmor 3.x
-- policy features
-- feature pinning
-- lesser of kernel features or base 3.0 feature set
-
-[binary policy](Apparmorbinarypolicy)
-
-packaging and distro recommendations
-- install time build of policy
-- preshipping policy
-
-# Dealing with different feature abis in policy
-
-conditionals and supports
-supports
-- kernel_supports
-- parser_supports
-- policy_supports
-- supports
-
-
-downgrading and ignoring unsupported rules
-
-# Future AppArmor
-- allow defining new features in policy
-- as long as new feature only uses the exported compiler abi, new features can be supported on older compilers.
-
-??? failing policy load
-
-??? rule downgrades
-
-??? Ignoring rules
 
