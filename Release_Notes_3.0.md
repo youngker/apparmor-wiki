@@ -19,7 +19,7 @@ The kernel portion of the project is maintained and pushed separately.
 # Highlighted new features
 
 - Policy now must declare the feature abi it was developed for if it is to use any new features. For further information please see the [wiki](AppArmorpolicyfeaturesabi).
-- The use of profile names that are based on pathnames are deprecated. For further information please see the wiki.
+- The use of profile names that are based on pathnames are deprecated. For further information please see the [wiki](DeprecateProfilePathName).
 - Support for new kernel features (requires appropriate features abi tagging in policy)
   - upstream v8 network socket rules
   - xattr attachment conditionals
@@ -28,10 +28,10 @@ The kernel portion of the project is maintained and pushed separately.
   - supports use in systems/images where python is not available
   - supports kill, unconfined and mixed profile modes
 - improved support for kernels that support LSM stacking
-- experimental support profile modes
-  - enforce (default)
-  - kill
-  - unconfined
+- support profile modes
+  - enforce (default when no mode flag is supplied)
+  - kill (experimental)
+  - unconfined (experimental)
 
 
 # Obtaining the Release
