@@ -70,21 +70,23 @@ The user experience is also improved for applications that ship profiles as part
 Yes AppArmor 3 still allows for the features ABI to specified as part of the compiler command line or pinned in the configuration file. The new ordering of how pinning is applied is
 
 1. Pinning of a feature ABI in the config file is applied
-2. Feature ABIs declared in a profile are applied overriding any Pinning declared in 1.
-3. Command line option directly passed to the apparmor_parser can be used to override any feature ABI declared in 1, and or 2.
+2. Command line option --feature-file and --policy-features directly passed to the apparmor_parser can be used to override any feature ABI pinned by the config file in 1.
+3. Feature ABIs declared in a profile are applied overriding any Pinning declared in 1 or 2.
+4. Command line option --policy-features-override is applied allowing developers to override the Feature ABI declared in policy.
 
-This ordering allows old policy to be pinned to a given feature ABI while also allowing newer policy that declares its own feature ABI to co-exist.
+This ordering allows AppArmor 2.x policy to be pinned to a given feature ABI while also allowing newer policy that declares its own feature ABI to co-exist.
 
-AppArmor 3 also introduces two new compiler flags in addition to the AppArmor 2 --feature-file to provide even better control.
+AppArmor 3 also introduces the new compiler flag
 
+```
+--policy-features-override
+```
+
+in addition to the AppArmor 2 supported
+
+```
+--feature-file - set both the policy-features abi and the kernel-features-abi
 --policy-features - this allows specifying what feature ABI the policy should use separate of what the kernel.
 
 --kernel-features - this allows specifying what feature ABI the kernel will support and is useful when precompiling policy to be shipped as part of a package.
-
-the --features-file option from AppArmor 2 effectively sets both of the above options to the same feature ABI.
-
-
-
-
-
-
+```
