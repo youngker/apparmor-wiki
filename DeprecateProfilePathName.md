@@ -22,7 +22,7 @@ profile firefox /usr/bin/firefox {
 
 This does require the use of the ```profile``` keyword. The path name based attachment (/usr/bin/firefox in the above Ex 2) is required to replicate exec attachment of pathname based profiles (Ex 1).
 
-# Why were pathname based profile names deprecated?
+# Why were path based profile names deprecated?
 
 There are several reasons that these types of profile names were deprecated.
 
