@@ -72,14 +72,14 @@ Yes AppArmor 3 still allows for the features ABI to specified as part of the com
 1. Pinning of a feature ABI in the config file is applied
 2. Command line option --feature-file and --policy-features directly passed to the apparmor_parser can be used to override any feature ABI pinned by the config file in 1.
 3. Feature ABIs declared in a profile are applied overriding any Pinning declared in 1 or 2.
-4. Command line option --policy-features-override is applied allowing developers to override the Feature ABI declared in policy.
+4. Command line option --override-policy-abi is applied allowing developers to override the Feature ABI declared in policy.
 
 This ordering allows AppArmor 2.x policy to be pinned to a given feature ABI while also allowing newer policy that declares its own feature ABI to co-exist.
 
 AppArmor 3 also introduces the new compiler flag
 
 ```
---policy-features-override
+--override-policy-abi
 ```
 
 in addition to the AppArmor 2 supported
