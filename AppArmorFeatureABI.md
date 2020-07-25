@@ -144,7 +144,8 @@ v5 {yes
 
 The full text feature ABI is not included in the binary (compiled) policy. Instead the version is encoded in the header and then additional information is encoded as needed within the policy encoding.
 
-????
+TODO
+
 
 ## Policy DB encoding of support for a rule class
 
