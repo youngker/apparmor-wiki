@@ -50,11 +50,11 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - ???
 
 - Profiles
-  - ???
+  - usr.sbin.winbindd profile to allow krb5 rcache files locking  MR 460
 
 ## Tests
 
-- ???
+- update tests to use assertEqual instead of the deprecated assertEquals MR 347
 
 ## Documentation
 
