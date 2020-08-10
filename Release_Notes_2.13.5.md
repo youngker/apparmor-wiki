@@ -49,8 +49,10 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 ## Policy
 - Tunables
   - Add @{run} variable to support out of tree policies. Fixes:https://gitlab.com/apparmor/apparmor/-/issues/88 MR:!466
+
 - Abstractions
-  - ???
+  - mesa: support i915 perf interface MR: !464
+  - nameservice: nss-systemd, allow access to /run/systemd/userdb/ Fixes:https://gitlab.com/apparmor/apparmor/-/issues/82 
 
 - Profiles
   - usr.sbin.winbindd profile to allow krb5 rcache files locking  MR:!460
