@@ -34,6 +34,7 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 - apparmor.vim
   - better handling during creation MR:!472
   - support "if exists" syntax highlighting MR:!500
+  - fix syntax highlighting for alias rules MR:!527
 
 ## ???
 - Fix profile load when using busybox Fixes: https://gitlab.com/apparmor/apparmor/-/issues/80
@@ -49,8 +50,12 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 
 ## Utils
 
-- genprof: Fix json mode when displaying local inactive profile MR:!516
-
+- genprof:
+  - Fix json mode when displaying local inactive profile MR:!516
+  - Make call out to less use lists to properly handle odd input MR:!520
+  - Improve error handling to not fail silently when reading profiles MR:!530
+  - Correctly handle missing rules and children profiles MR:!539
+  - Fix handling of degenerate quoted strings MR:!545
 
 
 ## Policy
@@ -58,16 +63,20 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
   - Add @{run} variable to support out of tree policies. Fixes:https://gitlab.com/apparmor/apparmor/-/issues/88 MR:!466
 
 - Abstractions
-  - dbus-network-manager-strict: support new abstraction MR: !409
+  - dbus-network-manager-strict: support new abstraction MR:!409
+  - gnome: allow read of /run/mount/utab MR:!412
   - mdns: allow /etc/mdns.allow Fixes: https://bugs.launchpad.net/ubuntu/+source/apparmor/+bug/1869629
-  - mesa: support i915 perf interface MR: !464
+  - mesa: support i915 perf interface MR:464
   - nameservice: nss-systemd, allow access to /run/systemd/userdb/ Fixes:https://gitlab.com/apparmor/apparmor/-/issues/82
-  - xdg-open and friends: support new abstraction MR: !404
+  - xdg-open and friends: support new abstraction MR:!404
+  - vulkan: fix device and driver enumeration MR:!543
 
 
 
 - Profiles
-  - dnsmasq: support dnsmasq 2.81 MR:!475
+  - dnsmasq:
+    - support dnsmasq 2.81 MR:!475
+    - allow reading DNSSEC trust anchors MR:!547
   - winbindd: allow krb5 rcache files locking  MR:!460
 
 ## Tests
