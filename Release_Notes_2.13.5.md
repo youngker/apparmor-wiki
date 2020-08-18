@@ -26,7 +26,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 
 ## Build Infrastructure
 
-- Fix build Make 4.3  Fixes: https://gitlab.com/apparmor/apparmor/-/issues/74
+- Fix build when using Make 4.3  Fixes: https://gitlab.com/apparmor/apparmor/-/issues/74
 Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 
 
