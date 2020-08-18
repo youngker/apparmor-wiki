@@ -28,8 +28,15 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 
 - Fix build when using Make 4.3  Fixes: https://gitlab.com/apparmor/apparmor/-/issues/74
 Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
+- Fix build for cross compiles MR:!485
 
-- apparmor.vim better handling during creation MR:!472
+
+- apparmor.vim
+  - better handling during creation MR:!472
+  - support "if exists" syntax highlighting MR:!500
+
+## ???
+- Fix profile load when using busybox Fixes: https://gitlab.com/apparmor/apparmor/-/issues/80
 
 ## libapparmor
 
@@ -60,7 +67,8 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 
 
 - Profiles
-  - usr.sbin.winbindd profile to allow krb5 rcache files locking  MR:!460
+  - dnsmasq: support dnsmasq 2.81 MR:!475
+  - winbindd: allow krb5 rcache files locking  MR:!460
 
 ## Tests
 
