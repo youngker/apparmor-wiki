@@ -29,7 +29,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 - Fix build when using Make 4.3  Fixes: https://gitlab.com/apparmor/apparmor/-/issues/74
 Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 
-
+- apparmor.vim better handling during creation MR:!472
 
 ## libapparmor
 
@@ -51,8 +51,13 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
   - Add @{run} variable to support out of tree policies. Fixes:https://gitlab.com/apparmor/apparmor/-/issues/88 MR:!466
 
 - Abstractions
+  - dbus-network-manager-strict: support new abstraction MR: !409
+  - mdns: allow /etc/mdns.allow Fixes: https://bugs.launchpad.net/ubuntu/+source/apparmor/+bug/1869629
   - mesa: support i915 perf interface MR: !464
-  - nameservice: nss-systemd, allow access to /run/systemd/userdb/ Fixes:https://gitlab.com/apparmor/apparmor/-/issues/82 
+  - nameservice: nss-systemd, allow access to /run/systemd/userdb/ Fixes:https://gitlab.com/apparmor/apparmor/-/issues/82
+  - xdg-open and friends: support new abstraction MR: !404
+
+
 
 - Profiles
   - usr.sbin.winbindd profile to allow krb5 rcache files locking  MR:!460
