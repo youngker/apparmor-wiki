@@ -49,7 +49,7 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 
 ## Utils
 
-- ???
+- genprof: Fix json mode when displaying local inactive profile MR:!516
 
 
 
