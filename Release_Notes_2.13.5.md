@@ -28,71 +28,71 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 
 - Fix build when using Make 4.3  Fixes: https://gitlab.com/apparmor/apparmor/-/issues/74
 Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 ([MR:465](https://gitlab.com/apparmor/apparmor/merge_requests/465))
-- Fix build for cross compiles MR:!485
+- Fix build for cross compiles ([MR:485](https://gitlab.com/apparmor/apparmor/merge_requests/485))
 
 - profiles
-  - fix local dependency on parser MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
-  - fix dependency check against libapparmor MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
+  - fix local dependency on parser ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586)) Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
+  - fix dependency check against libapparmor ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586)) Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
 
 - apparmor.vim
-  - better handling during creation MR:!472
-  - support "if exists" syntax highlighting MR:!500
-  - fix syntax highlighting for alias rules MR:!527
-  - add CAPABILITIES BPF and PERFMON to severity.db MR:!589 LP:https://bugs.launchpad.net/bugs/1890547
+  - better handling during creation ([MR:472](https://gitlab.com/apparmor/apparmor/merge_requests/472))
+  - support "if exists" syntax highlighting ([MR:500](https://gitlab.com/apparmor/apparmor/merge_requests/500))
+  - fix syntax highlighting for alias rules ([MR:527](https://gitlab.com/apparmor/apparmor/merge_requests/527))
+  - add CAPABILITIES BPF and PERFMON to severity.db ([MR:589](https://gitlab.com/apparmor/apparmor/merge_requests/589)) LP:https://bugs.launchpad.net/bugs/1890547
 
 ## Init
 - Fix profile load when using busybox Fixes: https://gitlab.com/apparmor/apparmor/-/issues/80
 
 ## Policy Compiler (a.k.a apparmor\_parser)
 
-- improve error handling in the lexer MR:!572
-- fix parsing around Whitespace and newline for some rules MR:!572
-- fix hashing of the feature set MR:!583
+- improve error handling in the lexer ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
+- fix parsing around Whitespace and newline for some rules ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
+- fix hashing of the feature set ([MR:583](https://gitlab.com/apparmor/apparmor/merge_requests/583))
 
 ## Utils
 - genprof/logprof:
-  - Fix json mode when displaying local inactive profile MR:!516
-  - Make call out to less use lists to properly handle odd input MR:!520
-  - Improve error handling to not fail silently when reading profiles MR:!530
-  - Correctly handle missing rules and children profiles MR:!539
-  - Fix handling of degenerate quoted strings MR:!545
-  - handle symlink log events MR:!587 Fixes https://gitlab.com/apparmor/apparmor/-/issues/107
+  - Fix json mode when displaying local inactive profile ([MR:516](https://gitlab.com/apparmor/apparmor/merge_requests/516))
+  - Make call out to less use lists to properly handle odd input ([MR:520](https://gitlab.com/apparmor/apparmor/merge_requests/520))
+  - Improve error handling to not fail silently when reading profiles ([MR:530](https://gitlab.com/apparmor/apparmor/merge_requests/530))
+  - Correctly handle missing rules and children profiles ([MR:539](https://gitlab.com/apparmor/apparmor/merge_requests/539))
+  - Fix handling of degenerate quoted strings ([MR:545](https://gitlab.com/apparmor/apparmor/merge_requests/545))
+  - handle symlink log events ([MR:587](https://gitlab.com/apparmor/apparmor/merge_requests/587)) Fixes https://gitlab.com/apparmor/apparmor/-/issues/107
 
 ## Policy
 - Tunables
-  - Add @{run} variable to support out of tree policies. Fixes:https://gitlab.com/apparmor/apparmor/-/issues/88 MR:!466
+  - Add @{run} variable to support out of tree policies. Fixes:https://gitlab.com/apparmor/apparmor/-/issues/88 ([MR:466](https://gitlab.com/apparmor/apparmor/merge_requests/466))
 
 - Abstractions
-  - dbus-network-manager-strict: support new abstraction MR:!409
-  - enchant: support libenchant-2-2 MR:!572
-  - fonts: update for Debian MR:!575 Fixes:#94
-  - gnome: allow read of /run/mount/utab MR:!412
+  - dbus-network-manager-strict: support new abstraction [(MR:409](https://gitlab.com/apparmor/apparmor/merge_requests/409))
+  - enchant: support libenchant-2-2 ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
+  - fonts: update for Debian ([MR:575](https://gitlab.com/apparmor/apparmor/merge_requests/575)) Fixes:#94
+  - gnome: allow read of /run/mount/utab ([MR:412](https://gitlab.com/apparmor/apparmor/merge_requests/412))
   - mdns: allow /etc/mdns.allow Fixes: https://bugs.launchpad.net/ubuntu/+source/apparmor/+bug/1869629
-  - mesa: support i915 perf interface MR:464
+  - mesa: support i915 perf interface ([MR:464](https://gitlab.com/apparmor/apparmor/merge_requests/464))
   - nameservice: nss-systemd, allow access to /run/systemd/userdb/ Fixes:https://gitlab.com/apparmor/apparmor/-/issues/82
-  - xdg-open and friends: support new abstraction MR:!404
-  - vulkan: fix device and driver enumeration MR:!543
-  - X: support X auth path $XDG_RUNTIME_DIR/xauth_XXXXXX MR:!581
+  - xdg-open and friends: support new abstraction ([MR:404](https://gitlab.com/apparmor/apparmor/merge_requests/404))
+  - vulkan: fix device and driver enumeration ([MR:543](https://gitlab.com/apparmor/apparmor/merge_requests/543))
+  - X: support X auth path $XDG_RUNTIME_DIR/xauth_XXXXXX ([MR:581](https://gitlab.com/apparmor/apparmor/merge_requests/581))
 
 - Profiles
   - dnsmasq:
-    - support dnsmasq 2.81 MR:!475
-    - allow reading DNSSEC trust anchors MR:!547
+    - support dnsmasq 2.81 ([MR:475](https://gitlab.com/apparmor/apparmor/merge_requests/475))
+    - allow reading DNSSEC trust anchors ([MR:547](https://gitlab.com/apparmor/apparmor/merge_requests/547))
   - dovecot:
-    - allow reading my.cnf MR:!566
-    - allow switching to user specific hats MR:!566
-  - winbindd: allow krb5 rcache files locking  MR:!460
+    - allow reading my.cnf ([MR:566](https://gitlab.com/apparmor/apparmor/merge_requests/566))
+    - allow switching to user specific hats ([MR:566](https://gitlab.com/apparmor/apparmor/merge_requests/566))
+  - winbindd: allow krb5 rcache files locking  ([MR:460](https://gitlab.com/apparmor/apparmor/merge_requests/460))
 
 ## Tests
 
-- update tests to use assertEqual instead of the deprecated assertEquals MR:!347
-- fix test to run in cross-compiled environment without forcing parser rebuild MR:!465
-- fix python test dir for select tests MR:!562
+- update tests to use assertEqual instead of the deprecated assertEquals ([MR:347](https://gitlab.com/apparmor/apparmor/merge_requests/347))
+- fix test to run in cross-compiled environment without forcing parser rebuild ([MR:465](https://gitlab.com/apparmor/apparmor/merge_requests/465))
+- fix python test dir for select tests ([MR:562](https://gitlab.com/apparmor/apparmor/merge_requests/562))
 - profiles
-  - fix make check to select tools based on USE_SYSTEM MR:!580
-  - fix logprof invocation of profiles make check MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
+  - fix make check to select tools based on USE_SYSTEM ([MR:580](https://gitlab.com/apparmor/apparmor/merge_requests/580))
+  - fix logprof invocation of profiles make check ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586)) Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
 - python utils
-  - fix libapparmor swig python path MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
+  - fix libapparmor swig python path [(MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586)) Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
 
 # Note
 
