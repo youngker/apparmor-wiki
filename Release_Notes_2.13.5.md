@@ -46,7 +46,9 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 
 ## Policy Compiler (a.k.a apparmor\_parser)
 
-- ???
+- improve error handling in the lexer MR:!572
+- fix parsing around Whitespace and newline for some rules MR:!572
+- fix hashing of the feature set MR:!583
 
 ## Utils
 
@@ -64,12 +66,15 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 
 - Abstractions
   - dbus-network-manager-strict: support new abstraction MR:!409
+  - enchant: support libenchant-2-2 MR:!572
+  - fonts: update for Debian MR:!575 Fixes:#94
   - gnome: allow read of /run/mount/utab MR:!412
   - mdns: allow /etc/mdns.allow Fixes: https://bugs.launchpad.net/ubuntu/+source/apparmor/+bug/1869629
   - mesa: support i915 perf interface MR:464
   - nameservice: nss-systemd, allow access to /run/systemd/userdb/ Fixes:https://gitlab.com/apparmor/apparmor/-/issues/82
   - xdg-open and friends: support new abstraction MR:!404
   - vulkan: fix device and driver enumeration MR:!543
+  - X: support X auth path $XDG_RUNTIME_DIR/xauth_XXXXXX MR:!581
 
 
 
@@ -77,12 +82,16 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
   - dnsmasq:
     - support dnsmasq 2.81 MR:!475
     - allow reading DNSSEC trust anchors MR:!547
+  - dovecot:
+    - allow reading my.cnf MR:!566
+    - allow switching to user specific hats MR:!566
   - winbindd: allow krb5 rcache files locking  MR:!460
 
 ## Tests
 
 - update tests to use assertEqual instead of the deprecated assertEquals MR:!347
 - fix test to run in cross-compiled environment without forcing parser rebuild MR:!465
+- fix python test dir for select tests MR:!562
 
 ## Documentation
 
