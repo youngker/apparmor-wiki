@@ -26,8 +26,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 
 ## Build Infrastructure
 
-- Fix build when using Make 4.3  ([AABUG:74](https://gitlab.com/apparmor/apparmor/-/issues/74))
-Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 ([MR:465](https://gitlab.com/apparmor/apparmor/merge_requests/465))
+- Fix build when using Make 4.3  ([MR:465](https://gitlab.com/apparmor/apparmor/merge_requests/465),[BOO:1167953](https://bugzilla.opensuse.org/show_bug.cgi?id=1167953),[AABUG:74](https://gitlab.com/apparmor/apparmor/-/issues/74))
 - Fix build for cross compiles ([MR:485](https://gitlab.com/apparmor/apparmor/merge_requests/485))
 
 - profiles
@@ -101,9 +100,3 @@ checked for elf binary executables. Policy and tests within apparmor
 2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
 
 
-# References
-
-[AABUG???: ???](???)<br>
-[dbug???: https://bugs.debian.org/????](https://bugs.debian.org/???)<br>
-[lp???: https://bugs.launchpad.net/bugs/???](https://bugs.launchpad.net/bugs/???)<br>
-[MR???: https://gitlab.com/apparmor/apparmor/merge_requests/???](https://gitlab.com/apparmor/apparmor/merge_requests/???)<br>
