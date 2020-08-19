@@ -40,13 +40,8 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
   - fix syntax highlighting for alias rules MR:!527
   - add CAPABILITIES BPF and PERFMON to severity.db MR:!589 LP:https://bugs.launchpad.net/bugs/1890547
 
-## ???
+## Init
 - Fix profile load when using busybox Fixes: https://gitlab.com/apparmor/apparmor/-/issues/80
-
-## libapparmor
-
-- ???
-
 
 ## Policy Compiler (a.k.a apparmor\_parser)
 
@@ -79,8 +74,6 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
   - vulkan: fix device and driver enumeration MR:!543
   - X: support X auth path $XDG_RUNTIME_DIR/xauth_XXXXXX MR:!581
 
-
-
 - Profiles
   - dnsmasq:
     - support dnsmasq 2.81 MR:!475
@@ -100,11 +93,6 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
   - fix logprof invocation of profiles make check MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
 - python utils
   - fix libapparmor swig python path MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
-
-
-## Documentation
-
-- ???
 
 # Note
 
