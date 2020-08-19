@@ -87,7 +87,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 - fix python test dir for select tests ([MR:562](https://gitlab.com/apparmor/apparmor/merge_requests/562))
 - profiles
   - fix make check to select tools based on USE_SYSTEM ([MR:580](https://gitlab.com/apparmor/apparmor/merge_requests/580))
-  - fix logprof invocation of profiles make check ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586),[AABUG:98]https://gitlab.com/apparmor/apparmor/-/issues/98)) 
+  - fix logprof invocation of profiles make check ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586),[AABUG:98](https://gitlab.com/apparmor/apparmor/-/issues/98)) 
 - python utils
   - fix libapparmor swig python path ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586),[AABUG:98](https://gitlab.com/apparmor/apparmor/-/issues/98))
 
