@@ -21,7 +21,7 @@ kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
 # Changes in this Release
 
-These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) and 2.13.5 [???](https://gitlab.com/apparmor/apparmor/-/commitdf????) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
+These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) and 2.13.5 [???cd4a161350a97a42a07dc7f8acb3f4251c4ba11b](https://gitlab.com/apparmor/apparmor/-/commitdf????) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
 
 
 ## Build Infrastructure
@@ -30,11 +30,15 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 - Fix build for cross compiles MR:!485
 
+- profiles
+  - fix local dependency on parser MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
+  - fix dependency check against libapparmor MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
 
 - apparmor.vim
   - better handling during creation MR:!472
   - support "if exists" syntax highlighting MR:!500
   - fix syntax highlighting for alias rules MR:!527
+  - add CAPABILITIES BPF and PERFMON to severity.db MR:!589 LP:https://bugs.launchpad.net/bugs/1890547
 
 ## ???
 - Fix profile load when using busybox Fixes: https://gitlab.com/apparmor/apparmor/-/issues/80
@@ -51,14 +55,13 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 - fix hashing of the feature set MR:!583
 
 ## Utils
-
-- genprof:
+- genprof/logprof:
   - Fix json mode when displaying local inactive profile MR:!516
   - Make call out to less use lists to properly handle odd input MR:!520
   - Improve error handling to not fail silently when reading profiles MR:!530
   - Correctly handle missing rules and children profiles MR:!539
   - Fix handling of degenerate quoted strings MR:!545
-
+  - handle symlink log events MR:!587 Fixes https://gitlab.com/apparmor/apparmor/-/issues/107
 
 ## Policy
 - Tunables
@@ -92,6 +95,12 @@ Fixes: https://bugzilla.opensuse.org/show_bug.cgi?id=1167953 MR:!465
 - update tests to use assertEqual instead of the deprecated assertEquals MR:!347
 - fix test to run in cross-compiled environment without forcing parser rebuild MR:!465
 - fix python test dir for select tests MR:!562
+- profiles
+  - fix make check to select tools based on USE_SYSTEM MR:!580
+  - fix logprof invocation of profiles make check MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
+- python utils
+  - fix libapparmor swig python path MR:!586 Fixes:https://gitlab.com/apparmor/apparmor/-/issues/98
+
 
 ## Documentation
 
