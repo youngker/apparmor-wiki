@@ -34,10 +34,10 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - fix dependency check against libapparmor ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586),[AABUG:98](https://gitlab.com/apparmor/apparmor/-/issues/98))
 
 - apparmor.vim
-  - better handling during creation ([MR:472](https://gitlab.com/apparmor/apparmor/merge_requests/472))
+  - better error handling during creation ([MR:472](https://gitlab.com/apparmor/apparmor/merge_requests/472))
   - support "if exists" syntax highlighting ([MR:500](https://gitlab.com/apparmor/apparmor/merge_requests/500))
   - fix syntax highlighting for alias rules ([MR:527](https://gitlab.com/apparmor/apparmor/merge_requests/527))
-  - add CAPABILITIES BPF and PERFMON to severity.db ([MR:589](https://gitlab.com/apparmor/apparmor/merge_requests/589),[LP1890547](https://bugs.launchpad.net/bugs/1890547))
+
 ## Init
 - Fix profile load when using busybox ([AABUG:80](https://gitlab.com/apparmor/apparmor/-/issues/80))
 
@@ -50,11 +50,12 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 ## Utils
 - genprof/logprof:
   - Fix json mode when displaying local inactive profile ([MR:516](https://gitlab.com/apparmor/apparmor/merge_requests/516))
-  - Make call out to less use lists to properly handle odd input ([MR:520](https://gitlab.com/apparmor/apparmor/merge_requests/520))
+  - Make call out to less use lists to properly handle odd filenames ([MR:520](https://gitlab.com/apparmor/apparmor/merge_requests/520))
   - Improve error handling to not fail silently when reading profiles ([MR:530](https://gitlab.com/apparmor/apparmor/merge_requests/530))
   - Correctly handle missing rules and children profiles ([MR:539](https://gitlab.com/apparmor/apparmor/merge_requests/539))
   - Fix handling of degenerate quoted strings ([MR:545](https://gitlab.com/apparmor/apparmor/merge_requests/545))
   - handle symlink log events ([MR:587](https://gitlab.com/apparmor/apparmor/merge_requests/587),[AABUG:107](https://gitlab.com/apparmor/apparmor/-/issues/107))
+  - add CAPABILITIES BPF and PERFMON to severity.db ([MR:589](https://gitlab.com/apparmor/apparmor/merge_requests/589),[LP1890547](https://bugs.launchpad.net/bugs/1890547))
 ## Policy
 - Tunables
   - Add @{run} variable to support out of tree policies. ([MR:466](https://gitlab.com/apparmor/apparmor/merge_requests/466),[AABUG:88](https://gitlab.com/apparmor/apparmor/-/issues/88))
