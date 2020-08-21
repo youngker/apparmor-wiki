@@ -65,7 +65,7 @@ Under AppArmor 2.x releases if a user upgraded their kernel they could find them
 
 The user experience is also improved for applications that ship profiles as part of their package instead of being part of the system policy. Under AppArmor 2.x if application profiles where not updated with the system profiles it could result in failures just as with changing the kernel. Even worse many devs were not in a position to update the applications profiles for the different distros the application ships on. With the feature ABI declared as part of the profile AppArmor can now support multiple feature ABIs, allowing application developers to update their profiles as works best for them.
 
-# Does AppArmor 3 still support AppArmor 2.x feature pinning
+# Does AppArmor 3 still support feature pinning
 
 Yes AppArmor 3 still allows for the features ABI to specified as part of the compiler command line or pinned in the configuration file. The new ordering of how pinning is applied is
 
