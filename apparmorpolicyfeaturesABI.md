@@ -65,9 +65,9 @@ Under AppArmor 2.x releases if a user upgraded their kernel they could find them
 
 The user experience is also improved for applications that ship profiles as part of their package instead of being part of the system policy. Under AppArmor 2.x if application profiles where not updated with the system profiles it could result in failures just as with changing the kernel. Even worse many devs were not in a position to update the applications profiles for the different distros the application ships on. With the feature ABI declared as part of the profile AppArmor can now support multiple feature ABIs, allowing application developers to update their profiles as works best for them.
 
-# Does AppArmor 3 still support feature pinning
+# Does AppArmor 3 still support feature [pinning](https://gitlab.com/apparmor/apparmor/-/wikis/AppArmor2FeatureABI#pinning)
 
-Yes AppArmor 3 still allows for the features ABI to specified as part of the compiler command line or pinned in the configuration file. The new ordering of how pinning is applied is
+Yes AppArmor 3 still allows for the features ABI to specified as part of the compiler command line or [pinned](https://gitlab.com/apparmor/apparmor/-/wikis/AppArmor2FeatureABI#pinning) in the configuration file. The new ordering of how [pinning](https://gitlab.com/apparmor/apparmor/-/wikis/AppArmor2FeatureABI#pinning) is applied is
 
 1. Pinning of a feature ABI in the config file is applied
 2. Command line option --feature-file and --policy-features directly passed to the apparmor_parser can be used to override any feature ABI pinned by the config file in 1.
