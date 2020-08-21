@@ -56,13 +56,35 @@ is equivalent to specifying the same file to both --policy-features and --kernel
 
 ## Pinning
 
-When deploying policy
+Pinning of the feature ABI is a way to lock policy down to a given stable feature set. This is desirable in stable deployments that may have different kernel versions installed through out the deployments life time.
 
+Changes to the kernel and the feature ABI can lead to a few different problems
+- Caches may need to be regenerated during boot. If the kernel has any feature changes and userspace only supports a single cache (apparmor 1 - 2.12) a recompile will be needed, which can slow down boot.
+- Policy may not have been developed with a given feature in mind resulting in Denials that can break the system. Eg. if a new mediation feature is added to the kernel, and policy doesn't know about it, the policy will compile in such a way as to deny the new feature (default deny) but the system may need this new feature or it will break.
+
+Distros can ensure their policy works with updated kernels that the distro deploys but they can not update out of distro policy, nor make sure their policy is updated for users that roll their own kernels. This can lead to failures and bug reports distro may not want from a stable system.
+
+Pinning the feature ABI allows the admin to set the ABI that the policy was developed under to ensure that caching is not needless regenerated and that new mediation features are not used when the policy has not been updated to support them.
+
+To pin a feature abi the parser.conf file is updated by adding a feature-file option line
+
+eg.
+```
+  # pin policy to 4.0 kernel ABI
+  feature-file=/etc/apparmor/features-ABI
+```
+
+Once this is set the apparmor_parser will compile all policy using the feature ABI in the /etc/apparmor/features-ABI file, unless it is explicitly overridded by passing the --features-file option directly to the apparmor_parser on the command line.
+
+### issues
+
+There is a down side to pinning the feature ABI. It prevents new features and mediation from being used in updated policy, and it prevents apparmor from logging potential violations so that policy can be updated. For this reason it is recommended that feature pinning is disabled during the development phase a release and only set before release.
 
 ### AppArmor 2.13
 
 In AppArmor 2.13 it is preferred that the --policy-features option is used instead of the --features-file option. This allows apparmor to keep multiple cache of pre compiled policy, each tailored to a kernel.
 
+AppArmor 2.13 also add support for multiple policy caches so that switching kernels does not force policy recompiles.
 
 --
 ## Loading policy into the kernel
