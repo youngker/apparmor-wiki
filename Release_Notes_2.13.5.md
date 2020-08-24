@@ -21,7 +21,7 @@ kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
 # Changes in this Release
 
-These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) and 2.13.5 [???cd4a161350a97a42a07dc7f8acb3f4251c4ba11b](https://gitlab.com/apparmor/apparmor/-/commitdf????) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
+These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) and 2.13.5 [???aecc9e1cb62ac1a8a33d5afc0a5e781f5414e432](https://gitlab.com/apparmor/apparmor/-/commitdf????) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
 
 
 ## Build Infrastructure
@@ -55,7 +55,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - Correctly handle missing rules and children profiles ([MR:539](https://gitlab.com/apparmor/apparmor/merge_requests/539))
   - Fix handling of degenerate quoted strings ([MR:545](https://gitlab.com/apparmor/apparmor/merge_requests/545))
   - handle symlink log events ([MR:587](https://gitlab.com/apparmor/apparmor/merge_requests/587),[AABUG:107](https://gitlab.com/apparmor/apparmor/-/issues/107))
-  - add CAPABILITIES BPF and PERFMON to severity.db ([MR:589](https://gitlab.com/apparmor/apparmor/merge_requests/589),[LP1890547](https://bugs.launchpad.net/bugs/1890547))
+  - add CAPABILITIES BPF and PERFMON to severity.db ([MR:589](https://gitlab.com/apparmor/apparmor/merge_requests/589),[MR:591](https://gitlab.com/apparmor/apparmor/merge_requests/591),[LP1890547](https://bugs.launchpad.net/bugs/1890547))
 ## Policy
 - Tunables
   - Add @{run} variable to support out of tree policies. ([MR:466](https://gitlab.com/apparmor/apparmor/merge_requests/466),[AABUG:88](https://gitlab.com/apparmor/apparmor/-/issues/88))
@@ -64,7 +64,9 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - dbus-network-manager-strict: support new abstraction [(MR:409](https://gitlab.com/apparmor/apparmor/merge_requests/409))
   - enchant: support libenchant-2-2 ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
   - fonts: update for Debian ([MR:575](https://gitlab.com/apparmor/apparmor/merge_requests/575),[AABUG:94](https://gitlab.com/apparmor/apparmor/-/issues/94))
-  - gnome: allow read of /run/mount/utab ([MR:412](https://gitlab.com/apparmor/apparmor/merge_requests/412))
+  - gnome:
+    - allow read of /run/mount/utab ([MR:412](https://gitlab.com/apparmor/apparmor/merge_requests/412))
+    - gnome: allow read of global settings file /usr/share/gtk-3.0/settings.ini ([MR:592](https://gitlab.com/apparmor/apparmor/merge_requests/592))
   - mdns: allow /etc/mdns.allow ([LP1869629](https://bugs.launchpad.net/ubuntu/+source/apparmor/+bug/1869629))
   - mesa: support i915 perf interface ([MR:464](https://gitlab.com/apparmor/apparmor/merge_requests/464))
   - nameservice: nss-systemd, allow access to /run/systemd/userdb/ ([AABUG:82](https://gitlab.com/apparmor/apparmor/-/issues/82))
