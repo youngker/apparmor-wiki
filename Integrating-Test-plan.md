@@ -21,6 +21,7 @@ The test plan is broken into sections, each dealing with a component or interact
 [gnome](???)
 [KDE](???)
 [systemd](???)
+[system tools - top, ps, ...](???)
 
 TODO split apart update/rewrite everything below
 
