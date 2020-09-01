@@ -7,21 +7,23 @@ The following guide is to help users and distros setup integrate and test AppArm
 The test plan is broken into sections, each dealing with a component or interaction that can have interaction with apparmor that may need testing. Unlike the Ubuntu test plan reference Ubuntu specific packaging this guide use the upstream build system, as a generic base. Distros are welcome to edit and or send patches to add Distro specific information or references to their own documentation.
 
 # Sections
-[apparmor userspace](???)
-[apparmor kernel](???)
-[apparmor regression testing](???)
-[dbus](???)
-[snapd](???)
-[lxd](???)
-[lxc](???)
-[libvirt/libvirt-lxc](???)
-[docker.io](????)
-[apache](???)
-[pam](???)
-[gnome](???)
-[KDE](???)
-[systemd](???)
-[system tools - top, ps, ...](???)
+* [apparmor userspace](???)
+* [apparmor kernel](???)
+* [apparmor regression testing](???)
+* [dbus](???)
+* [snapd](???)
+* [lxd](???)
+* [lxc](???)
+* [libvirt/libvirt-lxc](???)
+* [docker.io](????)
+* [apache](???)
+* [pam](???)
+* [gnome](???)
+* [KDE](???)
+* [systemd](???)
+* [R]
+* [system tools - top, ps, ...](???)
+* other things that have integrated apparmor apis
 
 TODO split apart update/rewrite everything below
 
