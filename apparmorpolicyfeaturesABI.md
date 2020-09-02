@@ -55,6 +55,12 @@ In the future it may be possible for policy to switch between ABIs during compil
 
 The addition of a feature ABI means that there are a few extra steps in profile development because new kernel features are not automatically used by policy. For more information please see [Developing Profiles with the features ABI](AppArmorpolicyfeaturesDev) for more information.
 
+# Pre-compiled policy
+
+When pre-compiling policy ```--kernel-features``` is used to set the target kernel feature abi. This will determine the target cache location as well as ensure policy is compiled correctly for the specified kernel.
+
+The older ```--feature-file``` used in AppArmor 2.x can still be used as an alternative. When used with policy that specifies an abi it is equivalent to specifying ```--kernel-features```. When compiling AppArmor 2.x policy that doesn't declare an abi it will set both ```--kernel-features``` and ```-policy-features``` to the same (ie. it declares the policy has the same abi as the target kernel whether or no that is true).
+
 # Why were feature ABI rules added
 
 Adding the feature ABI to policy allows AppArmor to better handle a couple of different situations.
