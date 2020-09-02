@@ -96,6 +96,10 @@ enforce features policy wasn't designed for
 
 fail to load policy
 
+## Shipping prebuilt policy
+
+To prebuild policy --features-file should be used. The feature abi should be for the target kernel or the lowest common denominator if there are multiple target kernels.
+
 
 ## Problems
 
