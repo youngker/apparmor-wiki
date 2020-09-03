@@ -21,7 +21,7 @@ kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
 # Changes in this Release
 
-These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) and 2.13.5 [???aecc9e1cb62ac1a8a33d5afc0a5e781f5414e432](https://gitlab.com/apparmor/apparmor/-/commitdf????) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
+These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) and 2.13.5 [???dab520aae9ee59c93307490a88fbde7883029dda](https://gitlab.com/apparmor/apparmor/-/commitdf????) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
 
 
 ## Build Infrastructure
@@ -46,6 +46,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 - improve error handling in the lexer ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
 - fix parsing around Whitespace and newline for some rules ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
 - fix hashing of the feature set ([MR:583](https://gitlab.com/apparmor/apparmor/merge_requests/583))
+- support capability BPF and capability perfmon regardless of kernel ([MR:594](https://gitlab.com/apparmor/apparmor/-/merge_requests/594))
 
 ## Utils
 - genprof/logprof:
@@ -61,7 +62,8 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - Add @{run} variable to support out of tree policies. ([MR:466](https://gitlab.com/apparmor/apparmor/merge_requests/466),[AABUG:88](https://gitlab.com/apparmor/apparmor/-/issues/88))
 
 - Abstractions
-  - dbus-network-manager-strict: support new abstraction [(MR:409](https://gitlab.com/apparmor/apparmor/merge_requests/409))
+  - hosts_access: add to support profiles that are using it ([MR:612](https://gitlab.com/apparmor/apparmor/merge_requests/612))
+  - dbus-network-manager-strict: support new abstraction ([MR:409](https://gitlab.com/apparmor/apparmor/merge_requests/409))
   - enchant: support libenchant-2-2 ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
   - fonts: update for Debian ([MR:575](https://gitlab.com/apparmor/apparmor/merge_requests/575),[AABUG:94](https://gitlab.com/apparmor/apparmor/-/issues/94))
   - gnome:
@@ -70,6 +72,9 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - mdns: allow /etc/mdns.allow ([LP1869629](https://bugs.launchpad.net/ubuntu/+source/apparmor/+bug/1869629))
   - mesa: support i915 perf interface ([MR:464](https://gitlab.com/apparmor/apparmor/merge_requests/464))
   - nameservice: nss-systemd, allow access to /run/systemd/userdb/ ([AABUG:82](https://gitlab.com/apparmor/apparmor/-/issues/82))
+  - nvidia_modprobe:
+    - allow reading driver parameters ([MR:603](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/603))
+    - allow creating /dev/nvidia-modeset ([MR:603](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/614))
   - xdg-open and friends: support new abstraction ([MR:404](https://gitlab.com/apparmor/apparmor/merge_requests/404))
   - vulkan: fix device and driver enumeration ([MR:543](https://gitlab.com/apparmor/apparmor/merge_requests/543))
   - X: support X auth path $XDG_RUNTIME_DIR/xauth_XXXXXX ([MR:581](https://gitlab.com/apparmor/apparmor/merge_requests/581))
@@ -81,10 +86,14 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - dovecot:
     - allow reading my.cnf ([MR:566](https://gitlab.com/apparmor/apparmor/merge_requests/566))
     - allow switching to user specific hats ([MR:566](https://gitlab.com/apparmor/apparmor/merge_requests/566))
+    - fix postfix binary paths ([MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602))
+  - postfix:
+    - fix postfix binary paths ([MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602))
   - winbindd: allow krb5 rcache files locking  ([MR:460](https://gitlab.com/apparmor/apparmor/merge_requests/460))
 
 ## Tests
 
+- fix regression tests regex separator (MR:599](https://gitlab.com/apparmor/apparmor/-/merge_requests/599))
 - update tests to use assertEqual instead of the deprecated assertEquals ([MR:347](https://gitlab.com/apparmor/apparmor/merge_requests/347))
 - fix test to run in cross-compiled environment without forcing parser rebuild ([MR:465](https://gitlab.com/apparmor/apparmor/merge_requests/465))
 - fix python test dir for select tests ([MR:574](https://gitlab.com/apparmor/apparmor/merge_requests/574))
