@@ -73,8 +73,8 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - mesa: support i915 perf interface ([MR:464](https://gitlab.com/apparmor/apparmor/merge_requests/464))
   - nameservice: nss-systemd, allow access to /run/systemd/userdb/ ([AABUG:82](https://gitlab.com/apparmor/apparmor/-/issues/82))
   - nvidia_modprobe:
-    - allow reading driver parameters ([MR:603](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/603))
-    - allow creating /dev/nvidia-modeset ([MR:603](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/614))
+    - allow reading driver parameters ([MR:603](https://gitlab.com/apparmor/apparmor/-/merge_requests/603))
+    - allow creating /dev/nvidia-modeset ([MR:603](https://gitlab.com/apparmor/apparmor/-/merge_requests/614))
   - xdg-open and friends: support new abstraction ([MR:404](https://gitlab.com/apparmor/apparmor/merge_requests/404))
   - vulkan: fix device and driver enumeration ([MR:543](https://gitlab.com/apparmor/apparmor/merge_requests/543))
   - X: support X auth path $XDG_RUNTIME_DIR/xauth_XXXXXX ([MR:581](https://gitlab.com/apparmor/apparmor/merge_requests/581))
@@ -93,7 +93,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 
 ## Tests
 
-- fix regression tests regex separator (MR:599](https://gitlab.com/apparmor/apparmor/-/merge_requests/599))
+- fix regression tests regex separator ([MR:599](https://gitlab.com/apparmor/apparmor/-/merge_requests/599))
 - update tests to use assertEqual instead of the deprecated assertEquals ([MR:347](https://gitlab.com/apparmor/apparmor/merge_requests/347))
 - fix test to run in cross-compiled environment without forcing parser rebuild ([MR:465](https://gitlab.com/apparmor/apparmor/merge_requests/465))
 - fix python test dir for select tests ([MR:574](https://gitlab.com/apparmor/apparmor/merge_requests/574))
