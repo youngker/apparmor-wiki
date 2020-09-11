@@ -28,6 +28,11 @@ The kernel portion of the project is maintained and pushed separately.
 - rewritten aa-status
   - supports use in systems/images where python is not available
   - supports kill, unconfined and mixed profile modes
+- rewritten aa-notify
+  - move from perl to python 3
+  - shared backend with other python tools
+  - support use of aa.CONFDIR instead of hard coded /etc/apparmor
+  - improved message layout
 - improved support for kernels that support LSM stacking
 - new utility aa-features to extract and work with kernel abi features
 - new utility aa-load to load binary policy without calling the apparmor_parser
