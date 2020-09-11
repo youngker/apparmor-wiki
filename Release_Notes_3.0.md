@@ -28,6 +28,8 @@ The kernel portion of the project is maintained and pushed separately.
   - supports use in systems/images where python is not available
   - supports kill, unconfined and mixed profile modes
 - improved support for kernels that support LSM stacking
+- new utility aa-features to extract and work with kernel abi features
+- new utility aa-load to load binary policy without calling the apparmor_parser
 - support profile modes
   - enforce (default when no mode flag is supplied)
   - kill (experimental)
