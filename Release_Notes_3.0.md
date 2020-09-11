@@ -24,6 +24,7 @@ The kernel portion of the project is maintained and pushed separately.
   - upstream v8 network socket rules
   - xattr attachment conditionals
   - capabilities PERFMON and BPF
+- improved compiler warnings and semantic checks
 - rewritten aa-status
   - supports use in systems/images where python is not available
   - supports kill, unconfined and mixed profile modes
