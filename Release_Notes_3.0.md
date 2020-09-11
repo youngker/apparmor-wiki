@@ -24,7 +24,8 @@ The kernel portion of the project is maintained and pushed separately.
   - upstream v8 network socket rules
   - xattr attachment conditionals
   - capabilities PERFMON and BPF
-- improved compiler warnings and semantic checks
+- compiler improvemetns
+  - improved warnings and controls of warnings warnings
 - rewritten aa-status
   - supports use in systems/images where python is not available
   - supports kill, unconfined and mixed profile modes
@@ -34,12 +35,14 @@ The kernel portion of the project is maintained and pushed separately.
   - support use of aa.CONFDIR instead of hard coded /etc/apparmor
   - improved message layout
 - improved support for kernels that support LSM stacking
-- new utility aa-features to extract and work with kernel abi features
+- new utility aa-features-abi to extract and work with kernel abi features
 - new utility aa-load to load binary policy without calling the apparmor_parser
 - support profile modes
   - enforce (default when no mode flag is supplied)
   - kill (experimental)
   - unconfined (experimental)
+- reference policy updated for 3.0 feature abi
+
 
 
 # Obtaining the Release
