@@ -70,12 +70,27 @@ And the following improvements
 
 
 ## Policy Compiler (a.k.a apparmor\_parser)
-
-- fix bugs in --config-file handling
 - make --config-file so it is no longer required to be the first option passed to the parser
-- move default cache location to /var/cache
-- ??? fix transition profile name mess
-- profile name validation???
+- move default location of cache to /var/cache/apparmor/ ([MR:156](https://gitlab.com/apparmor/apparmor/-/merge_requests/156),Bug-Debian: [debug904637](https://bugs.debian.org/904637))
+- output deprecated warning when using filenames as a profile name [MR:506](https://gitlab.com/apparmor/apparmor/-/merge_requests/506)
+- Add the ability to turn off jobs to ease with debugging ([MR:105](https://gitlab.com/apparmor/apparmor/-/merge_requests/105))
+- Improve warn flags and add support for -Werror ([MR:600](https://gitlab.com/apparmor/apparmor/-/merge_requests/600))
+- improve capability handling so it is not variable to which kernel headers are installed ([MR:578](https://gitlab.com/apparmor/apparmor/-/merge_requests/578))
+- support experimental enforce, kill and unconfined profile modes ([MR:440](https://gitlab.com/apparmor/apparmor/-/merge_requests/440),[AABUG:7](https://gitlab.com/apparmor/apparmor/-/issues/7))
+- add support for out-of-band transitions ([MR:414](https://gitlab.com/apparmor/apparmor/-/merge_requests/414))
+- Support xattr exec attachment conditional ([MR:270](https://gitlab.com/apparmor/apparmor/-/merge_requests/270))
+- improve static attachment overlap analysis providing better resolution when profile attachments overlap during exec  ([MR:326](https://gitlab.com/apparmor/apparmor/-/merge_requests/326))
+- improve cache handling when optimizations are used ([MR:385](https://gitlab.com/apparmor/apparmor/-/merge_requests/385))
+- limit the number of passes expr tree simplification does to avoid degenerate cases.
+- add missing permissions generation for using new kernel interfaces used by LSM stacking
+- fix various build errors, warnings, and refactor code ([MR:196](https://gitlab.com/apparmor/apparmor/-/merge_requests/196),[MR:196](https://gitlab.com/apparmor/apparmor/-/merge_requests/196),[MR:196](https://gitlab.com/apparmor/apparmor/-/merge_requests/196),[MR:616](https://gitlab.com/apparmor/apparmor/-/merge_requests/616),[MR:608](https://gitlab.com/apparmor/apparmor/-/merge_requests/608)[MR:569](https://gitlab.com/apparmor/apparmor/-/merge_requests/569),[MR:590](https://gitlab.com/apparmor/apparmor/-/merge_requests/590),[MR:561](https://gitlab.com/apparmor/apparmor/-/merge_requests/561),[MR:146](https://gitlab.com/apparmor/apparmor/-/merge_requests/146))
+- Fix debug builds [MR:609](https://gitlab.com/apparmor/apparmor/-/merge_requests/609)
+- remove resource leaks ([MR:439](https://gitlab.com/apparmor/apparmor/-/merge_requests/439))
+- fix cross compilation with libintl ([MR:485](https://gitlab.com/apparmor/apparmor/-/merge_requests/485))
+- remove deprecated dynamic exception specifications ([MR:356](https://gitlab.com/apparmor/apparmor/-/merge_requests/356))
+- Improve error message format [MR:610](https://gitlab.com/apparmor/apparmor/-/merge_requests/610)
+
+
 
 ## Init
 
