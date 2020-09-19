@@ -71,8 +71,8 @@ And the following improvements
 
 ## Policy Compiler (a.k.a apparmor\_parser)
 - make --config-file so it is no longer required to be the first option passed to the parser
-- move default location of cache to /var/cache/apparmor/ ([MR:156](https://gitlab.com/apparmor/apparmor/-/merge_requests/156),Bug-Debian: [debug904637](https://bugs.debian.org/904637))
-- output deprecated warning when using filenames as a profile name [MR:506](https://gitlab.com/apparmor/apparmor/-/merge_requests/506)
+- move default location of cache to /var/cache/apparmor/ ([MR:156](https://gitlab.com/apparmor/apparmor/-/merge_requests/156),[debug904637](https://bugs.debian.org/904637))
+- output deprecated warning when using filenames as a profile name ([MR:506](https://gitlab.com/apparmor/apparmor/-/merge_requests/506))
 - Add the ability to turn off jobs to ease with debugging ([MR:105](https://gitlab.com/apparmor/apparmor/-/merge_requests/105))
 - Improve warn flags and add support for -Werror ([MR:600](https://gitlab.com/apparmor/apparmor/-/merge_requests/600))
 - improve capability handling so it is not variable to which kernel headers are installed ([MR:578](https://gitlab.com/apparmor/apparmor/-/merge_requests/578))
@@ -88,7 +88,7 @@ And the following improvements
 - remove resource leaks ([MR:439](https://gitlab.com/apparmor/apparmor/-/merge_requests/439))
 - fix cross compilation with libintl ([MR:485](https://gitlab.com/apparmor/apparmor/-/merge_requests/485))
 - remove deprecated dynamic exception specifications ([MR:356](https://gitlab.com/apparmor/apparmor/-/merge_requests/356))
-- Improve error message format [MR:610](https://gitlab.com/apparmor/apparmor/-/merge_requests/610)
+- Improve error message format ([MR:610](https://gitlab.com/apparmor/apparmor/-/merge_requests/610))
 
 
 
