@@ -106,7 +106,6 @@ And the following improvements
 - use the parser's automatic parallelization ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338)) 
 - make posix-compatible ([MR:355](https://gitlab.com/apparmor/apparmor/-/merge_requests/355),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
 - improve slackware support ([MR:432](https://gitlab.com/apparmor/apparmor/-/merge_requests/432))
-
 - aa-teardown
   - install in /usr/sbin not /sbin ([MR:97](https://gitlab.com/apparmor/apparmor/-/merge_requests/97))
   - use /bin/sh instead of /bin/bash ([MR:115](https://gitlab.com/apparmor/apparmor/-/merge_requests/115))
