@@ -35,8 +35,6 @@ The kernel portion of the project is maintained and pushed separately.
   - support use of aa.CONFDIR instead of hard coded /etc/apparmor
   - improved message layout
 - improved support for kernels that support LSM stacking
-- new utility aa-features-abi to extract and work with kernel abi features
-- new utility aa-load to load binary policy without calling the apparmor_parser
 - support profile modes
   - enforce (default when no mode flag is supplied)
   - kill (experimental)
@@ -93,12 +91,42 @@ And the following improvements
 
 
 ## Init
+- drop dead code ([MR:269](https://gitlab.com/apparmor/apparmor/-/merge_requests/269),[MR:263](https://gitlab.com/apparmor/apparmor/-/merge_requests/263))
+- cleanup handling of mountpoints ([MR:394](https://gitlab.com/apparmor/apparmor/-/merge_requests/394))
+- add is_container_with_internal_policy() function. ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
+- set SFS_MOUNTPOINT in is_container_with_internal_policy() ([MR:363](https://gitlab.com/apparmor/apparmor/-/merge_requests/363))
+  - Adjust cache paths in apparmor.service ([MR:134](https://gitlab.com/apparmor/apparmor/-/merge_requests/134))
+- fix return codes ([MR:256](https://gitlab.com/apparmor/apparmor/-/merge_requests/256))
+- ignore .orig and .rej files when loading profiles ([MR:282](https://gitlab.com/apparmor/apparmor/-/merge_requests/282))
+- fix issues detected by shellcheck ([MR:293](https://gitlab.com/apparmor/apparmor/-/merge_requests/293))
+- Don't try to list files in a non-existent directories ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
+- add support for an additional profiles directory, defaulting to /var/lib/snapd/apparmor/profiles ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
+- warn when the profiles directory cannot be found ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252)[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
+- suppress warnings when booting in quiet mode ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
+- use the parser's automatic parallelization ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338)) 
+- make posix-compatible ([MR:355](https://gitlab.com/apparmor/apparmor/-/merge_requests/355),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
+- improve slackware support ([MR:432](https://gitlab.com/apparmor/apparmor/-/merge_requests/432))
+
+- aa-teardown
+  - install in /usr/sbin not /sbin ([MR:97](https://gitlab.com/apparmor/apparmor/-/merge_requests/97))
+  - use /bin/sh instead of /bin/bash ([MR:115](https://gitlab.com/apparmor/apparmor/-/merge_requests/115))
 
 
 
 ## Library
+  - build with -fPIC ([MR:422](https://gitlab.com/apparmor/apparmor/-/merge_requests/422))
+  - make compile flags consistent, and add -Wimplicit-fallthrough ([MR:549](https://gitlab.com/apparmor/apparmor/-/merge_requests/549),[MR:403](https://gitlab.com/apparmor/apparmor/-/merge_requests/403))
+  - fix signed vs unsigned comparison issues ([MR:549](https://gitlab.com/apparmor/apparmor/-/merge_requests/549),[MR:558](https://gitlab.com/apparmor/apparmor/-/merge_requests/558))
+  - fix warning from new compiler warn flags ([MR:561](https://gitlab.com/apparmor/apparmor/-/merge_requests/561))
+  - require python3 ([MR:481](https://gitlab.com/apparmor/apparmor/-/merge_requests/481))
+  - support new apparmor proc attr interfaces
+  - Make libapparmor LSM stacking aware
+  - Support alternate libc implementations ([MR:245](https://gitlab.com/apparmor/apparmor/-/merge_requests/245),[debug909966](https://bugs.debian.org/909966),[debug798955](https://bugs.debian.org/798955))
+  - improve CI integration ([MR:434](https://gitlab.com/apparmor/apparmor/-/merge_requests/434),[MR:433](https://gitlab.com/apparmor/apparmor/-/merge_requests/433))
+  - Fix cross compilation ([MR:462](https://gitlab.com/apparmor/apparmor/-/merge_requests/462))
+  - update API documentation ([MR:559](https://gitlab.com/apparmor/apparmor/-/merge_requests/559))  
+  - new api fn to lookup of features value ([MR:578](https://gitlab.com/apparmor/apparmor/-/merge_requests/578))
 
-- APIs
 
 
 
