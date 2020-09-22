@@ -147,6 +147,8 @@ And the following improvements
   - update abstractions to support local additions directory
   - test abstractions against apparmor_parser ([MR:237](https://gitlab.com/apparmor/apparmor/-/merge_requests/237))
   
+
+
   - apache2-common
     - fix path for apache2 stapling-cache ([MR:133](https://gitlab.com/apparmor/apparmor/-/merge_requests/133))
   - base
