@@ -148,7 +148,7 @@ And the following improvements
 - move from "#include" to "include" ([MR:553](https://gitlab.com/apparmor/apparmor/-/merge_requests/553),[MR:563](https://gitlab.com/apparmor/apparmor/-/merge_requests/563))
 - new @{etc_ro} and @{etc_rw} variables and use in policy ([MR:585](https://gitlab.com/apparmor/apparmor/-/merge_requests/585))
 
-### abstractions
+#### abstractions
   - General changes
     - update abstractions to support local additions directory
     - test abstractions against apparmor_parser ([MR:237](https://gitlab.com/apparmor/apparmor/-/merge_requests/237))
@@ -235,7 +235,7 @@ And the following improvements
   - xdg-open
     - new abstrction ([MR:404](https://gitlab.com/apparmor/apparmor/-/merge_requests/404))
 
-### profiles
+#### profiles
   - General changes
     - move profiles to short names with attachments instead of file pathnames ([MR:565](https://gitlab.com/apparmor/apparmor/-/merge_requests/565),[MR:620](https://gitlab.com/apparmor/apparmor/-/merge_requests/620))
   - chromium profile
@@ -313,7 +313,7 @@ And the following improvements
     - mention that dri rules were backported from abstraction/dri-enumerate
     - incorporate feedback from Talkless an cboltz
 
-### todo
+#### todo
 - profiles:
   - support distributions which merge sbin into bin
 
