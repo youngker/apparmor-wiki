@@ -135,6 +135,237 @@ And the following improvements
 
 ## Policy
 
+- improve CI integration of shipped policy ([MR:449](https://gitlab.com/apparmor/apparmor/-/merge_requests/449))
+- add permissions to access new apparmor api interfaces where necessary
+- use @{PROC} and @{run} throughout policy ([MR:455](https://gitlab.com/apparmor/apparmor/-/merge_requests/455))
+- adjust local include to use "include if exists" ([MR:489](https://gitlab.com/apparmor/apparmor/-/merge_requests/489)
+- tag policy with te AppArmor 3.0 abi ([MR:491](https://gitlab.com/apparmor/apparmor/-/merge_requests/491),[MR:555](https://gitlab.com/apparmor/apparmor/-/merge_requests/555))
+- move from "#include" to "include" ([MR:553](https://gitlab.com/apparmor/apparmor/-/merge_requests/553),[MR:563](https://gitlab.com/apparmor/apparmor/-/merge_requests/563))
+- new @{etc_ro} and @{etc_rw} variables and use in policy ([MR:585](https://gitlab.com/apparmor/apparmor/-/merge_requests/585))
+
+- abstractions
+  - update abstractions to support local additions directory
+  - test abstractions against apparmor_parser ([MR:237](https://gitlab.com/apparmor/apparmor/-/merge_requests/237))
+  
+  - apache2-common
+    - fix path for apache2 stapling-cache ([MR:133](https://gitlab.com/apparmor/apparmor/-/merge_requests/133))
+
+  - base
+    - allow mr on *.so* in common library paths ([MR:345](https://gitlab.com/apparmor/apparmor/-/merge_requests/345),[Tails16414](https://redmine.tails.boum.org/code/issues/16414))
+    - support suse /usr/etc/ ([MR:447](https://gitlab.com/apparmor/apparmor/-/merge_requests/447),[BOO:1161756](http://bugzilla.opensuse.org/show_bug.cgi?id=1161756))
+
+  - dbus-session-strict
+    - make x11 socket read-only([MR:281](https://gitlab.com/apparmor/apparmor/-/merge_requests/281))
+
+  - dri-common
+    - added ability to read /usr/share/drirc.d/ directory ([MR:314](https://gitlab.com/apparmor/apparmor/-/merge_requests/314),[MR:308](https://gitlab.com/apparmor/apparmor/-/merge_requests/308))
+
+  - exo-open
+    - new abstrction ([MR:404](https://gitlab.com/apparmor/apparmor/-/merge_requests/404),[MR:467](https://gitlab.com/apparmor/apparmor/-/merge_requests/467),[AABUG:](https://gitlab.com/apparmor/apparmor/-/issues/73))
+
+  - fonts
+    - updat for Debian and openSUSE ([MR:96](https://gitlab.com/apparmor/apparmor/-/merge_requests/96))
+
+  - freedesktop.org
+    - treat Flatpak exports the same way as bits shipped by the distro ([MR:71](https://gitlab.com/apparmor/apparmor/-/merge_requests/71))
+
+  - gio-open
+    - new abstrction ([MR:404](https://gitlab.com/apparmor/apparmor/-/merge_requests/404))
+
+  - gvfs-open
+    - new abstrction ([MR:404](https://gitlab.com/apparmor/apparmor/-/merge_requests/404))
+
+  - hosts_access
+    - new abstraction for tcpwrappers style access to hosts files ([MR:605](https://gitlab.com/apparmor/apparmor/-/merge_requests/605),[LP:1864466](https://bugs.launchpad.net/bugs/1864466))
+
+  - kde
+    - treat Flatpak exports the same way as bits shipped by the distro ([MR:71](https://gitlab.com/apparmor/apparmor/-/merge_requests/71))
+
+  - kde-open
+    - new abstrction ([MR:404](https://gitlab.com/apparmor/apparmor/-/merge_requests/404))
+
+
+  - launchpad-integration
+    - disallow writes to thumbnailer dir ([MR:203](https://gitlab.com/apparmor/apparmor/-/merge_requests/203),[LP:1788929](https://bugs.launchpad.net/bugs/1788929))
+
+  - mesa
+    - new abstraction ([MR:137](https://gitlab.com/apparmor/apparmor/-/merge_requests/137))
+    - allow locking shader cache ([MR:148](https://gitlab.com/apparmor/apparmor/-/merge_requests/148))
+
+  - nameservice
+    - allow accessing the libnss-systemd VarLink sockets and DBus APIs ([MR:480](https://gitlab.com/apparmor/apparmor/-/merge_requests/480))
+    - support suse /usr/etc/ ([MR:447](https://gitlab.com/apparmor/apparmor/-/merge_requests/447),[BOO:1161756](http://bugzilla.opensuse.org/show_bug.cgi?id=1161756))
+
+  - nvidia
+    - allow reading application profiles ([MR:125](https://gitlab.com/apparmor/apparmor/-/merge_requests/125))
+
+  - nss-systemd
+    - allow accessing the libnss-systemd VarLink sockets and DBus APIs ([MR:480](https://gitlab.com/apparmor/apparmor/-/merge_requests/480))
+
+  - opencl
+    - new abstraction support for POCL, Mesa Clover, Intel Beignet and NVIDIA CUDA ([MR:124](https://gitlab.com/apparmor/apparmor/-/merge_requests/124))
+
+  - opencl-nvidia
+    - disallow writes to thumbnailer dir ([MR:203](https://gitlab.com/apparmor/apparmor/-/merge_requests/203),[LP:1788929](https://bugs.launchpad.net/bugs/1788929))
+
+  - php-fpm
+    - fix worker name ([MR:619](https://gitlab.com/apparmor/apparmor/-/merge_requests/619))
+    
+  - private_files
+    - deny access to mutt files ([MR:276](https://gitlab.com/apparmor/apparmor/-/merge_requests/276))
+    - disallow writes to thumbnailer dir ([MR:203](https://gitlab.com/apparmor/apparmor/-/merge_requests/203),[LP:1788929](https://bugs.launchpad.net/bugs/1788929))
+
+  - private_files_strict
+    - deny access to aws files ([MR:276](https://gitlab.com/apparmor/apparmor/-/merge_requests/276))
+    - disallow writes to thumbnailer dir ([MR:203](https://gitlab.com/apparmor/apparmor/-/merge_requests/203),[LP:1788929](https://bugs.launchpad.net/bugs/1788929))
+    
+  - qt5
+    - new abstraction with common rules for qt5 based applications ([MR:99](https://gitlab.com/apparmor/apparmor/-/merge_requests/99))
+
+  - qt5-compose-cache-write
+    - fix anonymous shared memory access ([MR:302](https://gitlab.com/apparmor/apparmor/-/merge_requests/301))
+
+  - qt5-settings-write
+    - fix anonymous shared memory access ([MR:302](https://gitlab.com/apparmor/apparmor/-/merge_requests/302))
+    
+  - samba
+    - allow smbd to load new shared libraries ([MR:121](https://gitlab.com/apparmor/apparmor/-/merge_requests/121),[BOO:1092099](https://bugzilla.opensuse.org/show_bug.cgi?id=1092099))
+    - allow winbindd to read and write new kerberos cache location ([MR:121](https://gitlab.com/apparmor/apparmor/-/merge_requests/121),[BOO:1092099](https://bugzilla.opensuse.org/show_bug.cgi?id=1092099))
+    - support Arch ([MR:411](https://gitlab.com/apparmor/apparmor/-/merge_requests/411))
+
+  - ssl_certs
+    - add letsencrypt support ([MR:283](https://gitlab.com/apparmor/apparmor/-/merge_requests/283))
+    - update for dehydrated ([MR:299](https://gitlab.com/apparmor/apparmor/-/merge_requests/299))
+    - add dehydrated certificate location ([MR:161](https://gitlab.com/apparmor/apparmor/-/merge_requests/161))
+    - add for CertBot on openSUSE Leap ([MR:397](https://gitlab.com/apparmor/apparmor/-/merge_requests/397))
+
+  - ssl_keys
+    - add letsencrypt support ([MR:283](https://gitlab.com/apparmor/apparmor/-/merge_requests/283))
+    - update for dehydrated ([MR:299](https://gitlab.com/apparmor/apparmor/-/merge_requests/299))
+    - add dehydrated certificate location ([MR:161](https://gitlab.com/apparmor/apparmor/-/merge_requests/161))
+    - add for CertBot on openSUSE Leap ([MR:397](https://gitlab.com/apparmor/apparmor/-/merge_requests/397))
+    
+  - ubuntu-browsers
+    - remove obsolete NPAPI support ([MR:417](https://gitlab.com/apparmor/apparmor/-/merge_requests/417))
+    - disallow writes to thumbnailer dir ([MR:203](https://gitlab.com/apparmor/apparmor/-/merge_requests/203),[LP:1788929](https://bugs.launchpad.net/bugs/1788929))
+
+  - ubuntu-email
+    - support launching Thunderbird
+
+  - Vulkan
+    - add new abstraction ([MR:126](https://gitlab.com/apparmor/apparmor/-/merge_requests/126))
+
+  - wayland
+    - make x11 socket read-only ([MR:281](https://gitlab.com/apparmor/apparmor/-/merge_requests/281))
+
+  - X
+    - make x11 socket read-only ([MR:281](https://gitlab.com/apparmor/apparmor/-/merge_requests/281))
+
+  - xdg-open
+    - new abstrction ([MR:404](https://gitlab.com/apparmor/apparmor/-/merge_requests/404))
+
+
+- profiles
+  - move profiles to short names with attachments instead of file pathnames ([MR:565](https://gitlab.com/apparmor/apparmor/-/merge_requests/565),[MR:620](https://gitlab.com/apparmor/apparmor/-/merge_requests/620))
+
+
+  - chromium profile
+    - import from ubuntu and fixup to be more generic ([MR:606](https://gitlab.com/apparmor/apparmor/-/merge_requests/606))
+    - cleanup comments, /lib/ and /usr/lib cleanups, suport lib{32,64} ([MR:611](https://gitlab.com/apparmor/apparmor/-/merge_requests/611))
+
+  - dhclient
+    - Add path for Fedora/RHEL/CentOS/Oracle Linux ([MR:291](https://gitlab.com/apparmor/apparmor/-/merge_requests/291))
+    - Support correct path for lease file on IPv6 ([MR:291](https://gitlab.com/apparmor/apparmor/-/merge_requests/291))
+    - fix for debian buster ([MR:570](https://gitlab.com/apparmor/apparmor/-/merge_requests/570))
+  - dhcpd
+    - Support lease file for IPv6 ([MR:291](https://gitlab.com/apparmor/apparmor/-/merge_requests/291))
+  
+  - dnsmasq
+    - Add pid file used by NetworkManager ([MR:288](https://gitlab.com/apparmor/apparmor/-/merge_requests/288))
+    - Adjust pattern for log files to comply SELinux ([MR:288](https://gitlab.com/apparmor/apparmor/-/merge_requests/288))
+    - allow peer=libvirtd to support named profile ([MR:304](https://gitlab.com/apparmor/apparmor/-/merge_requests/304),[BOO:1118952](https://bugzilla.opensuse.org/show_bug.cgi?id=1118952))
+
+  - dovecot
+    - allow access to suid_dumpable ([MR:286](https://gitlab.com/apparmor/apparmor/-/merge_requests/286))
+    - move from ssl to OpenSSL access ([MR:337](https://gitlab.com/apparmor/apparmor/-/merge_requests/337))
+    - auth processes need to read from postfix auth socket ([MR:336](https://gitlab.com/apparmor/apparmor/-/merge_requests/336))
+    - let dovecot/anvil rw the auth-penalty socket ([MR:336](https://gitlab.com/apparmor/apparmor/-/merge_requests/336))
+    - allow chroot'ing the auth processes ([MR:336](https://gitlab.com/apparmor/apparmor/-/merge_requests/336))
+    - allow FD passing between dovecot and dovecot's anvil ([MR:336](https://gitlab.com/apparmor/apparmor/-/merge_requests/336))
+    - align {pop3,managesieve}-login to imap-login ([MR:338](https://gitlab.com/apparmor/apparmor/-/merge_requests/338))
+    - restrict access by owner to the dovecot/config socket ([MR:338](https://gitlab.com/apparmor/apparmor/-/merge_requests/338))
+    - align {pop3,managesieve}-login to imap-login ([MR:338](https://gitlab.com/apparmor/apparmor/-/merge_requests/338))
+    - add configuration files created by openresolv ([MR:457](https://gitlab.com/apparmor/apparmor/-/merge_requests/457))
+    - allow apparmor api access ([MR:566](https://gitlab.com/apparmor/apparmor/-/merge_requests/566))
+
+  - fingerd
+    - needs lock access on /run/utmp ([MR:153](https://gitlab.com/apparmor/apparmor/-/merge_requests/153))
+
+  - freshclam
+    - add pidfile and /var/lib/clamav access ([MR:381](https://gitlab.com/apparmor/apparmor/-/merge_requests/381))
+
+  - lighttpd
+    - minor updates, added Debian/Ubuntu integration ([MR:153](https://gitlab.com/apparmor/apparmor/-/merge_requests/153))
+
+  - lsb_release
+    - added permissions needed by openSUSE implementation ([MR:154](https://gitlab.com/apparmor/apparmor/-/merge_requests/154))
+
+  - mysqld
+    - Allow mysqld directory for MySQL PID file ([MR:450](https://gitlab.com/apparmor/apparmor/-/merge_requests/450))
+    
+  - nmdb
+    - support Arch ([MR:411](https://gitlab.com/apparmor/apparmor/-/merge_requests/411))
+
+  - php-fpm
+    - allow only one pid file ([MR:601](https://gitlab.com/apparmor/apparmor/-/merge_requests/601))
+    - fix profile name in signal and change_profile rule ([MR:601](https://gitlab.com/apparmor/apparmor/-/merge_requests/601))
+    - profile: adjust /run paths ([MR:601](https://gitlab.com/apparmor/apparmor/-/merge_requests/601))
+    - Add php-fpm isolation with apparmor hats ([MR:577](https://gitlab.com/apparmor/apparmor/-/merge_requests/577))
+    - allow only one pid file ([MR:617](https://gitlab.com/apparmor/apparmor/-/merge_requests/617),[AABUG:115](https://gitlab.com/apparmor/apparmor/-/issues/115))
+    
+  - postdrop
+    -    - Allow to read icu *.dat files in postfix-related profiles ([MR:546](https://gitlab.com/apparmor/apparmor/-/merge_requests/546))
+
+  - postfix
+    - Allow access to dynamicmaps ([MR:284](https://gitlab.com/apparmor/apparmor/-/merge_requests/284))
+    - eliminate redundant rules ([MR:284](https://gitlab.com/apparmor/apparmor/-/merge_requests/284))
+    - allow reading icu *.dat ([MR:615](https://gitlab.com/apparmor/apparmor/-/merge_requests/615))
+    
+  - postmap
+    - Allow to read icu *.dat files in postfix-related profiles ([MR:546](https://gitlab.com/apparmor/apparmor/-/merge_requests/546))
+
+  - postqueue
+    - Allow to read icu *.dat files in postfix-related profiles ([MR:546](https://gitlab.com/apparmor/apparmor/-/merge_requests/546))
+
+  - sendmail
+    - Allow to read icu *.dat files in postfix-related profiles ([MR:546](https://gitlab.com/apparmor/apparmor/-/merge_requests/546))
+
+  - smbd
+    - support Arch ([MR:411](https://gitlab.com/apparmor/apparmor/-/merge_requests/411))
+
+  - sshd
+    - need write access to Kerberos ticket cache ([MR:153](https://gitlab.com/apparmor/apparmor/-/merge_requests/153))
+
+  - statd
+    - updated so that it works on modern env ([MR:153](https://gitlab.com/apparmor/apparmor/-/merge_requests/153))
+
+  - useradd
+    - support usr-merge ([MR:152](https://gitlab.com/apparmor/apparmor/-/merge_requests/152))
+
+  - windbindd
+    - support Arch ([MR:411](https://gitlab.com/apparmor/apparmor/-/merge_requests/411))
+
+  - wireshark ([MR:143](https://gitlab.com/apparmor/apparmor/-/merge_requests/143))
+    - allow saving pcaps with optional gzip compression
+    - allow creating QT compose cache
+    - restrict hidden file creation under ~/.config/
+    - drop useless/redundant rules
+    - fix access to configuration profiles
+    - add a comment for QtProject.conf rules
+    - mention that dri rules were backported from abstraction/dri-enumerate
+    - incorporate feedback from Talkless an cboltz
+
+
 - profiles:
   - support distributions which merge sbin into bin
 
