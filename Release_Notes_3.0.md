@@ -144,11 +144,9 @@ And the following improvements
 - new @{etc_ro} and @{etc_rw} variables and use in policy ([MR:585](https://gitlab.com/apparmor/apparmor/-/merge_requests/585))
 
 ### abstractions
-  - update abstractions to support local additions directory
-  - test abstractions against apparmor_parser ([MR:237](https://gitlab.com/apparmor/apparmor/-/merge_requests/237))
-  
-
-
+  - General changes
+    - update abstractions to support local additions directory
+    - test abstractions against apparmor_parser ([MR:237](https://gitlab.com/apparmor/apparmor/-/merge_requests/237))
   - apache2-common
     - fix path for apache2 stapling-cache ([MR:133](https://gitlab.com/apparmor/apparmor/-/merge_requests/133))
   - base
@@ -233,7 +231,8 @@ And the following improvements
     - new abstrction ([MR:404](https://gitlab.com/apparmor/apparmor/-/merge_requests/404))
 
 ### profiles
-  - move profiles to short names with attachments instead of file pathnames ([MR:565](https://gitlab.com/apparmor/apparmor/-/merge_requests/565),[MR:620](https://gitlab.com/apparmor/apparmor/-/merge_requests/620))
+  - General changes
+    - move profiles to short names with attachments instead of file pathnames ([MR:565](https://gitlab.com/apparmor/apparmor/-/merge_requests/565),[MR:620](https://gitlab.com/apparmor/apparmor/-/merge_requests/620))
   - chromium profile
     - import from ubuntu and fixup to be more generic ([MR:606](https://gitlab.com/apparmor/apparmor/-/merge_requests/606))
     - cleanup comments, /lib/ and /usr/lib cleanups, suport lib{32,64} ([MR:611](https://gitlab.com/apparmor/apparmor/-/merge_requests/611))
