@@ -326,11 +326,35 @@ And the following improvements
   - dnsmasq: add paths for NetworkManager connection sharing
 
 ## Documentation
+  - update bug reporting and documentation to use gitlab
+  - apparmor.d
+    - update language description with over arching info, eg. declarative
+    - update network address family names list [6b2765637e8ed2b8e0e4d1cfae0a9d6b2e955306]
+    - add info on profile header ([MR:505](https://gitlab.com/apparmor/apparmor/-/merge_requests/505))
+    - add info on kill and unconfined profile modes ([MR:440](https://gitlab.com/apparmor/apparmor/-/merge_requests/440),[AABUG:7](https://gitlab.com/apparmor/apparmor/-/issues/7))
+    - add info on xattr attachment conditionals [MR:270](https://gitlab.com/apparmor/apparmor/merge_requests/270)
+    - add info on feature abis ([MR:491](https://gitlab.com/apparmor/apparmor/-/merge_requests/491))
+    - add info on pinning and feature abi interation ([MR:570](https://gitlab.com/apparmor/apparmor/-/merge_requests/579))
+    - fix dbus example
+    - fix typos and whitespacing issues
+  - apparmor_parser    
+    - Add info on disabling jobs ([MR:105]:https://gitlab.com/apparmor/apparmor/merge_requests/105)
+    - Add info on config-file
+    - Add info on feature abi options (MR:491](https://gitlab.com/apparmor/apparmor/-/merge_requests/491),[579](https://gitlab.com/apparmor/apparmor/-/merge_requests/579))
+    - Add info on -Werror and warn flags ([MR:600](https://gitlab.com/apparmor/apparmor/-/merge_requests/600))
+  - apparmor
+    - Document various debugging options ([debug:826218](https://bugs.debian.org/826218))
+  - aa-status
+    - document kill, unconfined and mixed modes
+  - libapparmor
+    - document aa_features_new_from_file() ([MR:491](https://gitlab.com/apparmor/apparmor/-/merge_requests/491))
+    - document aa_features_value() ([MR:578]( https://gitlab.com/apparmor/apparmor/-/merge_requests/578))
+  - new xattrs man page
 
 
 
 ## Translations
-
+- sync translation from launchpad
 
 
 ## Tests
