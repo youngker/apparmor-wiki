@@ -1,6 +1,6 @@
 # Warning populating the Changes in this release is a WIP will be fully updated in the next few days
 
-AppArmor 3.0 was released 2020-06-07.
+AppArmor 3.0 was released 2020-09-??.
 
 # Introduction
 
