@@ -40,7 +40,7 @@ The kernel portion of the project is maintained and pushed separately.
   - kill (experimental)
   - unconfined (experimental)
 - reference policy updated for 3.0 feature abi
-- basic support for systemd v246 early load of apparmor policy.
+- basic support for [systemd v246 early load of apparmor policy](https://gitlab.com/apparmor/apparmor/-/wikis/AppArmorInSystemd).
 
 # Important Notes
 
