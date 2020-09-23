@@ -170,15 +170,17 @@ And the following improvements
   - use aa.CONFDIR to find configuration ([MR:372](https://gitlab.com/apparmor/apparmor/-/merge_requests/372))
 
 ## cboltz utils  TODO
-- fix writing of alias rules ([MR:119](https://gitlab.com/apparmor/apparmor/-/merge_requests/119))
+- fix writing of alias rules ([MR:119](https://gitlab.com/apparmor/apparmor/-/merge_requests/119)) -- also backported to 2.9..2.13 (and obsolete for 3.0 because of switching to AliasRule)
 - error out when alias declared inside of a profile ([MR:116](https://gitlab.com/apparmor/apparmor/-/merge_requests/116))
-- improve testing output ([MR:194](https://gitlab.com/apparmor/apparmor/-/merge_requests/194))
+- improve testing output ([MR:194](https://gitlab.com/apparmor/apparmor/-/merge_requests/194)) -- actually about parser simple.pl tests, not tools
 - add support for xattr attachment conditionals ([MR:285](https://gitlab.com/apparmor/apparmor/-/merge_requests/285))
 - Extend common DebugLogger with option to log to stderr ([MR:325](https://gitlab.com/apparmor/apparmor/-/merge_requests/325))
 - fully support 'include if exists' ([MR:499](https://gitlab.com/apparmor/apparmor/-/merge_requests/499),[MR:507](https://gitlab.com/apparmor/apparmor/-/merge_requests/507),[LP:1738879](https://bugs.launchpad.net/bugs/1738879))
 - support abi rules ([MR:525](https://gitlab.com/apparmor/apparmor/-/merge_requests/525))
-
-
+- rewrite handling of alias rules -- AliasRule ([MR:526](https://gitlab.com/apparmor/apparmor/-/merge_requests/526), [MR:550](https://gitlab.com/apparmor/apparmor/-/merge_requests/550))
+- rewrite handling of include rules ([MR:537](https://gitlab.com/apparmor/apparmor/-/merge_requests/537))
+- rewrite handling of variable rules ([MR:544](https://gitlab.com/apparmor/apparmor/-/merge_requests/544), [LP:1331856](https://bugs.launchpad.net/apparmor/+bug/1331856))
+- merge and remove duplicated code from aa-mergeprof ([MR:536](https://gitlab.com/apparmor/apparmor/-/merge_requests/536))
 
 
 ## Policy
