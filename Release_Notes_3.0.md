@@ -405,6 +405,7 @@ And the following improvements
 - Add tests for shared aa library functions used in command line scripts ([MR:328](https://gitlab.com/apparmor/apparmor/-/merge_requests/328))
 - Add testcases for 'owner link' rules ([MR:369](https://gitlab.com/apparmor/apparmor/-/merge_requests/369))
 - fix policy cache test to work correctly with hierarchial caches ([MR:348](https://gitlab.com/apparmor/apparmor/-/merge_requests/348))
+- fix usr-merge failures in test-aa.py ([MR:331](https://gitlab.com/apparmor/apparmor/-/merge_requests/331),[LP:1390592](https://bugs.launchpad.net/bugs/1390592))
 -regression tests
   - Add a build-dep target to Makefile to aid in setup
   - fix swap test permission warning ([MR:108](https://gitlab.com/apparmor/apparmor/-/merge_requests/108))
@@ -413,6 +414,7 @@ And the following improvements
   - make LSM stacking aware ([MR:504](https://gitlab.com/apparmor/apparmor/-/merge_requests/504))
   - use --config-file in tests so they are unaffected by the system parser.conf file
   - add FIPS-140-2 lib validation hmac files ([MR:595](https://gitlab.com/apparmor/apparmor/-/merge_requests/595),Bug: [LP:1891664](https://bugs.launchpad.net/bugs/1891664))
+  - fix usr-merge failures, use realpath when generating inierpreter profile ([MR:331](https://gitlab.com/apparmor/apparmor/-/merge_requests/331),[LP:1390592](https://bugs.launchpad.net/bugs/1390592))
 
 
 
