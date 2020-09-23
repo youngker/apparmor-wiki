@@ -196,6 +196,7 @@ And the following improvements
   - base
     - allow mr on *.so* in common library paths ([MR:345](https://gitlab.com/apparmor/apparmor/-/merge_requests/345),[Tails16414](https://redmine.tails.boum.org/code/issues/16414))
     - support suse /usr/etc/ ([MR:447](https://gitlab.com/apparmor/apparmor/-/merge_requests/447),[BOO:1161756](http://bugzilla.opensuse.org/show_bug.cgi?id=1161756))
+    - add FIPS-140-2 lib validation hmac files to abstractions/base ([MR:595](https://gitlab.com/apparmor/apparmor/-/merge_requests/595),Bug: [LP:1891664](https://bugs.launchpad.net/bugs/1891664))
   - dbus-session-strict
     - make x11 socket read-only([MR:281](https://gitlab.com/apparmor/apparmor/-/merge_requests/281))
   - dri-common
@@ -407,6 +408,8 @@ And the following improvements
   - support building policy cache tests against older versions of libapparmor ([MR:407](https://gitlab.com/apparmor/apparmor/-/merge_requests/407))
   - make LSM stacking aware ([MR:504](https://gitlab.com/apparmor/apparmor/-/merge_requests/504))
   - use --config-file in tests so they are unaffected by the system parser.conf file
+  - add FIPS-140-2 lib validation hmac files ([MR:595](https://gitlab.com/apparmor/apparmor/-/merge_requests/595),Bug: [LP:1891664](https://bugs.launchpad.net/bugs/1891664))
+
 
 
 # Note
