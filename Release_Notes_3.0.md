@@ -40,13 +40,13 @@ The kernel portion of the project is maintained and pushed separately.
   - kill (experimental)
   - unconfined (experimental)
 - reference policy updated for 3.0 feature abi
-
+- basic support for systemd v246 early load of apparmor policy.
 
 # Important Notes
 
 - Potentially breaking change: AppArmor will now issue warning about policy that does not specify a feature abi if that policy is not pinned to a specific feature abi. AppArmor will compile such policy using a default feature abi instead of the kernels abi. For more information see [wiki](AppArmorpolicyfeaturesabi).
 
-- Potentially breaking change: AppArmor no longer loads snapd policy by default. It is expected that snapd users are using the snapd unit file. If this is not the case distros will need to revert ```0164fd05 init: stop loading snap policy```
+- Potentially breaking change: AppArmor no longer loads snapd policy by default. It is expected that snapd users are using the snapd unit file. If this is not the case distros will need to revert ```0164fd05 init: stop loading snap policy``` OR take advantage of systemd v246 early load of apparmor policy.
 
 # Obtaining the Release
 These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46) and 3.0 (???) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
