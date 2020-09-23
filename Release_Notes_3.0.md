@@ -166,6 +166,14 @@ And the following improvements
   - Re-implement aa-notify in Python ([MR:341](https://gitlab.com/apparmor/apparmor/-/merge_requests/341),[AABUG:16](https://gitlab.com/apparmor/apparmor/-/issues/16))
   - use aa.CONFDIR to find configuration ([MR:372](https://gitlab.com/apparmor/apparmor/-/merge_requests/372))
 
+## cboltz utils  TODO
+- fix writing of alias rules ([MR:119](https://gitlab.com/apparmor/apparmor/-/merge_requests/119))
+- error out when alias declared inside of a profile ([MR:116](https://gitlab.com/apparmor/apparmor/-/merge_requests/116))
+- improve testing output ([MR:194](https://gitlab.com/apparmor/apparmor/-/merge_requests/194))
+- add support for xattr attachment conditionals ([MR:285](https://gitlab.com/apparmor/apparmor/-/merge_requests/285))
+- Extend common DebugLogger with option to log to stderr ([MR:325](https://gitlab.com/apparmor/apparmor/-/merge_requests/325))
+- fully support 'include if exists' ([MR:499](https://gitlab.com/apparmor/apparmor/-/merge_requests/499),[MR:507](https://gitlab.com/apparmor/apparmor/-/merge_requests/507),[LP:1738879](https://bugs.launchpad.net/bugs/1738879))
+- support abi rules ([MR:525](https://gitlab.com/apparmor/apparmor/-/merge_requests/525))
 
 
 
@@ -268,7 +276,9 @@ And the following improvements
 
 #### profiles
   - General changes
-    - move profiles to short names with attachments instead of file pathnames ([MR:565](https://gitlab.com/apparmor/apparmor/-/merge_requests/565),[MR:620](https://gitlab.com/apparmor/apparmor/-/merge_requests/620))
+    - move profiles to short names with attachments instead of file pathnames ([MR:565](https://gitlab.com/apparmor
+    - support distributions which merge sbin into bin
+/apparmor/-/merge_requests/565),[MR:620](https://gitlab.com/apparmor/apparmor/-/merge_requests/620))
   - chromium profile
     - import from ubuntu and fixup to be more generic ([MR:606](https://gitlab.com/apparmor/apparmor/-/merge_requests/606))
     - cleanup comments, /lib/ and /usr/lib cleanups, suport lib{32,64} ([MR:611](https://gitlab.com/apparmor/apparmor/-/merge_requests/611))
@@ -282,6 +292,7 @@ And the following improvements
     - Add pid file used by NetworkManager ([MR:288](https://gitlab.com/apparmor/apparmor/-/merge_requests/288))
     - Adjust pattern for log files to comply SELinux ([MR:288](https://gitlab.com/apparmor/apparmor/-/merge_requests/288))
     - allow peer=libvirtd to support named profile ([MR:304](https://gitlab.com/apparmor/apparmor/-/merge_requests/304),[BOO:1118952](https://bugzilla.opensuse.org/show_bug.cgi?id=1118952))
+    - add paths for NetworkManager connection sharing
   - dovecot
     - allow access to suid_dumpable ([MR:286](https://gitlab.com/apparmor/apparmor/-/merge_requests/286))
     - move from ssl to OpenSSL access ([MR:337](https://gitlab.com/apparmor/apparmor/-/merge_requests/337))
@@ -306,6 +317,12 @@ And the following improvements
     - Allow mysqld directory for MySQL PID file ([MR:450](https://gitlab.com/apparmor/apparmor/-/merge_requests/450))
   - nmdb
     - support Arch ([MR:411](https://gitlab.com/apparmor/apparmor/-/merge_requests/411))
+  - ntpd
+    - allow access to ntp clockstat
+    - add openntpd drift and socket files
+    - support void linux binary location
+  - ping
+    - support void linux binary location
   - php-fpm
     - allow only one pid file ([MR:601](https://gitlab.com/apparmor/apparmor/-/merge_requests/601))
     - fix profile name in signal and change_profile rule ([MR:601](https://gitlab.com/apparmor/apparmor/-/merge_requests/601))
@@ -330,6 +347,8 @@ And the following improvements
     - need write access to Kerberos ticket cache ([MR:153](https://gitlab.com/apparmor/apparmor/-/merge_requests/153))
   - statd
     - updated so that it works on modern env ([MR:153](https://gitlab.com/apparmor/apparmor/-/merge_requests/153))
+  - traceroute
+    - support void linux binary location
   - useradd
     - support usr-merge ([MR:152](https://gitlab.com/apparmor/apparmor/-/merge_requests/152))
   - windbindd
@@ -343,18 +362,6 @@ And the following improvements
     - add a comment for QtProject.conf rules
     - mention that dri rules were backported from abstraction/dri-enumerate
     - incorporate feedback from Talkless an cboltz
-
-#### todo
-- profiles:
-  - support distributions which merge sbin into bin
-
-  - ping: support void linux binary location
-  - traceroute: support void linux binary location
-  - ntpd
-    - allow access to ntp clockstat
-    - add openntpd drift and socket files
-    - support void linux binary location
-  - dnsmasq: add paths for NetworkManager connection sharing
 
 ## Documentation
   - update bug reporting and documentation to use gitlab
@@ -399,18 +406,10 @@ And the following improvements
   - Add NO_NEW_PRIVS regression tests ([MR:408](https://gitlab.com/apparmor/apparmor/-/merge_requests/408),[MR:424](https://gitlab.com/apparmor/apparmor/-/merge_requests/424))
   - support building policy cache tests against older versions of libapparmor ([MR:407](https://gitlab.com/apparmor/apparmor/-/merge_requests/407))
   - make LSM stacking aware ([MR:504](https://gitlab.com/apparmor/apparmor/-/merge_requests/504))
+  - use --config-file in tests so they are unaffected by the system parser.conf file
 
 
-- use --config-file in tests so they are unaffected by the system parser.conf file
-
--   parser
--   libapparmor
--   utils
--   regression tests
-
-
-Note
-====
+# Note
 
 There is a semantic change in the 4.8 kernel (commit
 9f834ec18defc369d73ccf9e87a2790bfa05bf46) that affects apparmor policy
