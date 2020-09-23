@@ -44,7 +44,7 @@ The kernel portion of the project is maintained and pushed separately.
 
 # Important Notes
 
-- Potentially breaking change: AppArmor will now issue warning about policy that does not specify a feature abi if that policy is not pinned to a specific feature abi. AppArmor will compile such policy using a default feature abi instead of the kernels abi. For more information see [wiki](AppArmorpolicyfeaturesabi).
+- Potentially breaking change: AppArmor will now issue warning about policy that does not specify a feature abi if that policy is not pinned to a specific feature abi. AppArmor will compile such policy using a default feature abi instead of the kernels abi. For more information see the [wiki](AppArmorpolicyfeaturesabi).
 
 - Potentially breaking change: AppArmor no longer loads snapd policy by default. It is expected that snapd users are using the snapd unit file. If this is not the case distros will need to revert ```0164fd05 init: stop loading snap policy``` OR take advantage of systemd v246 early load of apparmor policy.
 
