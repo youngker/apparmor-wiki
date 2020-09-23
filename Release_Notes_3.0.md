@@ -24,8 +24,6 @@ The kernel portion of the project is maintained and pushed separately.
   - upstream v8 network socket rules
   - xattr attachment conditionals
   - capabilities PERFMON and BPF
-- compiler improvemetns
-  - improved warnings and controls of warnings warnings
 - rewritten aa-status
   - supports use in systems/images where python is not available
   - supports kill, unconfined and mixed profile modes
@@ -68,8 +66,17 @@ Includes all the bug fixes and improvements in
 
 And the following improvements
 
-## Build Infrastructure
+## General improvments
+- drop obsolete code ([MR:423](https://gitlab.com/apparmor/apparmor/-/merge_requests/423),[LP:692406](https://bugs.launchpad.net/bugs/692406),[MR:416](https://gitlab.com/apparmor/apparmor/-/merge_requests/416))
+- remove use of perl as dependency for regular use (still required as a build/test dependency)
+- fix typos, and formating
+- update comments
+- update references to wiki, and gitlab
 
+## Build Infrastructure
+- Fix coverity scans ([MR:145](https://gitlab.com/apparmor/apparmor/-/merge_requests/145))
+- cleanup Makefiles ([MR:272](https://gitlab.com/apparmor/apparmor/-/merge_requests/272),)
+- Cleanup compiler flags and make consistent
 
 
 ## Policy Compiler (a.k.a apparmor\_parser)
@@ -92,6 +99,9 @@ And the following improvements
 - fix cross compilation with libintl ([MR:485](https://gitlab.com/apparmor/apparmor/-/merge_requests/485))
 - remove deprecated dynamic exception specifications ([MR:356](https://gitlab.com/apparmor/apparmor/-/merge_requests/356))
 - Improve error message format ([MR:610](https://gitlab.com/apparmor/apparmor/-/merge_requests/610))
+- cleanups and distro compatibility improvements ([MR:512](https://gitlab.com/apparmor/apparmor/-/merge_requests/512))
+- fix python deprecation warnings ([MR:492](https://gitlab.com/apparmor/apparmor/-/merge_requests/492))
+
 
 
 
@@ -135,11 +145,32 @@ And the following improvements
 
 
 ## Utils
+- fix cross compilation with libintl ([MR:485](https://gitlab.com/apparmor/apparmor/-/merge_requests/485))
+- fix build to use compiler warning flags ([MR:542](https://gitlab.com/apparmor/apparmor/-/merge_requests/542))
+- fix cleanup
+- aa-enabled
+  - make LSM stacking aware
+- aa-status
+  - rewrite so it standalone and doesn't have external dependencies so it can be used in minimal installs ([MR:473](https://gitlab.com/apparmor/apparmor/-/merge_requests/473),[LP:1865519](https://bugs.launchpad.net/bugs/1865519))
+  - make LSM stacking aware
+  - support mixed, kill, and unconfined profile modes
+  - bump json version
+- aa-exec
+  - Improve error, debug and verbose messages ([MR:128](https://gitlab.com/apparmor/apparmor/-/merge_requests/128))
+  - Improve handling of errors when changing profiles fail ([MR:129](https://gitlab.com/apparmor/apparmor/-/merge_requests/129))
+  - Error out on conflicting aa-exec parameters ([MR:540](https://gitlab.com/apparmor/apparmor/-/merge_requests/540))
+  - fix warning from new compiler warn flags ([MR:561](https://gitlab.com/apparmor/apparmor/-/merge_requests/561))
+- aa-decode
+  - rewrite in python ([MR:321](https://gitlab.com/apparmor/apparmor/-/merge_requests/321))
+- aa-notify
+  - Re-implement aa-notify in Python ([MR:341](https://gitlab.com/apparmor/apparmor/-/merge_requests/341),[AABUG:16](https://gitlab.com/apparmor/apparmor/-/issues/16))
+  - use aa.CONFDIR to find configuration ([MR:372](https://gitlab.com/apparmor/apparmor/-/merge_requests/372))
+
+
 
 
 
 ## Policy
-
 - improve CI integration of shipped policy ([MR:449](https://gitlab.com/apparmor/apparmor/-/merge_requests/449))
 - add permissions to access new apparmor api interfaces where necessary
 - use @{PROC} and @{run} throughout policy ([MR:455](https://gitlab.com/apparmor/apparmor/-/merge_requests/455))
@@ -358,6 +389,17 @@ And the following improvements
 
 
 ## Tests
+- Add tests for aa-notify ([MR:324](https://gitlab.com/apparmor/apparmor/-/merge_requests/324))
+- Add some tests for complex profile names ([MR:360](https://gitlab.com/apparmor/apparmor/-/merge_requests/360))
+- Add tests for shared aa library functions used in command line scripts ([MR:328](https://gitlab.com/apparmor/apparmor/-/merge_requests/328))
+- Add testcases for 'owner link' rules ([MR:369](https://gitlab.com/apparmor/apparmor/-/merge_requests/369))
+-regression tests
+  - Add a build-dep target to Makefile to aid in setup
+  - fix swap test permission warning ([MR:108](https://gitlab.com/apparmor/apparmor/-/merge_requests/108))
+  - Add NO_NEW_PRIVS regression tests ([MR:408](https://gitlab.com/apparmor/apparmor/-/merge_requests/408),[MR:424](https://gitlab.com/apparmor/apparmor/-/merge_requests/424))
+  - support building policy cache tests against older versions of libapparmor ([MR:407](https://gitlab.com/apparmor/apparmor/-/merge_requests/407))
+  - make LSM stacking aware ([MR:504](https://gitlab.com/apparmor/apparmor/-/merge_requests/504))
+
 
 - use --config-file in tests so they are unaffected by the system parser.conf file
 
