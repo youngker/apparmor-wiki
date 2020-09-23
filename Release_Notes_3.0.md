@@ -177,10 +177,14 @@ And the following improvements
 - Extend common DebugLogger with option to log to stderr ([MR:325](https://gitlab.com/apparmor/apparmor/-/merge_requests/325))
 - fully support 'include if exists' ([MR:499](https://gitlab.com/apparmor/apparmor/-/merge_requests/499),[MR:507](https://gitlab.com/apparmor/apparmor/-/merge_requests/507),[LP:1738879](https://bugs.launchpad.net/bugs/1738879))
 - support abi rules ([MR:525](https://gitlab.com/apparmor/apparmor/-/merge_requests/525))
-- rewrite handling of alias rules -- AliasRule ([MR:526](https://gitlab.com/apparmor/apparmor/-/merge_requests/526), [MR:550](https://gitlab.com/apparmor/apparmor/-/merge_requests/550))
+- rewrite handling of alias rules ([MR:526](https://gitlab.com/apparmor/apparmor/-/merge_requests/526), [MR:550](https://gitlab.com/apparmor/apparmor/-/merge_requests/550))
 - rewrite handling of include rules ([MR:537](https://gitlab.com/apparmor/apparmor/-/merge_requests/537))
 - rewrite handling of variable rules ([MR:544](https://gitlab.com/apparmor/apparmor/-/merge_requests/544), [LP:1331856](https://bugs.launchpad.net/apparmor/+bug/1331856))
 - merge and remove duplicated code from aa-mergeprof ([MR:536](https://gitlab.com/apparmor/apparmor/-/merge_requests/536))
+- let logprof only propose abstractions without '# LOGPROF-SUGGEST: no' ([MR:254](https://gitlab.com/apparmor/apparmor/-/merge_requests/254))
+- Get rid of is_covered_aare_compat() ([MR:478](https://gitlab.com/apparmor/apparmor/-/merge_requests/478))
+- rewrite log handling and simplify converting log events to aa-logprof proposals ([MR:377](https://gitlab.com/apparmor/apparmor/-/merge_requests/377))
+- rewrite handling of link rules (handled in FileRule now) ([MR:371](https://gitlab.com/apparmor/apparmor/-/merge_requests/371))
 
 
 ## Policy
