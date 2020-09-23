@@ -76,7 +76,8 @@ And the following improvements
 ## Build Infrastructure
 - Fix coverity scans ([MR:145](https://gitlab.com/apparmor/apparmor/-/merge_requests/145))
 - cleanup Makefiles ([MR:272](https://gitlab.com/apparmor/apparmor/-/merge_requests/272),)
-- Cleanup compiler flags and make consistent
+- CI Drop specifying python and pyflakes version ([MR:483](https://gitlab.com/apparmor/apparmor/-/merge_requests/483))
+- cleanup compiler flags and make consistent
 
 
 ## Policy Compiler (a.k.a apparmor\_parser)
