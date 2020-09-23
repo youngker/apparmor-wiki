@@ -10,7 +10,12 @@ Introduction
 Loading apparmor policy
 =======================
 
-???
+Systemd v246 added the ability to load apparmor policy cache during early boot.
+Requirements
+- cache must be in a location available during early boot, eg. /etc/apparmor.d/cache or /lib/apparmor/cache.  Cache in /var/cache/apparmor/ can NOT be used.
+- cache for the specific kernel being booted must be compiled before boot/reboot into said kernel
+- ???? setup
+
 
 The restart problem
 ===================
