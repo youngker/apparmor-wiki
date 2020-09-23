@@ -141,6 +141,8 @@ And the following improvements
   - Fix cross compilation ([MR:462](https://gitlab.com/apparmor/apparmor/-/merge_requests/462))
   - update API documentation ([MR:559](https://gitlab.com/apparmor/apparmor/-/merge_requests/559))  
   - new api fn to lookup of features value ([MR:578](https://gitlab.com/apparmor/apparmor/-/merge_requests/578))
+  - add log testcases for exec with and without target= ([MR:405](https://gitlab.com/apparmor/apparmor/-/merge_requests/405))
+
 
 
 
