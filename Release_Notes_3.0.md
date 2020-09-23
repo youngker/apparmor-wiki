@@ -404,6 +404,7 @@ And the following improvements
 - Add some tests for complex profile names ([MR:360](https://gitlab.com/apparmor/apparmor/-/merge_requests/360))
 - Add tests for shared aa library functions used in command line scripts ([MR:328](https://gitlab.com/apparmor/apparmor/-/merge_requests/328))
 - Add testcases for 'owner link' rules ([MR:369](https://gitlab.com/apparmor/apparmor/-/merge_requests/369))
+- fix policy cache test to work correctly with hierarchial caches ([MR:348](https://gitlab.com/apparmor/apparmor/-/merge_requests/348))
 -regression tests
   - Add a build-dep target to Makefile to aid in setup
   - fix swap test permission warning ([MR:108](https://gitlab.com/apparmor/apparmor/-/merge_requests/108))
