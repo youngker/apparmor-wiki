@@ -117,7 +117,7 @@ And the following improvements
 - fix issues detected by shellcheck ([MR:293](https://gitlab.com/apparmor/apparmor/-/merge_requests/293))
 - Don't try to list files in a non-existent directories ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
 - add support for an additional profiles directory, defaulting to /var/lib/snapd/apparmor/profiles ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
-- warn when the profiles directory cannot be found ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252)[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
+- warn when the profiles directory cannot be found ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
 - suppress warnings when booting in quiet mode ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
 - use the parser's automatic parallelization ([MR:252](https://gitlab.com/apparmor/apparmor/-/merge_requests/252),[debug917874](https://bugs.debian.org/917874),[LP:1377338](https://bugs.launchpad.net/bugs/1377338)) 
 - make posix-compatible ([MR:355](https://gitlab.com/apparmor/apparmor/-/merge_requests/355),[LP:1377338](https://bugs.launchpad.net/bugs/1377338))
