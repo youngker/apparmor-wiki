@@ -19,10 +19,15 @@ Early policy loads are required to confine systemd, and other early services or 
 
 ## Early policy loads
 
-Requires
+Early policy must be precompiled binary (cache) that matches the kernel being booted and it must be placed in
 
-- all policy to be loaded to have precompiled cache that is available during early boot.
-  - cache must be in a location that is available eg. /etc/apparmor.d/cache or /lib/apparmor/cache. Cache in /var/cache/apparmor/ can NOT be used.
+```
+/etc/apparmor/earlypolicy
+```
+
+The cache placed in ```/etc/apparmor/earlypolicy``` is expected to to conform to the per kernel directory hierarchy of regular cache.
+
+
 
 ????
 - Load is not parallel with other units
