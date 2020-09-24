@@ -19,29 +19,65 @@ Early policy loads are required to confine systemd, and other early services or 
 
 ## Early policy loads
 
-Early policy must be precompiled binary (cache) that matches the kernel being booted and it must be placed in
+Early policy must be pre-compiled binary (cache) that matches the kernel being booted and it must be placed in
 
 ```
 /etc/apparmor/earlypolicy
 ```
 
-The cache placed in ```/etc/apparmor/earlypolicy``` is expected to to conform to the per kernel directory hierarchy of regular cache.
+The cache placed in ```/etc/apparmor/earlypolicy``` is expected to conform to the per kernel [directory hierarchy of regular cache](https://gitlab.com/apparmor/apparmor/-/wikis/Apparmorbinarypolicy#layout-of-binary-policy).
+
+The early policy cache does not have to contain all of the system policy, only the policy that should be loaded in early boot. The early policy load does not run in parallel with other units so loading a large policy may slow down boot some. However AppArmor will not do a compile of policy during early boot so the load will be as fast as the kernel can load and verify the policy.
+
+When using early policy the user is responsible for either copying cache files into ```/etc/apparmor/earlypolicy/``` or setting up apparmor to write its cache directly to earlypolicy.
+
+### Early policy and boot
+
+If early policy is configured systemd will load policy from ```/etc/apparmor/earlypolicy/``` and then try to set its confinement to the ```systemd``` profile.
+
+If the ```systemd``` profile is not present in the loaded policy systemd will report an error.
+
+```
+Failed to change to AppArmor profile 'systemd'. Please ensure that one of the binary profile files in policy cache directory /etc/apparmor/earlypolicy/XXXXX contains a profile with that name."
+```
+
+This failure does not mean that early policy is not loaded, just that systemd is not confined by AppArmor policy.
+
+WARNING: Confining systemd with AppArmor policy can break your system. Make sure your policy is good before enforcing any policy on systemd.
+
+### Configuring AppArmor to write cache to ```/etc/apparmor/earlypolicy/```
+
+To have AppArmor write its cache into ```/etc/apparmor/earlypolicy/``` the ```/etc/apparmor/parser.conf``` file needs to be edited. The following lines can be added to the file to turn on caching and writing of policy cache to the desired location.
+
+```
+# enable writing the cache
+write-cache
+# set the cache location
+cache-loc /etc/apparmor/earlypolicy/
+```
+
+After this is done policy needs to be recompiled. Reloading policy should do this for the current kernel
+
+```
+systemctl reload apparmor.service
+```
+
+For kernels that are different than the current kernel
+
+```
+apparmor_parser -QT --kernel-features=<kernel_features_file> <policy_location>
+```
+
+where ```<kernel_features_file>``` is the features file for the kernel that policy should be compiled for and <policy_location> is the location of text policy on your system (eg. ```/etc/apparmor.d/```
 
 
+## Late policy Loads
 
-????
-- Load is not parallel with other units
-  - large loads can slow down boot
+Late policy loads is provided by systemd apparmor unit. This unit calls out to the ```apparmor_parser``` to handle loads and policy compiles. This enables the late load to recompile policy if the cache is stale or if the kernel is not one that apparmor has generated policy for before.
 
-Does not have to be all of policy
+The late policy load can run in parallel with other systemd units unless they depend on it.
 
-
-
-Systemd v246 added the ability to load apparmor policy cache during early boot.
-Requirements
-- cache must be in a location available during early boot, eg. /etc/apparmor.d/cache or /lib/apparmor/cache.  Cache in /var/cache/apparmor/ can NOT be used.
-- cache for the specific kernel being booted must be compiled before boot/reboot into said kernel
-- ???? setup
+Late policy loads can not confine services that start before the policy is loaded nor systemd.
 
 
 The restart problem
