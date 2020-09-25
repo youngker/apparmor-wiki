@@ -184,6 +184,7 @@ And the following improvements
   - Get rid of is_covered_aare_compat() ([MR:478](https://gitlab.com/apparmor/apparmor/-/merge_requests/478))
   - rewrite log handling and simplify converting log events to aa-logprof proposals ([MR:377](https://gitlab.com/apparmor/apparmor/-/merge_requests/377))
   - rewrite handling of link rules (handled in FileRule now) ([MR:371](https://gitlab.com/apparmor/apparmor/-/merge_requests/371))
+  - add change_profile support ([MR:631](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/631))
   - lots of cleanup and improvements
 
 ## Policy
