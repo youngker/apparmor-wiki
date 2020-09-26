@@ -169,9 +169,7 @@ And the following improvements
   - Re-implement aa-notify in Python ([MR:341](https://gitlab.com/apparmor/apparmor/-/merge_requests/341),[AABUG:16](https://gitlab.com/apparmor/apparmor/-/issues/16))
   - use aa.CONFDIR to find configuration ([MR:372](https://gitlab.com/apparmor/apparmor/-/merge_requests/372))
 - genprof, logprof and aa python library,
-  - fix writing of alias rules ([MR:119](https://gitlab.com/apparmor/apparmor/-/merge_requests/119)) -- also backported to 2.9..2.13 (and obsolete for 3.0 because of switching to AliasRule)
   - error out when alias declared inside of a profile ([MR:116](https://gitlab.com/apparmor/apparmor/-/merge_requests/116))
-  - improve testing output ([MR:194](https://gitlab.com/apparmor/apparmor/-/merge_requests/194)) -- actually about parser simple.pl tests, not tools
   - add support for xattr attachment conditionals ([MR:285](https://gitlab.com/apparmor/apparmor/-/merge_requests/285))
   - Extend common DebugLogger with option to log to stderr ([MR:325](https://gitlab.com/apparmor/apparmor/-/merge_requests/325))
   - fully support 'include if exists' ([MR:499](https://gitlab.com/apparmor/apparmor/-/merge_requests/499),[MR:507](https://gitlab.com/apparmor/apparmor/-/merge_requests/507),[LP:1738879](https://bugs.launchpad.net/bugs/1738879))
