@@ -1,6 +1,6 @@
 AppArmor manpages
 
-- [aa-audit.8](manpage_aa-audit.8.md)
+- [aa-audit.8](manpage_aa-audit.8)
 - [aa-autodep.8](manpage_aa-autodep.8.md)
 - [aa_change_hat.2](manpage_aa_change_hat.2.md)
 - [aa_change_profile.2](manpage_aa_change_profile.2.md)
