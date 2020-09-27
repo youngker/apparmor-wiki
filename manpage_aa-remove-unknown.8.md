@@ -1,5 +1,5 @@
 # Navigation
-Return to manpage [Index}](ManPages)
+Return to manpage [Index](ManPages)
 
 
 # NAME
