@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 apparmor\_parser - loads AppArmor profiles into the kernel

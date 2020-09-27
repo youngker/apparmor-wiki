@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa-logprof - utility for updating AppArmor security profiles

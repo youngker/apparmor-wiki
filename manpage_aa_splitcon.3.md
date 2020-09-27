@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa\_splitcon - split the confinement context into a label and mode

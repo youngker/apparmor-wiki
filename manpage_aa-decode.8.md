@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa-decode - decode hex-encoded in AppArmor log files

@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa-autodep - guess basic AppArmor profile requirements

@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa-remove-unknown - remove unknown AppArmor profiles

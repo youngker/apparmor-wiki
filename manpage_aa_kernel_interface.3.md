@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa\_kernel\_interface - an opaque object representing the AppArmor kernel interface for policy loading, replacing, and removing

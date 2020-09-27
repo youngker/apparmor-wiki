@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa\_change\_hat  - change to or from a "hat" within a AppArmor profile

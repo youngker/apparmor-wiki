@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa\_getprocattr\_raw, aa\_getprocattr - read and parse procattr data

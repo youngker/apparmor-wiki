@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa-enforce - set an AppArmor security profile to _enforce_ mode from

@@ -1,3 +1,7 @@
+# Navigation
+Return to manpage [Index}](ManPages)
+
+
 # NAME
 
 aa\_stack\_profile, aa\_stack\_onexec - combine multiple profiles to confine a task
