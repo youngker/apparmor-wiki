@@ -1,5 +1,6 @@
 AppArmor manpages
 
+# System calls
 - [aa_change_hat.2](manpage_aa_change_hat.2)
 - [aa_change_profile.2](manpage_aa_change_profile.2)
 - [aa_find_mountpoint.2](manpage_aa_find_mountpoint.2)
@@ -7,17 +8,21 @@ AppArmor manpages
 - [aa_query_label.2](manpage_aa_query_label.2)
 - [aa_stack_profile.2](manpage_aa_stack_profile.2)
 
+# Library Functions
 - [aa_features.3](manpage_aa_features.3)
 - [aa_kernel_interface.3](manpage_aa_kernel_interface.3)
 - [aa_policy_cache.3](manpage_aa_policy_cache.3)
 - [aa_splitcon.3](manpage_aa_splitcon.3)
 
+# File formats
 - [apparmor.d.5](manpage_apparmor.d.5)
 - [logprof.conf.5](manpage_logprof.conf.5)
 
+# Misc
 - [apparmor.7](manpage_apparmor.7)
 - [apparmor_xattrs.7](manpage_apparmor_xattrs.7)
 
+# Admin tools
 - [aa-audit.8](manpage_aa-audit.8)
 - [aa-autodep.8](manpage_aa-autodep.8)
 - [aa-cleanprof.8](manpage_aa-cleanprof.8)
