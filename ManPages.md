@@ -1,5 +1,10 @@
 AppArmor manpages
 
+# User commands
+- [aa-enabled](manpage_aa-enabled.1)
+- [aa-exec](manpage_aa-exec.1)
+- [aa-features-abi](manpage_aa-features-abi.1)
+
 # System calls
 - [aa_change_hat.2](manpage_aa_change_hat.2)
 - [aa_change_profile.2](manpage_aa_change_profile.2)
@@ -38,7 +43,9 @@ AppArmor manpages
 - [aa-remove-unknown.8](manpage_aa-remove-unknown.8)
 - [aa-teardown.8](manpage_aa-teardown.8)
 - [aa-unconfined.8](manpage_aa-unconfined.8)
+- [aa-status](manpage_aa-status.8)
 - [apparmor_parser.8](manpage_apparmor_parser.8)
+- [mod_apparmor](manpage_mod_apparmor.8)
 
 
 
