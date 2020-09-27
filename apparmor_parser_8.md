@@ -1,457 +1,400 @@
-<?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title></title>
-<link rel="stylesheet" href="apparmor.css" type="text/css" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rev="made" href="mailto:root@localhost" />
-</head>
+# NAME
 
-<body>
-<table border="0" width="100%" cellspacing="0" cellpadding="3">
-<tr><td class="_podblock_" valign="middle">
-<big><strong><span class="_podblock_">&nbsp;</span></strong></big>
-</td></tr>
-</table>
+apparmor\_parser - loads AppArmor profiles into the kernel
 
+# SYNOPSIS
 
+**apparmor\_parser \[options\] &lt;command> \[profiles\]...**
 
-<ul id="index">
-  <li><a href="#NAME">NAME</a></li>
-  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
-  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
-  <li><a href="#COMMANDS">COMMANDS</a></li>
-  <li><a href="#Unprivileged-commands">Unprivileged commands</a></li>
-  <li><a href="#Unprivileged-profile-commands">Unprivileged profile commands</a></li>
-  <li><a href="#Privileged-commands">Privileged commands</a></li>
-  <li><a href="#Privileged-profile-commands">Privileged profile commands</a></li>
-  <li><a href="#OPTIONS">OPTIONS</a></li>
-  <li><a href="#CONFIG-FILE">CONFIG FILE</a></li>
-  <li><a href="#BUGS">BUGS</a></li>
-  <li><a href="#SEE-ALSO">SEE ALSO</a></li>
-</ul>
+**apparmor\_parser \[options\] &lt;command>**
 
-<h1 id="NAME">NAME</h1>
+**apparmor\_parser \[-hv\] \[--help\] \[--version\]**
 
-<p>apparmor_parser - loads AppArmor profiles into the kernel</p>
+# DESCRIPTION
 
-<h1 id="SYNOPSIS">SYNOPSIS</h1>
+**apparmor\_parser** is used as a general tool to compile, and manage AppArmor
+policy, including loading new apparmor.d(5) profiles into the Linux kernel.
 
-<p><b>apparmor_parser [options] &lt;command&gt; [profiles]...</b></p>
+AppArmor profiles restrict the operations available to processes.
 
-<p><b>apparmor_parser [options] &lt;command&gt;</b></p>
+The **profiles** are loaded into the Linux kernel by the **apparmor\_parser**
+program. The **profiles** may be specified by file name or a directory
+name containing a set of profiles. If a directory is specified then the
+**apparmor\_parser** will try to do a profile load for each file in the
+directory that is not a dot file, or explicitly black listed (\*.dpkg-new,
+\*.dpkg-old, \*.dpkg-dist, \*.dpkg-bak, \*.dpkg-remove, \*.pacsave, \*.pacnew,
+\*.rpmnew, \*.rpmsave, \*.orig, \*.rej, \*~).
+The **apparmor\_parser** will fall back to taking input from standard input if
+a profile or directory is not supplied.
 
-<p><b>apparmor_parser [-hv] [--help] [--version]</b></p>
+The input supplied to **apparmor\_parser** should be in the format described in
+apparmor.d(5).
 
-<h1 id="DESCRIPTION">DESCRIPTION</h1>
+# COMMANDS
 
-<p><b>apparmor_parser</b> is used as a general tool to compile, and manage AppArmor policy, including loading new apparmor.d(5) profiles into the Linux kernel.</p>
+The command set is broken into four subcategories.
 
-<p>AppArmor profiles restrict the operations available to processes.</p>
+- unprivileged commands
 
-<p>The <b>profiles</b> are loaded into the Linux kernel by the <b>apparmor_parser</b> program. The <b>profiles</b> may be specified by file name or a directory name containing a set of profiles. If a directory is specified then the <b>apparmor_parser</b> will try to do a profile load for each file in the directory that is not a dot file, or explicitly black listed (*.dpkg-new, *.dpkg-old, *.dpkg-dist, *.dpkg-bak, *.dpkg-remove, *.pacsave, *.pacnew, *.rpmnew, *.rpmsave, *.orig, *.rej, *~). The <b>apparmor_parser</b> will fall back to taking input from standard input if a profile or directory is not supplied.</p>
+    Commands that don't require any privilege and don't operate on profiles.
 
-<p>The input supplied to <b>apparmor_parser</b> should be in the format described in apparmor.d(5).</p>
+- unprivileged profile commands
 
-<h1 id="COMMANDS">COMMANDS</h1>
+    Commands that operate on a profile either specified on the command line or
+    read from stdin if no profile was specified.
 
-<p>The command set is broken into four subcategories.</p>
+- privileged commands
 
-<dl>
+    Commands that require the MAC\_ADMIN capability within the affected AppArmor
+    namespace to load policy into the kernel or filesystem write permissions to
+    update the affected privileged files (cache etc).
 
-<dt id="unprivileged-commands">unprivileged commands</dt>
-<dd>
+- privileged profile commands
 
-<p>Commands that don&#39;t require any privilege and don&#39;t operate on profiles.</p>
+    Commands that require privilege and operate on profiles.
 
-</dd>
-<dt id="unprivileged-profile-commands">unprivileged profile commands</dt>
-<dd>
+# Unprivileged commands
 
-<p>Commands that operate on a profile either specified on the command line or read from stdin if no profile was specified.</p>
+- -V, --version
 
-</dd>
-<dt id="privileged-commands">privileged commands</dt>
-<dd>
+    Print the version number and exit.
 
-<p>Commands that require the MAC_ADMIN capability within the affected AppArmor namespace to load policy into the kernel or filesystem write permissions to update the affected privileged files (cache etc).</p>
+- -h, --help
 
-</dd>
-<dt id="privileged-profile-commands">privileged profile commands</dt>
-<dd>
+    Give a quick reference guide.
 
-<p>Commands that require privilege and operate on profiles.</p>
+# Unprivileged profile commands
 
-</dd>
-</dl>
+- -N, --names
 
-<h1 id="Unprivileged-commands">Unprivileged commands</h1>
+    Produce a list of policies from a given set of profiles (implies -K).
 
-<dl>
+- -p, --preprocess
 
-<dt id="V---version">-V, --version</dt>
-<dd>
+    Apply preprocessing to the input profile(s) by flattening includes into
+    the output profile and dump to stdout.
 
-<p>Print the version number and exit.</p>
+- -S, --stdout
 
-</dd>
-<dt id="h---help">-h, --help</dt>
-<dd>
+    Writes a binary (cached) profile to stdout (implies -K and -T).
 
-<p>Give a quick reference guide.</p>
+- -o file, --ofile file
 
-</dd>
-</dl>
+    Writes a binary (cached) profile to the specified file (implies -K and -T)
 
-<h1 id="Unprivileged-profile-commands">Unprivileged profile commands</h1>
+# Privileged commands
 
-<dl>
+- --purge-cache
 
-<dt id="N---names">-N, --names</dt>
-<dd>
+    Unconditionally clear out cached profiles.
 
-<p>Produce a list of policies from a given set of profiles (implies -K).</p>
+# Privileged profile commands
 
-</dd>
-<dt id="p---preprocess">-p, --preprocess</dt>
-<dd>
+- -a, --add
 
-<p>Apply preprocessing to the input profile(s) by flattening includes into the output profile and dump to stdout.</p>
+    Insert the AppArmor definitions given into the kernel. This is the default
+    action. This gives an error message if a AppArmor definition by the same
+    name already exists in the kernel, or if the parser doesn't understand
+    its input. It reports when an addition succeeded.
 
-</dd>
-<dt id="S---stdout">-S, --stdout</dt>
-<dd>
+- -r, --replace
 
-<p>Writes a binary (cached) profile to stdout (implies -K and -T).</p>
+    This flag is required if an AppArmor definition by the same name already
+    exists in the kernel; used to replace the definition already
+    in the kernel with the definition given on standard input.
 
-</dd>
-<dt id="o-file---ofile-file">-o file, --ofile file</dt>
-<dd>
+- -R, --remove
 
-<p>Writes a binary (cached) profile to the specified file (implies -K and -T)</p>
+    This flag is used to remove an AppArmor definition already in the kernel.
+    Note that it still requires a complete AppArmor definition as described
+    in apparmor.d(5) even though the contents of the definition aren't
+    used.
 
-</dd>
-</dl>
+# OPTIONS
 
-<h1 id="Privileged-commands">Privileged commands</h1>
+- -B, --binary
 
-<dl>
+    Treat the profile files specified on the command line (or stdin if none
+    specified) as binary cache files, produced with the -S or -o options,
+    and load to the kernel as specified by -a, -r, and -R (implies -K
+    and -T).
 
-<dt id="purge-cache">--purge-cache</dt>
-<dd>
+- -C, --Complain
 
-<p>Unconditionally clear out cached profiles.</p>
+    Force the profile to load in complain mode.
 
-</dd>
-</dl>
+- -b n, --base n
 
-<h1 id="Privileged-profile-commands">Privileged profile commands</h1>
+    Set the base directory for resolving #include directives
+    defined as relative paths.
 
-<dl>
+- -I n, --Include n
 
-<dt id="a---add">-a, --add</dt>
-<dd>
+    Add element n to the search path when resolving #include directives
+    defined as an absolute paths.
 
-<p>Insert the AppArmor definitions given into the kernel. This is the default action. This gives an error message if a AppArmor definition by the same name already exists in the kernel, or if the parser doesn&#39;t understand its input. It reports when an addition succeeded.</p>
+- -f n, --apparmorfs n
 
-</dd>
-<dt id="r---replace">-r, --replace</dt>
-<dd>
+    Set the location of the apparmor security filesystem (default is
+    "/sys/kernel/security/apparmor").
 
-<p>This flag is required if an AppArmor definition by the same name already exists in the kernel; used to replace the definition already in the kernel with the definition given on standard input.</p>
+- --policy-features n
 
-</dd>
-<dt id="R---remove">-R, --remove</dt>
-<dd>
+    Specify the feature set that the policy was developed under. This does
+    not override feature ABI rules.
 
-<p>This flag is used to remove an AppArmor definition already in the kernel. Note that it still requires a complete AppArmor definition as described in apparmor.d(5) even though the contents of the definition aren&#39;t used.</p>
+- --override-policy-abi n
 
-</dd>
-</dl>
+    Specify the feature set that the policy was developed under and
+    override any feature ABI rules that the policy may be using.
 
-<h1 id="OPTIONS">OPTIONS</h1>
+- --kernel-features n
 
-<dl>
+    Specify the feature set of the kernel that the policy is being compiled for. If not specified this will be determined by the system's kernel.
 
-<dt id="B---binary">-B, --binary</dt>
-<dd>
+- -M n, --features-file n
 
-<p>Treat the profile files specified on the command line (or stdin if none specified) as binary cache files, produced with the -S or -o options, and load to the kernel as specified by -a, -r, and -R (implies -K and -T).</p>
+    Use the features file located at path "n" (default is
+    /etc/apparmor.d/cache/.features). If the --cache-loc option is present, the
+    ".features" file in the specified cache directory is used.
 
-</dd>
-<dt id="C---Complain">-C, --Complain</dt>
-<dd>
+    Note: this sets both the --kernel-features and --policy-features to be the
+    same.
 
-<p>Force the profile to load in complain mode.</p>
+- -m n, --match-string n
 
-</dd>
-<dt id="b-n---base-n">-b n, --base n</dt>
-<dd>
+    Only use match features "n".
 
-<p>Set the base directory for resolving #include directives defined as relative paths.</p>
+    Note: this sets both the --kernel-features and --policy-features to be the
+    same.
 
-</dd>
-<dt id="I-n---Include-n">-I n, --Include n</dt>
-<dd>
+- -n n, --namespace-string n
 
-<p>Add element n to the search path when resolving #include directives defined as an absolute paths.</p>
+    Force a profile to load in the namespace "n".
 
-</dd>
-<dt id="f-n---apparmorfs-n">-f n, --apparmorfs n</dt>
-<dd>
+- -X, --readimpliesX
 
-<p>Set the location of the apparmor security filesystem (default is &quot;/sys/kernel/security/apparmor&quot;).</p>
+    In the case of profiles that are loading on systems were READ\_IMPLIES\_EXEC
+    is set in the kernel for a given process, load the profile so that any "r"
+    flags are processed as "mr".
 
-</dd>
-<dt id="policy-features-n">--policy-features n</dt>
-<dd>
+- -k, --show-cache
 
-<p>Specify the feature set that the policy was developed under. This does not override feature ABI rules.</p>
+    Report the cache processing (hit/miss details) when loading or saving
+    cached profiles.
 
-</dd>
-<dt id="override-policy-abi-n">--override-policy-abi n</dt>
-<dd>
+- -K, --skip-cache
 
-<p>Specify the feature set that the policy was developed under and override any feature ABI rules that the policy may be using.</p>
+    Perform no caching at all: disables -W, implies -T.
 
-</dd>
-<dt id="kernel-features-n">--kernel-features n</dt>
-<dd>
+- -T, --skip-read-cache
 
-<p>Specify the feature set of the kernel that the policy is being compiled for. If not specified this will be determined by the system&#39;s kernel.</p>
+    By default, if a profile's cache is found in the location specified by
+    \--cache-loc and the timestamp is newer than the profile, it will be loaded
+    from the cache. This option disables this cache loading behavior.
 
-</dd>
-<dt id="M-n---features-file-n">-M n, --features-file n</dt>
-<dd>
+- -W, --write-cache
 
-<p>Use the features file located at path &quot;n&quot; (default is /etc/apparmor.d/cache/.features). If the --cache-loc option is present, the &quot;.features&quot; file in the specified cache directory is used.</p>
+    Write out cached profiles to the location specified in --cache-loc.  Off
+    by default. In cases where abstractions have been changed, and the parser
+    is running with "--replace", it may make sense to also use
+    "--skip-read-cache" with the "--write-cache" option.
 
-<p>Note: this sets both the --kernel-features and --policy-features to be the same.</p>
+- --skip-bad-cache
 
-</dd>
-<dt id="m-n---match-string-n">-m n, --match-string n</dt>
-<dd>
+    Skip updating the cache if it contains cached profiles in a bad or
+    inconsistent state
 
-<p>Only use match features &quot;n&quot;.</p>
+- -L, --cache-loc
 
-<p>Note: this sets both the --kernel-features and --policy-features to be the same.</p>
+    Set the location(s) of the cache directory. This option can accept a
+    comma separated list of directories, which will be searched in order
+    to find a matching cache. The first matching cache file found is used
+    even if a directory later in the search order may contain a newer cache
+    file.
 
-</dd>
-<dt id="n-n---namespace-string-n">-n n, --namespace-string n</dt>
-<dd>
+    If multiple directories are specified and --write-cache has been specified
+    then cache writes will be made to the first directory in the list, all
+    other directories will be treated as read only.
 
-<p>Force a profile to load in the namespace &quot;n&quot;.</p>
+    If a cache directory name needs to have a comma as part of the name, it
+    can be specified by using a backslash to escape the comma character in
+    the directory name.
 
-</dd>
-<dt id="X---readimpliesX">-X, --readimpliesX</dt>
-<dd>
+    If not specified the cache location defaults to /var/cache/apparmor
 
-<p>In the case of profiles that are loading on systems were READ_IMPLIES_EXEC is set in the kernel for a given process, load the profile so that any &quot;r&quot; flags are processed as &quot;mr&quot;.</p>
+- --print-cache-dir
 
-</dd>
-<dt id="k---show-cache">-k, --show-cache</dt>
-<dd>
+    Print the cache directory location. This path will be a subdirectory of the
+    directory specified by --cache-loc. The subdirectory used will be influenced by
+    the features available in the currently running kernel or by the features
+    specified with the --match-string or --features-file options.
 
-<p>Report the cache processing (hit/miss details) when loading or saving cached profiles.</p>
+- -Q, --skip-kernel-load
 
-</dd>
-<dt id="K---skip-cache">-K, --skip-cache</dt>
-<dd>
+    Perform all actions except the actual loading of a profile into the kernel.
+    This is useful for testing profile generation, caching, etc, without making
+    changes to the running kernel profiles.
 
-<p>Perform no caching at all: disables -W, implies -T.</p>
+    This also removes the need for privilege to execute the commands that
+    manage policy in the kernel
 
-</dd>
-<dt id="T---skip-read-cache">-T, --skip-read-cache</dt>
-<dd>
+- -q, --quiet
 
-<p>By default, if a profile&#39;s cache is found in the location specified by --cache-loc and the timestamp is newer than the profile, it will be loaded from the cache. This option disables this cache loading behavior.</p>
+    Do not report on the profiles as they are loaded, and not show warnings.
 
-</dd>
-<dt id="W---write-cache">-W, --write-cache</dt>
-<dd>
+- -v, --verbose
 
-<p>Write out cached profiles to the location specified in --cache-loc. Off by default. In cases where abstractions have been changed, and the parser is running with &quot;--replace&quot;, it may make sense to also use &quot;--skip-read-cache&quot; with the &quot;--write-cache&quot; option.</p>
+    Report on the profiles as they are loaded, and show warnings.
 
-</dd>
-<dt id="skip-bad-cache">--skip-bad-cache</dt>
-<dd>
+- --warn=n
 
-<p>Skip updating the cache if it contains cached profiles in a bad or inconsistent state</p>
+    Enable various warnings during policy compilation. A single warn flag
+    can be specified per --warn option, but the --warn flag can be passed
+    multiple times.
 
-</dd>
-<dt id="L---cache-loc">-L, --cache-loc</dt>
-<dd>
+        apparmor_parser --warn=rules-not-enforced ...
 
-<p>Set the location(s) of the cache directory. This option can accept a comma separated list of directories, which will be searched in order to find a matching cache. The first matching cache file found is used even if a directory later in the search order may contain a newer cache file.</p>
+    A specific warning can be disabled by prepending _no_- to the flag
 
-<p>If multiple directories are specified and --write-cache has been specified then cache writes will be made to the first directory in the list, all other directories will be treated as read only.</p>
+        apparmor_parser --warn=no-rules-not-enforced ...
 
-<p>If a cache directory name needs to have a comma as part of the name, it can be specified by using a backslash to escape the comma character in the directory name.</p>
+    Use --help=warn to see a full list of which warn flags are supported.
 
-<p>If not specified the cache location defaults to /var/cache/apparmor</p>
+- --Werror\[=n\]
 
-</dd>
-<dt id="print-cache-dir">--print-cache-dir</dt>
-<dd>
+    Convert warnings into errors during policy compilation. If the
+    optional flag is not specified all warnings become errors. If the
+    optional flag is specified only the class of warnings specified will
+    become errors. A single flag can be specified per --Werror option, but
+    the --Werror flag can be passed multiple times.
 
-<p>Print the cache directory location. This path will be a subdirectory of the directory specified by --cache-loc. The subdirectory used will be influenced by the features available in the currently running kernel or by the features specified with the --match-string or --features-file options.</p>
+        apparmor_parser --Werror=deprecated ...
 
-</dd>
-<dt id="Q---skip-kernel-load">-Q, --skip-kernel-load</dt>
-<dd>
+    Use --help=warn or --help=Werror to see a full list of which warn flags
+    are supported.
 
-<p>Perform all actions except the actual loading of a profile into the kernel. This is useful for testing profile generation, caching, etc, without making changes to the running kernel profiles.</p>
+- -d, --debug
 
-<p>This also removes the need for privilege to execute the commands that manage policy in the kernel</p>
+    Given once, only checks the profiles to ensure syntactic correctness.
+    Given twice, dumps its interpretation of the profile for checking.
 
-</dd>
-<dt id="q---quiet">-q, --quiet</dt>
-<dd>
+- -D n, --dump=n
 
-<p>Do not report on the profiles as they are loaded, and not show warnings.</p>
+    Debug flag for dumping various structures and passes of policy compilation.
+    A single dump flag can be specified per --dump option, but the dump flag
+    can be passed multiple times.  Note progress flags tend to also imply
+    the matching stats flag.
 
-</dd>
-<dt id="v---verbose">-v, --verbose</dt>
-<dd>
+        apparmor_parser --dump=dfa-stats --dump=trans-stats <file>
 
-<p>Report on the profiles as they are loaded, and show warnings.</p>
+    Use --help=dump to see a full list of which dump flags are supported
 
-</dd>
-<dt id="warn-n">--warn=n</dt>
-<dd>
+- -j n, --jobs=n
 
-<p>Enable various warnings during policy compilation. A single warn flag can be specified per --warn option, but the --warn flag can be passed multiple times.</p>
+    Set the number of jobs used to compile the specified policy. Where n can
+    be
 
-<pre><code>  apparmor_parser --warn=rules-not-enforced ...</code></pre>
+        0    - disable jobs and use the main process for all compilation
+        #    - a specific number of jobs
+        auto - the # of cpus in the in the system
+        x#   - # * number of cpus
 
-<p>A specific warning can be disabled by prepending <i>no</i>- to the flag</p>
+    Eg.
+      -j8     OR --jobs=8                   allows for 8 parallel jobs
+      -jauto  OR --jobs=auto                sets the jobs to the # of cpus
+      -jx4    OR --jobs=x4                  sets the jobs to # of cpus \* 4
+      -jx1   is equivalent to   -jauto
 
-<pre><code>  apparmor_parser --warn=no-rules-not-enforced ...</code></pre>
+    The default value is the number of cpus in the system.
 
-<p>Use --help=warn to see a full list of which warn flags are supported.</p>
+- --max-jobs n
 
-</dd>
-<dt id="Werror-n">--Werror[=n]</dt>
-<dd>
+    Set a hard cap on the value that can be specified by the --jobs flag.
+    It takes the same set of options available to the --jobs option, and
+    defaults to 8\*cpus
 
-<p>Convert warnings into errors during policy compilation. If the optional flag is not specified all warnings become errors. If the optional flag is specified only the class of warnings specified will become errors. A single flag can be specified per --Werror option, but the --Werror flag can be passed multiple times.</p>
+- -O n, --optimize=n
 
-<pre><code>  apparmor_parser --Werror=deprecated ...</code></pre>
+    Set the optimization flags used by policy compilation.  A single optimization
+    flag can be toggled per -O option, but the optimize flag can be passed
+    multiple times.  Turning off some phases of the optimization can make
+    it so that policy can't complete compilation due to size constraints
+    (it is entirely possible to create a dfa with millions of states that will
+    take days or longer to compile).
 
-<p>Use --help=warn or --help=Werror to see a full list of which warn flags are supported.</p>
+    Note: The parser is set to use a balanced default set of flags, that
+    will result in reasonable compression but not take excessive amounts
+    of time to complete.
 
-</dd>
-<dt id="d---debug">-d, --debug</dt>
-<dd>
+    Use --help=optimize to see a full list of which optimization flags are
+    supported.
 
-<p>Given once, only checks the profiles to ensure syntactic correctness. Given twice, dumps its interpretation of the profile for checking.</p>
+- --abort-on-error
+Abort processing of profiles on the first error encountered, otherwise
+the parser will continue to try to compile other profiles if specified.
 
-</dd>
-<dt id="D-n---dump-n">-D n, --dump=n</dt>
-<dd>
+    Note: If an error is encountered while processing profiles the last error
+    encountered will be used to set the exit code. 
 
-<p>Debug flag for dumping various structures and passes of policy compilation. A single dump flag can be specified per --dump option, but the dump flag can be passed multiple times. Note progress flags tend to also imply the matching stats flag.</p>
+- --skip-bad-cache-rebuild
+The default behavior of the parser is to check if a cached version of
+a profile exists and if it does it attempt to load it into the kernel.
+If that load is rejected, then the parser will attempt to rebuild the
+cache file, and load again.
 
-<pre><code>  apparmor_parser --dump=dfa-stats --dump=trans-stats &lt;file&gt;</code></pre>
+    This option tells the parser to not attempt to rebuild the cache on
+    failure, instead the parser continues on with processing the remaining
+    profiles.
 
-<p>Use --help=dump to see a full list of which dump flags are supported</p>
+- --config-file
 
-</dd>
-<dt id="j-n---jobs-n">-j n, --jobs=n</dt>
-<dd>
+    Specify the config file to use instead of
+    /etc/apparmor/parser.conf. This option will be processed early before
+    regular options regardless of the order it is specified in.
 
-<p>Set the number of jobs used to compile the specified policy. Where n can be</p>
+- --print-config-file
 
-<pre><code>  0    - disable jobs and use the main process for all compilation
-  #    - a specific number of jobs
-  auto - the # of cpus in the in the system
-  x#   - # * number of cpus</code></pre>
+    Print the config file location that will be used.
 
-<p>Eg. -j8 OR --jobs=8 allows for 8 parallel jobs -jauto OR --jobs=auto sets the jobs to the # of cpus -jx4 OR --jobs=x4 sets the jobs to # of cpus * 4 -jx1 is equivalent to -jauto</p>
+# CONFIG FILE
 
-<p>The default value is the number of cpus in the system.</p>
+An optional config file /etc/apparmor/parser.conf can be used to specify the
+default options for the parser, which then can be overridden using the command
+line options.
 
-</dd>
-<dt id="max-jobs-n">--max-jobs n</dt>
-<dd>
+The config file ignores leading whitespace and treats lines that begin with #
+as comments.  Config options are specified one per line using the same format
+as the longform command line options (without the preceding --).
 
-<p>Set a hard cap on the value that can be specified by the --jobs flag. It takes the same set of options available to the --jobs option, and defaults to 8*cpus</p>
+Eg.
+    #comment
 
-</dd>
-<dt id="O-n---optimize-n">-O n, --optimize=n</dt>
-<dd>
+    optimize=no-expr-tree
+    optimize=compress-fast
 
-<p>Set the optimization flags used by policy compilation. A single optimization flag can be toggled per -O option, but the optimize flag can be passed multiple times. Turning off some phases of the optimization can make it so that policy can&#39;t complete compilation due to size constraints (it is entirely possible to create a dfa with millions of states that will take days or longer to compile).</p>
+As with the command line some options accumulate and others override, ie. when
+there are conflicting versions of switch the last option is the one chosen.
 
-<p>Note: The parser is set to use a balanced default set of flags, that will result in reasonable compression but not take excessive amounts of time to complete.</p>
+Eg.
+    Optimize=no-minimize
+    Optimize=minimize
 
-<p>Use --help=optimize to see a full list of which optimization flags are supported.</p>
+would result in Optimize=minimize being set.
 
-</dd>
-<dt id="abort-on-error-Abort-processing-of-profiles-on-the-first-error-encountered-otherwise-the-parser-will-continue-to-try-to-compile-other-profiles-if-specified">--abort-on-error Abort processing of profiles on the first error encountered, otherwise the parser will continue to try to compile other profiles if specified.</dt>
-<dd>
+The Include, Dump, and Optimize options accululate except for the inversion
+option (no-X vs. X), and a couple options that work by setting/clearing
+multiple options (compress-small).  In that case the option will override
+the flags it sets but will may accumulate with others.
 
-<p>Note: If an error is encountered while processing profiles the last error encountered will be used to set the exit code.</p>
+All other options override previously set values.
 
-</dd>
-<dt id="skip-bad-cache-rebuild-The-default-behavior-of-the-parser-is-to-check-if-a-cached-version-of-a-profile-exists-and-if-it-does-it-attempt-to-load-it-into-the-kernel.-If-that-load-is-rejected-then-the-parser-will-attempt-to-rebuild-the-cache-file-and-load-again">--skip-bad-cache-rebuild The default behavior of the parser is to check if a cached version of a profile exists and if it does it attempt to load it into the kernel. If that load is rejected, then the parser will attempt to rebuild the cache file, and load again.</dt>
-<dd>
+# BUGS
 
-<p>This option tells the parser to not attempt to rebuild the cache on failure, instead the parser continues on with processing the remaining profiles.</p>
+If you find any bugs, please report them at
+[https://gitlab.com/apparmor/apparmor/-/issues](https://gitlab.com/apparmor/apparmor/-/issues).
 
-</dd>
-<dt id="config-file">--config-file</dt>
-<dd>
+# SEE ALSO
 
-<p>Specify the config file to use instead of /etc/apparmor/parser.conf. This option will be processed early before regular options regardless of the order it is specified in.</p>
-
-</dd>
-<dt id="print-config-file">--print-config-file</dt>
-<dd>
-
-<p>Print the config file location that will be used.</p>
-
-</dd>
-</dl>
-
-<h1 id="CONFIG-FILE">CONFIG FILE</h1>
-
-<p>An optional config file /etc/apparmor/parser.conf can be used to specify the default options for the parser, which then can be overridden using the command line options.</p>
-
-<p>The config file ignores leading whitespace and treats lines that begin with # as comments. Config options are specified one per line using the same format as the longform command line options (without the preceding --).</p>
-
-<p>Eg. #comment</p>
-
-<pre><code>    optimize=no-expr-tree
-    optimize=compress-fast</code></pre>
-
-<p>As with the command line some options accumulate and others override, ie. when there are conflicting versions of switch the last option is the one chosen.</p>
-
-<p>Eg. Optimize=no-minimize Optimize=minimize</p>
-
-<p>would result in Optimize=minimize being set.</p>
-
-<p>The Include, Dump, and Optimize options accululate except for the inversion option (no-X vs. X), and a couple options that work by setting/clearing multiple options (compress-small). In that case the option will override the flags it sets but will may accumulate with others.</p>
-
-<p>All other options override previously set values.</p>
-
-<h1 id="BUGS">BUGS</h1>
-
-<p>If you find any bugs, please report them at <a href="https://gitlab.com/apparmor/apparmor/-/issues">https://gitlab.com/apparmor/apparmor/-/issues</a>.</p>
-
-<h1 id="SEE-ALSO">SEE ALSO</h1>
-
-<p>apparmor(7), apparmor.d(5), aa_change_hat(2), and <a href="https://wiki.apparmor.net">https://wiki.apparmor.net</a>.</p>
-
-<table border="0" width="100%" cellspacing="0" cellpadding="3">
-<tr><td class="_podblock_" valign="middle">
-<big><strong><span class="_podblock_">&nbsp;</span></strong></big>
-</td></tr>
-</table>
-
-</body>
-
-</html>
-
-
+apparmor(7), apparmor.d(5), aa\_change\_hat(2), and
+[https://wiki.apparmor.net](https://wiki.apparmor.net).
