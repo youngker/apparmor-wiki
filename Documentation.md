@@ -14,20 +14,23 @@ AppArmor Essentials
 Manuals
 -------
 
-Profile enforcement:
+[AppArmor Manpages](ManPages)
+
+
+Ubuntu Profile enforcement:
 
 -   [apparmor\_parser](http://manpages.ubuntu.com/manpages/precise/en/man8/apparmor_parser.8.html)
 -   [aa-audit](http://manpages.ubuntu.com/manpages/precise/en/man8/aa-audit)
 -   [aa-enforce](http://manpages.ubuntu.com/manpages/precise/en/man8/aa-enforce.8.html)
 -   [aa-complain](http://manpages.ubuntu.com/manpages/precise/en/man8/aa-complain.8.html)
 
-Monitoring tools:
+Ubuntu Monitoring tools:
 
 -   [aa-status](http://manpages.ubuntu.com/manpages/precise/en/man8/aa-status.8.html)
 -   [aa-notify](http://manpages.ubuntu.com/manpages/precise/en/man8/aa-notify)
 -   [aa-unconfined](http://manpages.ubuntu.com/manpages/precise/en/man8/aa-unconfined.8.html)
 
-Profile development:
+Ubuntu Profile development:
 
 -   [aa-autodep](http://manpages.ubuntu.com/manpages/precise/en/man8/aa-autodep.8.html)
 -   [aa-logprof](http://manpages.ubuntu.com/manpages/precise/en/man8/aa-logprof.8.html)
