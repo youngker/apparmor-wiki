@@ -60,7 +60,7 @@ Released Versions of AppArmor Userspace Utils
 [AppArmor 3.0](Release_Notes_3.0)
 -------------------------------------------
 
--   Release Date: 2020-03-15
+-   Release Date: 2020-10-01
 -   Shipped in: Debian ?, Ubuntu ?, Suse ?
 -   Kernels supported: 4.13 and upwards
 -   [Release Notes](Release_Notes_3.0)
