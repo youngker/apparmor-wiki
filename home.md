@@ -58,15 +58,17 @@ The AppArmor v2.4 compatibility patches are available in the stable kernel branc
 
 #### Userspace
 
-Development release: AppArmor 3.0
-
+Development release: AppArmor 3.1
 -   in development
--   targeting
-    -   policy versioning
-    -   query caching
-    -   extensible rule support so older parsers don't break on new rule types
 
-Current stable release: 2.13.4
+Current stable release: 3.0
+-   launchpad <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz>
+-   launchpad <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz.asc>
+-   launchpad sha256sum: 66fd751fe51eb427d2aa864ee035b12d01d212fd595579275219b0148c43755e
+-   gitlab
+-   [ 3.0 release notes](Release_Notes_3.0)
+
+Prior supported release 2.13.4
 -   <https://launchpad.net/apparmor/2.13/2.13.4/+download/apparmor-2.13.4.tar.gz>
 -   sha256sum: 90bf86c07ffbe2c22be46d75c7345fad12d5911653c59750a37d59c63ad5d10e
 -   signature: <https://launchpad.net/apparmor/2.13/2.13.4/+download/apparmor-2.13.4.tar.gz.asc>
