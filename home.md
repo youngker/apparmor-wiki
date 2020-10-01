@@ -62,10 +62,10 @@ Development release: AppArmor 3.1
 -   in development
 
 Current stable release: 3.0
--   launchpad <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz>
--   launchpad <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz.asc>
+-   [gitlab release](https://gitlab.com/apparmor/apparmor/-/releases/v3.0.0)
+-   [launchpad code](<https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz>)
+-   [launchpad signature](<https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz.asc>)
 -   launchpad sha256sum: 66fd751fe51eb427d2aa864ee035b12d01d212fd595579275219b0148c43755e
--   gitlab
 -   [ 3.0 release notes](Release_Notes_3.0)
 
 Prior supported release 2.13.4
