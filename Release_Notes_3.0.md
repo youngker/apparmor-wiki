@@ -1,6 +1,4 @@
-# Warning populating the Changes in this release is a WIP will be fully updated in the next few days
-
-AppArmor 3.0 was released 2020-09-??.
+AppArmor 3.0 was released 2020-10-01.
 
 # Introduction
 
@@ -39,6 +37,7 @@ The kernel portion of the project is maintained and pushed separately.
   - unconfined (experimental)
 - reference policy updated for 3.0 feature abi
 - basic support for [systemd v246 early load of apparmor policy](https://gitlab.com/apparmor/apparmor/-/wikis/AppArmorInSystemd#early-policy-loads).
+- new tool [aa-features-abi](https://gitlab.com/apparmor/apparmor/-/wikis/manpage_aa-features-abi.1) for extracting feature abis from the kernel
 
 # Important Notes
 
@@ -47,12 +46,12 @@ The kernel portion of the project is maintained and pushed separately.
 - Potentially breaking change: AppArmor no longer loads snapd policy by default. It is expected that snapd users are using the snapd unit file. If this is not the case distros will need to revert ```0164fd05 init: stop loading snap policy``` OR take advantage of systemd v246 early load of apparmor policy.
 
 # Obtaining the Release
-These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46) and 3.0 (???) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
+These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46) and 3.0 (5d51483bfecf556183558644dc8958135397a7e2) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
 
 Tarball
--   <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.tar.gz>
--   sha256sum: 
--   signature: <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.tar.gz.asc>
+-   <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz>
+-   sha256sum: 66fd751fe51eb427d2aa864ee035b12d01d212fd595579275219b0148c43755e
+-   signature: <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz.asc>
 
 # Changes in this Release
 
