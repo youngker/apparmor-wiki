@@ -24,6 +24,26 @@ and set a set of key=value fields.
 type=1400 AVC
 type=1107 USER_AVC
 
+AppArmor currently supports the subj_type field as a match value, Eg.
+
+```
+auditctl -a exit,always -S open -F subj_type=man -F success=0
+```
+
+can be used to log open syscall failures for tasks confined by the ```man``` profile. It is important to note that if apparmor causes the failure a regular apparmor denial message will be recorded in addition to the syscall message. But if apparmor didn't cause the syscall to fail then the syscall message will be recorded.  eg. with the above audit rule loaded, and an apparmor profile causing a file access denial we get
+
+```
+type=AVC msg=audit(1602017543.829:407): apparmor="DENIED" operation="open" profile="man" name="/etc/manpath.config" pid=5401 comm="man" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+type=SYSCALL msg=audit(1602017543.829:407): arch=c000003e syscall=257 success=no exit=-13 a0=ffffff9c a1=557cff2db19d a2=0 a3=0 items=1 ppid=2142 pid=5401 auid=1000 uid=1000 gid=1000 euid=1000 suid=1000 fsuid=1000 egid=1000 sgid=1000 fsgid=1000 tty=pts0 ses=5 comm="man" exe="/usr/bin/man" subj==man (enforce) key=(null)
+type=CWD msg=audit(1602017543.829:407): cwd="/home/jj"
+type=PATH msg=audit(1602017543.829:407): item=0 name="/etc/manpath.config" inode=917689 dev=fc:05 mode=0100644 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL cap_fp=0 cap_fi=0 cap_fe=0 cap_fver=0 cap_frootid=0
+```
+
+the apparmor denial is the ```type=AVC``` message while the sycall audit caused by the rule is the ```type=SYSCALL``` message
+
+
+
+
 # configuration
 
 AppArmor auditing will be affected by either auditd configuration, or if auditd the kernels printk configuration.
