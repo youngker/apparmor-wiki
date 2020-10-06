@@ -24,7 +24,7 @@ and set a set of key=value fields.
 type=1400 AVC
 type=1107 USER_AVC
 
-AppArmor currently supports the subj_type field as a match value, Eg.
+AppArmor currently supports equal (=) and not equal (!=) matches on the subj_type field, Eg.
 
 ```
 auditctl -a exit,always -S open -F subj_type=man -F success=0
