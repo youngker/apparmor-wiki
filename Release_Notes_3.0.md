@@ -41,7 +41,9 @@ The kernel portion of the project is maintained and pushed separately.
 
 # Important Notes
 
-- gitlab release tarballs: Differ from the launchpad release tarballs. The lauchpad release tarball has libapparmor ```autogen.sh``` already applied as part of its build, meaning distros only need to use ./configure in their build setup. Distros moving to the gitlab release tarballs will need to make sure ./autogen.sh is performed be doing ./configure as part of the build.
+- gitlab release tarballs: Differ from the launchpad release tarballs. The launchpad release tarball has a couple processing steps already performed:
+  - libapparmor ```autogen.sh``` is already done, meaning distros only need to use ./configure in their build setup
+  - the docs for everything but libapparmor have already been built
 
 - Potentially breaking change: AppArmor will now issue warning about policy that does not specify a feature abi if that policy is not pinned to a specific feature abi. AppArmor will compile such policy using a default feature abi instead of the kernels abi. For more information see the [wiki](AppArmorpolicyfeaturesabi).
 
