@@ -50,16 +50,22 @@ The kernel portion of the project is maintained and pushed separately.
 - Potentially breaking change: AppArmor no longer loads snapd policy by default. It is expected that snapd users are using the snapd unit file. If this is not the case distros will need to revert ```0164fd05 init: stop loading snap policy``` OR take advantage of systemd v246 early load of apparmor policy.
 
 # Obtaining the Release
-These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46) and 3.0 (5d51483bfecf556183558644dc8958135397a7e2) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
 
-gitlab: https://gitlab.com/apparmor/apparmor/-/releases/v3.0.0
+There are two ways to obtain this release either through gitlab or a tarball in launchpad. Important note: the gitlab release tarballs: Differ from the launchpad release tarballs. The launchpad release tarball has a couple processing steps already performed:
+  - libapparmor ```autogen.sh``` is already done, meaning distros only need to use ./configure in their build setup
+  - the docs for everything but libapparmor have already been built
 
-Launchpad Tarball
+### gitlab release
+- https://gitlab.com/apparmor/apparmor/-/releases/v3.0.0
+
+### Launchpad Tarball
 -   <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz>
 -   sha256sum: 66fd751fe51eb427d2aa864ee035b12d01d212fd595579275219b0148c43755e
 -   signature: <https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz.asc>
 
 # Changes in this Release
+
+These release notes cover all changes between 2.13 (f97782b100733770eebc7cf2839ba43683a74f46) and 3.0 (5d51483bfecf556183558644dc8958135397a7e2) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
 
 Includes all the bug fixes and improvements in
 - [2.13.1](Release_Notes_2.13.1)
