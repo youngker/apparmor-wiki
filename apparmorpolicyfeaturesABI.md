@@ -41,6 +41,14 @@ Warning from stdin (stdin line 1): apparmor_parser: File 'example' missing featu
 
 It will then set the profile to use a default feature ABI that is pre v8 networking feature compatible (This means network mediation will not work with upstream kernels but will work with kernel's patched with the out of tree v7 networking patches).
 
+The warning can be disabled by passing the ```--warn=no-abi``` flag to the apparmor_parser or adding
+
+```
+warn=no-abi
+```
+
+to the /etc/apparmor/parser.conf file.
+
 AppArmor 2.x policy should largely just continue to work under the default ABI rule, allowing for a gradual transition to AppArmor 3.x policy.
 
 ## ABI rules in include files
