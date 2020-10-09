@@ -95,12 +95,17 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - dnsmasq:
     - support dnsmasq 2.81 ([MR:475](https://gitlab.com/apparmor/apparmor/merge_requests/475))
     - allow reading DNSSEC trust anchors ([MR:547](https://gitlab.com/apparmor/apparmor/merge_requests/547))
+    - fix path the lease_helpt ([AABUG:87](https://gitlab.com/apparmor/apparmor/-/issues/87))
   - dovecot:
     - allow reading my.cnf ([MR:566](https://gitlab.com/apparmor/apparmor/merge_requests/566))
     - allow switching to user specific hats ([MR:566](https://gitlab.com/apparmor/apparmor/merge_requests/566))
     - fix postfix binary paths ([MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602))
+  - nvidia_modprobe
+    - allow creating device file ([AABUG:87](https://gitlab.com/apparmor/apparmor/-/issues/87))
   - postfix:
     - fix postfix binary paths ([MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602))
+    - allow reading icu \*.dat ([MR:615](https://gitlab.com/apparmor/apparmor/-/merge_requests/615))
+    - allow locking /etc/aliases.db
   - winbindd: allow krb5 rcache files locking  ([MR:460](https://gitlab.com/apparmor/apparmor/merge_requests/460))
 
 ## Tests
