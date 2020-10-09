@@ -106,6 +106,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
     - fix postfix binary paths ([MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602))
     - allow reading icu \*.dat ([MR:615](https://gitlab.com/apparmor/apparmor/-/merge_requests/615))
     - allow locking /etc/aliases.db
+    - ??????? ([MR:621](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/621))
   - winbindd: allow krb5 rcache files locking  ([MR:460](https://gitlab.com/apparmor/apparmor/merge_requests/460))
 
 ## Tests
