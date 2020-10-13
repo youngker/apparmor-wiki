@@ -49,6 +49,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - better error handling during creation ([MR:472](https://gitlab.com/apparmor/apparmor/merge_requests/472))
   - support "if exists" syntax highlighting ([MR:500](https://gitlab.com/apparmor/apparmor/merge_requests/500))
   - fix syntax highlighting for alias rules ([MR:527](https://gitlab.com/apparmor/apparmor/merge_requests/527))
+  - fix handling of path based dbus and mount conditionals ([MR:607](https://gitlab.com/apparmor/apparmor/-/merge_requests/607))
 
 ## Init
 - Fix profile load when using busybox ([AABUG:80](https://gitlab.com/apparmor/apparmor/-/issues/80))
@@ -65,6 +66,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 - support capability BPF and capability perfmon regardless of kernel ([MR:594](https://gitlab.com/apparmor/apparmor/-/merge_requests/594))
 - Fix automatic addition of rules for access to change_hat interfaces for hats and parents ([MR:625](https://gitlab.com/apparmor/apparmor/-/merge_requests/625))
 - Fix expansion of variables in unix rules addr= conditional ([LP:1856738](https://bugs.launchpad.net/apparmor/+bug/1856738), [MR:607](https://gitlab.com/apparmor/apparmor/-/merge_requests/607))
+- Fix variable expansion for mount type= and options= ([AABUG:99](https://gitlab.com/apparmor/apparmor/-/issues/99), [MR:638](https://gitlab.com/apparmor/apparmor/-/merge_requests/638))
 
 ## Utils
 - genprof/logprof:
