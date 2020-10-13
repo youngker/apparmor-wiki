@@ -59,6 +59,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 - fix parsing around Whitespace and newline for some rules ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
 - fix hashing of the feature set ([MR:583](https://gitlab.com/apparmor/apparmor/merge_requests/583))
 - support capability BPF and capability perfmon regardless of kernel ([MR:594](https://gitlab.com/apparmor/apparmor/-/merge_requests/594))
+- Fix automatic addition of rules for access to change_hat interfaces for hats and parents ([MR:625](https://gitlab.com/apparmor/apparmor/-/merge_requests/625))
 
 ## Utils
 - genprof/logprof:
@@ -103,10 +104,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - nvidia_modprobe
     - allow creating device file ([AABUG:87](https://gitlab.com/apparmor/apparmor/-/issues/87))
   - postfix:
-    - fix postfix binary paths ([MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602))
-    - allow reading icu \*.dat ([MR:615](https://gitlab.com/apparmor/apparmor/-/merge_requests/615))
-    - allow locking /etc/aliases.db
-    - ??????? ([MR:621](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/621))
+    - refresh profiles([MR:621](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/621),[MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602),[MR:615](https://gitlab.com/apparmor/apparmor/-/merge_requests/615),[MR:621](https://gitlab.com/apparmor/apparmor/-/merge_requests/621))
   - winbindd: allow krb5 rcache files locking  ([MR:460](https://gitlab.com/apparmor/apparmor/merge_requests/460))
 
 ## Tests
@@ -120,6 +118,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - fix logprof invocation of profiles make check ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586),[AABUG:98](https://gitlab.com/apparmor/apparmor/-/issues/98)) 
 - python utils
   - fix libapparmor swig python path ([MR:586](https://gitlab.com/apparmor/apparmor/merge_requests/586),[AABUG:98](https://gitlab.com/apparmor/apparmor/-/issues/98))
+- Don't build syscall_sysctl test if missing kernel headers ([AABUG:119](https://gitlab.com/apparmor/apparmor/-/issues/119), [LP:1897288](https://bugs.launchpad.net/apparmor/+bug/1897288), [MR:637](https://gitlab.com/apparmor/apparmor/-/merge_requests/637))
 
 # Note
 
