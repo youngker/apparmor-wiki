@@ -9,9 +9,16 @@ announcements will be sent out to the apparmor mailing list
 
 Meeting Logs are linked off of the month agenda title.
 
-# [IRC Meeting, 18:00 UTC, Tue Septemeber 8, 2020](IRC_meeting_2020-09-08)
+# [IRC Meeting, 18:00 UTC, Tue December 8, 2020](IRC_meeting_2020-12-08)
 - TODO
 - anything else
+
+# [IRC Meeting, 18:00 UTC, Tue October 13, 2020](IRC_meeting_2020-10-13)
+- TODO
+- anything else
+
+# IRC Meeting, 18:00 UTC, Tue September 8, 2020
+- Cancelled
 
 # IRC Meeting, 18:00 UTC, Tue August 11, 2020
 - Cancelled
