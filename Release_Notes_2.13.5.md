@@ -13,7 +13,7 @@ kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
 # Important Notes
 
-- gitlab release tarballs: Differ from the launchpad release tarballs. The launchpad release tarball has a couple processing steps already performed:
+- gitlab release tarballs: Differ from the launchpad release tarballs. The both start from the same commit (tagged v2.13.5) however the launchpad release tarball has a couple processing steps already performed:
   - libapparmor ```autogen.sh``` is already done, meaning distros only need to use ./configure in their build setup
   - the docs for everything but libapparmor have already been built
 
