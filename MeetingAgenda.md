@@ -14,8 +14,8 @@ Meeting Logs are linked off of the month agenda title.
 - anything else
 
 # [IRC Meeting, 18:00 UTC, Tue October 13, 2020](IRC_meeting_2020-10-13)
-- TODO
-- anything else
+- 2.13.5
+- 3.1
 
 # IRC Meeting, 18:00 UTC, Tue September 8, 2020
 - Cancelled
