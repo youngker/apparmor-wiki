@@ -104,7 +104,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
   - nvidia_modprobe
     - allow creating device file ([AABUG:87](https://gitlab.com/apparmor/apparmor/-/issues/87))
   - postfix:
-    - refresh profiles([MR:621](MR: https://gitlab.com/apparmor/apparmor/-/merge_requests/621),[MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602),[MR:615](https://gitlab.com/apparmor/apparmor/-/merge_requests/615),[MR:621](https://gitlab.com/apparmor/apparmor/-/merge_requests/621))
+    - refresh profiles ([MR:602](https://gitlab.com/apparmor/apparmor/-/merge_requests/602),[MR:615](https://gitlab.com/apparmor/apparmor/-/merge_requests/615),[MR:621](https://gitlab.com/apparmor/apparmor/-/merge_requests/621))
   - winbindd: allow krb5 rcache files locking  ([MR:460](https://gitlab.com/apparmor/apparmor/merge_requests/460))
 
 ## Tests
