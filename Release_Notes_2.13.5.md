@@ -53,6 +53,10 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 ## Init
 - Fix profile load when using busybox ([AABUG:80](https://gitlab.com/apparmor/apparmor/-/issues/80))
 
+## Libapparmor
+- Fix potential build failure when dynamically linking the apparmor_parser by add _aa_asprintf to private symbols ([MR:643](https://gitlab.com/apparmor/apparmor/-/merge_requests/643))
+- Fix build failure on musl libc ([MR:642](https://gitlab.com/apparmor/apparmor/-/merge_requests/642))
+
 ## Policy Compiler (a.k.a apparmor\_parser)
 
 - improve error handling in the lexer ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
@@ -60,6 +64,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 - fix hashing of the feature set ([MR:583](https://gitlab.com/apparmor/apparmor/merge_requests/583))
 - support capability BPF and capability perfmon regardless of kernel ([MR:594](https://gitlab.com/apparmor/apparmor/-/merge_requests/594))
 - Fix automatic addition of rules for access to change_hat interfaces for hats and parents ([MR:625](https://gitlab.com/apparmor/apparmor/-/merge_requests/625))
+- Fix expansion of variables in unix rules addr= conditional ([LP:1856738](https://bugs.launchpad.net/apparmor/+bug/1856738), [MR:607](https://gitlab.com/apparmor/apparmor/-/merge_requests/607))
 
 ## Utils
 - genprof/logprof:
