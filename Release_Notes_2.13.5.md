@@ -63,7 +63,7 @@ These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03
 - improve error handling in the lexer ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
 - fix parsing around Whitespace and newline for some rules ([MR:572](https://gitlab.com/apparmor/apparmor/merge_requests/572))
 - fix hashing of the feature set ([MR:583](https://gitlab.com/apparmor/apparmor/merge_requests/583))
-- support capability BPF and capability perfmon regardless of kernel ([MR:594](https://gitlab.com/apparmor/apparmor/-/merge_requests/594))
+- support capability BPF, capability perfmon, capability checkpoint_restore regardless of kernel ([MR:594](https://gitlab.com/apparmor/apparmor/-/merge_requests/594), [MR:654](https://gitlab.com/apparmor/apparmor/-/merge_requests/654))
 - Fix automatic addition of rules for access to change_hat interfaces for hats and parents ([MR:625](https://gitlab.com/apparmor/apparmor/-/merge_requests/625))
 - Fix expansion of variables in unix rules addr= conditional ([LP:1856738](https://bugs.launchpad.net/apparmor/+bug/1856738), [MR:607](https://gitlab.com/apparmor/apparmor/-/merge_requests/607))
 - Fix variable expansion for mount type= and options= ([AABUG:99](https://gitlab.com/apparmor/apparmor/-/issues/99), [MR:638](https://gitlab.com/apparmor/apparmor/-/merge_requests/638))
