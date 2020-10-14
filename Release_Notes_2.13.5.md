@@ -11,7 +11,7 @@ This version of the userspace should work with all kernel versions from
 apparmor patches applied). And supports features released in the 4.18
 kernel and ubuntu 18.04 kernel with the apparmor 3 development patches.
 
-# Important Notes
+# Important Note
 
 - gitlab release tarballs: Differ from the launchpad release tarballs. The both start from the same commit (tagged v2.13.5) however the launchpad release tarball has a couple processing steps already performed:
   - libapparmor ```autogen.sh``` is already done, meaning distros only need to use ./configure in their build setup
