@@ -57,6 +57,13 @@ The actual set of mediation available depends on both the userspace version and 
 Released Versions of AppArmor Userspace Utils
 =============================================
 
+[AppArmor 3.0.1](Release_Notes_3.0.1)
+-------------------------------------------
+
+-   Release Date: 2020-10-01
+-   [Release Notes](Release_Notes_3.0.1)
+-   Development target: Bug Fixes
+
 [AppArmor 3.0](Release_Notes_3.0)
 -------------------------------------------
 
