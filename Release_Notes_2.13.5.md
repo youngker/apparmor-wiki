@@ -1,4 +1,4 @@
-AppArmor 2.13.5 was released 2020-??-???.
+AppArmor 2.13.5 was released 2020-10-15.
 
 # Introduction
 
@@ -28,12 +28,12 @@ There are two ways to obtain this release either through gitlab or a tarball in 
 
 ### Launchpad Tarball
 -   <https://launchpad.net/apparmor/2.13/2.13.5/+download/apparmor-2.13.5.tar.gz>
--   sha256sum: ???
+-   sha256sum: 637e2a14d844e53e0f0b31dc8fe8821f7bb36908c709ccc23e29033053caa717
 -   signature: <https://launchpad.net/apparmor/2.13/2.13.5/+download/apparmor-2.13.5.tar.gz.asc>
 
 # Changes in this Release
 
-These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) and 2.13.5 [???fac184d9231b5b01f1d397d7620deafc1171ba93](https://gitlab.com/apparmor/apparmor/-/commitdf????) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
+These release notes cover all changes between 2.13.4 [df0ac742f7a1146181d8734d03334494f2015134](https://gitlab.com/apparmor/apparmor/-/commitdf0ac742f7a1146181d8734d03334494f2015134) and 2.13.5 [ab0f4ab2ed7e734827b143cd32dace4444875e9b](https://gitlab.com/apparmor/apparmor/-/commitab0f4ab2ed7e734827b143cd32dace4444875e9b) on the [apparmor-2.13 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-2.13).
 
 
 ## Build Infrastructure
