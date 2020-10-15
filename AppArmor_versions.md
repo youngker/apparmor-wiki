@@ -60,7 +60,7 @@ Released Versions of AppArmor Userspace Utils
 [AppArmor 3.0.1](Release_Notes_3.0.1)
 -------------------------------------------
 
--   Release Date: 2020-10-01
+-   Release Date: 2020-?M?-?D?
 -   [Release Notes](Release_Notes_3.0.1)
 -   Development target: Bug Fixes
 
