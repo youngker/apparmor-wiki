@@ -62,19 +62,22 @@ Development release: AppArmor 3.1
 -   in development
 
 Current stable release: 3.0
--   [gitlab release](https://gitlab.com/apparmor/apparmor/-/releases/v3.0.0)
--   [launchpad code](<https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz>)
--   [launchpad signature](<https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz.asc>)
--   launchpad sha256sum: 66fd751fe51eb427d2aa864ee035b12d01d212fd595579275219b0148c43755e
+- gitlab release
+  - https://gitlab.com/apparmor/apparmor/-/releases/v3.0.0
+- launchpad
+  - [code](<https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz>)
+  - [signature](<https://launchpad.net/apparmor/3.0/3.0/+download/apparmor-3.0.0.tar.gz.asc>)
+  - sha256sum: 66fd751fe51eb427d2aa864ee035b12d01d212fd595579275219b0148c43755e
 -   [ 3.0 release notes](Release_Notes_3.0)
 
-Prior supported release 2.13.4
--   <https://launchpad.net/apparmor/2.13/2.13.4/+download/apparmor-2.13.4.tar.gz>
--   sha256sum: 90bf86c07ffbe2c22be46d75c7345fad12d5911653c59750a37d59c63ad5d10e
--   signature: <https://launchpad.net/apparmor/2.13/2.13.4/+download/apparmor-2.13.4.tar.gz.asc>
--   gitlab tar.gz sha25sum: 39dfd7c36ddc529f17b24e9b5a9d8aae76baecefc090214cd697f31960d08bfa
--   [gitlab tar.gz signature](2.13.4_signature)
--   [ 2.13.4 release notes](Release_Notes_2.13.4)
+Prior supported release 2.13.5
+- gitlab release
+  - https://gitlab.com/apparmor/apparmor/-/releases/v2.13.5
+- launchpad
+  - [code](<https://launchpad.net/apparmor/2.13/2.13.5/+download/apparmor-2.13.5.tar.gz>)
+  - [signature](<https://launchpad.net/apparmor/2.13/2.13.5/+download/apparmor-2.13.5.tar.gz.asc>)
+  -   sha256sum: 637e2a14d844e53e0f0b31dc8fe8821f7bb36908c709ccc23e29033053caa717 
+-   [ 2.13.5 release notes](Release_Notes_2.13.5)
 
 Prior supported release: 2.12.3
 -   <https://launchpad.net/apparmor/2.12/2.12.3/+download/apparmor-2.12.3.tar.gz>
