@@ -58,9 +58,6 @@ The AppArmor v2.4 compatibility patches are available in the stable kernel branc
 
 #### Userspace
 
-Development release: AppArmor 3.1
--   in development
-
 Current stable release: 3.0
 - gitlab release
   - https://gitlab.com/apparmor/apparmor/-/releases/v3.0.0
