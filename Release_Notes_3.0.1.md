@@ -1,0 +1,83 @@
+AppArmor 3.0.1 was released 2020-?M??-?D??.
+
+# Introduction
+
+AppArmor 3.0.1 is a maintenance release of the user space components
+of the AppArmor security project. The kernel portion of the project
+is maintained and pushed separately.
+
+This version of the userspace should work with all kernel versions from
+2.6.15 and later (some earlier version of the kernel if they have the
+apparmor patches applied).
+
+The kernel portion of the project is maintained and pushed separately.
+
+
+# Highlighted new features
+- 
+
+# Important Notes
+-
+
+# Obtaining the Release
+
+- https://gitlab.com/apparmor/apparmor/-/releases/v3.0.1
+
+# Changes in this Release
+
+These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc8958135397a7e2) and 3.0.1 (?????) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
+
+Includes all the bug fixes and improvements in
+- [2.13.1](Release_Notes_2.13.1)
+- [2.13.2](Release_Notes_2.13.2)
+- [2.13.3](Release_Notes_2.13.3)
+- [2.13.4](Release_Notes_2.13.4)
+- [2.13.5](Release_Notes_2.13.5)
+
+
+And the following improvements
+
+## General improvments
+- 
+
+## Build Infrastructure
+- 
+
+## Policy Compiler (a.k.a apparmor\_parser)
+- 
+
+## Init
+- 
+
+## Library
+- 
+
+## Utils
+- 
+
+## Policy
+- 
+
+#### abstractions
+-
+
+#### profiles
+-
+
+## Documentation
+- 
+
+
+## Translations
+- 
+
+## Tests
+- 
+
+# Note
+
+There is a semantic change in the 4.8 kernel (commit
+9f834ec18defc369d73ccf9e87a2790bfa05bf46) that affects apparmor policy
+enforcement. Specifically it affects when the m permission bit is
+checked for elf binary executables. Policy and tests within apparmor
+2.12 and later have been updated to support running on pre 4.8 and 4.8+ kernels.
