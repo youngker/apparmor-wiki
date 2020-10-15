@@ -71,6 +71,16 @@ Released Versions of AppArmor Userspace Utils
 
 -  Cancelled
 
+
+[AppArmor 2.13.5](Release_Notes_2.13.5)
+---------------------------------------------
+
+-   Release Date: 2020-10-15
+-   Shipped in:
+-   Kernels supported: 3.3 and upwards
+-   [Release Notes](Release_Notes_2.13.5)
+-   Development target: Bug fixes and policy improvements for AppArmor 2.13.4
+
 [AppArmor 2.13.4](Release_Notes_2.13.4)
 ---------------------------------------------
 
