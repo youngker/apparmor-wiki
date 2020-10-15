@@ -24,7 +24,7 @@ There are two ways to obtain this release either through gitlab or a tarball in 
   - the docs for everything but libapparmor have already been built
 
 ### gitlab release
-- 
+- https://gitlab.com/apparmor/apparmor/-/releases/v2.13.5
 
 ### Launchpad Tarball
 -   <https://launchpad.net/apparmor/2.13/2.13.5/+download/apparmor-2.13.5.tar.gz>
