@@ -27,15 +27,7 @@ The kernel portion of the project is maintained and pushed separately.
 
 These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc8958135397a7e2) and 3.0.1 (?????) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
 
-Includes all the bug fixes and improvements in
-- [2.13.1](Release_Notes_2.13.1)
-- [2.13.2](Release_Notes_2.13.2)
-- [2.13.3](Release_Notes_2.13.3)
-- [2.13.4](Release_Notes_2.13.4)
-- [2.13.5](Release_Notes_2.13.5)
 
-
-And the following improvements
 
 ## General improvments
 - 
