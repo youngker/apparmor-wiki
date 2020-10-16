@@ -13,11 +13,8 @@ apparmor patches applied).
 The kernel portion of the project is maintained and pushed separately.
 
 
-# Highlighted new features
-- 
-
-# Important Notes
--
+# Highlighted fixes or improvements
+- Adds support for ```capability checkpoint_restore``` for the 5.9 and later kernels
 
 # Obtaining the Release
 
@@ -36,7 +33,7 @@ These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc895
 - 
 
 ## Policy Compiler (a.k.a apparmor\_parser)
-- 
+- add support for capability checkpoint_restore in the policy language.
 
 ## Init
 - 
@@ -45,7 +42,7 @@ These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc895
 - 
 
 ## Utils
-- 
+- add capability checkpoint_restore to the severity db
 
 ## Policy
 - 
