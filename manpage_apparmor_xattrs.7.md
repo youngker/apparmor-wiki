@@ -65,7 +65,9 @@ xattr matching requires the following kernel feature:
 
 # KNOWN ISSUES
 
-AppArmor profiles currently can't reliably match extended attributes with
+AppArmor 3 with 5.8 and later kernels no known issues.
+
+In AppArmor 2.x and kernels before 5.8 profiles can't reliably match extended attributes with
 binary values such as security.evm and security.ima. In the future AppArmor may
 gain the ability to match based on the presence of certain attributes while
 ignoring their values.
