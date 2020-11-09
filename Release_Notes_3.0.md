@@ -20,7 +20,7 @@ The kernel portion of the project is maintained and pushed separately.
 - The use of profile names that are based on pathnames are deprecated. For further information please see the [wiki](https://gitlab.com/apparmor/apparmor/-/wikis/DeprecateProfilePathName).
 - Support for new kernel features (requires appropriate features abi tagging in policy)
   - upstream v8 network socket rules
-  - xattr attachment conditionals
+  - [xattr attachment conditionals](https://gitlab.com/apparmor/apparmor/-/wikis/manpage_apparmor_xattrs.7)
   - capabilities PERFMON and BPF
 - rewritten aa-status
   - supports use in systems/images where python is not available
