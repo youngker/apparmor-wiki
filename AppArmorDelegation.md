@@ -63,7 +63,7 @@ In addition to the application having to take explicit action to delegate author
 
 _+_ the use of standard unix fd passing over sockets means many applications support object delegation without needing to be moified explicitly to support apparmor.
 
-_*_ It is important to note that the default of task's inheriting open files is not an explicit action and does cause delegation of authority. If this behavior is desired it can be achieved through [policy directed delegation](AppArmorDelegation#application-directed-delegation).
+_*_ It is important to note that the default of task's inheriting open files is not an explicit action and does NOT cause delegation of authority. If this behavior is desired it can be achieved through [policy directed delegation](AppArmorDelegation#application-directed-delegation).
 
 
 ### Application directed delegation has to be allowed by the profile
