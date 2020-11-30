@@ -113,7 +113,7 @@ Delegation can have additional restrictions and qualifiers. In particular delega
 ```
 profile example {
   # allow delegating to any child, no matter its profile
-  allow child delegation,
+  allow delegation options=child,
 }
 ```
 
@@ -121,7 +121,7 @@ and these restriction can be combined with the profile restriction
 
 ```
 profile example {
-  allow child delegation -> foo,
+  allow delegation options=child -> foo,
 }
 ```
 
@@ -159,9 +159,9 @@ By default the task can delegate any permission granted by its profile, but the 
 
 ```
 profile example {
-  allow delegation -> foo <= {
+  allow delegation {
       rw /**,
-  },
+  } -> foo,
   allow delegation -> bar,
 
   rwk /**,
@@ -176,9 +176,9 @@ For example
 
 ```
 profile example {
-  allow delegation -> foo <= {
+  allow delegation {
       rw /**,
-  },
+  } -> foo ,
   allow delegation -> bar,
 
   r /**,
@@ -196,30 +196,30 @@ AppArmor allows for this type of situation without issuing an error or warning d
 Rule sets can be given a name, by making them a profile, which can then be used in place of the block of rules.
 
 ```
-profile bar {
+authority bar {
   rw /**,
 }
 
 profile example {
-  allow delegation -> foo <= bar,
+  allow delegation (bar) -> foo,
 }
 ```
 
 ### Delegation can be restricted to open objects
 
-The profile can limit the delegation to already open files using the ```object``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
+The profile can limit the delegation to already open files/objects using the ```open``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
 
 ```
 profile example {
   rw @{HOME}/**,
 
   allow delegation -> /usr/bin/child <= {
-      object rw @{HOME}/**,
+      open rw @{HOME}/**,
   }
 }
 ```
 
-Rules that do not have the ```object``` only restriction restriction will also allow for object delegation, but the object restriction does not allow rules to be delegated.
+Rules that do not have the ```open``` only restriction restriction will also allow for object delegation, but the object restriction does not allow rules to be delegated.
 
 
 # Policy directed delegation
@@ -278,7 +278,7 @@ profile example {
 }
 ```
 
-??? better tag than (extends???)
+??? better tag than (extends???) notiation conflicts
 
 #### Why isn't the exception behavior the default?
 
@@ -286,28 +286,28 @@ Defaulting to the delegation being limited to the authority is consistent with h
 
 ### Delegation can be restricted to open files
 
-The profile can limit the delegation to already open files using the ```object``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
+The profile can limit the delegation to already open files using the ```open``` qualifier. This prevents the child task from being able to open new files that match the delegated rule.
 
 ```
 profile example {
   rw @{HOME}/**,
 
   px /usr/bin/child + {
-      object rw @{HOME}/**,
+      open rw @{HOME}/**,
   }
 }
 ```
 
 ### Overlapping rules can be used to control delegation
 
-Overlapping rules can be used to determine delegation permissions. The ```object``` qualifier is not accumulated like regular permissions but instead applied on a most specific match basis similar to exec rule qualifiers.
+Overlapping rules can be used to determine delegation permissions. The ```open``` qualifier is not accumulated like regular permissions but instead applied on a most specific match basis similar to exec rule qualifiers.
 
 ```
 profile example {
   rw @{HOME}/**,
 
   px /usr/bin/child + {
-      object rw @{HOME}/**,
+      open rw @{HOME}/**,
       rw @{HOME}/Downloads/*,
   }
 }
@@ -322,7 +322,7 @@ Like with application directed delegation the rule sets can be named by making t
 ```
 profile example {
 
-   profile foo {
+   authority foo {
       rw @{HOME}/**,
       r  /tmp/**,
   }
@@ -336,12 +336,12 @@ profile example {
 ```
 profile example {
 
-   profile foo {
+   authority foo {
       rw @{HOME}/**,
       r  /tmp/**,
   }
 
-  profile bar {
+  authority bar {
       r /etc/passwd,
       rw @{HOME/.config/**,
   }
@@ -357,18 +357,18 @@ profile example {
 Rule sets can be shared between multiple profiles
 
 ```
-profile shared {
+authority shared {
       rw @{HOME}/**,
       r  /tmp/**,
   }
 
 profile one {
-  px /usr/bin/child + foo,
+  px /usr/bin/child + shared,
 
 }
 
 profile two {
-  px /usr/bin/bash + foo,
+  px /usr/bin/bash + shared,
 
 }
 
@@ -583,9 +583,9 @@ When object delegation is used, permission to delegate the object is not limited
 profile example {
   rw @{HOME}/**,
 
-  allow delegation -> /usr/bin/child <= {
+  allow delegation {
       rw @{HOME}/**,
-  }
+  } -> /usr/bin/child,
 }
 ```
 
@@ -642,9 +642,10 @@ The unconfined state delegates its open object access. This behavior has always 
 
 ```
 profile unconfined {
-  allow delegation <= {
-    object /**,
-  }
+  allow delegation {
+    open /**,
+  } -> **,
+  pix /** + { open all, }
 
 }
 ```
