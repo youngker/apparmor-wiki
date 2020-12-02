@@ -63,8 +63,7 @@ These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc895
   - tightens cache location and add fallback ([AABUG:91](https://gitlab.com/apparmor/apparmor/-/issues/91))
 - ubuntu-browsers
   - Add support for brave browser ([MR:667](https://gitlab.com/apparmor/apparmor/-/merge_requests/667))
-  - Adjust ubuntu-integration to use abstractions/exo-open
-    [MR:666](https://gitlab.com/apparmor/apparmor/-/merge_requests/666)
+  - Adjust ubuntu-integration to use abstractions/exo-open ([MR:666](https://gitlab.com/apparmor/apparmor/-/merge_requests/666))
 - X
   - Allow (only) reading X compose cache ([MR:685](https://gitlab.com/apparmor/apparmor/-/merge_requests/685))
   - make x11 socket writable again ([MR:664](https://gitlab.com/apparmor/apparmor/-/merge_requests/664))
