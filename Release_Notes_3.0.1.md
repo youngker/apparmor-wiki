@@ -25,25 +25,26 @@ The kernel portion of the project is maintained and pushed separately.
 These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc8958135397a7e2) and 3.0.1 (?????) [apparmor-3.0 branch](https://gitlab.com/apparmor/apparmor/tree/apparmor-3.0).
 
 
-
-## General improvments
-- 
-
-## Build Infrastructure
-- 
+## Library
+- fix failure in procattr accesses due to domain change ([MR:681](https://gitlab.com/apparmor/apparmor/-/merge_requests/681), [AABUG:131](https://gitlab.com/apparmor/apparmor/-/issues/131))
+- add missing include for `socklen_t` ([MR:642](https://gitlab.com/apparmor/apparmor/-/merge_requests/642))
+- add _aa_asprintf to private symbols ([MR:643](https://gitlab.com/apparmor/apparmor/-/merge_requests/643))
+- add `aa_features_new_from_file` to public symbols ([MR:643](https://gitlab.com/apparmor/apparmor/-/merge_requests/643))
 
 ## Policy Compiler (a.k.a apparmor\_parser)
 - add support for capability checkpoint_restore in the policy language.
+- Add support for CAP_CHECKPOINT_RESTORE ([MR:654](https://gitlab.com/apparmor/apparmor/-/merge_requests/654))
+- Fix warning message when complain mode is forced ([MR:649](https://gitlab.com/apparmor/apparmor/-/merge_requests/649), [LP:1899218](https://bugs.launchpad.net/bugs/1899218))
+- fix parser.conf commenting on pinning an abi ([MR:648](https://gitlab.com/apparmor/apparmor/-/merge_requests/648))
+- dont force host cpp to detect reallocarray ([MR:647](https://gitlab.com/apparmor/apparmor/-/merge_requests/647))
 
-## Init
-- 
-
-## Library
-- fix failure in procattr accesses due to domain change ([MR:681](https://gitlab.com/apparmor/apparmor/-/merge_requests/681), [AABUG:131](https://gitlab.com/apparmor/apparmor/-/issues/131))
+## aa_status
+- Fix build issue with musl ([MR:647](https://gitlab.com/apparmor/apparmor/-/merge_requests/647))
 
 ## aa-notify
 - don't crash if the logfile is not present due to rotation ([MR:688](https://gitlab.com/apparmor/apparmor/-/merge_requests/688), [AABUG:130](https://gitlab.com/apparmor/apparmor/-/issues/130))
 - Stop aa-notify from exit after 100s of polling ([MR:660](https://gitlab.com/apparmor/apparmor/-/merge_requests/660), [AABUG:126](https://gitlab.com/apparmor/apparmor/-/issues/126))
+- Skip test if it can not access /var/log/wtmp ([MR:641](https://gitlab.com/apparmor/apparmor/-/merge_requests/641), [AABUG:120](https://gitlab.com/apparmor/apparmor/-/issues/120))
 
 ## Utils
 - add capability checkpoint_restore to the severity db ([MR:656](https://gitlab.com/apparmor/apparmor/-/merge_requests/656))
@@ -54,7 +55,6 @@ These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc895
 - split linting with PYFLAKES into a separate target. ([AABUG:121](https://gitlab.com/apparmor/apparmor/-/issues/121))
 
 ## Policy
-- 
 
 #### abstractions
 - fonts
@@ -73,6 +73,7 @@ These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc895
 #### profiles
 - dhclient-script
   - Fix invalid Pux (should be PUx) permissions ([MR:676](https://gitlab.com/apparmor/apparmor/-/merge_requests/676))
+  - Fix dhclient and dhclient-script profiles to work on debian buster ([MR:645](https://gitlab.com/apparmor/apparmor/-/merge_requests/645))
 - dovecot
   - allow reading dh.pem ([MR:671](https://gitlab.com/apparmor/apparmor/-/merge_requests/671), [debug10](https://bugs.debian.org/10))
   - allow kill signal ([MR:671](https://gitlab.com/apparmor/apparmor/-/merge_requests/671))
@@ -82,12 +83,13 @@ These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc895
 ## Documentation
 - Fix typos in man pages ([MR:669](https://gitlab.com/apparmor/apparmor/-/merge_requests/669))
 - apparmor_xattrs.7: fix whatis entry ([MR:669](https://gitlab.com/apparmor/apparmor/-/merge_requests/669))
+- fix manpage order ([MR:646](https://gitlab.com/apparmor/apparmor/-/merge_requests/646))
 
-## Translations
-- 
 
 ## Tests
-- 
+- regression
+  - Fix aa_policy_cache to use correct config file ([MR:653](https://gitlab.com/apparmor/apparmor/-/merge_requests/653))
+  - Fix regression tests when using in tree parser ([MR:653](https://gitlab.com/apparmor/apparmor/-/merge_requests/653))
 
 # Note
 
