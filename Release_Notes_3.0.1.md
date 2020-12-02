@@ -1,4 +1,4 @@
-AppArmor 3.0.1 was released 2020-?M??-?D??.
+AppArmor 3.0.1 was released 2020-12-02.
 
 # Introduction
 
