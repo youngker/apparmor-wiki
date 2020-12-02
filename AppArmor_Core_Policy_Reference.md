@@ -2634,7 +2634,7 @@ audit, quiet, deny, kill, nokill? owner and conditional
              “wanpipe” | “bluetooth”
 ```
 
-**note**: “unix”, “local” and “netlink” are not allowed
+**note**: “local” is not allowed
 
 ```
  type = “stream” | “dgram” | “seqpacket” | “rdm” | “raw” | “packet” | “dccp”
