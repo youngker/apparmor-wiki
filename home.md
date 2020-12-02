@@ -61,6 +61,10 @@ The AppArmor v2.4 compatibility patches are available in the stable kernel branc
 Current stable release: 3.0.1
 - gitlab release
   - https://gitlab.com/apparmor/apparmor/-/releases/v3.0.1
+- launchpad
+  -   <https://launchpad.net/apparmor/3.0/3.0.1/+download/apparmor-3.0.1.tar.gz>
+  -   sha256sum: 8fada772d9a60989525594346d9aa22af938daafc1781adce9a1acb3c75bdf24
+  -   signature: <https://launchpad.net/apparmor/3.0/3.0.1/+download/apparmor-3.0.1.tar.gz.asc>
 -   [ 3.0.1 release notes](Release_Notes_3.0.1)
 
 Prior supported release 2.13.5
