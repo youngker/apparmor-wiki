@@ -18,12 +18,19 @@ The kernel portion of the project is maintained and pushed separately.
 
 # Obtaining the Release
 
-- https://gitlab.com/apparmor/apparmor/-/releases/v3.0.1
-
-Note: gitlab release tarballs: Differ from the launchpad release tarballs. The launchpad release tarball has a couple processing steps already performed:
+There are two ways to obtain this release either through gitlab or a tarball in launchpad. Important note: the gitlab release tarballs: Differ from the launchpad release tarballs. The launchpad release tarball has a couple processing steps already performed:
 
 * libapparmor `autogen.sh` is already done, meaning distros only need to use ./configure in their build setup
 * the docs for everything but libapparmor have already been built
+
+### gitlab
+- https://gitlab.com/apparmor/apparmor/-/releases/v3.0.1
+
+### Launchpad
+
+  -   <https://launchpad.net/apparmor/3.0/3.0.1/+download/apparmor-3.0.1.tar.gz>
+  -   sha256sum: 8fada772d9a60989525594346d9aa22af938daafc1781adce9a1acb3c75bdf24
+  -   signature: <https://launchpad.net/apparmor/3.0/3.0.1/+download/apparmor-3.0.1.tar.gz.asc>
 
 # Changes in this Release
 
