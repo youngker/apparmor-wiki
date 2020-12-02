@@ -39,23 +39,49 @@ These release notes cover all changes between 3.0 (5d51483bfecf556183558644dc895
 - 
 
 ## Library
-- 
+- fix failure in procattr accesses due to domain change ([MR:681](https://gitlab.com/apparmor/apparmor/-/merge_requests/681), [AABUG:131](https://gitlab.com/apparmor/apparmor/-/issues/131))
+
+## aa-notify
+- don't crash if the logfile is not present due to rotation ([MR:688](https://gitlab.com/apparmor/apparmor/-/merge_requests/688), [AABUG:130](https://gitlab.com/apparmor/apparmor/-/issues/130))
+- Stop aa-notify from exit after 100s of polling ([MR:660](https://gitlab.com/apparmor/apparmor/-/merge_requests/660), [AABUG:126](https://gitlab.com/apparmor/apparmor/-/issues/126))
 
 ## Utils
-- add capability checkpoint_restore to the severity db
+- add capability checkpoint_restore to the severity db ([MR:656](https://gitlab.com/apparmor/apparmor/-/merge_requests/656))
+- check if abstractions exist ([MR:683](https://gitlab.com/apparmor/apparmor/-/merge_requests/683), [BOO:1178527](https://bugzilla.opensuse.org/show_bug.cgi?id=1178527))
+- aa-autodep: load abstractions on start ([MR:682](https://gitlab.com/apparmor/apparmor/-/merge_requests/682), [BOO:1178527](https://bugzilla.opensuse.org/show_bug.cgi?id=1178527))
+- Fix hotkey conflict in utils de.po and id.po ([MR:675](https://gitlab.com/apparmor/apparmor/-/merge_requests/675))
+- fix failure of make -C profiles check-logprof ([MR:663](https://gitlab.com/apparmor/apparmor/-/merge_requests/663), [AABUG:36](https://gitlab.com/apparmor/apparmor/-/issues/36))
+- split linting with PYFLAKES into a separate target. ([AABUG:121](https://gitlab.com/apparmor/apparmor/-/issues/121))
 
 ## Policy
 - 
 
 #### abstractions
--
+- fonts
+  - Add Fontmatrix support ([MR:657](https://gitlab.com/apparmor/apparmor/-/merge_requests/657))
+- mesa
+  - tightens cache location and add fallback ([AABUG:91](https://gitlab.com/apparmor/apparmor/-/issues/91))
+- ubuntu-browsers
+  - Add support for brave browser ([MR:667](https://gitlab.com/apparmor/apparmor/-/merge_requests/667))
+  - Adjust ubuntu-integration to use abstractions/exo-open
+    [MR:666](https://gitlab.com/apparmor/apparmor/-/merge_requests/666)
+- X
+  - Allow (only) reading X compose cache ([MR:685](https://gitlab.com/apparmor/apparmor/-/merge_requests/685))
+  - make x11 socket writable again ([MR:664](https://gitlab.com/apparmor/apparmor/-/merge_requests/664))
+  - adjust for new ICEauthority path in run ([MR:668](https://gitlab.com/apparmor/apparmor/-/merge_requests/668))
 
 #### profiles
--
+- dhclient-script
+  - Fix invalid Pux (should be PUx) permissions ([MR:676](https://gitlab.com/apparmor/apparmor/-/merge_requests/676))
+- dovecot
+  - allow reading dh.pem ([MR:671](https://gitlab.com/apparmor/apparmor/-/merge_requests/671), [debug10](https://bugs.debian.org/10))
+  - allow kill signal ([MR:671](https://gitlab.com/apparmor/apparmor/-/merge_requests/671))
+- nscd
+  - Fix service fails on Arch Linux ([MR:651](https://gitlab.com/apparmor/apparmor/-/merge_requests/651), [AABUG:124](https://gitlab.com/apparmor/apparmor/-/issues/124))
 
 ## Documentation
-- 
-
+- Fix typos in man pages ([MR:669](https://gitlab.com/apparmor/apparmor/-/merge_requests/669))
+- apparmor_xattrs.7: fix whatis entry ([MR:669](https://gitlab.com/apparmor/apparmor/-/merge_requests/669))
 
 ## Translations
 - 
