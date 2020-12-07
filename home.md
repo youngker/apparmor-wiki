@@ -67,14 +67,14 @@ Current stable release: 3.0.1
   -   signature: <https://launchpad.net/apparmor/3.0/3.0.1/+download/apparmor-3.0.1.tar.gz.asc>
 -   [ 3.0.1 release notes](Release_Notes_3.0.1)
 
-Prior supported release 2.13.5
+Prior supported release 2.13.6
 - gitlab release
-  - https://gitlab.com/apparmor/apparmor/-/releases/v2.13.5
+  - https://gitlab.com/apparmor/apparmor/-/releases/v2.13.6
 - launchpad
-  - [code](<https://launchpad.net/apparmor/2.13/2.13.5/+download/apparmor-2.13.5.tar.gz>)
-  - [signature](<https://launchpad.net/apparmor/2.13/2.13.5/+download/apparmor-2.13.5.tar.gz.asc>)
-  -   sha256sum: 637e2a14d844e53e0f0b31dc8fe8821f7bb36908c709ccc23e29033053caa717 
--   [ 2.13.5 release notes](Release_Notes_2.13.5)
+  - [code](<https://launchpad.net/apparmor/2.13/2.13.6/+download/apparmor-2.13.6.tar.gz>)
+  - [signature](<https://launchpad.net/apparmor/2.13/2.13.6/+download/apparmor-2.13.6.tar.gz.asc>)
+  -   sha256sum: 4426b8b73f368889aea69cbc224ae666d4145b9520a2866cc2a915908e87ba8f
+-   [ 2.13.6 release notes](Release_Notes_2.13.6)
 
 Prior supported release: 2.12.3
 -   <https://launchpad.net/apparmor/2.12/2.12.3/+download/apparmor-2.12.3.tar.gz>
