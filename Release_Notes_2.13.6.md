@@ -22,7 +22,7 @@ There are two ways to obtain this release either through gitlab or a tarball in 
 
 ### Launchpad Tarball
 -   <https://launchpad.net/apparmor/2.13/2.13.6/+download/apparmor-2.13.6.tar.gz>
--   sha256sum: 
+-   sha256sum: 4426b8b73f368889aea69cbc224ae666d4145b9520a2866cc2a915908e87ba8f
 -   signature: <https://launchpad.net/apparmor/2.13/2.13.6/+download/apparmor-2.13.6.tar.gz.asc>
 
 # Changes in this Release
