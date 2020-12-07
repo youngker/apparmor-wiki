@@ -1,4 +1,4 @@
-AppArmor 2.13.6 was released 2020-12-02.
+AppArmor 2.13.6 was released 2020-12-07.
 
 # Introduction
 
